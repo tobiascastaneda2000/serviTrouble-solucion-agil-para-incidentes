@@ -1,3 +1,5 @@
+import Usuario.UsuarioAdministrador;
+
 import java.util.Set;
 
 public class Comunidad {
