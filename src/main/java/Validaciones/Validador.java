@@ -22,6 +22,18 @@ public class Validador {
         validaciones = new HashSet<>();
         errores = new Stack<>();
     }
+    //Setter de validaciones
+    public void subirValidacion(Validacion validacion){
+        validaciones.add(validacion);
+    }
+    //Setter
+    public void setUsername(String username){
+        this.username = username;
+    }
+    //Setter
+    public void setPassword(String password){
+        this.password = password;
+    }
 
     public Boolean validar(){
         return validaciones.stream().allMatch(
