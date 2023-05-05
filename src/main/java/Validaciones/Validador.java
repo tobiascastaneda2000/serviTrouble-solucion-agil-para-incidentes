@@ -33,7 +33,7 @@ public class Validador {
         );
     }
     
-    public Usuario iniciar_sesion(){
+    public Usuario iniciarSesion(){
         if( this.intentos>0 && this.validar() ){           
            return new Usuario(username,password);
         }else{
