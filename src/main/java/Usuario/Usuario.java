@@ -8,4 +8,11 @@ public class Usuario {
         this.nombre = nombre;
         this.contrasenia = contrasenia;
     }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+    public String getContrasenia(){
+        return this.contrasenia;
+    }
 }

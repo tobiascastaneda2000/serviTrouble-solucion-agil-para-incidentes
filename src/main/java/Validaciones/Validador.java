@@ -1,17 +1,20 @@
 package Validaciones;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import Usuario.*;
 public class Validador {
+
+    Set<Usuario> usuariosRegistrados;
 
     private String username;
     private String password;
     private Set<Validacion> validaciones;
     private Stack<String> errores;
     private int intentos;
+
     public Validador(String username, String password) {
         this.username = username;
         this.password = password;
@@ -33,17 +36,48 @@ public class Validador {
         );
     }
     
-    public Usuario iniciarSesion(){
-        if( this.intentos>0 && this.validar() ){           
-           return new Usuario(username,password);
+    public void registrar(){
+        if( this.validar() ){
+           Usuario usuario = new Usuario(username,password);
+           usuariosRegistrados.add(usuario);
         }else{
             while(!errores.empty()){
                 String mensaje = errores.pop();
                 System.out.println(mensaje);
             }
-            this.intentos--;
-            return null;
         }
     }
+
+    public Usuario iniciarSesion(){
+
+        if(this.intentos>0){
+            Usuario usuario = this.devolverUsuarioCorrespondiente(username);
+            if(usuario != null){
+                if(usuario.getContrasenia().equals(password)){
+                    return usuario;
+                }
+                else {
+                    this.intentos--;
+                    throw new RuntimeException("LA contraseña es incorrecta");
+                }
+            }
+            else{
+                throw new RuntimeException("No existe este usuario");
+            }
+
+        }
+        else {
+            throw new RuntimeException("No hay mas intentos");
+        }
+
+    }
+
+
+    private Usuario devolverUsuarioCorrespondiente(String username) {
+        return usuariosRegistrados.stream().filter( usuario -> usuario.getNombre().equals(username) ).
+                collect(Collectors.toList()).get(0);
+    }
+
+
 
 }
