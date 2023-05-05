@@ -32,15 +32,16 @@ public class Validador {
             }
         );
     }
-
+    
     public Usuario iniciar_sesion(){
-        if(this.validar()){
-            return new Usuario(username,password);
+        if( this.intentos>0 && this.validar() ){           
+           return new Usuario(username,password);
         }else{
             while(!errores.empty()){
                 String mensaje = errores.pop();
                 System.out.println(mensaje);
             }
+            this.intentos--;
             return null;
         }
     }
