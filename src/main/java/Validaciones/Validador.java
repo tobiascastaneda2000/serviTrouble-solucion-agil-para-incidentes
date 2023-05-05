@@ -50,14 +50,18 @@ public class Validador {
     
     public void registrar(){
         if( this.validar() ){
-           Usuario usuario = new Usuario(username,password);
-           usuariosRegistrados.add(usuario);
+           this.crearUsuario();
         }else{
             while(!errores.empty()){
                 String mensaje = errores.pop();
                 System.out.println(mensaje);
             }
         }
+    }
+
+    private void crearUsuario() {
+        Usuario usuario = new Usuario(username,password);
+        usuariosRegistrados.add(usuario);
     }
 
     public Usuario iniciarSesion(){
