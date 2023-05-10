@@ -5,27 +5,45 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import Usuario.*;
+
 public class Validador {
 
-    Set<Usuario> usuariosRegistrados;
+  Set<Usuario> usuariosRegistrados;
 
-    private String username;
-    private String password;
-    private Set<Validacion> validaciones;
-    private Stack<String> errores;
+  public Set<Validacion> validaciones;
+  //private Stack<String> errores; //Atributo de anterior version validar() descomentar de querer utilizarse
+  public Stack<RuntimeException> errores2;
 
-    public Validador(String username, String password) {
-        this.username = username;
-        this.password = password;
-        validaciones = new HashSet<>();
-        errores = new Stack<>();
+  public Validador() {
+    validaciones = new HashSet<>();
+    //errores = new Stack<>(); //Atributo de anterior version validar() descomentar de querer utilizarse
+    this.errores2 = new Stack<>();
+  }
+
+  //Setter de validaciones
+  public void subirValidacion(Validacion validacion) {
+    validaciones.add(validacion);
+  }
+
+  //Devuelve lista de excepcciones, y de no a haber, lista vacia
+  public Stack<RuntimeException> validar(String password) {
+    realizarTodasLasValidaciones(password);
+    return errores2;
+  }
+
+  //Hacer todas las validaciones
+  public void realizarTodasLasValidaciones(String password) {
+    try {
+      //Realiza verificacion con cada validacion de coleccion
+      validaciones.forEach(validacion -> validacion.esValida(password));
+    } catch (RuntimeException exception) {
+      //Coloca errores en una pila
+      errores2.push(exception);
     }
+  }
 
-    //Setter de validaciones
-    public void subirValidacion(Validacion validacion){
-        validaciones.add(validacion);
-    }
-
+  //METODO VALIDAR ANTERIOR, lo deje comentado por las dudas
+/*
     public Boolean validar(){
         return validaciones.stream().allMatch(
             validacion -> {
@@ -48,19 +66,13 @@ public class Validador {
                 System.out.println(mensaje);
             }
         }
-    }
-
-    private void crearUsuario() {
-        Usuario usuario = new Usuario(username,password);
-        usuariosRegistrados.add(usuario);
-    }
+    }*/
 
 
-    private Usuario devolverUsuarioCorrespondiente(String username) {
-        return usuariosRegistrados.stream().filter( usuario -> usuario.getNombre().equals(username) ).
-                collect(Collectors.toList()).get(0);
-    }
-
+  private Usuario devolverUsuarioCorrespondiente(String username) {
+    return usuariosRegistrados.stream().filter(usuario -> usuario.getNombre().equals(username)).
+        collect(Collectors.toList()).get(0);
+  }
 
 
 }

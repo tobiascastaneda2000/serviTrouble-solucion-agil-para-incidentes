@@ -28,7 +28,7 @@ public class Usuario {
 
     public void iniciarSesion(String username, String contrasenia){
         if(this.intentos==0){
-            throw new RuntimeException("Se ha superado limite de intentos e inicio de sesion");
+            throw new MuchosIntestosParaIniciarSesion("Se ha superado limite de intentos e inicio de sesion, espere unos minutos..");
         }
         if(this.nombre.equals( username) && this.contrasenia.equals(contrasenia)){
             sesionAbierta = true;

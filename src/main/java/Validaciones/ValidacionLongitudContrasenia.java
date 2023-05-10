@@ -12,19 +12,18 @@ public class ValidacionLongitudContrasenia implements Validacion{
   }
 
   @Override
-  public Boolean esValida(String password) {
+  public void esValida(String password) {
     if(password.length() < longitudMinimaCaracteres) {
-      throw new IllegalArgumentException(
+      throw new ContraseniaConPocosCaracteres(
           "La contrasenia debe tener al menos "+longitudMinimaCaracteres+" caracteres."
       );
     }
 
     if(password.length() >= longitudMaximaCaracteres){
-      throw new IllegalArgumentException(
+      throw new ContraseniaConMuchosCaracteres(
               "La longitud de la contraseña debe ser menor a los "+ longitudMaximaCaracteres+" caracteres."
       );
     }
-    return false;
   }
 
 }

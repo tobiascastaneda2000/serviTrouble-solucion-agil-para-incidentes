@@ -16,13 +16,11 @@ public class ValidacionPeorContrasenia implements Validacion{
     }
   }
 
+
   @Override
-  public Boolean esValida(String password) {
+  public void esValida(String password) {
     if(peoresContrasenias.contains(password)) {
-      throw new IllegalArgumentException(
-          "La contrasenia no puede estar dentro del Top10000 de peores contrasenias."
-      );
+      throw new DebilPasswordException("La contrasenia NO puede estar dentro del Top10000 de peores contrasenias.");
     }
-    return false;
   }
 }
