@@ -2,7 +2,6 @@ package Validaciones;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import Usuario.*;
 
@@ -70,7 +69,7 @@ public class Validador {
 
 
   private Usuario devolverUsuarioCorrespondiente(String username) {
-    return usuariosRegistrados.stream().filter(usuario -> usuario.getNombre().equals(username)).
+    return usuariosRegistrados.stream().filter(usuario -> usuario.getUsername().equals(username)).
         collect(Collectors.toList()).get(0);
   }
 

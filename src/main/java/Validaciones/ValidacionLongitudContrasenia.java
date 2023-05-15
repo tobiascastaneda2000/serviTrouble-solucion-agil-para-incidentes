@@ -1,11 +1,12 @@
 package Validaciones;
 
-public class ValidacionLongitudContrasenia implements Validacion{
+public class ValidacionLongitudContrasenia implements Validacion {
 
   private int longitudMinimaCaracteres = 8;
   private int longitudMaximaCaracteres = 64;
 
-  public ValidacionLongitudContrasenia(){}
+  public ValidacionLongitudContrasenia() {
+  }
 
   public int getLongitudMinimaCaracteres() {
     return longitudMinimaCaracteres;
@@ -13,15 +14,15 @@ public class ValidacionLongitudContrasenia implements Validacion{
 
   @Override
   public void esValida(String password) {
-    if(password.length() < longitudMinimaCaracteres) {
-      throw new ContraseniaConPocosCaracteres(
-          "La contrasenia debe tener al menos "+longitudMinimaCaracteres+" caracteres."
+    if (password.length() < longitudMinimaCaracteres) {
+      throw new ContraseniaConPocosCaracteresException(
+          "La contrasenia debe tener al menos " + longitudMinimaCaracteres + " caracteres."
       );
     }
 
-    if(password.length() >= longitudMaximaCaracteres){
-      throw new ContraseniaConMuchosCaracteres(
-              "La longitud de la contraseña debe ser menor a los "+ longitudMaximaCaracteres+" caracteres."
+    if (password.length() >= longitudMaximaCaracteres) {
+      throw new ContraseniaConMuchosCaracteresException(
+          "La longitud de la contraseña debe ser menor a los " + longitudMaximaCaracteres + " caracteres."
       );
     }
   }
