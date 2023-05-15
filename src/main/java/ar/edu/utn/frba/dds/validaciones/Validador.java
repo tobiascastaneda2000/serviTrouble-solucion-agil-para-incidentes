@@ -1,9 +1,9 @@
-package validaciones;
+package ar.edu.utn.frba.dds.validaciones;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import usuario.*;
+import ar.edu.utn.frba.dds.usuario.*;
 
 public class Validador {
 

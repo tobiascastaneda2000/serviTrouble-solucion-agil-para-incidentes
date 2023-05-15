@@ -1,4 +1,4 @@
-package validaciones;
+package ar.edu.utn.frba.dds.validaciones;
 
 public class DebilPasswordException extends RuntimeException {
 

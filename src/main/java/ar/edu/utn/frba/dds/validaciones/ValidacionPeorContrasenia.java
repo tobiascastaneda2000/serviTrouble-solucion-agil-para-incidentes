@@ -1,4 +1,4 @@
-package validaciones;
+package ar.edu.utn.frba.dds.validaciones;
 
 import java.io.*;
 import java.util.List;

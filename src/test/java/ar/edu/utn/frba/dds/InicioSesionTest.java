@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds;
 
-import usuario.*;
+import ar.edu.utn.frba.dds.usuario.*;
 import org.junit.jupiter.api.*;
 
 public class InicioSesionTest {
