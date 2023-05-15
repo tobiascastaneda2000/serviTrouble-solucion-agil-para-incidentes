@@ -1,4 +1,4 @@
-package Validaciones;
+package validaciones;
 
 public class ValidacionLongitudContrasenia implements Validacion {
 

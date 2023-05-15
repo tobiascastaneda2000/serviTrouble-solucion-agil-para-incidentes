@@ -1,4 +1,4 @@
-package Validaciones;
+package validaciones;
 
 import java.io.*;
 import java.util.List;

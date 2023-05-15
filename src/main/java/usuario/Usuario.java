@@ -1,15 +1,15 @@
-package Usuario;
+package usuario;
 
 public class Usuario {
-    String usuario;
-    String contrasenia;
+    public String usuario;
+    public String contrasenia;
     int intentos;
     boolean sesionAbierta;
 
     public Usuario(String nombre, String contrasenia) {
         this.usuario = nombre;
         this.contrasenia = contrasenia;
-        this.intentos = 3;
+        this.intentos = 0;
         this.sesionAbierta = false;
     }
 
@@ -26,13 +26,13 @@ public class Usuario {
 
 
     public void iniciarSesion(String username, String contrasenia){
+        validarSesionAbierta();
         validarCantidadIntentos();
         if(coincideUsuarioYContrasenia(username, contrasenia)){
-            validarSesionAbierta();
             sesionAbierta = true;
         }
         else {
-            this.intentos--;
+            this.intentos++;
         }
     }
 
@@ -47,7 +47,7 @@ public class Usuario {
     }
 
     private void validarCantidadIntentos() {
-        if(getIntentos()<=0){
+        if(getIntentos()>=3){
             throw new MaxCantIntentosInicioSesionException("Se ha superado limite de intentos e inicio de sesion, espere unos minutos..");
         }
     }

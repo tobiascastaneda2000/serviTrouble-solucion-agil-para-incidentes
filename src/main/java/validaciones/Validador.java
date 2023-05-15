@@ -1,9 +1,9 @@
-package Validaciones;
+package validaciones;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import Usuario.*;
+import usuario.*;
 
 public class Validador {
 

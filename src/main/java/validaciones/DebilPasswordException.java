@@ -1,4 +1,4 @@
-package Validaciones;
+package validaciones;
 
 public class DebilPasswordException extends RuntimeException {
 
