@@ -1,14 +1,10 @@
 package ar.edu.utn.frba.dds.validaciones;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import ar.edu.utn.frba.dds.usuario.*;
 
 public class Validador {
-
-  Set<Usuario> usuariosRegistrados;
-
   public Set<Validacion> validaciones;
   //private Stack<String> errores; //Atributo de anterior version validar() descomentar de querer utilizarse
   public Stack<RuntimeException> errores2;
@@ -25,7 +21,7 @@ public class Validador {
   }
 
   //Devuelve lista de excepcciones, y de no a haber, lista vacia
-  public Stack<RuntimeException> validar(String password) {
+  public Stack<RuntimeException> validarContrasenia(String password) {
     realizarTodasLasValidaciones(password);
     return errores2;
   }
@@ -66,12 +62,6 @@ public class Validador {
             }
         }
     }*/
-
-
-  private Usuario devolverUsuarioCorrespondiente(String username) {
-    return usuariosRegistrados.stream().filter(usuario -> usuario.getUsername().equals(username)).
-        collect(Collectors.toList()).get(0);
-  }
 
 
 }
