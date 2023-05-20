@@ -1,11 +1,14 @@
 package ar.edu.utn.frba.dds.validaciones;
 
+import java.io.File;
 import java.util.*;
 
 import ar.edu.utn.frba.dds.usuario.*;
 
 public class Validador {
   public Set<Validacion> validaciones;
+  private File archivo;
+  public List<String> denyList;
   //private Stack<String> errores; //Atributo de anterior version validar() descomentar de querer utilizarse
   public Stack<RuntimeException> errores2;
 

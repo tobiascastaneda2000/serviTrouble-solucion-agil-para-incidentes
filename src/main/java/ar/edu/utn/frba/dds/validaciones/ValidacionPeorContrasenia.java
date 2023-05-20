@@ -4,9 +4,10 @@ import java.io.*;
 import java.util.List;
 
 public class ValidacionPeorContrasenia implements Validacion {
+
   private BufferedReader archivoPeoresContrasenias;
   private List<String> peoresContrasenias;
-
+  /*
   public ValidacionPeorContrasenia(String rutaArchivoPeoresContrasenias) {
     try {
       this.archivoPeoresContrasenias = new BufferedReader(new FileReader(new File(rutaArchivoPeoresContrasenias)));
@@ -14,7 +15,18 @@ public class ValidacionPeorContrasenia implements Validacion {
     } catch (IOException e) {
       throw new IllegalArgumentException("No se pudo cargar el listado de contraseñas prohibidas.");
     }
+  }*/
+
+  public ValidacionPeorContrasenia() {
+    File archivo = new File("src/main/java/ar/edu/utn/frba/dds/validaciones/password-list-top-10000.txt");
+    try {
+      this.archivoPeoresContrasenias = new BufferedReader(new FileReader(archivo));
+      this.peoresContrasenias = archivoPeoresContrasenias.lines().toList();
+    } catch (IOException e) {
+      throw new IllegalArgumentException("No se pudo cargar el listado de contraseñas prohibidas.");
+    }
   }
+
 
 
   @Override
