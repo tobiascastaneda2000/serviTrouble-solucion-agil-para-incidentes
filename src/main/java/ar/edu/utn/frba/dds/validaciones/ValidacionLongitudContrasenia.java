@@ -21,15 +21,48 @@ public class ValidacionLongitudContrasenia implements Validacion {
    2) Crear funcion que devuelva, en caso que tenga mas de un espacio seguido, un entero
    con la cantidad de espacios qu ehay que restarle a su logitud
      */
-    if (password.length() < longitudMinimaCaracteres) {
-      throw new ContraseniaConPocosCaracteresException(
-          "La contrasenia debe tener al menos " + longitudMinimaCaracteres + " caracteres."
-      );
+    validarLongitudMinima(password);
+    //validarLongitudMinimaConEspacios(password);
+    validarLongitudMaxima(password);
+  }
+/*
+  private void validarLongitudMinimaConEspacios(String password) {
+    String palabraSinEspacios = null;
+    boolean ultimoCaracterFueEspacio = false;
+    for (int i = 0; i < password.length(); i++) {
+      if (password.charAt(i) == ' ') {
+
+        if(ultimoCaracterFueEspacio){
+          //no se suma espacio
+          ultimoCaracterFueEspacio = false;
+        }
+        else {
+          palabraSinEspacios = palabraSinEspacios + password.charAt(i);
+          ultimoCaracterFueEspacio = true;
+        }
+
+      }
+      else {
+
+        palabraSinEspacios = palabraSinEspacios + password.charAt(i);
+      }
     }
 
+    validarLongitudMinima(palabraSinEspacios);
+  }*/
+
+  private void validarLongitudMaxima(String password) {
     if (password.length() >= longitudMaximaCaracteres) {
       throw new ContraseniaConMuchosCaracteresException(
           "La longitud de la contraseña debe ser menor a los " + longitudMaximaCaracteres + " caracteres."
+      );
+    }
+  }
+
+  private void validarLongitudMinima(String password){
+    if (password.length() < longitudMinimaCaracteres) {
+      throw new ContraseniaConPocosCaracteresException(
+          "La contrasenia debe tener al menos " + longitudMinimaCaracteres + " caracteres."
       );
     }
   }
