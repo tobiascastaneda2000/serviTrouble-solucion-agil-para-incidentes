@@ -22,34 +22,33 @@ public class ValidacionLongitudContrasenia implements Validacion {
    con la cantidad de espacios qu ehay que restarle a su logitud
      */
     validarLongitudMinima(password);
-    //validarLongitudMinimaConEspacios(password);
+    validarLongitudMinima(devolverCadenaSinEspacios(password));
     validarLongitudMaxima(password);
   }
-/*
-  private void validarLongitudMinimaConEspacios(String password) {
+
+  private String devolverCadenaSinEspacios(String password) {
     String palabraSinEspacios = null;
     boolean ultimoCaracterFueEspacio = false;
     for (int i = 0; i < password.length(); i++) {
       if (password.charAt(i) == ' ') {
 
-        if(ultimoCaracterFueEspacio){
+        if (ultimoCaracterFueEspacio) {
           //no se suma espacio
           ultimoCaracterFueEspacio = false;
-        }
-        else {
+        } else {
           palabraSinEspacios = palabraSinEspacios + password.charAt(i);
           ultimoCaracterFueEspacio = true;
         }
 
-      }
-      else {
+      } else {
 
         palabraSinEspacios = palabraSinEspacios + password.charAt(i);
       }
+
     }
 
-    validarLongitudMinima(palabraSinEspacios);
-  }*/
+    return palabraSinEspacios;
+  }
 
   private void validarLongitudMaxima(String password) {
     if (password.length() >= longitudMaximaCaracteres) {
@@ -59,7 +58,7 @@ public class ValidacionLongitudContrasenia implements Validacion {
     }
   }
 
-  private void validarLongitudMinima(String password){
+  private void validarLongitudMinima(String password) {
     if (password.length() < longitudMinimaCaracteres) {
       throw new ContraseniaConPocosCaracteresException(
           "La contrasenia debe tener al menos " + longitudMinimaCaracteres + " caracteres."
