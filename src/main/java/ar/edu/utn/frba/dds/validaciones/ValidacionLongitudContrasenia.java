@@ -26,28 +26,26 @@ public class ValidacionLongitudContrasenia implements Validacion {
     validarLongitudMaxima(password);
   }
 
-  private String devolverCadenaSinEspacios(String password) {
-    String palabraSinEspacios = null;
-    boolean ultimoCaracterFueEspacio = false;
+  String devolverCadenaSinEspacios(String password) {
+    String cadenaResultante = "";
+    char caracterAnterior = ' ';
     for (int i = 0; i < password.length(); i++) {
-      if (password.charAt(i) == ' ') {
-
-        if (ultimoCaracterFueEspacio) {
-          //no se suma espacio
-          ultimoCaracterFueEspacio = false;
-        } else {
-          palabraSinEspacios = palabraSinEspacios + password.charAt(i);
-          ultimoCaracterFueEspacio = true;
+      char caracterActual = password.charAt(i);
+      if (caracterActual != ' ') {
+        cadenaResultante += caracterActual;
         }
+      else {
+        if(caracterAnterior != ' ' ){
+          cadenaResultante += caracterActual;
 
-      } else {
-
-        palabraSinEspacios = palabraSinEspacios + password.charAt(i);
+        }
       }
+
+      caracterAnterior = caracterActual;
 
     }
 
-    return palabraSinEspacios;
+    return cadenaResultante;
   }
 
   private void validarLongitudMaxima(String password) {
