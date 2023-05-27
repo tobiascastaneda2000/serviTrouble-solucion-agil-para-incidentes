@@ -40,31 +40,4 @@ public class Validador {
     }
   }
 
-  //METODO VALIDAR ANTERIOR, lo deje comentado por las dudas
-/*
-    public Boolean validar(){
-        return validaciones.stream().allMatch(
-            validacion -> {
-                try{
-                    return validacion.esValida(password);
-                }catch(IllegalArgumentException exception){
-                    errores.push(exception.getMessage());
-                    return false;
-                }
-            }
-        );
-    }
-    
-    public void registrar(){
-        if( this.validar() ){
-           this.crearUsuario();
-        }else{
-            while(!errores.empty()){
-                String mensaje = errores.pop();
-                System.out.println(mensaje);
-            }
-        }
-    }*/
-
-
 }

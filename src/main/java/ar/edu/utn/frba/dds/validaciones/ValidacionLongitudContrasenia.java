@@ -2,8 +2,8 @@ package ar.edu.utn.frba.dds.validaciones;
 
 public class ValidacionLongitudContrasenia implements Validacion {
 
-  private int longitudMinimaCaracteres = 8;
-  private int longitudMaximaCaracteres = 64;
+  private final int longitudMinimaCaracteres = 8;
+  private final int longitudMaximaCaracteres = 64;
 
   public ValidacionLongitudContrasenia() {
   }
@@ -26,7 +26,7 @@ public class ValidacionLongitudContrasenia implements Validacion {
     validarLongitudMaxima(password);
   }
 
-  String devolverCadenaSinEspacios(String password) {
+  public String devolverCadenaSinEspacios(String password) {
     String cadenaResultante = "";
     char caracterAnterior = ' ';
     for (int i = 0; i < password.length(); i++) {

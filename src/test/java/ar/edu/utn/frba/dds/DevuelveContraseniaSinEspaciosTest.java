@@ -1,5 +1,6 @@
-package ar.edu.utn.frba.dds.validaciones;
+package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.validaciones.ValidacionLongitudContrasenia;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
