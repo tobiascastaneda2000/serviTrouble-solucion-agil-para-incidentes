@@ -12,30 +12,27 @@ public class ValidacionLongitudContrasenia implements Validacion {
     return longitudMinimaCaracteres;
   }
 
+  public int getLongitudMaximaCaracteres() {
+    return longitudMaximaCaracteres;
+  }
+
   @Override
   public void esValida(String password) {
-    /*
-    Para arreglar los espacios de password tenemos dos opcciones:
 
-   1) Crear funcion que se pasa el password y devuelve un String con la password arreglada
-   2) Crear funcion que devuelva, en caso que tenga mas de un espacio seguido, un entero
-   con la cantidad de espacios qu ehay que restarle a su logitud
-     */
-    validarLongitudMinima(password);
-    validarLongitudMinima(devolverCadenaSinEspacios(password));
+    String passwordConEspaciosRecortados = recortarEspaciosSeguidos(password);
+    validarLongitudMinima(passwordConEspaciosRecortados);
     validarLongitudMaxima(password);
   }
 
-  public String devolverCadenaSinEspacios(String password) {
+  public String recortarEspaciosSeguidos(String password) {
     String cadenaResultante = "";
     char caracterAnterior = ' ';
     for (int i = 0; i < password.length(); i++) {
       char caracterActual = password.charAt(i);
       if (caracterActual != ' ') {
         cadenaResultante += caracterActual;
-        }
-      else {
-        if(caracterAnterior != ' ' ){
+      } else {
+        if (caracterAnterior != ' ') {
           cadenaResultante += caracterActual;
 
         }
@@ -51,7 +48,7 @@ public class ValidacionLongitudContrasenia implements Validacion {
   private void validarLongitudMaxima(String password) {
     if (password.length() >= longitudMaximaCaracteres) {
       throw new ContraseniaConMuchosCaracteresException(
-          "La longitud de la contraseña debe ser menor a los " + longitudMaximaCaracteres + " caracteres."
+          "La longitud de la contraseña debe ser menor a los " + getLongitudMaximaCaracteres() + " caracteres."
       );
     }
   }
@@ -59,7 +56,7 @@ public class ValidacionLongitudContrasenia implements Validacion {
   private void validarLongitudMinima(String password) {
     if (password.length() < longitudMinimaCaracteres) {
       throw new ContraseniaConPocosCaracteresException(
-          "La contrasenia debe tener al menos " + longitudMinimaCaracteres + " caracteres."
+          "La contrasenia debe tener al menos " + getLongitudMinimaCaracteres() + " caracteres."
       );
     }
   }

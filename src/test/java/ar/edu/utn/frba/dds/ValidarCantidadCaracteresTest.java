@@ -20,12 +20,12 @@ public class ValidarCantidadCaracteresTest {
   }
 
   @Test
-  void contraseñaMenosDe8Caracteres() {
+  void contraseniaMenosDe8Caracteres() {
     assertThrows(ContraseniaConPocosCaracteresException.class, () -> validacionLongitudContrasenia.esValida("sh") );
   }
 
   @Test
-  void contraseñaConMasDe64Caracteres() {
+  void contraseniaConMasDe64Caracteres() {
     String muchosCaracteres = "Las pruebas end-to-end, también conocidas como pruebas extremo a extremo, se enfocan en probar " +
         "todo el flujo de trabajo de una aplicación o sistema desde el inicio hasta el final, simulando una experiencia " +
         "real del usuario. Estas pruebas implican la interacción y coordinación de múltiples componentes del sistema, " +

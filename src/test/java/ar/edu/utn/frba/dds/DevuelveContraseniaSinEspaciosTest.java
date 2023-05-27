@@ -24,11 +24,11 @@ class DevuelveContraseniaSinEspaciosTest {
 
   @Test
   void contraseniaSinEspaciosDevuelveMismoString(){
-    assertEquals(validacionLongitudContrasenia.devolverCadenaSinEspacios(contraseniaSinEspacios) , "Maximo1234");
+    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaSinEspacios) , "Maximo1234");
   }
 
   @Test
   void contraseniaConEspaciosDevuelveStringMenor(){
-    assertEquals(validacionLongitudContrasenia.devolverCadenaSinEspacios(contraseniaConEspacios) , "M l");
+    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaConEspacios) , "M l");
   }
 }
