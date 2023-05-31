@@ -77,7 +77,7 @@ public class Validador {
                     this.intentos--;
                     throw new RuntimeException("LA contraseña es incorrecta");
                 }
-            } 
+            }
             else{
                 throw new RuntimeException("No existe este usuario");
             }
