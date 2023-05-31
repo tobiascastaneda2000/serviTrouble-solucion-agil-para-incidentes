@@ -21,6 +21,7 @@ public class Validador {
         this.intentos = 3;
         validaciones = new HashSet<>();
         errores = new Stack<>();
+
     }
     //Setter de validaciones
     public void subirValidacion(Validacion validacion){
