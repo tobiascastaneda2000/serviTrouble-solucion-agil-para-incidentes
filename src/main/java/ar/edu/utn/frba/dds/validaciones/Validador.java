@@ -6,6 +6,7 @@ import java.util.*;
 import ar.edu.utn.frba.dds.usuario.*;
 
 public class Validador {
+
   public Set<Validacion> validaciones;
   private File archivo;
   public List<String> denyList;
@@ -19,7 +20,7 @@ public class Validador {
   }
 
   //Setter de validaciones
-  public void subirValidacion(Validacion validacion) {
+  public void agregarValidacion(Validacion validacion) {
     validaciones.add(validacion);
   }
 
