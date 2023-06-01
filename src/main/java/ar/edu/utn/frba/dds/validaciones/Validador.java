@@ -32,13 +32,16 @@ public class Validador {
 
   //Hacer todas las validaciones
   public void realizarTodasLasValidaciones(String password) {
-    try {
-      //Realiza verificacion con cada validacion de coleccion
-      validaciones.forEach(validacion -> validacion.esValida(password));
-    } catch (RuntimeException exception) {
-      //Coloca errores en una pila
-      errores2.push(exception);
-    }
-  }
 
+      //Realiza verificacion con cada validacion de coleccion
+      validaciones.forEach(validacion -> {
+        try{
+          validacion.esValida(password);}
+          catch (RuntimeException exception) {
+            //Coloca errores en una pila
+            errores2.push(exception);
+          }
+        }
+      );
+    }
 }

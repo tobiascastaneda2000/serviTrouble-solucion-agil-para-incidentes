@@ -48,6 +48,7 @@ class ValidadorTest {
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(),  1 );
     assertEquals(listadoErrores.pop().getClass(), ContraseniaConPocosCaracteresException.class );
+
   }
 
   @Test
@@ -80,13 +81,11 @@ class ValidadorTest {
     validador.agregarValidacion(validacionPeorContrasenia);
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  1 );
-    assertEquals(listadoErrores.peek().getClass(), ContraseniaConPocosCaracteresException.class );
-    //assertEquals(listadoErrores.peek().getClass(), DebilPasswordException.class );
-    /*Stack se queda con primer error que lanza, por lo que si hay mas de un error igualmente tendra 1 solo
-    * */
+    assertEquals(listadoErrores.size(),  2);
+    assertEquals(listadoErrores.pop().getClass(), ContraseniaConPocosCaracteresException.class );
+    assertEquals(listadoErrores.pop().getClass(), DebilPasswordException.class );
 
-    /*Es necesario guardar todos las validaciones que ocurrieron? O podemos quedarnos con la primera*/
+    //Podemos pasar un stack a un list??? Asi evitamos el orden en que se suben las validaciones
   }
 
 
