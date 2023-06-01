@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.usuario.*;
+import ar.edu.utn.frba.dds.exceptions.MaxCantIntentosInicioSesionException;
+import ar.edu.utn.frba.dds.exceptions.SesionYaEstaAbiertaException;
 import org.junit.jupiter.api.*;
 
 public class InicioSesionTest {
