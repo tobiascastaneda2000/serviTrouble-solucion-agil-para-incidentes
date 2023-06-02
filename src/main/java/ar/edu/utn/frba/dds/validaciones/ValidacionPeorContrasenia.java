@@ -20,7 +20,7 @@ public class ValidacionPeorContrasenia implements Validacion {
   @Override
   public void esValida(String password) {
     if (peoresContrasenias.contains(password)) {
-      throw new DebilPasswordException("La contrasenia ingresada esta catalogada como una contraseña debil, reintente nuevamente.");
+      throw new DebilPasswordException();
     }
   }
 }

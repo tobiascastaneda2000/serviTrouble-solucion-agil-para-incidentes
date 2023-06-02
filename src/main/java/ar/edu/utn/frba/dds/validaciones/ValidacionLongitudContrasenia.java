@@ -47,17 +47,13 @@ public class ValidacionLongitudContrasenia implements Validacion {
 
   private void validarLongitudMaxima(String password) {
     if (password.length() >= longitudMaximaCaracteres) {
-      throw new ContraseniaConMuchosCaracteresException(
-          "La longitud de la contraseña debe ser menor a los " + getLongitudMaximaCaracteres() + " caracteres."
-      );
+      throw new ContraseniaConMuchosCaracteresException();
     }
   }
 
   private void validarLongitudMinima(String password) {
     if (password.length() < longitudMinimaCaracteres) {
-      throw new ContraseniaConPocosCaracteresException(
-          "La contrasenia debe tener al menos " + getLongitudMinimaCaracteres() + " caracteres."
-      );
+      throw new ContraseniaConPocosCaracteresException();
     }
   }
 

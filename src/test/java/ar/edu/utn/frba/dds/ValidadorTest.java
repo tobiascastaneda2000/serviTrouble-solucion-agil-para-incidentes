@@ -10,7 +10,10 @@ import ar.edu.utn.frba.dds.validaciones.Validador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
@@ -18,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValidadorTest {
   ValidacionPeorContrasenia validacionPeorContrasenia;
-  ValidacionLongitudContrasenia validacionLongitudContrasenia ;
+  ValidacionLongitudContrasenia validacionLongitudContrasenia;
   Validador validador;
   String contrasenia;
 
@@ -31,68 +34,69 @@ class ValidadorTest {
   }
 
   @Test
-  void siNoFallaValidacionesDevuelveListaVacia(){
+  void siNoFallaValidacionesDevuelveListaVacia() {
     contrasenia = "AguanteCanserbero6543";
-    Stack<RuntimeException> listadoErrores;
+    List<RuntimeException> listadoErrores;
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  0 );
-    assertTrue(listadoErrores.empty());
+    assertEquals(listadoErrores.size(), 0);
+    assertEquals(listadoErrores, List.of());
 
   }
 
   @Test
-  void fallaSoloValidacionPocosCaracteres(){
+  void fallaSoloValidacionPocosCaracteres() {
     contrasenia = "345";
-    Stack<RuntimeException> listadoErrores;
+    List<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  1 );
-    assertEquals(listadoErrores.pop().getClass(), ContraseniaConPocosCaracteresException.class );
+    assertEquals(listadoErrores.size(), 1);
+    assertTrue(listadoErrores.contains(new ContraseniaConPocosCaracteresException()));
+    assertEquals(listadoErrores, Arrays.asList(new ContraseniaConPocosCaracteresException()));
 
   }
 
   @Test
-  void fallaSoloValidacionMuchosCaracteres(){
+  void fallaSoloValidacionMuchosCaracteres() {
     contrasenia = "En este ejemplo, estamos utilizando assertEquals para comparar la clase de excepción lanzada " +
         "(e.getClass()) con la clase de excepción esperada (MiExcepcion.class). Si las clases son iguales, " +
         "la aserción será exitosa y el test pasará. Si las clases no son iguales, la aserción fallará y se " +
         "mostrará un mensaje de error.";
-    Stack<RuntimeException> listadoErrores;
+    List<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  1 );
-    assertEquals(listadoErrores.pop().getClass(), ContraseniaConMuchosCaracteresException.class );
+    assertEquals(listadoErrores.size(), 1);
+    assertTrue(listadoErrores.contains(new ContraseniaConMuchosCaracteresException()));
+    assertEquals(listadoErrores, Arrays.asList(new ContraseniaConMuchosCaracteresException()));
+
   }
 
   @Test
-  void fallaSoloValidacionPeoresContrasenias(){
+  void fallaSoloValidacionPeoresContrasenias() {
     contrasenia = "secret";
-    Stack<RuntimeException> listadoErrores;
+    List<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionPeorContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  1 );
-    assertEquals(listadoErrores.pop().getClass(), DebilPasswordException.class );
+    assertEquals(listadoErrores.size(), 1);
+    assertEquals(listadoErrores, Arrays.asList(new DebilPasswordException()));
+    assertTrue(listadoErrores.contains(new DebilPasswordException()));
   }
 
   @Test
-  void puedenFallarVariasValidacionesSoloSeQuedaConPrimerError(){
+  void puedenFallarVariasValidacionesSoloSeQuedaConPrimerError() {
     contrasenia = "1234";
-    Stack<RuntimeException> listadoErrores;
+    List<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionPeorContrasenia);
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
-    assertEquals(listadoErrores.size(),  2);
-    assertEquals(listadoErrores.pop().getClass(), ContraseniaConPocosCaracteresException.class );
-    assertEquals(listadoErrores.pop().getClass(), DebilPasswordException.class );
+    assertEquals(listadoErrores.size(), 2);
 
-    //Podemos pasar un stack a un list??? Asi evitamos el orden en que se suben las validaciones
+    assertEquals(listadoErrores, Arrays.asList(new DebilPasswordException(), new ContraseniaConPocosCaracteresException()));
+    assertTrue(listadoErrores.contains(new ContraseniaConPocosCaracteresException()));
+    assertTrue(listadoErrores.contains(new DebilPasswordException()));
+
+    //Averiguar por que no valida los tests
+    //calcula cant elementos dentor de manera correcta, pero no se puede comparar excepcciones
   }
-
-
-
-
-
-
 
 
 }
