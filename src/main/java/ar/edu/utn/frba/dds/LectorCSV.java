@@ -26,8 +26,8 @@ public class LectorCSV {
             fileReader = new BufferedReader(new FileReader(file));
             String leido = fileReader.readLine();
             while (leido != null) {
-                String[] campos = leido.split(";");
-                entidades.add(generarEntidad(campos));
+                Entidad entidadNueva = generarEntidad(leido);
+                if(entidadNueva != null) entidades.add(entidadNueva);
                 leido = fileReader.readLine();
             }
             fileReader.close();
@@ -39,12 +39,13 @@ public class LectorCSV {
         return entidades;
     }
 
-    public Entidad generarEntidad(String[] campos) {
+    public Entidad generarEntidad(String dataLeida) {
+        String[] campos = dataLeida.split(";");
+        if(campos.length < 3) return null;
         int id = Integer.parseInt(campos[0]);
         String razonSocial = campos[1];
         String email = campos[2];
-
-        return new Entidad(id, razonSocial, email);
+        return ( razonSocial.equals("") || email.equals("") ) ? null : new Entidad(id, razonSocial, email);
     }
 
 }

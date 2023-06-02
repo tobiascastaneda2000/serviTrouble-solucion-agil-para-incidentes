@@ -9,7 +9,7 @@ public class Localizacion {
   private final String url = "https://apis.datos.gob.ar/georef/api/";
 
   public Localizacion(){}
-
+/*
   public String obtenerProvincias(){
 
   }
@@ -17,5 +17,5 @@ public class Localizacion {
   public realizarRequest(String params){
 
   }
-
+*/
 }
