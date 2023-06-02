@@ -23,13 +23,13 @@ class DevuelveContraseniaSinEspaciosTest {
 
   @Test
   @DisplayName("Contrasenia sin espacios devuelve el mismo string")
-  void contraseniaSinEspaciosDevuelveMismoString(){
-    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaSinEspacios) , "Maximo1234");
+  void contraseniaSinEspaciosDevuelveMismoString() {
+    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaSinEspacios), "Maximo1234");
   }
 
   @Test
   @DisplayName("Contrasenia con espacios reemplana muchos espacios seguidos por uno solo")
-  void contraseniaConEspaciosDevuelveStringMenor(){
-    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaConEspacios) , "M l");
+  void contraseniaConEspaciosDevuelveStringMenor() {
+    assertEquals(validacionLongitudContrasenia.recortarEspaciosSeguidos(contraseniaConEspacios), "M l");
   }
 }

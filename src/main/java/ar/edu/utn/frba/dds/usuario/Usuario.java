@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.usuario;
 
-import ar.edu.utn.frba.dds.exceptions.MaxCantIntentosInicioSesionException;
-import ar.edu.utn.frba.dds.exceptions.SesionYaEstaAbiertaException;
+import ar.edu.utn.frba.dds.usuario.exceptions.MaxCantIntentosInicioSesionException;
+import ar.edu.utn.frba.dds.usuario.exceptions.SesionYaEstaAbiertaException;
 
 public class Usuario {
   public String usuario;
