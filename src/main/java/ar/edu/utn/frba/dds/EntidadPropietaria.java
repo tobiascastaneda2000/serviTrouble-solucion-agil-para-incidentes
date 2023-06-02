@@ -15,6 +15,6 @@ public class EntidadPropietaria {
         this.usuarioEncargado = usuarioEncargado;
     }
     public void recopilarProblematicas() {
-        
+
     }
 }
