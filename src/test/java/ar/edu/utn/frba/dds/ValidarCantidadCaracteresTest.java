@@ -2,12 +2,12 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.validaciones.ContraseniaConMuchosCaracteresException;
 import ar.edu.utn.frba.dds.validaciones.ContraseniaConPocosCaracteresException;
-import ar.edu.utn.frba.dds.validaciones.DebilPasswordException;
 import ar.edu.utn.frba.dds.validaciones.ValidacionLongitudContrasenia;
-import ar.edu.utn.frba.dds.validaciones.ValidacionPeorContrasenia;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ValidarCantidadCaracteresTest {
@@ -20,11 +20,13 @@ public class ValidarCantidadCaracteresTest {
   }
 
   @Test
+  @DisplayName("contraseña con menos de 8 caracteres lanza excepccion")
   void contraseniaMenosDe8Caracteres() {
     assertThrows(ContraseniaConPocosCaracteresException.class, () -> validacionLongitudContrasenia.esValida("sh") );
   }
 
   @Test
+  @DisplayName("contraseña con mas de 64 caracteres lanza excepccion")
   void contraseniaConMasDe64Caracteres() {
     String muchosCaracteres = "Las pruebas end-to-end, también conocidas como pruebas extremo a extremo, se enfocan en probar " +
         "todo el flujo de trabajo de una aplicación o sistema desde el inicio hasta el final, simulando una experiencia " +
@@ -34,4 +36,13 @@ public class ValidarCantidadCaracteresTest {
         "situaciones del mundo real.";
     assertThrows(ContraseniaConMuchosCaracteresException.class, () -> validacionLongitudContrasenia.esValida(muchosCaracteres) );
   }
+
+  @Test
+  @DisplayName("contraseña entre 8 y 64 caracteres es aceptado")
+  void contraseniaEntre8a64Caracteres() {
+    String caracteres = "ry5u4j iro5";
+    assertDoesNotThrow( () -> validacionLongitudContrasenia.esValida(caracteres) );
+  }
 }
+
+

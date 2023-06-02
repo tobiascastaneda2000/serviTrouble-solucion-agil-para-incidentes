@@ -18,6 +18,7 @@ public class InicioSesionTest {
   }
 
   @Test
+  @DisplayName("Intentar iniciar sesion con masde 3 intentos lanza excepccion")
   void noMasDe3Intentos() {
     usuarioSesionCerrada.iniciarSesion("Migal", "Rodriguez");
     usuarioSesionCerrada.iniciarSesion("Miguel", "Rudiguer");
@@ -26,6 +27,7 @@ public class InicioSesionTest {
   }
 
   @Test
+  @DisplayName("Intentar iniciar sesion cuando esta abierta lanza excepccion")
   void sesionYaFueAbierta() {
 
     Assertions.assertTrue(usuarioSesionAbierta.isSesionAbierta());
@@ -34,6 +36,7 @@ public class InicioSesionTest {
   }
 
   @Test
+  @DisplayName("Ingresar usuario erroneo suma un intento")
   void usuarioErroneoSumaUnIntento() {
     usuarioSesionCerrada.iniciarSesion("Adrian", "Rodriguez");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 1);
@@ -41,6 +44,7 @@ public class InicioSesionTest {
   }
 
   @Test
+  @DisplayName("Ingresar contraseña erronea suma un intento")
   void contraseniaErroneaSumaUnIntento() {
     usuarioSesionCerrada.iniciarSesion("Miguel", "Rincon");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 1);
@@ -48,6 +52,7 @@ public class InicioSesionTest {
   }
 
   @Test
+  @DisplayName("Ingresar datos correctos abre sesion y no suma intentos")
   void datosCorrectosAbrenSesion() {
     usuarioSesionCerrada.iniciarSesion("Miguel", "Rodriguez");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 0);
