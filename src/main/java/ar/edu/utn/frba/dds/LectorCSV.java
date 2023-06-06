@@ -10,10 +10,24 @@ public class LectorCSV {
     private File file;
     private BufferedReader fileReader;
 
+    String extensioncsv;
+
 
     public LectorCSV(String csvPath) {
-        this.csvPath = csvPath;
-        file = new File(this.csvPath);
+
+        if(csvPath.length() >= 3) {
+            this.extensioncsv = csvPath.substring(csvPath.length() - 4);
+            if (extensioncsv.equals(".csv")) {
+                this.csvPath = csvPath;
+                file = new File(this.csvPath);
+            } else {
+                throw new PathIncorrectoException();
+            }
+        }
+        else{
+            throw new RuntimeException();
+        }
+
     }
 
     public String getCsvPath() {
@@ -22,21 +36,26 @@ public class LectorCSV {
 
     public List<Entidad> obtenerEntidadesDeCSV() {
         List<Entidad> entidades = new ArrayList<>();
-        try {
-            fileReader = new BufferedReader(new FileReader(file));
-            String leido = fileReader.readLine();
-            while (leido != null) {
-                Entidad entidadNueva = generarEntidad(leido);
-                if(entidadNueva != null) entidades.add(entidadNueva);
-                leido = fileReader.readLine();
+
+        if(file.exists()) {
+            try {
+                fileReader = new BufferedReader(new FileReader(file));
+                String cabecera = fileReader.readLine();
+                String leido = fileReader.readLine();
+                while (leido != null) {
+                    Entidad entidadNueva = generarEntidad(leido);
+                    if (entidadNueva != null) entidades.add(entidadNueva);
+                    leido = fileReader.readLine();
+                }
+                fileReader.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-            fileReader.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            return entidades;
         }
-        return entidades;
+        else{
+            throw new ArchivoNoExistenteException();
+        }
     }
 
     public Entidad generarEntidad(String dataLeida) {
