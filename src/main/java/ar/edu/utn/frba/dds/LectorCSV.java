@@ -11,6 +11,7 @@ public class LectorCSV {
     private BufferedReader fileReader;
 
     String extensioncsv;
+    List<Entidad> entidades = new ArrayList<>();
 
 
     public LectorCSV(String csvPath) {
@@ -35,7 +36,7 @@ public class LectorCSV {
     }
 
     public List<Entidad> obtenerEntidadesDeCSV() {
-        List<Entidad> entidades = new ArrayList<>();
+
 
         if(file.exists()) {
             try {
@@ -44,8 +45,17 @@ public class LectorCSV {
                 String leido = fileReader.readLine();
                 while (leido != null) {
                     Entidad entidadNueva = generarEntidad(leido);
-                    if (entidadNueva != null) entidades.add(entidadNueva);
-                    leido = fileReader.readLine();
+                    if(entidades.stream().anyMatch(e->
+                        e.getId() == entidadNueva.getId() &&
+                        e.getEmail().equals(entidadNueva.getEmail()) &&
+                        e.getRazonSocial().equals(entidadNueva.getRazonSocial())
+                    )){
+                        throw new EntidadYaCargadaException();
+                    }
+                    else{
+                        entidades.add(entidadNueva);
+                        leido = fileReader.readLine();
+                    }
                 }
                 fileReader.close();
             } catch (IOException ex) {
@@ -60,11 +70,16 @@ public class LectorCSV {
 
     public Entidad generarEntidad(String dataLeida) {
         String[] campos = dataLeida.split(";");
-        if(campos.length < 3) return null;
+        if(campos.length < 3){
+            throw new EntidadIncompletaException();
+        }
         int id = Integer.parseInt(campos[0]);
         String razonSocial = campos[1];
         String email = campos[2];
-        return ( razonSocial.equals("") || email.equals("") ) ? null : new Entidad(id, razonSocial, email);
+        if( razonSocial.equals("") || email.equals("") ){
+            throw new CampoDeEntidadVacioException();
+        }
+        return new Entidad(id, razonSocial, email);
     }
 
 }
