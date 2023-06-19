@@ -18,10 +18,9 @@ public class ValidacionLongitudContrasenia implements Validacion {
 
   @Override
   public void esValida(String password) {
-
     String passwordConEspaciosRecortados = recortarEspaciosSeguidos(password);
     validarLongitudMinima(passwordConEspaciosRecortados);
-    validarLongitudMaxima(password);
+    validarLongitudMaxima(passwordConEspaciosRecortados);
   }
 
   public String recortarEspaciosSeguidos(String password){
