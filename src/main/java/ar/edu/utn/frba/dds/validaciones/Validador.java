@@ -5,11 +5,11 @@ import java.util.*;
 public class Validador {
 
   public Set<Validacion> validaciones;
-  public List<RuntimeException> listadoErrores;
+  public Set<RuntimeException> listadoErrores;
 
   public Validador() {
     this.validaciones = new HashSet<>();
-    this.listadoErrores = new ArrayList<>();
+    this.listadoErrores = new HashSet<>();
   }
 
   //Setter de validaciones
@@ -18,7 +18,7 @@ public class Validador {
   }
 
   //Devuelve lista de excepcciones, y de no a haber, lista vacia
-  public List<RuntimeException> validarContrasenia(String password) {
+  public Set<RuntimeException> validarContrasenia(String password) {
     realizarTodasLasValidaciones(password);
     return listadoErrores;
   }

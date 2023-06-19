@@ -36,7 +36,7 @@ class ValidadorTest {
   @DisplayName("Cuando no hay fallas la lista esta vacia")
   void siNoFallaValidacionesDevuelveListaVacia() {
     contrasenia = "AguanteCanserbero6543";
-    List<RuntimeException> listadoErrores;
+    Set<RuntimeException> listadoErrores;
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(), 0);
     assertEquals(listadoErrores, List.of());
@@ -47,7 +47,7 @@ class ValidadorTest {
   @DisplayName("Cuando hay pocos caracteres devuelve su excepccion")
   void fallaSoloValidacionPocosCaracteres() {
     contrasenia = "345";
-    List<RuntimeException> listadoErrores;
+    Set<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(), 1);
@@ -63,7 +63,7 @@ class ValidadorTest {
         "(e.getClass()) con la clase de excepción esperada (MiExcepcion.class). Si las clases son iguales, " +
         "la aserción será exitosa y el test pasará. Si las clases no son iguales, la aserción fallará y se " +
         "mostrará un mensaje de error.";
-    List<RuntimeException> listadoErrores;
+    Set<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(), 1);
@@ -78,7 +78,7 @@ class ValidadorTest {
   @DisplayName("Cuando es contraseña debil devuelve su excepccion")
   void fallaSoloValidacionPeoresContrasenias() {
     contrasenia = "secret";
-    List<RuntimeException> listadoErrores;
+    Set<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionPeorContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(), 1);
@@ -90,7 +90,7 @@ class ValidadorTest {
   @DisplayName("Cuando hay muchos fallos devuelve todos los fallos ocurridos")
   void puedenFallarVariasValidacionesSoloSeQuedaConPrimerError() {
     contrasenia = "1234";
-    List<RuntimeException> listadoErrores;
+    Set<RuntimeException> listadoErrores;
     validador.agregarValidacion(validacionPeorContrasenia);
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
