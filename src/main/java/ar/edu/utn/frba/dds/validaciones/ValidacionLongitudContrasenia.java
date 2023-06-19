@@ -24,25 +24,8 @@ public class ValidacionLongitudContrasenia implements Validacion {
     validarLongitudMaxima(password);
   }
 
-  public String recortarEspaciosSeguidos(String password) {
-    String cadenaResultante = "";
-    char caracterAnterior = ' ';
-    for (int i = 0; i < password.length(); i++) {
-      char caracterActual = password.charAt(i);
-      if (caracterActual != ' ') {
-        cadenaResultante += caracterActual;
-      } else {
-        if (caracterAnterior != ' ') {
-          cadenaResultante += caracterActual;
-
-        }
-      }
-
-      caracterAnterior = caracterActual;
-
-    }
-
-    return cadenaResultante;
+  public String recortarEspaciosSeguidos(String password){
+    return password.replaceAll("\\s+", " ");
   }
 
   private void validarLongitudMaxima(String password) {
