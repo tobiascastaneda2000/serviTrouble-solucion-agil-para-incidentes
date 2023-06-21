@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class ServicioLocalizacion {
-    private final String url = "https://apis.datos.gob.ar/georef/api/";
+    private final String url;
     private ApiGeoRef apiGeoRef;
 
-    private ServicioLocalizacion() {
+    private ServicioLocalizacion(String nuevaUrl) {
+        this.url = nuevaUrl;
         this.apiGeoRef = new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(nuevaUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiGeoRef.class);
