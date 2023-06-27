@@ -15,7 +15,7 @@ public class ServicioLocalizacion {
     private final String url;
     private ApiGeoRef apiGeoRef;
 
-    private ServicioLocalizacion(String nuevaUrl) {
+    public ServicioLocalizacion(String nuevaUrl) {
         this.url = nuevaUrl;
         this.apiGeoRef = new Retrofit.Builder()
                 .baseUrl(nuevaUrl)
