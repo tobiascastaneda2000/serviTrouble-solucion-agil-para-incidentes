@@ -1,6 +1,10 @@
 package ar.edu.utn.frba.dds;
 
-import org.junit.jupiter.api.Disabled;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadYaCargadaException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.PathIncorrectoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;

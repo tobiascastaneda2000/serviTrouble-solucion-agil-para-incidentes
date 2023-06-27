@@ -1,5 +1,11 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadYaCargadaException;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.PathIncorrectoException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
