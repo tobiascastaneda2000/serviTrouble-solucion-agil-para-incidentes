@@ -1,0 +1,5 @@
+package ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref;
+
+public interface Localizacion {
+
+}

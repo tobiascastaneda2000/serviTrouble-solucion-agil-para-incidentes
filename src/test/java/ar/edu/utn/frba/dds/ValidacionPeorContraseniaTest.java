@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.validaciones.DebilPasswordException;
-import ar.edu.utn.frba.dds.validaciones.ValidacionPeorContrasenia;
+import ar.edu.utn.frba.dds.validaciones_password.DebilPasswordException;
+import ar.edu.utn.frba.dds.validaciones_password.ValidacionPeorContrasenia;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

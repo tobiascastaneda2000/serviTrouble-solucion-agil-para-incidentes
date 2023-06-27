@@ -1,16 +1,14 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.Localizacion.Departamento;
-import ar.edu.utn.frba.dds.Localizacion.Municipio;
-import ar.edu.utn.frba.dds.Localizacion.Provincia;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ApiGeoRef;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Provincia;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
-import retrofit2.CallAdapter;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

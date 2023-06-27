@@ -1,8 +1,9 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref;
 
-import ar.edu.utn.frba.dds.Localizacion.Departamento;
-import ar.edu.utn.frba.dds.Localizacion.Municipio;
-import ar.edu.utn.frba.dds.Localizacion.Provincia;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ApiGeoRef;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Departamento;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Municipio;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Provincia;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
