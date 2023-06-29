@@ -13,7 +13,7 @@ public class Miembro {
     public Usuario usuario;
     public PermisoComunidad permisoComunidad;
     public String medioComunicacion; //De momento esta al dope
-    List<Map<String,TipoServicio>> notificaciones;
+    List<Notificacion> notificaciones;
 
     public Miembro(Usuario usuario, PermisoComunidad permisoComunidad, String notiConfinguracion) {
         this.usuario = usuario;
@@ -36,10 +36,8 @@ public class Miembro {
 
     }
 
-        public void recibirNotificaiones(String mensaje, TipoServicio servicio) {
-        Map<String, TipoServicio> noti = new HashMap<>();
-        noti.put(mensaje,servicio);
-        notificaciones.add(noti);
+        public void recibirNotificaiones(Notificacion notificacion) {
+        notificaciones.add(notificacion);
     }
     //Por ahora falta diferenciar el envio via whatssap y mail
 }

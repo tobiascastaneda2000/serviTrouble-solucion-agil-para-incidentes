@@ -6,6 +6,6 @@ public class Notificador {
 
   public void notificar(String mensaje, Comunidad comunidad, TipoServicio servicio){
 
-    comunidad.getMiembros().forEach(m->m.recibirNotificaiones(mensaje, servicio));
+    comunidad.getMiembros().forEach(m->m.recibirNotificaiones(new Notificacion(mensaje, servicio)));
   }
 }
