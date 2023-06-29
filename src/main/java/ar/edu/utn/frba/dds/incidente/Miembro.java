@@ -15,10 +15,14 @@ public class Miembro {
     public String medioComunicacion; //De momento esta al dope
     List<Notificacion> notificaciones;
 
-    public Miembro(Usuario usuario, PermisoComunidad permisoComunidad, String notiConfinguracion) {
+    public Notificador tipoNotificador;
+
+    public Miembro(Usuario usuario, PermisoComunidad permisoComunidad,
+                   String notiConfinguracion, Notificador tipoNotificador) {
         this.usuario = usuario;
         this.permisoComunidad = permisoComunidad;
         this.medioComunicacion = notiConfinguracion;
+        this.tipoNotificador = tipoNotificador;
     }
 
     public Comunidad devolverComunidad() {
@@ -32,7 +36,7 @@ public class Miembro {
 
         Comunidad comunidad = this.devolverComunidad();
         comunidad.agregarIncidente(new Incidente(servicio, observaciones));
-        new Notificador().notificar("Nuevo Incidente", this.devolverComunidad(), servicio);
+        tipoNotificador.notificar("Nuevo Incidente", this.devolverComunidad(), servicio);
 
     }
 
