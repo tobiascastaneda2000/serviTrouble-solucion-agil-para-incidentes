@@ -1,13 +1,22 @@
 package ar.edu.utn.frba.dds.usuario;
 
+import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.TipoServicio;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.usuario.exceptions.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.usuario.exceptions.SesionYaEstaAbiertaException;
+
+import java.util.List;
 
 public class Usuario {
   public String usuario;
   public String contrasenia;
   int intentos;
   boolean sesionAbierta;
+
+  Localizacion localizacionInteres;
+  List<Entidad> entidadesDeInteres;
+  List<TipoServicio> serviciosDeInteres;
 
   public Usuario(String nombre, String contrasenia) {
     this.usuario = nombre;
