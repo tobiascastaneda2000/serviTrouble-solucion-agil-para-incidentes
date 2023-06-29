@@ -21,10 +21,10 @@ public class Miembro {
     List<Map<Integer, Integer>> horarios;
 
     public Miembro(Usuario usuario, PermisoComunidad permisoComunidad,
-                   String notiConfinguracion, Notificador tipoNotificador) {
+                   List<Map<Integer, Integer>> horarios, Notificador tipoNotificador) {
         this.usuario = usuario;
         this.permisoComunidad = permisoComunidad;
-        this.medioComunicacion = notiConfinguracion;
+        this.horarios = horarios;
         this.tipoNotificador = tipoNotificador;
     }
 

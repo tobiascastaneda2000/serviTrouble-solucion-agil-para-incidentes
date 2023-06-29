@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.usuario.Usuario;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Comunidad {
@@ -22,8 +23,8 @@ public class Comunidad {
         return miembros;
     }
 
-    public void registrarMiembro(Usuario usuario, String medioComunicacion) {
-        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD, medioComunicacion));
+    public void registrarMiembro(Usuario usuario, List<Map<Integer, Integer>> horarios, Notificador noti) {
+        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD, horarios, noti));
     }
     //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
 
