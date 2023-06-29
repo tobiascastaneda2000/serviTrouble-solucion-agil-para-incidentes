@@ -14,8 +14,11 @@ public class Miembro {
     public PermisoComunidad permisoComunidad;
     public String medioComunicacion; //De momento esta al dope
     List<Notificacion> notificaciones;
+    //Debe guardarse notificaciones o solo se envia a traves de una api??
 
     public Notificador tipoNotificador;
+
+    List<Map<Integer, Integer>> horarios;
 
     public Miembro(Usuario usuario, PermisoComunidad permisoComunidad,
                    String notiConfinguracion, Notificador tipoNotificador) {

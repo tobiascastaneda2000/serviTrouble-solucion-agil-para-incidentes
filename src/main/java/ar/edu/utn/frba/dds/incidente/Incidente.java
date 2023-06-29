@@ -10,18 +10,18 @@ public class Incidente {
   }
 
   TipoServicio servicio;
-  boolean estaAbierto;
   String observacion;
-  LocalDateTime fechaHora;
+  LocalDateTime fechaHoraAbre;
+  LocalDateTime fechaHoraCierre;
 
   public Incidente(TipoServicio servicio, String observacion) {
     this.servicio = servicio;
     this.observacion = observacion;
-    this.estaAbierto = true;
-    this.fechaHora = LocalDateTime.now();
+    //this.estaAbierto = true;
+    this.fechaHoraAbre = LocalDateTime.now();
   }
 
   public void cerrar() {
-    this.estaAbierto = false;
+    this.fechaHoraCierre = LocalDateTime.now();
   }
 }

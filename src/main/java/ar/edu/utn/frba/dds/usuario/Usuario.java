@@ -68,4 +68,8 @@ public class Usuario {
     }
   }
 
+
+  //public accederServiciosCercanos(){}
+  //Debe devolver los servicios que tiene en la misma localizacion
+
 }
