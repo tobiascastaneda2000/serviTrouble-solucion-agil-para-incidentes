@@ -5,6 +5,10 @@ import ar.edu.utn.frba.dds.TipoServicio;
 import java.time.LocalDateTime;
 
 public class Incidente {
+  public TipoServicio getServicio() {
+    return servicio;
+  }
+
   TipoServicio servicio;
   boolean estaAbierto;
   String observacion;

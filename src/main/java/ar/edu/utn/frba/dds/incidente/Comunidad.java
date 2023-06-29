@@ -22,8 +22,8 @@ public class Comunidad {
     }
 
 
-    public void registrarMiembro(Usuario usuario, String notiConfinguracion) {
-        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD, notiConfinguracion));
+    public void registrarMiembro(Usuario usuario, String medioComunicacion) {
+        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD, medioComunicacion));
     }
     //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
 
@@ -37,7 +37,7 @@ public class Comunidad {
 
     public void cerrarIncidente(Incidente incidente){
         incidente.cerrar();
-        new Notificador().notificar("Resuelto", this);
+        new Notificador().notificar("Resuelto", this, incidente.getServicio());
         //Debe tambien eliminar el incidente???
     }
 }

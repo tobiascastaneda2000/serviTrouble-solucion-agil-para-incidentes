@@ -4,19 +4,21 @@ import ar.edu.utn.frba.dds.PermisoComunidad;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.usuario.Usuario;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Miembro {
 
     public Usuario usuario;
     public PermisoComunidad permisoComunidad;
-    public String notiConfinguracion;
-    List<String> notificaciones;
+    public String medioComunicacion; //De momento esta al dope
+    List<Map<String,TipoServicio>> notificaciones;
 
     public Miembro(Usuario usuario, PermisoComunidad permisoComunidad, String notiConfinguracion) {
         this.usuario = usuario;
         this.permisoComunidad = permisoComunidad;
-        this.notiConfinguracion = notiConfinguracion;
+        this.medioComunicacion = notiConfinguracion;
     }
 
     public Comunidad devolverComunidad() {
@@ -30,12 +32,14 @@ public class Miembro {
 
         Comunidad comunidad = this.devolverComunidad();
         comunidad.agregarIncidente(new Incidente(servicio, observaciones));
-        new Notificador().notificar("Nuevo Incidente", this.devolverComunidad());
+        new Notificador().notificar("Nuevo Incidente", this.devolverComunidad(), servicio);
 
     }
 
-        public void recibirNotificaiones(String mensaje) {
-        notificaciones.add(mensaje);
+        public void recibirNotificaiones(String mensaje, TipoServicio servicio) {
+        Map<String, TipoServicio> noti = new HashMap<>();
+        noti.put(mensaje,servicio);
+        notificaciones.add(noti);
     }
     //Por ahora falta diferenciar el envio via whatssap y mail
 }
