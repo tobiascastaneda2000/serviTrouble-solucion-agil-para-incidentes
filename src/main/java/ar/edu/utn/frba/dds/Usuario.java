@@ -9,18 +9,17 @@ public class Usuario {
   public String contrasenia;
   int intentos;
   boolean sesionAbierta;
-  public Notificador tipoNotificador;
+  //public Notificador tipoNotificador;
   Localizacion localizacionInteres;
   List<Entidad> entidadesDeInteres;
   List<TipoServicio> serviciosDeInteres;
-  List<Miembro> miembros;
+  //List<Miembro> miembros;
 
-  public Usuario(String nombre, String contrasenia, Notificador notificador) {
+  public Usuario(String nombre, String contrasenia) {
     this.usuario = nombre;
     this.contrasenia = contrasenia;
     this.intentos = 0;
     this.sesionAbierta = false;
-    this.tipoNotificador = notificador;
   }
 
   public String getUsername() {
@@ -75,20 +74,12 @@ public class Usuario {
   //Debe devolver los servicios que tiene en la misma localizacion
 
 
-  public void informarIncidente(TipoServicio servicio, String observaciones) {
-
-    List<Comunidad> comunidades = this.comunidadesPertenecientes();
-    comunidades.forEach(c->c.agregarIncidente(new Incidente(servicio, observaciones)));
-    comunidades.forEach(c->c.notificar("Nuevo Incidente",servicio));
-  }
-
+/*
   List<Comunidad> comunidadesPertenecientes(){
     return miembros.stream().map(m->m.devolverComunidad()).toList();
-  }
+  }*/
 
-
-  public void cerrarIncidente(Incidente incidente){
-    List<Comunidad> comunidades = this.comunidadesPertenecientes();
-    comunidades.forEach(c->c.cerrarIncidente(incidente));
+  List<Comunidad> comunidadesPertenecientes(){
+    return RepositorioComunidades.getInstance().getComunidades().stream().filter(c->c.contieneUsuario(this)).toList();
   }
 }

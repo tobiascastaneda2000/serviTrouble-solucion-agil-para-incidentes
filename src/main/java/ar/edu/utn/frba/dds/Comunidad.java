@@ -40,6 +40,10 @@ public class Comunidad {
 
     public void notificar(String texto, TipoServicio servicio) {
        miembros.stream().filter(m->m.usuario.getServiciosDeInteres().contains(servicio))
-           .forEach(m->m.usuario.tipoNotificador.notificar(texto,m.usuario));
+           .forEach(m->m.tipoNotificador.notificar(texto,m.usuario));
+    }
+
+    public boolean contieneUsuario(Usuario usuario) {
+        return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
     }
 }

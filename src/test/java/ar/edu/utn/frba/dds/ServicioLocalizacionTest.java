@@ -28,8 +28,8 @@ public class ServicioLocalizacionTest {
     servicio = new ServicioLocalizacion("https://apis.datos.gob.ar/georef/api/");
     api = mock(ApiGeoRef.class);
     listadoProvincias = Arrays.asList(jujuy);
-    call = api.getListData(listadoProvincias);
-    when(api.getProvincias()).thenReturn(call);
+    /*call = apit.getListData(listadoProvincias);
+    when(api.getProvincias()).thenReturn(call);*/
   }
 
   @Test
