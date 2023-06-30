@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,8 +13,16 @@ public class Comunidad {
         this.miembros = new HashSet<>();
     }
 
-    List<Incidente> incidentesAResolver;
-    List<Incidente> incidentesResueltos;
+    public List<Incidente> getIncidentesAResolver() {
+        return incidentesAResolver;
+    }
+
+    public List<Incidente> getIncidentesResueltos() {
+        return incidentesResueltos;
+    }
+
+    List<Incidente> incidentesAResolver  = new ArrayList<>();
+    List<Incidente> incidentesResueltos = new ArrayList<>();
 
     public Set<Miembro> getMiembros() {
         return miembros;
@@ -50,4 +59,6 @@ public class Comunidad {
     public boolean contieneUsuario(Usuario usuario) {
         return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
     }
+
+
 }

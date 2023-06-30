@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +14,7 @@ public class Usuario {
   //public Notificador tipoNotificador;
   Localizacion localizacionInteres;
   List<Entidad> entidadesDeInteres;
-  List<TipoServicio> serviciosDeInteres;
+  List<TipoServicio> serviciosDeInteres = new ArrayList<>();
   //List<Miembro> miembros;
 
   public Usuario(String nombre, String contrasenia) {
@@ -39,7 +41,7 @@ public class Usuario {
   }
 
   public List<TipoServicio> getServiciosDeInteres(){
-    return getServiciosDeInteres();
+    return this.serviciosDeInteres;
   }
 
 

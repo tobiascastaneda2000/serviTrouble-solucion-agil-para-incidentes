@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.dds;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class RepositorioComunidades {
    public static RepositorioComunidades instance = new RepositorioComunidades();
-  Set<Comunidad> comunidades;
+  Set<Comunidad> comunidades = new HashSet<>();
 
   public Set<Comunidad>getComunidades(){
     return this.comunidades;
