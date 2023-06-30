@@ -77,13 +77,18 @@ public class Usuario {
 
   public void informarIncidente(TipoServicio servicio, String observaciones) {
 
-    List<Comunidad> comunidades = miembros.stream().map(m->m.devolverComunidad()).toList();
+    List<Comunidad> comunidades = this.comunidadesPertenecientes();
     comunidades.forEach(c->c.agregarIncidente(new Incidente(servicio, observaciones)));
     comunidades.forEach(c->c.notificar("Nuevo Incidente",servicio));
   }
 
+  List<Comunidad> comunidadesPertenecientes(){
+    return miembros.stream().map(m->m.devolverComunidad()).toList();
+  }
+
+
   public void cerrarIncidente(Incidente incidente){
-    List<Comunidad> comunidades = miembros.stream().map(m->m.devolverComunidad()).toList();
+    List<Comunidad> comunidades = this.comunidadesPertenecientes();
     comunidades.forEach(c->c.cerrarIncidente(incidente));
   }
 }
