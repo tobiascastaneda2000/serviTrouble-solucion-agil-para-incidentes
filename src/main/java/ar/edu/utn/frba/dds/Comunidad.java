@@ -19,9 +19,13 @@ public class Comunidad {
         return miembros;
     }
 
-  /*  public void registrarMiembro(Usuario usuario, List<Map<Integer, Integer>> horarios, Notificador noti) {
-        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD, horarios, noti));
-    }*/
+    public void registrarMiembro(Usuario usuario,
+                                 //List<Map<Integer, Integer>> horarios,
+                                 Notificador noti) {
+        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
+            //horarios,
+            noti));
+    }
     //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
 
     boolean contieneMiembro(Miembro miembro) {
