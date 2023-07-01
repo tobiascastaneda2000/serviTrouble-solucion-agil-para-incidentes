@@ -9,6 +9,7 @@ import java.util.Set;
 public class Usuario {
   public String usuario;
   public String contrasenia;
+
   int intentos;
   boolean sesionAbierta;
   //public Notificador tipoNotificador;

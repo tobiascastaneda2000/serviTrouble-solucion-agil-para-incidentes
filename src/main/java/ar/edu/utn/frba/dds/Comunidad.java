@@ -30,10 +30,10 @@ public class Comunidad {
 
     public void registrarMiembro(Usuario usuario,
                                  //List<Map<Integer, Integer>> horarios,
-                                 Notificador noti) {
+                                 MedioNotificador medio) {
         miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
             //horarios,
-            noti));
+            medio));
     }
     //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
 

@@ -1,10 +1,16 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.entrega_3;
 
+import ar.edu.utn.frba.dds.Comunidad;
+import ar.edu.utn.frba.dds.Incidente;
+import ar.edu.utn.frba.dds.Miembro;
+import ar.edu.utn.frba.dds.MedioNotificador;
+import ar.edu.utn.frba.dds.RepositorioComunidades;
+import ar.edu.utn.frba.dds.TipoServicio;
+import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.WhatsAppSender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.mock;
 
@@ -13,7 +19,7 @@ class AperturaIncidenteTest {
   Usuario usuario;
   Comunidad palermoGrupo;
   Comunidad barracasGrupo;
-  Notificador notificadorWhatsapp;
+  MedioNotificador notificadorWhatsapp;
 
   Miembro miembro;
 
@@ -22,7 +28,7 @@ class AperturaIncidenteTest {
      usuario = new Usuario("Leonardo ", "Dicaprio" );
      palermoGrupo = new Comunidad();
      barracasGrupo = new Comunidad();
-     notificadorWhatsapp = new WhatsAppNotificador();
+     notificadorWhatsapp = new WhatsAppSender();
      palermoGrupo.registrarMiembro(usuario, notificadorWhatsapp);
      barracasGrupo.registrarMiembro(usuario, notificadorWhatsapp);
      RepositorioComunidades.getInstance().guardarComunidad(palermoGrupo);

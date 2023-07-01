@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-public class MailNotificador implements Notificador {
+
+public class WhatsAppSender implements MedioNotificador {
   @Override
   public void notificar(String mensaje, Usuario usuario) {
 
