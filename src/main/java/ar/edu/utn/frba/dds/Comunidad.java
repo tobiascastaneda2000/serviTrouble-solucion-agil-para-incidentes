@@ -81,5 +81,7 @@ public class Comunidad {
   }
 
 
-
+  public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
+    return this.incidentesAResolver.stream().filter(i->i.getEstado() == estadoIncidente).toList();
+  }
 }
