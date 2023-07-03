@@ -25,7 +25,7 @@ class AperturaIncidenteTest {
 
   @BeforeEach
   void setUp() {
-     usuario = new Usuario("Leonardo ", "Dicaprio" );
+     usuario = new Usuario("Leonardo ", "Dicaprio","mail" );
      palermoGrupo = new Comunidad();
      barracasGrupo = new Comunidad();
      notificadorWhatsapp = new WhatsAppSender();

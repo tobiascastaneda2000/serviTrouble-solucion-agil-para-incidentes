@@ -10,6 +10,8 @@ public class Usuario {
   public String usuario;
   public String contrasenia;
 
+  public String correo;
+
   int intentos;
   boolean sesionAbierta;
   //public Notificador tipoNotificador;
@@ -18,11 +20,12 @@ public class Usuario {
   List<TipoServicio> serviciosDeInteres = new ArrayList<>();
   //List<Miembro> miembros;
 
-  public Usuario(String nombre, String contrasenia) {
+  public Usuario(String nombre, String contrasenia, String correo) {
     this.usuario = nombre;
     this.contrasenia = contrasenia;
     this.intentos = 0;
     this.sesionAbierta = false;
+    this.correo = correo;
   }
 
   public String getUsername() {
@@ -84,5 +87,9 @@ public class Usuario {
 
   List<Comunidad> comunidadesPertenecientes(){
     return RepositorioComunidades.getInstance().getComunidades().stream().filter(c->c.contieneUsuario(this)).toList();
+  }
+
+  public String getCorreo() {
+    return this.correo;
   }
 }

@@ -8,8 +8,8 @@ public class InicioSesionTest {
 
   @BeforeEach
   void init() {
-    usuarioSesionCerrada = new Usuario("Miguel", "Rodriguez");
-    usuarioSesionAbierta = new Usuario("Camila", "Zoe");
+    usuarioSesionCerrada = new Usuario("Miguel", "Rodriguez", "mail");
+    usuarioSesionAbierta = new Usuario("Camila", "Zoe", "mail");
     usuarioSesionAbierta.iniciarSesion("Camila", "Zoe");
 
   }

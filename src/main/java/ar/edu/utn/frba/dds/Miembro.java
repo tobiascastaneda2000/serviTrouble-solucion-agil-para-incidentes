@@ -16,8 +16,8 @@ public class Miembro {
 
     //List<Map<Integer, Integer>> horarios;
 
-  public Miembro(Usuario usuario, PermisoComunidad permisoComunidad,
-                   //List<Map<Integer, Integer>> horarios,
+  public Miembro(Usuario usuario,
+                 PermisoComunidad permisoComunidad,
                    MedioNotificador tipoNotificador) {
         this.usuario = usuario;
         this.permisoComunidad = permisoComunidad;
@@ -25,23 +25,26 @@ public class Miembro {
         this.tipoNotificador = tipoNotificador;
     }
 
-    public Comunidad devolverComunidad() {
-        Comunidad comunidad =
-            RepositorioComunidades.getInstance().getComunidades()
-                .stream().filter(c->c.contieneMiembro(this)).findFirst().orElse(null);
-        return comunidad;
-    }
-
     public void informarIncidente(TipoServicio servicio, String observaciones) {
 
         List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-        comunidades.forEach(c->c.agregarIncidente(new Incidente(servicio, observaciones)));
-        comunidades.forEach(c->c.notificar("Nuevo Incidente",servicio));
+        comunidades.forEach(c->c.abrirIncidente( servicio,  observaciones));
+        //comunidades.forEach(c->c.notificarAperturaIncidente(servicio));
+
     }
+
+    //1. Se agrega el inicidente solo a la comunidad del miembro
+  // 2. Se notifica a a los miembros de todas la comunidades que
+  // tengan ese servicio como interes y y se encuentre suscrito
 
     public void cerrarIncidente(Incidente incidente){
         List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
         comunidades.forEach(c->c.cerrarIncidente(incidente));
+    }
+
+    public String getCorreo(){
+    return this.usuario.getCorreo();
+
     }
 
 }

@@ -7,58 +7,78 @@ import java.util.Set;
 
 public class Comunidad {
 
-    public Set<Miembro> miembros;
+  public Set<Miembro> miembros;
+  List<Incidente> incidentesAResolver = new ArrayList<>();
+  List<Incidente> incidentesResueltos = new ArrayList<>();
 
-    public Comunidad() {
-        this.miembros = new HashSet<>();
-    }
+  //CONSTRUCTOR
 
-    public List<Incidente> getIncidentesAResolver() {
-        return incidentesAResolver;
-    }
+  public Comunidad() {
+    this.miembros = new HashSet<>();
+  }
 
-    public List<Incidente> getIncidentesResueltos() {
-        return incidentesResueltos;
-    }
+  //GETTERS
 
-    List<Incidente> incidentesAResolver  = new ArrayList<>();
-    List<Incidente> incidentesResueltos = new ArrayList<>();
+  public List<Incidente> getIncidentesAResolver() {
+    return incidentesAResolver;
+  }
 
-    public Set<Miembro> getMiembros() {
-        return miembros;
-    }
+  public List<Incidente> getIncidentesResueltos() {
+    return incidentesResueltos;
+  }
 
-    public void registrarMiembro(Usuario usuario,
-                                 //List<Map<Integer, Integer>> horarios,
-                                 MedioNotificador medio) {
-        miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
-            //horarios,
-            medio));
-    }
-    //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
+  public Set<Miembro> getMiembros() {
+    return miembros;
+  }
 
-    boolean contieneMiembro(Miembro miembro) {
-        return miembros.contains(miembro);
-    }
+  //METODOS
 
-    public void agregarIncidente(Incidente incidente) {
-        incidentesAResolver.add(incidente);
-    }
+  public void registrarMiembro(Usuario usuario,
+                               //List<Map<Integer, Integer>> horarios,
+                               MedioNotificador medio) {
+    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
+        //horarios,
+        medio));
+  }
+  //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
 
-    public void cerrarIncidente(Incidente incidente){
-        incidente.cerrar();
-        incidentesAResolver.remove(incidente);
-        incidentesResueltos.add(incidente);
-    }
+  boolean contieneMiembro(Miembro miembro) {
+    return miembros.contains(miembro);
+  }
 
-    public void notificar(String texto, TipoServicio servicio) {
-       miembros.stream().filter(m->m.usuario.getServiciosDeInteres().contains(servicio))
-           .forEach(m->m.tipoNotificador.notificar(texto,m.usuario));
-    }
+  public void abrirIncidente(TipoServicio servicio, String observaciones) {
+    Incidente incidente = new Incidente(servicio, observaciones);
+    efectivizarAperturaIncidente(incidente);
+    notificarAperturaIncidente(incidente);
+  }
 
-    public boolean contieneUsuario(Usuario usuario) {
-        return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
-    }
+  private void efectivizarAperturaIncidente(Incidente incidente) {
+    incidentesAResolver.add(incidente);
+
+  }
+
+  public void notificarAperturaIncidente(Incidente incidente) {
+    miembrosInteresados(incidente.getServicio()).forEach(m -> m.tipoNotificador.notificar("Apertura Incidente", m.getCorreo(), incidente));
+  }
+
+  private List<Miembro> miembrosInteresados(TipoServicio servicio) {
+    return this.miembros.stream().filter(m -> m.usuario.getServiciosDeInteres().contains(servicio)).toList();
+  }
+
+  public void cerrarIncidente(Incidente incidente) {
+    efectivizarCierreIncidente(incidente);
+  }
+
+  private void efectivizarCierreIncidente(Incidente incidente) {
+    incidente.cerrar();
+    incidentesAResolver.remove(incidente);
+    incidentesResueltos.add(incidente);
+  }
+
+
+  public boolean contieneUsuario(Usuario usuario) {
+    return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
+  }
 
 
 }
