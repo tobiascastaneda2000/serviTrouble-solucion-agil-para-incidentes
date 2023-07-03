@@ -46,6 +46,10 @@ public class Comunidad {
     return miembros.contains(miembro);
   }
 
+  public Miembro getUnMiembro(Usuario usuario){
+    return this.miembros.stream().filter(m->m.getUsuario() == usuario).findFirst().orElse(null);
+  }
+
   public void abrirIncidente(TipoServicio servicio, String observaciones) {
     Incidente incidente = new Incidente(servicio, observaciones);
     efectivizarAperturaIncidente(incidente);

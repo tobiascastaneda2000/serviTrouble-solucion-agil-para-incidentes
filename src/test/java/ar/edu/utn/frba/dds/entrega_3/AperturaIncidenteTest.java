@@ -33,8 +33,7 @@ class AperturaIncidenteTest {
      barracasGrupo.registrarMiembro(usuario, notificadorWhatsapp);
      RepositorioComunidades.getInstance().guardarComunidad(palermoGrupo);
      RepositorioComunidades.getInstance().guardarComunidad(barracasGrupo);
-      miembro =
-         palermoGrupo.getMiembros().stream().filter(m -> m.getUsuario() == usuario).toList().get(0);
+     miembro = palermoGrupo.getUnMiembro(usuario);
      //Miembro NO se puede instanciar ¿Es algo bueno? De momento se deja  asi para testear
 
 
