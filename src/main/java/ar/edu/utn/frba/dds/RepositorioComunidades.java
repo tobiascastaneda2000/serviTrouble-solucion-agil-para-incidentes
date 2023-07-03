@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RepositorioComunidades {
    public static RepositorioComunidades instance = new RepositorioComunidades();
@@ -18,4 +19,7 @@ public class RepositorioComunidades {
     return instance;
   }
 
+  public Comunidad devolverComunidad(Miembro miembro) {
+    return comunidades.stream().filter(c -> c.contieneMiembro(miembro)).toList().get(0);
+  }
 }

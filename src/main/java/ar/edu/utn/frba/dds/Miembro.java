@@ -47,4 +47,12 @@ public class Miembro {
 
     }
 
+    public List<Incidente> getIncidentesPorEstado(EstadoIncidente estadoIncidente){
+     return comunidadDelMiembro().getIncidentesAResolver().stream().filter(i->i.getEstado() == estadoIncidente).toList();
+    }
+
+    public Comunidad comunidadDelMiembro(){
+    return  RepositorioComunidades.getInstance().devolverComunidad(this);
+    }
+
 }
