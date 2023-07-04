@@ -12,6 +12,10 @@ public class Miembro {
   public Usuario usuario;
   public PermisoComunidad permisoComunidad;
 
+  public MedioNotificador getTipoNotificador() {
+    return tipoNotificador;
+  }
+
   public MedioNotificador tipoNotificador;
 
   //List<Map<Integer, Integer>> horarios;

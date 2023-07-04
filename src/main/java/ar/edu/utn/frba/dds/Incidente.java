@@ -8,6 +8,11 @@ public class Incidente {
   TipoServicio servicio;
   String observacion;
   LocalDateTime fechaHoraAbre;
+
+  public LocalDateTime getFechaHoraCierre() {
+    return fechaHoraCierre;
+  }
+
   LocalDateTime fechaHoraCierre;
 
   public EstadoIncidente getEstado(){
