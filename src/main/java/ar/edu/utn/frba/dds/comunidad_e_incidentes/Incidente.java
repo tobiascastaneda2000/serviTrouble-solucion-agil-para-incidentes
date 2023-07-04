@@ -17,7 +17,7 @@ public class Incidente {
 
   LocalDateTime fechaHoraCierre;
 
-  public EstadoIncidente getEstado(){
+  public EstadoIncidente getEstado() {
     return estadoIncidente;
   }
 

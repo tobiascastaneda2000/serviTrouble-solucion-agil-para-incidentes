@@ -31,9 +31,8 @@ public class Main {
       timer.schedule(task ,0L,internal);
 */
 
-      // Para ranking Utilizaremos https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-java.util.Comparator-
-      //Aun o sabemos si sera todod en main o se creara ademas una un iterfaz crearRankings
-
+    // Para ranking Utilizaremos https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-java.util.Comparator-
+    //Aun o sabemos si sera todod en main o se creara ademas una un iterfaz crearRankings
 
 
   }

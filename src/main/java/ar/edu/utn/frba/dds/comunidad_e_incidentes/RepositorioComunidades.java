@@ -4,17 +4,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class RepositorioComunidades {
-   public static RepositorioComunidades instance = new RepositorioComunidades();
+  public static RepositorioComunidades instance = new RepositorioComunidades();
   Set<Comunidad> comunidades = new HashSet<>();
 
-  public Set<Comunidad>getComunidades(){
+  public Set<Comunidad> getComunidades() {
     return this.comunidades;
   }
-  public void guardarComunidad(Comunidad comunidad){
+
+  public void guardarComunidad(Comunidad comunidad) {
     comunidades.add(comunidad);
   }
 
-  public static RepositorioComunidades getInstance(){
+  public static RepositorioComunidades getInstance() {
     return instance;
   }
 

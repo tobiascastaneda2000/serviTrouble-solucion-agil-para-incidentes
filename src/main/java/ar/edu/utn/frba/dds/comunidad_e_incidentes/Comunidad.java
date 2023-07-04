@@ -50,8 +50,8 @@ public class Comunidad {
     return miembros.contains(miembro);
   }
 
-  public Miembro getUnMiembro(Usuario usuario){
-    return this.miembros.stream().filter(m->m.getUsuario() == usuario).findFirst().orElse(null);
+  public Miembro getUnMiembro(Usuario usuario) {
+    return this.miembros.stream().filter(m -> m.getUsuario() == usuario).findFirst().orElse(null);
   }
 
   public void abrirIncidente(TipoServicio servicio, String observaciones) {
@@ -74,10 +74,6 @@ public class Comunidad {
   }
 
   public void cerrarIncidente(Incidente incidente) {
-    efectivizarCierreIncidente(incidente);
-  }
-
-  private void efectivizarCierreIncidente(Incidente incidente) {
     incidente.cerrar();
     incidentesAResolver.remove(incidente);
     incidentesResueltos.add(incidente);
@@ -90,6 +86,6 @@ public class Comunidad {
 
 
   public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
-    return this.incidentesAResolver.stream().filter(i->i.getEstado() == estadoIncidente).toList();
+    return this.incidentesAResolver.stream().filter(i -> i.getEstado() == estadoIncidente).toList();
   }
 }

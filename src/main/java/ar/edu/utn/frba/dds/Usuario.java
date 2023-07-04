@@ -47,7 +47,7 @@ public class Usuario {
     return sesionAbierta;
   }
 
-  public List<TipoServicio> getServiciosDeInteres(){
+  public List<TipoServicio> getServiciosDeInteres() {
     return this.serviciosDeInteres;
   }
 
@@ -88,8 +88,8 @@ public class Usuario {
     return miembros.stream().map(m->m.devolverComunidad()).toList();
   }*/
 
-  public List<Comunidad> comunidadesPertenecientes(){
-    return RepositorioComunidades.getInstance().getComunidades().stream().filter(c->c.contieneUsuario(this)).toList();
+  public List<Comunidad> comunidadesPertenecientes() {
+    return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
   public String getCorreo() {

@@ -13,14 +13,15 @@ public class RepoEntidades {
   public static RepoEntidades instance = new RepoEntidades();
   List<Entidad> entidades = new ArrayList<>();
 
-  public RepoEntidades getInstance(){
+  public RepoEntidades getInstance() {
     return instance;
   }
 
-  public List<Entidad>getEntidades(){
+  public List<Entidad> getEntidades() {
     return this.entidades;
   }
-  public void guardarEntidad(Entidad entidad){
+
+  public void guardarEntidad(Entidad entidad) {
     entidades.add(entidad);
   }
 
