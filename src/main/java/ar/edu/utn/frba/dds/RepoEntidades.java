@@ -20,7 +20,7 @@ public class RepoEntidades {
   public List<Entidad>getEntidades(){
     return this.entidades;
   }
-  public void guardarComunidad(Entidad entidad){
+  public void guardarEntidad(Entidad entidad){
     entidades.add(entidad);
   }
 
