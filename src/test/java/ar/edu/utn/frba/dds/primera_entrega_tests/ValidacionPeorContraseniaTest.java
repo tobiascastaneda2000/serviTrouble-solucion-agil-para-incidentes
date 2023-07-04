@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.primera_entrega_tests;
 
 import ar.edu.utn.frba.dds.validaciones_password.DebilPasswordException;
 import ar.edu.utn.frba.dds.validaciones_password.ValidacionPeorContrasenia;

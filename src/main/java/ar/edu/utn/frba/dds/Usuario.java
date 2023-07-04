@@ -1,10 +1,13 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
+import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
+import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Usuario {
   public String usuario;
@@ -85,7 +88,7 @@ public class Usuario {
     return miembros.stream().map(m->m.devolverComunidad()).toList();
   }*/
 
-  List<Comunidad> comunidadesPertenecientes(){
+  public List<Comunidad> comunidadesPertenecientes(){
     return RepositorioComunidades.getInstance().getComunidades().stream().filter(c->c.contieneUsuario(this)).toList();
   }
 

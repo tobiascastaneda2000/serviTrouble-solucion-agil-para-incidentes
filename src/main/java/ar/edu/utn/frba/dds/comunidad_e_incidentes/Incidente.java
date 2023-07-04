@@ -1,4 +1,6 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+
+import ar.edu.utn.frba.dds.TipoServicio;
 
 import java.time.LocalDateTime;
 

@@ -1,10 +1,10 @@
-package ar.edu.utn.frba.dds.entrega_3;
+package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Comunidad;
-import ar.edu.utn.frba.dds.Incidente;
-import ar.edu.utn.frba.dds.Miembro;
-import ar.edu.utn.frba.dds.MedioNotificador;
-import ar.edu.utn.frba.dds.RepositorioComunidades;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Miembro;
+import ar.edu.utn.frba.dds.notificador.MedioNotificador;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +16,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class AperturaIncidenteTest {
+class AperturayCierreIncidentesTest {
 
   Usuario usuarioInformante;
 

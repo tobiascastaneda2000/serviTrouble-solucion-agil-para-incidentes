@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 public enum PermisoComunidad {
     //Hace falta que sea especifico de comunidad?

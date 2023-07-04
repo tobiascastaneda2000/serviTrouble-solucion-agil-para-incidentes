@@ -1,8 +1,7 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class RepositorioComunidades {
    public static RepositorioComunidades instance = new RepositorioComunidades();

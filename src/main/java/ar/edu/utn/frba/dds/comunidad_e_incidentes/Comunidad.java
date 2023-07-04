@@ -1,4 +1,8 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+
+import ar.edu.utn.frba.dds.TipoServicio;
+import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
 import java.util.ArrayList;
 import java.util.HashSet;

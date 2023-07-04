@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ApiGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Provincia;
