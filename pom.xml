@@ -32,18 +32,18 @@
       <version>5.2.0</version>
       <scope>test</scope>
     </dependency>
+    <!--
+        <dependency>
+          <groupId>com.squareup.retrofit2</groupId>
+          <artifactId>retrofit</artifactId>
+          <version>2.9.0</version>
+        </dependency>
 
-    <dependency>
-      <groupId>com.squareup.retrofit2</groupId>
-      <artifactId>retrofit</artifactId>
-      <version>2.9.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.squareup.retrofit2</groupId>
-      <artifactId>converter-gson</artifactId>
-      <version>2.9.0</version>
-    </dependency>
+        <dependency>
+          <groupId>com.squareup.retrofit2</groupId>
+          <artifactId>converter-gson</artifactId>
+          <version>2.9.0</version>
+        </dependency>-->
 
     <!-- Dependencias para API Geo-ref -->
 
