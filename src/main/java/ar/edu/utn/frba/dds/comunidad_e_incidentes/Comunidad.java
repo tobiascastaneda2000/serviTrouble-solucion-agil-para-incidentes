@@ -14,10 +14,6 @@ public class Comunidad {
 
   public Set<Miembro> miembros;
 
-  /*
-  List<Incidente> incidentesAResolver = new ArrayList<>();
-  List<Incidente> incidentesResueltos = new ArrayList<>();
-  */
   List<Incidente> incidentes = new ArrayList<>();
 
   //CONSTRUCTOR
@@ -56,10 +52,10 @@ public class Comunidad {
   }
 
   public void abrirIncidente(Servicio servicio, String observaciones) {
-    Incidente incidente = new Incidente(servicio, observaciones);
+    Incidente incidente = new Incidente(observaciones);
     servicio.actualizarEstadoServicio(incidente); //Para ranking
     efectivizarAperturaIncidente(incidente);
-    notificarAperturaIncidente(incidente);
+    notificarAperturaIncidente(servicio);
   }
 
   private void efectivizarAperturaIncidente(Incidente incidente) {
@@ -67,8 +63,8 @@ public class Comunidad {
 
   }
 
-  public void notificarAperturaIncidente(Incidente incidente) {
-    miembrosInteresados(incidente.getServicio()).forEach(m -> m.tipoNotificador.notificar("Apertura Incidente", m.getCorreo(), incidente));
+  public void notificarAperturaIncidente(Servicio servicio) {
+    miembrosInteresados(servicio).forEach(m -> m.tipoNotificador.notificar("Apertura Incidente", m.getCorreo(), servicio));
   }
 
   private List<Miembro> miembrosInteresados(Servicio servicio) {

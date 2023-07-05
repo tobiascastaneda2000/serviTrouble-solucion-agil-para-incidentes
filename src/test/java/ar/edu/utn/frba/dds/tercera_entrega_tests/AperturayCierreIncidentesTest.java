@@ -27,7 +27,7 @@ class AperturayCierreIncidentesTest {
   MedioNotificador notificadorWhatsapp;
   MedioNotificador notificadorMail;
 
-  Servicio mockServicio;
+  Servicio servicio;
 
   Miembro otroMiembro;
 
@@ -47,7 +47,7 @@ class AperturayCierreIncidentesTest {
     RepositorioComunidades.getInstance().guardarComunidad(barracasGrupo);
     miembroInformante = palermoGrupo.getUnMiembro(usuarioInformante);
     otroMiembro = palermoGrupo.getUnMiembro(otroUsuario);
-    mockServicio = mock(Servicio.class);
+    servicio =new Servicio(TipoServicio.ASCENSOR);
 
     //Miembro NO se puede instanciar ¿Es algo bueno? De momento se deja  asi para testear
 
@@ -55,9 +55,9 @@ class AperturayCierreIncidentesTest {
 
   @Test
   void comunidadEfetivizaAltaIncidente() {
-    miembroInformante.informarIncidente(mockServicio, "algo");
-    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
-    Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
+    miembroInformante.informarIncidente(servicio, "algo");
+    Incidente incidente = devolverIncidente(servicio, "algo");
+    Assertions.assertTrue(servicio.getHistorialIncidentes().contains(incidente));
     Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getObservacion).toList().contains("algo"));
     Assertions.assertEquals(incidente.getEstado(),EstadoIncidente.ABIERTO);
   }
@@ -65,16 +65,16 @@ class AperturayCierreIncidentesTest {
   @Test
     ///Falla, por que solo le comunica a miembors interezados, hacer test aparte
   void comunidadNotificaAltaIncidenteATodosLosMiembros() {
-    miembroInformante.informarIncidente(mockServicio, "algo");
-    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
-    verify(miembroInformante.getTipoNotificador()).notificar("Apertura Incidente", miembroInformante.getCorreo(), incidente);
-    verify(otroMiembro.getTipoNotificador()).notificar("Apertura Incidente", otroMiembro.getCorreo(), incidente);
+    miembroInformante.informarIncidente(servicio, "algo");
+    Incidente incidente = devolverIncidente(servicio, "algo");
+    verify(miembroInformante.getTipoNotificador()).notificar("Apertura Incidente", miembroInformante.getCorreo(), servicio);
+    verify(otroMiembro.getTipoNotificador()).notificar("Apertura Incidente", otroMiembro.getCorreo(), servicio);
   }
 
   @Test
   void cerrarIncidente() {
-    miembroInformante.informarIncidente(mockServicio, "algo");
-    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
+    miembroInformante.informarIncidente(servicio, "algo");
+    Incidente incidente = devolverIncidente(servicio, "algo");
     miembroInformante.cerrarIncidente(incidente);
     Assertions.assertEquals(incidente.getEstado(), EstadoIncidente.CERRADO);
     Assertions.assertNotNull(incidente.getFechaHoraCierre());
@@ -82,8 +82,9 @@ class AperturayCierreIncidentesTest {
   }
 
 
-  public Incidente devolverIncidente(Servicio servicio, String obs, Comunidad comunidad) {
-    return comunidad.getIncidentes().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
+  public Incidente devolverIncidente(Servicio servicio, String obs) {
+    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
+    //return comunidad.getIncidentes().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
 
   }
 }

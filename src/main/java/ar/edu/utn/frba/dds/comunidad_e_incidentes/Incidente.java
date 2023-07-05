@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class Incidente {
 
   EstadoIncidente estadoIncidente;
-  Servicio servicio;
   String observacion;
 
   public LocalDateTime getFechaHoraAbre() {
@@ -28,16 +27,11 @@ public class Incidente {
     return estadoIncidente;
   }
 
-  public Servicio getServicio() {
-    return servicio;
-  }
-
   public String getObservacion() {
     return observacion;
   }
 
-  public Incidente(Servicio servicio, String observacion) {
-    this.servicio = servicio;
+  public Incidente(String observacion) {
     this.observacion = observacion;
     this.fechaHoraAbre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.ABIERTO;
