@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Establecimiento {
-  public List<TipoServicio> getServicio() {
+  public List<Servicio> getServicio() {
     return servicios;
   }
 
-  List<TipoServicio> servicios = new ArrayList<>();
+  List<Servicio> servicios = new ArrayList<>();
 }

@@ -20,7 +20,6 @@ import static org.mockito.Mockito.verify;
 class AperturayCierreIncidentesTest {
 
   Usuario usuarioInformante;
-
   Usuario otroUsuario;
   Comunidad palermoGrupo;
   Comunidad barracasGrupo;
@@ -53,8 +52,10 @@ class AperturayCierreIncidentesTest {
   @Test
   void comunidadEfetivizaAltaIncidente() {
     miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
+    Incidente incidente = devolverIncidente(TipoServicio.ASCENSOR, "algo", palermoGrupo);
     Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
     Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getObservacion).toList().contains("algo"));
+    Assertions.assertEquals(incidente.getEstado(),EstadoIncidente.ABIERTO);
   }
 
   @Test

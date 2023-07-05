@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.TipoServicio;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Incidente {
@@ -39,5 +40,10 @@ public class Incidente {
   public void cerrar() {
     this.fechaHoraCierre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.CERRADO;
+  }
+
+  //PARA RANKINGS
+  public Duration diferenciaEntreAperturayCierre(){
+    return Duration.between(this.fechaHoraAbre,this.fechaHoraCierre);
   }
 }

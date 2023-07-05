@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Entidad;
 import ar.edu.utn.frba.dds.Establecimiento;
+import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
@@ -73,7 +74,7 @@ public class Miembro {
     return RepositorioComunidades.getInstance().devolverComunidad(this);
   }
 
-  public List<TipoServicio> serviciosDeInteres() {
+  public List<Servicio> serviciosDeInteres() {
     return this.entidadesAsociadas.stream()
         .flatMap(e -> e.getEstablecimientos().stream()).toList().stream()
         .flatMap(e -> e.getServicio().stream()).toList();
