@@ -8,6 +8,10 @@ public class Entidad {
   private String razonSocial;
   private String email;
 
+  public List<Establecimiento> getEstablecimientos() {
+    return establecimientos;
+  }
+
   public List<Establecimiento> establecimientos = new ArrayList<>();
 
   public Entidad(int id, String razonSocial, String email) {

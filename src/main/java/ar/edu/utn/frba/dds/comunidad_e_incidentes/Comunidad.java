@@ -12,8 +12,12 @@ import java.util.Set;
 public class Comunidad {
 
   public Set<Miembro> miembros;
+
+  /*
   List<Incidente> incidentesAResolver = new ArrayList<>();
   List<Incidente> incidentesResueltos = new ArrayList<>();
+  */
+  List<Incidente> incidentes = new ArrayList<>();
 
   //CONSTRUCTOR
 
@@ -23,12 +27,8 @@ public class Comunidad {
 
   //GETTERS
 
-  public List<Incidente> getIncidentesAResolver() {
-    return incidentesAResolver;
-  }
-
-  public List<Incidente> getIncidentesResueltos() {
-    return incidentesResueltos;
+  public List<Incidente> getIncidentes() {
+    return this.incidentes;
   }
 
   public Set<Miembro> getMiembros() {
@@ -61,7 +61,7 @@ public class Comunidad {
   }
 
   private void efectivizarAperturaIncidente(Incidente incidente) {
-    incidentesAResolver.add(incidente);
+    incidentes.add(incidente);
 
   }
 
@@ -70,13 +70,11 @@ public class Comunidad {
   }
 
   private List<Miembro> miembrosInteresados(TipoServicio servicio) {
-    return this.miembros.stream().filter(m -> m.usuario.getServiciosDeInteres().contains(servicio)).toList();
+    return this.miembros.stream().filter(m -> m.serviciosDeInteres().contains(servicio)).toList();
   }
 
   public void cerrarIncidente(Incidente incidente) {
     incidente.cerrar();
-    incidentesAResolver.remove(incidente);
-    incidentesResueltos.add(incidente);
   }
 
 
@@ -84,8 +82,8 @@ public class Comunidad {
     return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
   }
 
-
-  public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
-    return this.incidentesAResolver.stream().filter(i -> i.getEstado() == estadoIncidente).toList();
+  public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente){
+    return this.incidentes.stream().filter(i->i.getEstado() == estadoIncidente).toList();
   }
+
 }

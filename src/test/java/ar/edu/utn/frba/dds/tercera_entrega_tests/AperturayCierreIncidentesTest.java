@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Miembro;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
@@ -52,8 +53,8 @@ class AperturayCierreIncidentesTest {
   @Test
   void comunidadEfetivizaAltaIncidente() {
     miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
-    Assertions.assertTrue(palermoGrupo.getIncidentesAResolver().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
-    Assertions.assertTrue(palermoGrupo.getIncidentesAResolver().stream().map(Incidente::getObservacion).toList().contains("algo"));
+    Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
+    Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getObservacion).toList().contains("algo"));
   }
 
   @Test
@@ -70,23 +71,14 @@ class AperturayCierreIncidentesTest {
     miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
     Incidente incidente = devolverIncidente(TipoServicio.ASCENSOR, "algo", palermoGrupo);
     miembroInformante.cerrarIncidente(incidente);
-    Assertions.assertFalse(palermoGrupo.getIncidentesAResolver().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
-    Assertions.assertFalse(palermoGrupo.getIncidentesAResolver().stream().map(Incidente::getObservacion).toList().contains("algo"));
-    Assertions.assertTrue(palermoGrupo.getIncidentesResueltos().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
-    Assertions.assertTrue(palermoGrupo.getIncidentesResueltos().stream().map(Incidente::getObservacion).toList().contains("algo"));
+    Assertions.assertEquals(incidente.getEstado(), EstadoIncidente.CERRADO);
     Assertions.assertNotNull(incidente.getFechaHoraCierre());
 
   }
 
 
   public Incidente devolverIncidente(TipoServicio servicio, String obs, Comunidad comunidad) {
-    Incidente lista1 = comunidad.getIncidentesAResolver().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
-    Incidente lista2 = comunidad.getIncidentesResueltos().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
-    if (lista1 != null) {
-      return lista1;
-    } else {
-      return lista2;
-    }
+    return comunidad.getIncidentes().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
 
   }
 }

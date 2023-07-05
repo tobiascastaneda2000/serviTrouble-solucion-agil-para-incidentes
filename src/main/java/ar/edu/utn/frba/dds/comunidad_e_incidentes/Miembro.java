@@ -1,17 +1,23 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 
+import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.Establecimiento;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Miembro {
 
   public Usuario getUsuario() {
     return usuario;
   }
+
+  public List<Entidad> entidadesAsociadas = new ArrayList<>();
 
   public Usuario usuario;
   public PermisoComunidad permisoComunidad;
@@ -59,16 +65,18 @@ public class Miembro {
      return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
     }*/
 
-  public List<Incidente> getIncidentesAbiertos() {
-    return comunidadDelMiembro().getIncidentesAResolver();
-  }
-
-  public List<Incidente> getIncidentesCerrados() {
-    return comunidadDelMiembro().getIncidentesResueltos();
+  public List<Incidente> getIncidentes(EstadoIncidente estadoIncidente) {
+    return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
   }
 
   public Comunidad comunidadDelMiembro() {
     return RepositorioComunidades.getInstance().devolverComunidad(this);
+  }
+
+  public List<TipoServicio> serviciosDeInteres() {
+    return this.entidadesAsociadas.stream()
+        .flatMap(e -> e.getEstablecimientos().stream()).toList().stream()
+        .flatMap(e -> e.getServicio().stream()).toList();
   }
 
 }

@@ -17,11 +17,10 @@ public class Usuario {
 
   int intentos;
   boolean sesionAbierta;
-  //public Notificador tipoNotificador;
+
   Localizacion localizacionInteres;
-  List<Entidad> entidadesDeInteres;
-  List<TipoServicio> serviciosDeInteres = new ArrayList<>();
-  //List<Miembro> miembros;
+  List<Entidad> estidadesAsociadas;
+  //List<TipoServicio> serviciosDeInteres = new ArrayList<>();
 
   public Usuario(String nombre, String contrasenia, String correo) {
     this.usuario = nombre;
@@ -47,9 +46,6 @@ public class Usuario {
     return sesionAbierta;
   }
 
-  public List<TipoServicio> getServiciosDeInteres() {
-    return this.serviciosDeInteres;
-  }
 
 
   public void iniciarSesion(String username, String contrasenia) {
