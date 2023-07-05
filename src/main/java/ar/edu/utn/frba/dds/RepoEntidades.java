@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,20 +30,23 @@ public class RepoEntidades {
     entidades.add(entidad);
   }
 
-  public List<Entidad> rankingMayorPromedioCierreIncidentesSemanal(){
+  public List<Entidad> rankingMayorPromedioCierreIncidentesSemanal() {
 
-    List<Entidad> lista = this.entidades;/*
-    lista.sort(new Comparator<Entidad>() {
-      @Override
-      public int compare(Entidad p1, Entidad p2) {
-        return p1.getAge() - p2.getAge();
-      }
-    });*/
-    return this.entidades;
+    List<Entidad> lista = this.entidades;
+
+    Comparator<Entidad> comparadorPromedioCierreIncidentes = Comparator.comparing(Entidad::promedioDuracionIncidentes);
+    lista.sort(comparadorPromedioCierreIncidentes);
+
+    return lista;
   }
-
   public List<Entidad> rankingMayorCantidadIncidentesSemanal(){
-    return this.entidades;
+      List<Entidad> lista = this.entidades;
+
+      Comparator<Entidad> comparadorCantidadIncidentes = Comparator.comparing(Entidad::cantidadDeIncidentes);
+      lista.sort(comparadorCantidadIncidentes);
+
+      return lista;
+
   }
 
 

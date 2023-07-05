@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
+import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
@@ -26,6 +27,8 @@ class AperturayCierreIncidentesTest {
   MedioNotificador notificadorWhatsapp;
   MedioNotificador notificadorMail;
 
+  Servicio mockServicio;
+
   Miembro otroMiembro;
 
   Miembro miembroInformante;
@@ -44,6 +47,7 @@ class AperturayCierreIncidentesTest {
     RepositorioComunidades.getInstance().guardarComunidad(barracasGrupo);
     miembroInformante = palermoGrupo.getUnMiembro(usuarioInformante);
     otroMiembro = palermoGrupo.getUnMiembro(otroUsuario);
+    mockServicio = mock(Servicio.class);
 
     //Miembro NO se puede instanciar ¿Es algo bueno? De momento se deja  asi para testear
 
@@ -51,8 +55,8 @@ class AperturayCierreIncidentesTest {
 
   @Test
   void comunidadEfetivizaAltaIncidente() {
-    miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
-    Incidente incidente = devolverIncidente(TipoServicio.ASCENSOR, "algo", palermoGrupo);
+    miembroInformante.informarIncidente(mockServicio, "algo");
+    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
     Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getServicio).toList().contains(TipoServicio.ASCENSOR));
     Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getObservacion).toList().contains("algo"));
     Assertions.assertEquals(incidente.getEstado(),EstadoIncidente.ABIERTO);
@@ -61,16 +65,16 @@ class AperturayCierreIncidentesTest {
   @Test
     ///Falla, por que solo le comunica a miembors interezados, hacer test aparte
   void comunidadNotificaAltaIncidenteATodosLosMiembros() {
-    miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
-    Incidente incidente = devolverIncidente(TipoServicio.ASCENSOR, "algo", palermoGrupo);
+    miembroInformante.informarIncidente(mockServicio, "algo");
+    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
     verify(miembroInformante.getTipoNotificador()).notificar("Apertura Incidente", miembroInformante.getCorreo(), incidente);
     verify(otroMiembro.getTipoNotificador()).notificar("Apertura Incidente", otroMiembro.getCorreo(), incidente);
   }
 
   @Test
   void cerrarIncidente() {
-    miembroInformante.informarIncidente(TipoServicio.ASCENSOR, "algo");
-    Incidente incidente = devolverIncidente(TipoServicio.ASCENSOR, "algo", palermoGrupo);
+    miembroInformante.informarIncidente(mockServicio, "algo");
+    Incidente incidente = devolverIncidente(mockServicio, "algo", palermoGrupo);
     miembroInformante.cerrarIncidente(incidente);
     Assertions.assertEquals(incidente.getEstado(), EstadoIncidente.CERRADO);
     Assertions.assertNotNull(incidente.getFechaHoraCierre());
@@ -78,7 +82,7 @@ class AperturayCierreIncidentesTest {
   }
 
 
-  public Incidente devolverIncidente(TipoServicio servicio, String obs, Comunidad comunidad) {
+  public Incidente devolverIncidente(Servicio servicio, String obs, Comunidad comunidad) {
     return comunidad.getIncidentes().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
 
   }

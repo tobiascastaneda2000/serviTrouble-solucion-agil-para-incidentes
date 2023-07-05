@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
+import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
@@ -54,8 +55,9 @@ public class Comunidad {
     return this.miembros.stream().filter(m -> m.getUsuario() == usuario).findFirst().orElse(null);
   }
 
-  public void abrirIncidente(TipoServicio servicio, String observaciones) {
+  public void abrirIncidente(Servicio servicio, String observaciones) {
     Incidente incidente = new Incidente(servicio, observaciones);
+    servicio.actualizarEstadoServicio(incidente); //Para ranking
     efectivizarAperturaIncidente(incidente);
     notificarAperturaIncidente(incidente);
   }
@@ -69,7 +71,7 @@ public class Comunidad {
     miembrosInteresados(incidente.getServicio()).forEach(m -> m.tipoNotificador.notificar("Apertura Incidente", m.getCorreo(), incidente));
   }
 
-  private List<Miembro> miembrosInteresados(TipoServicio servicio) {
+  private List<Miembro> miembrosInteresados(Servicio servicio) {
     return this.miembros.stream().filter(m -> m.serviciosDeInteres().contains(servicio)).toList();
   }
 

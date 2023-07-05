@@ -40,7 +40,7 @@ public class Miembro {
     this.tipoNotificador = tipoNotificador;
   }
 
-  public void informarIncidente(TipoServicio servicio, String observaciones) {
+  public void informarIncidente(Servicio servicio, String observaciones) {
 
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     comunidades.forEach(c -> c.abrirIncidente(servicio, observaciones));

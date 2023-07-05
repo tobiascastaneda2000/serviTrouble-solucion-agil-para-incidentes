@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
+import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 
 import java.time.Duration;
@@ -8,8 +9,13 @@ import java.time.LocalDateTime;
 public class Incidente {
 
   EstadoIncidente estadoIncidente;
-  TipoServicio servicio;
+  Servicio servicio;
   String observacion;
+
+  public LocalDateTime getFechaHoraAbre() {
+    return fechaHoraAbre;
+  }
+
   LocalDateTime fechaHoraAbre;
 
   public LocalDateTime getFechaHoraCierre() {
@@ -22,7 +28,7 @@ public class Incidente {
     return estadoIncidente;
   }
 
-  public TipoServicio getServicio() {
+  public Servicio getServicio() {
     return servicio;
   }
 
@@ -30,7 +36,7 @@ public class Incidente {
     return observacion;
   }
 
-  public Incidente(TipoServicio servicio, String observacion) {
+  public Incidente(Servicio servicio, String observacion) {
     this.servicio = servicio;
     this.observacion = observacion;
     this.fechaHoraAbre = LocalDateTime.now();
@@ -46,4 +52,6 @@ public class Incidente {
   public Duration diferenciaEntreAperturayCierre(){
     return Duration.between(this.fechaHoraAbre,this.fechaHoraCierre);
   }
+
+
 }
