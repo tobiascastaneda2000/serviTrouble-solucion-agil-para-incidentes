@@ -48,6 +48,15 @@ public class Incidente {
     this.estadoIncidente = EstadoIncidente.CERRADO;
   }
 
+  //Para rankings
+  public boolean estaAbierto(){
+    return estadoIncidente == EstadoIncidente.ABIERTO;
+  }
+
+  public boolean estaCerrado(){
+    return estadoIncidente == EstadoIncidente.CERRADO;
+  }
+
   //PARA RANKINGS
   public Duration diferenciaEntreAperturayCierre(){
     return Duration.between(this.fechaHoraAbre,this.fechaHoraCierre);
