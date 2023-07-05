@@ -27,6 +27,8 @@ public class Servicio {
   }
 
 
+  //RANKINGs
+
   public List<Incidente> incidentesDe24Horas() {
 
     List<Incidente> lista = this.historialIncidentes;

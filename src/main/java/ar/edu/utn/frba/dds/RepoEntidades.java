@@ -1,16 +1,11 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Set;
 
 public class RepoEntidades {
@@ -30,24 +25,19 @@ public class RepoEntidades {
     entidades.add(entidad);
   }
 
-  public List<Entidad> rankingMayorPromedioCierreIncidentesSemanal() {
+  public List<Entidad> realizarRankingSegunCriterio(CriterioRanking criterioRanking) {
 
-    List<Entidad> lista = this.entidades;
-
-    Comparator<Entidad> comparadorPromedioCierreIncidentes = Comparator.comparing(Entidad::promedioDuracionIncidentes);
-    lista.sort(comparadorPromedioCierreIncidentes);
-
-    return lista;
+    List<Entidad> entidades = this.entidades;
+    Comparator<Entidad> criterio = criterioRanking.criterioDeComparacion();
+    entidades.sort(criterio);
+    return entidades;
   }
+
+  /*
+  return criterioRankings.stream().flatMap(c->c.ordenarPorPromedioCierre(this.entidades).stream()).toList();
   public List<Entidad> rankingMayorCantidadIncidentesSemanal(){
-      List<Entidad> lista = this.entidades;
-
-      Comparator<Entidad> comparadorCantidadIncidentes = Comparator.comparing(Entidad::cantidadDeIncidentes);
-      lista.sort(comparadorCantidadIncidentes);
-
-      return lista;
-
-  }
+    return criterioRankings.stream().flatMap(c->c.ordenarPorCantIncidentesReportados(this.entidades).stream()).toList();
+  }*/
 
 
 }

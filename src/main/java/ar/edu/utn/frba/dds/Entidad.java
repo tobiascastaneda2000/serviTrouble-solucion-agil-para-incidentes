@@ -37,7 +37,7 @@ public class Entidad {
   }
 
 
-  //PARA RANKINGS
+  //PARA RANKINGS-Mejorar polimorfismo
 
   public List<Servicio> getServicios(){
     return this.establecimientos.stream().flatMap(e->e.getServicio().stream()).toList();
@@ -50,8 +50,8 @@ public class Entidad {
 
   public List<Duration> listaTotalDuracionCierres(){
     return getIncidentes().stream()
-        .filter(i->i.getEstado()== EstadoIncidente.CERRADO).toList().stream()
-        .map(i->i.diferenciaEntreAperturayCierre()).toList();
+        .filter(Incidente::estaAbierto).toList().stream()
+        .map(Incidente::diferenciaEntreAperturayCierre).toList();
   }
 
   public Duration duracionTotalIncidentesCerrados(){
