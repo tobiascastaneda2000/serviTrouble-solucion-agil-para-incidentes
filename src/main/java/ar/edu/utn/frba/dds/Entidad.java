@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
 import java.time.Duration;
@@ -43,25 +42,20 @@ public class Entidad {
     return this.establecimientos.stream().flatMap(e->e.getServicio().stream()).toList();
   }
 
-  public List<Incidente> getIncidentes(){
+
+  public List<Incidente> getIncidentesCerrados(){
     return getServicios().stream()
-        .flatMap(i->i.getHistorialIncidentes().stream()).toList();
+        .flatMap(i->i.getHistorialIncidentes().stream()).toList().stream().filter(Incidente::estaCerrado).toList();
   }
 
-  public List<Duration> listaTotalDuracionCierres(){
-    return getIncidentes().stream()
-        .filter(Incidente::estaAbierto).toList().stream()
-        .map(Incidente::diferenciaEntreAperturayCierre).toList();
+  public Duration duracionTotalDeTodosLosIncidentesCerrados(){
+    return getIncidentesCerrados().stream()
+        .map(Incidente::diferenciaEntreAperturayCierre).toList().stream().reduce(Duration.ZERO,Duration::plus);
   }
-
-  public Duration duracionTotalIncidentesCerrados(){
-    return listaTotalDuracionCierres().stream().reduce(Duration.ZERO,Duration::plus);
-  }
-
   public long promedioDuracionIncidentes(){
-    return duracionTotalIncidentesCerrados().toSeconds()/ listaTotalDuracionCierres().size();
+    return duracionTotalDeTodosLosIncidentesCerrados().toSeconds()/ getIncidentesCerrados().size();
   }
-  public int cantidadDeIncidentes(){
+  public int cantidadDeIncidentesReportados(){
     return filtrarPorCantidadUltimas24Horas().size();
   }
 

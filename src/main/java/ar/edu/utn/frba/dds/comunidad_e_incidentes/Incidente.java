@@ -48,7 +48,7 @@ public class Incidente {
   }
 
   public boolean estaCerrado(){
-    return estadoIncidente == EstadoIncidente.CERRADO;
+    return !estaAbierto();
   }
 
   //PARA RANKINGS
