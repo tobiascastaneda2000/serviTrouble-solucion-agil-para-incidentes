@@ -2,12 +2,17 @@ package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.Entidad;
 import ar.edu.utn.frba.dds.RepoEntidades;
+import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
+import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -20,6 +25,9 @@ class RepoEntidadesRealizarRankingsTest {
   Entidad jorgito;
   Entidad quatar_aerolines;
 
+  CriterioRanking rankingPromedio ;
+  CriterioRanking rankingCantidadReportes;
+
   @BeforeEach
   void setUp() {
 
@@ -29,15 +37,27 @@ class RepoEntidadesRealizarRankingsTest {
     repoEntidades.guardarEntidad(gualmayen);
     repoEntidades.guardarEntidad(gualmayen);
     repoEntidades.guardarEntidad(gualmayen);
+
     when(gualmayen.cantidadDeIncidentesReportados()).thenReturn(4);
-    when(jorgito.cantidadDeIncidentesReportados()).thenReturn(20);
     when(quatar_aerolines.cantidadDeIncidentesReportados()).thenReturn(10);
-    when(gualmayen.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(12));
+    when(jorgito.cantidadDeIncidentesReportados()).thenReturn(20);
+
+
     when(jorgito.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(4));
+    when(gualmayen.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(12));
     when(quatar_aerolines.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(20));
+
+    rankingPromedio = new PromedioCierresSemanal();
+    rankingCantidadReportes = new CantidadReportesSemanal();
   }
 
   @Test
-  void realizarRankingSegunCriterio() {
+  void realizarRankingSegunPromedios() {
+    Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingPromedio), List.of(jorgito, gualmayen,quatar_aerolines));
+  }
+
+  @Test
+  void realizarRankingSegunCantidadReportes() {
+    Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingCantidadReportes), List.of(gualmayen, quatar_aerolines,jorgito));
   }
 }
