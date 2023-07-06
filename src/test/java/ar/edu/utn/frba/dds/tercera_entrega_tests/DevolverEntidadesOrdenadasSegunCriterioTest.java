@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -49,11 +50,13 @@ class DevolverEntidadesOrdenadasSegunCriterioTest {
   }
 
   @Test
+  @DisplayName("Ordenar segun promedios de cierre")
   void realizarRankingSegunPromedios() {
     Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingPromedio), List.of(jorgito, gualmayen,quatar_aerolines));
   }
 
   @Test
+  @DisplayName("Ordenar segun cantidad de reportes")
   void realizarRankingSegunCantidadReportes() {
     Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingCantidadReportes), List.of(gualmayen, quatar_aerolines,jorgito));
   }
