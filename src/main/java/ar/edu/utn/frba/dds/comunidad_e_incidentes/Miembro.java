@@ -23,12 +23,6 @@ public class Miembro {
   public Usuario usuario;
   public PermisoComunidad permisoComunidad;
 
-  public MedioNotificador getTipoNotificador() {
-    return tipoNotificador;
-  }
-
-  public MedioNotificador tipoNotificador;
-
   //List<Map<Integer, Integer>> horarios;
 
   public Miembro(Usuario usuario,
@@ -37,7 +31,6 @@ public class Miembro {
     this.usuario = usuario;
     this.permisoComunidad = permisoComunidad;
     //this.horarios = horarios;
-    this.tipoNotificador = tipoNotificador;
   }
 
   public void informarIncidente(Servicio servicio, String observaciones) {
@@ -74,10 +67,6 @@ public class Miembro {
     return RepositorioComunidades.getInstance().devolverComunidad(this);
   }
 
-  public List<Servicio> serviciosDeInteres() {
-    return this.entidadesAsociadas.stream()
-        .flatMap(e -> e.getEstablecimientos().stream()).toList().stream()
-        .flatMap(e -> e.getServicio().stream()).toList();
-  }
+
 
 }

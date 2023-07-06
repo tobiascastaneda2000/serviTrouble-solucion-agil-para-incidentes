@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
@@ -19,8 +20,11 @@ public class Usuario {
   boolean sesionAbierta;
 
   Localizacion localizacionInteres;
-  List<Entidad> estidadesAsociadas;
-  //List<TipoServicio> serviciosDeInteres = new ArrayList<>();
+  List<Entidad> estidadesInteres;
+
+  List<Servicio> serviciosDeInteres;
+
+  public MedioNotificador tipoNotificador;
 
   public Usuario(String nombre, String contrasenia, String correo) {
     this.usuario = nombre;
@@ -91,4 +95,10 @@ public class Usuario {
   public String getCorreo() {
     return this.correo;
   }
+
+  public List<Servicio> serviciosDeInteres() {
+    return this.serviciosDeInteres();
+  }
+
 }
+

@@ -64,11 +64,11 @@ public class Comunidad {
   }
 
   public void notificarAperturaIncidente(Servicio servicio) {
-    miembrosInteresados(servicio).forEach(m -> m.tipoNotificador.notificar("Apertura Incidente", m.getCorreo(), servicio));
+    miembrosInteresados(servicio).forEach(m -> m.getUsuario().tipoNotificador.notificar("Apertura Incidente", m.getUsuario(), servicio));
   }
 
   private List<Miembro> miembrosInteresados(Servicio servicio) {
-    return this.miembros.stream().filter(m -> m.serviciosDeInteres().contains(servicio)).toList();
+    return this.miembros.stream().filter(m -> m.usuario.serviciosDeInteres().contains(servicio)).toList();
   }
 
   public void cerrarIncidente(Incidente incidente) {

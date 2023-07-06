@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
 import java.time.Duration;
@@ -16,6 +17,8 @@ public class Entidad {
   }
 
   public List<Establecimiento> establecimientos = new ArrayList<>();
+
+  public List<Incidente> incidentes;
 
   public Entidad(int id, String razonSocial, String email) {
     this.id = id;
@@ -68,4 +71,22 @@ public class Entidad {
     return getServicios().stream().flatMap(s->s.incidentesDe24Horas().stream()).toList();
   }
 
+  public void crearIncidente(Establecimiento establecimiento,Servicio servicio, String observaciones) {
+
+    if(this.establecimientos.contains(establecimiento)){
+      if(establecimiento.servicios.contains(servicio)){
+        RepoUsuarios repoUsuarios = RepoUsuarios.instance;
+        List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
+        Incidente incidente = new Incidente(observaciones);
+        this.incidentes.add(incidente);
+        usuariosInteresados.forEach(u -> u.tipoNotificador.notificar("Apertura Incidente en Entidad", u, servicio));
+      }
+      else{
+        throw new ServicioIncorrectoException();
+      }
+    }
+    else{
+      throw new EstablecimientoIncorrectoException();
+    }
+  }
 }

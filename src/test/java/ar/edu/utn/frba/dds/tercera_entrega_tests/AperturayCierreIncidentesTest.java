@@ -67,8 +67,8 @@ class AperturayCierreIncidentesTest {
   void comunidadNotificaAltaIncidenteATodosLosMiembros() {
     miembroInformante.informarIncidente(servicio, "algo");
     Incidente incidente = devolverIncidente(servicio, "algo");
-    verify(miembroInformante.getTipoNotificador()).notificar("Apertura Incidente", miembroInformante.getCorreo(), servicio);
-    verify(otroMiembro.getTipoNotificador()).notificar("Apertura Incidente", otroMiembro.getCorreo(), servicio);
+    verify(miembroInformante.getUsuario().tipoNotificador).notificar("Apertura Incidente", miembroInformante.getUsuario(), servicio);
+    verify(otroMiembro.getUsuario().tipoNotificador).notificar("Apertura Incidente", otroMiembro.getUsuario(), servicio);
   }
 
   @Test
