@@ -43,17 +43,17 @@ public class Incidente {
   }
 
   //Para rankings
-  public boolean estaAbierto(){
+  public boolean estaAbierto() {
     return estadoIncidente == EstadoIncidente.ABIERTO;
   }
 
-  public boolean estaCerrado(){
+  public boolean estaCerrado() {
     return !estaAbierto();
   }
 
   //PARA RANKINGS
-  public Duration diferenciaEntreAperturayCierre(){
-    return Duration.between(this.fechaHoraAbre,this.fechaHoraCierre);
+  public Duration diferenciaEntreAperturayCierre() {
+    return Duration.between(this.fechaHoraAbre, this.fechaHoraCierre);
   }
 
 

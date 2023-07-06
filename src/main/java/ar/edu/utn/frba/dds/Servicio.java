@@ -37,32 +37,24 @@ public class Servicio {
     if (lista.size() <= 1)
       return lista;
     else {
-      Comparator<Incidente> criterioPrimerIncidenteOcurridoNoCerrado = Comparator.comparing(Incidente::getFechaHoraAbre);
-      lista.sort(criterioPrimerIncidenteOcurridoNoCerrado);
 
-      int i = 0;
-      Incidente incidente;
-      Incidente incidenteAnterior = null;
-      List<Incidente> listadoIncidentesAQuitar = new ArrayList<>();
-      for (i = 0; i < lista.size(); i++) {
+      List<Incidente> listadoIncidentesFiltrados = new ArrayList<>();
+      Iterator<Incidente> iterator = lista.iterator();
+      Incidente incidenteAnterior = iterator.next();
+      listadoIncidentesFiltrados.add(incidenteAnterior);
 
-        incidente = lista.get(i);
+      while (iterator.hasNext()) {
+        Incidente incidente = iterator.next();
+        Duration duracion = Duration.between(incidenteAnterior.getFechaHoraAbre(), incidente.getFechaHoraAbre());
 
-        if(i>0 ) {
-          Duration duracion = Duration.between(incidenteAnterior.getFechaHoraAbre(), incidente.getFechaHoraAbre());
-          if (incidenteAnterior.estaAbierto() && duracion.toHours() < 24) {
-            listadoIncidentesAQuitar.add(incidente);
-          }
-
+        if (incidenteAnterior.estaCerrado() || duracion.toHours() >= 24) {
+          listadoIncidentesFiltrados.add(incidente);
         }
 
         incidenteAnterior = incidente;
       }
 
-      lista.removeAll(listadoIncidentesAQuitar);
-
-      return lista;
+      return listadoIncidentesFiltrados;
     }
-
   }
 }
