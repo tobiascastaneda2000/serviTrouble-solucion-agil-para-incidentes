@@ -36,7 +36,7 @@ public class Entidad {
   }
 
 
-  //PARA RANKINGS-Mejorar polimorfismo
+  //PARA RANKINGS-
 
   public List<Servicio> getServicios(){
     return this.establecimientos.stream().flatMap(e->e.getServicio().stream()).toList();
@@ -48,13 +48,18 @@ public class Entidad {
         .flatMap(i->i.getHistorialIncidentes().stream()).toList().stream().filter(Incidente::estaCerrado).toList();
   }
 
+  //PARA PROMEDIOS DE CIERRES DE INCIDENTES
+
   public Duration duracionTotalDeTodosLosIncidentesCerrados(){
     return getIncidentesCerrados().stream()
         .map(Incidente::diferenciaEntreAperturayCierre).toList().stream().reduce(Duration.ZERO,Duration::plus);
   }
-  public long promedioDuracionIncidentes(){
-    return duracionTotalDeTodosLosIncidentesCerrados().toSeconds()/ getIncidentesCerrados().size();
+  public Duration promedioDuracionIncidentes(){
+    long duracion = duracionTotalDeTodosLosIncidentesCerrados().toSeconds()/ getIncidentesCerrados().size();
+    return Duration.ofMinutes(duracion); ///Duracio en minutos
   }
+
+  //PARA CANTIDAD DE INCIDENTES REPORTADOS
   public int cantidadDeIncidentesReportados(){
     return filtrarPorCantidadUltimas24Horas().size();
   }

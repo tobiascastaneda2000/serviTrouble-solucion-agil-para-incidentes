@@ -33,11 +33,5 @@ public class RepoEntidades {
     return entidades;
   }
 
-  /*
-  return criterioRankings.stream().flatMap(c->c.ordenarPorPromedioCierre(this.entidades).stream()).toList();
-  public List<Entidad> rankingMayorCantidadIncidentesSemanal(){
-    return criterioRankings.stream().flatMap(c->c.ordenarPorCantIncidentesReportados(this.entidades).stream()).toList();
-  }*/
-
 
 }
