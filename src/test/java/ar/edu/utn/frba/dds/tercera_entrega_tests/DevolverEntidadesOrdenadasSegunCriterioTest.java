@@ -10,15 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class RepoEntidadesRealizarRankingsTest {
+class DevolverEntidadesOrdenadasSegunCriterioTest {
 
   RepoEntidades repoEntidades = new RepoEntidades();
   Entidad gualmayen;
@@ -35,8 +32,8 @@ class RepoEntidadesRealizarRankingsTest {
     jorgito = mock(Entidad.class);
     quatar_aerolines = mock(Entidad.class);
     repoEntidades.guardarEntidad(gualmayen);
-    repoEntidades.guardarEntidad(gualmayen);
-    repoEntidades.guardarEntidad(gualmayen);
+    repoEntidades.guardarEntidad(jorgito);
+    repoEntidades.guardarEntidad(quatar_aerolines);
 
     when(gualmayen.cantidadDeIncidentesReportados()).thenReturn(4);
     when(quatar_aerolines.cantidadDeIncidentesReportados()).thenReturn(10);
