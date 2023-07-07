@@ -5,9 +5,13 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -21,11 +25,6 @@ public class Usuario {
   int intentos;
   boolean sesionAbierta;
 
-  public Localizacion getLocalizacionInteres() {
-    return localizacionInteres;
-  }
-
-  Localizacion localizacionInteres;
   List<Entidad> estidadesInteres;
 
   List<Servicio> serviciosDeInteres;
@@ -75,11 +74,18 @@ public class Usuario {
     return this.contrasenia;
   }
 
+  public Localizacion getLocalizacionInteres() throws IOException {
+    //Necesitariamos pasarle como parametro al miembro o algun dato del mismo
+
+    ServicioLocalizacion servicioLocalizacion = new ServicioGeoRef("https://apis.datos.gob.ar/georef/api/");
+    return servicioLocalizacion.getDepartamentos().stream().toList().get(0);
+  }
+
   public boolean isSesionAbierta() {
     return sesionAbierta;
   }
 
-
+  //INICIO DE SESION
   public void iniciarSesion(String username, String contrasenia) {
     validarSesionAbierta();
     validarCantidadIntentos();

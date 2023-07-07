@@ -1,4 +1,4 @@
 package ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref;
 
-public class Departamento {
+public class Departamento implements Localizacion{
 }

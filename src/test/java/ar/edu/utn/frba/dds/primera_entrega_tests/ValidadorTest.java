@@ -80,8 +80,8 @@ class ValidadorTest {
     validador.agregarValidacion(validacionLongitudContrasenia);
     listadoErrores = validador.validarContrasenia(contrasenia);
     assertEquals(listadoErrores.size(), 2);
-    assertInstanceOf(listadoErrores.get(0).getClass(), new DebilPasswordException());
-    assertInstanceOf(listadoErrores.get(1).getClass(), new ContraseniaConPocosCaracteresException());
+    assertInstanceOf(listadoErrores.get(1).getClass(), new DebilPasswordException());
+    assertInstanceOf(listadoErrores.get(0).getClass(), new ContraseniaConPocosCaracteresException());
 
   }
 
