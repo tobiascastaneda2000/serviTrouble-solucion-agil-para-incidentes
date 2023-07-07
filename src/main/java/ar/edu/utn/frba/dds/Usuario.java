@@ -32,6 +32,10 @@ public class Usuario {
     this.medioNotificador = medioNotificador;
   }
 
+  public MedioNotificador getMedioNotificador() {
+    return medioNotificador;
+  }
+
   public MedioNotificador medioNotificador;
 
   public Usuario(String nombre, String contrasenia, String correo) {
