@@ -59,6 +59,4 @@ public class Incidente {
   public Duration diferenciaEntreAperturayCierre() {
     return Duration.between(this.fechaHoraAbre, this.fechaHoraCierre);
   }
-
-
 }

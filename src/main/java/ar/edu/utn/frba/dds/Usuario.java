@@ -78,6 +78,11 @@ public class Usuario {
     }
   }
 
+  public void ejecutarNotificaciones() {
+
+  }
+
+
 
   //public accederServiciosCercanos(){}
   //Debe devolver los servicios que tiene en la misma localizacion
