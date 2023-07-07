@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
@@ -15,11 +16,12 @@ import java.util.List;
 import java.util.Set;
 
 public class Usuario {
+  private int id;
+
   public String usuario;
   public String contrasenia;
 
-  public String correo;
-
+  public String contacto;
   int intentos;
   boolean sesionAbierta;
 
@@ -39,18 +41,13 @@ public class Usuario {
 
   public MedioNotificador medioNotificador;
 
-  public void setServicioLocalizacion(ServicioLocalizacion servicioLocalizacion) {
-    this.servicioLocalizacion = servicioLocalizacion;
-  }
-
-  public ServicioLocalizacion servicioLocalizacion;
-
-  public Usuario(String nombre, String contrasenia, String correo) {
+  public Usuario(int id, String nombre, String contrasenia, String contacto) {
+    this.id = id;
     this.usuario = nombre;
     this.contrasenia = contrasenia;
     this.intentos = 0;
     this.sesionAbierta = false;
-    this.correo = correo;
+    this.contacto = contacto;
   }
 
   public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {
@@ -59,6 +56,10 @@ public class Usuario {
 
   public Set<Horario> getHorariosPlanificados() {
     return horariosPlanificados;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getUsername() {
@@ -76,7 +77,8 @@ public class Usuario {
   public Localizacion getLocalizacionInteres() throws IOException {
     //Necesitariamos pasarle como parametro al miembro o algun dato del mismo
 
-    return this.servicioLocalizacion.getDepartamentos().stream().toList().get(0);
+    ServicioLocalizacion servicioLocalizacion = new ServicioGeoRef("https://apis.datos.gob.ar/georef/api/");
+    return servicioLocalizacion.getDepartamentos().stream().toList().get(0);
   }
 
   public boolean isSesionAbierta() {
@@ -110,13 +112,6 @@ public class Usuario {
     }
   }
 
-
-
-  public void ejecutarNotificaciones() {
-
-  }
-
-
   //public accederServiciosCercanos(){}
   //Debe devolver los servicios que tiene en la misma localizacion
 
@@ -130,8 +125,8 @@ public class Usuario {
     return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
-  public String getCorreo() {
-    return this.correo;
+  public String getContacto() {
+    return this.contacto;
   }
 
   public List<Servicio> serviciosDeInteres() {
@@ -139,7 +134,11 @@ public class Usuario {
   }
 
   public void notificar(Incidente incidente) {
-    this.medioNotificador.notificar(incidente);
+    this.medioNotificador.notificar(incidente, this.contacto);
+  }
+
+  public void notificar(List<Incidente> incidentes) {
+    this.medioNotificador.notificar(incidentes, this.contacto);
   }
 
 }
