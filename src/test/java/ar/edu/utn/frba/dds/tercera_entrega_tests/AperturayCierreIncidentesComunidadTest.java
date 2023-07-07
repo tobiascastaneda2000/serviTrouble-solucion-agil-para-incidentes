@@ -11,16 +11,14 @@ import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class AperturayCierreIncidentesTest {
+class AperturayCierreIncidentesComunidadTest {
 
   Usuario usuarioInformante;
   Usuario otroUsuario;
@@ -87,8 +85,7 @@ class AperturayCierreIncidentesTest {
 
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {
-    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
-    //return comunidad.getIncidentes().stream().filter(i -> i.getServicio() == servicio && Objects.equals(i.getObservacion(), obs)).findFirst().orElse(null);
+    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
   }
 }
