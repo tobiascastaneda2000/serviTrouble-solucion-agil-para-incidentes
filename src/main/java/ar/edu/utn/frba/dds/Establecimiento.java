@@ -17,5 +17,9 @@ public class Establecimiento {
     return localizacion;
   }
 
+  public void agregarServicio(Servicio servicio){
+    servicios.add(servicio);
+  }
+
 }
 

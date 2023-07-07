@@ -7,8 +7,9 @@ import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
-
+import ar.edu.utn.frba.dds.notificador.Horario;
 import java.util.List;
+import java.util.Set;
 
 public class Usuario {
   public String usuario;
@@ -28,6 +29,8 @@ public class Usuario {
 
   List<Servicio> serviciosDeInteres;
 
+  private Set<Horario> horariosPlanificados;
+
   public void setMedioNotificador(MedioNotificador medioNotificador) {
     this.medioNotificador = medioNotificador;
   }
@@ -46,6 +49,13 @@ public class Usuario {
     this.correo = correo;
   }
 
+  public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {
+    this.horariosPlanificados = horariosPlanificados;
+  }
+
+  public Set<Horario> getHorariosPlanificados() {
+    return horariosPlanificados;
+  }
 
   public String getUsername() {
     return this.usuario;
