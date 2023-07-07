@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -24,7 +24,7 @@ public class Usuario {
 
   List<Servicio> serviciosDeInteres;
 
-  public MedioNotificador tipoNotificador;
+  public MedioNotificador medioNotificador;
 
   public Usuario(String nombre, String contrasenia, String correo) {
     this.usuario = nombre;
@@ -78,6 +78,11 @@ public class Usuario {
     }
   }
 
+  public void ejecutarNotificaciones() {
+
+  }
+
+
 
   //public accederServiciosCercanos(){}
   //Debe devolver los servicios que tiene en la misma localizacion
@@ -98,6 +103,10 @@ public class Usuario {
 
   public List<Servicio> serviciosDeInteres() {
     return this.serviciosDeInteres();
+  }
+
+  public void notificar(Incidente incidente) {
+    this.medioNotificador.notificar(incidente);
   }
 
 }
