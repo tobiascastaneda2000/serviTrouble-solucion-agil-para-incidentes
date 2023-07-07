@@ -18,7 +18,8 @@ public class RepositorioComunidades {
     return instance;
   }
 
-  public Comunidad devolverComunidad(Miembro miembro) {
-    return comunidades.stream().filter(c -> c.contieneMiembro(miembro)).toList().get(0);
+  public void notificarIncidente(Incidente incidente) {
+    this.getComunidades().forEach(comunidad -> comunidad.notificarMiembros(incidente));
   }
+
 }

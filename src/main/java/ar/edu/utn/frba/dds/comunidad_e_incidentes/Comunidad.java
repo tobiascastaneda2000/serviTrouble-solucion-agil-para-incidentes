@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,8 +11,8 @@ import java.util.Set;
 public class Comunidad {
 
   public Set<Miembro> miembros;
-
-  List<Incidente> incidentes = new ArrayList<>();
+  public List<Incidente> incidentes = new ArrayList<>();
+  public List<Servicio> serviciosDeInteres = new ArrayList<Servicio>();
 
   //CONSTRUCTOR
 
@@ -29,25 +27,30 @@ public class Comunidad {
   }
 
   public Set<Miembro> getMiembros() {
-    return miembros;
+    return this.miembros;
   }
 
   //METODOS
 
-  public void registrarMiembro(Usuario usuario,
-                               //List<Map<Integer, Integer>> horarios,
-                               MedioNotificador medio) {
-    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
-        //horarios,
-        medio));
+  public void aniadirServicioInteres(Servicio servicio) {
+    this.serviciosDeInteres.add(servicio);
+  }
+
+  public List<Servicio> getServiciosDeInteres() {
+    return this.serviciosDeInteres;
+  }
+
+  public Boolean contieneServicioDeInteres(Servicio servicio) {
+    return this.getServiciosDeInteres().contains(servicio);
+  }
+
+
+  public void registrarMiembro(Usuario usuario) {
+    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD));
   }
   //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
-
-  boolean contieneMiembro(Miembro miembro) {
-    return miembros.contains(miembro);
-  }
-
-  public Miembro getUnMiembro(Usuario usuario) {
+  
+  public Miembro getMiembro(Usuario usuario) {
     return this.miembros.stream().filter(m -> m.getUsuario() == usuario).findFirst().orElse(null);
   }
 
@@ -64,7 +67,8 @@ public class Comunidad {
   }
 
   public void notificarAperturaIncidente(Servicio servicio) {
-    miembrosInteresados(servicio).forEach(m -> m.getUsuario().tipoNotificador.notificar("Apertura Incidente", m.getUsuario(), servicio));
+    // miembrosInteresados(servicio).forEach(m -> m.getUsuario().tipoNotificador.notificar("Apertura Incidente", m.getUsuario(), servicio));
+
   }
 
   private List<Miembro> miembrosInteresados(Servicio servicio) {
@@ -82,6 +86,12 @@ public class Comunidad {
 
   public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente){
     return this.incidentes.stream().filter(i->i.getEstado() == estadoIncidente).toList();
+  }
+
+  public void notificarMiembros(Incidente incidente) {
+    if (this.contieneServicioDeInteres(incidente.getServicioAsociado())) {
+      this.getMiembros().forEach(miembro -> miembro.getUsuario().notificar(incidente));
+    }
   }
 
 }

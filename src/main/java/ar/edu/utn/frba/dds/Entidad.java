@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
 import java.time.Duration;
@@ -79,7 +78,7 @@ public class Entidad {
         List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
         Incidente incidente = new Incidente(observaciones);
         this.incidentes.add(incidente);
-        usuariosInteresados.forEach(u -> u.tipoNotificador.notificar("Apertura Incidente en Entidad", u, servicio));
+        usuariosInteresados.forEach(u -> u.medioNotificador.notificar(servicio));
       }
       else{
         throw new ServicioIncorrectoException();
