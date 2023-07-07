@@ -33,11 +33,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId> org.quartz-scheduler </groupId>
-      <artifactId> quartz </artifactId>
-      <version>2.3.2</version>
-    </dependency>
     <!-- dependency for log4j -->
     <dependency>
       <groupId> log4j </groupId>
@@ -68,6 +63,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -154,8 +150,9 @@
           <target>17</target>
         </configuration>
       </plugin>
+      <!--
       <plugin>
-        <!-- Build an executable JAR -->
+        Build an executable JAR default
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
@@ -166,6 +163,30 @@
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+      -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>build-b</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>ar.edu.utn.frba.dds.Main</mainClass>
+                </manifest>
+              </archive>
+              <finalName>Scheduler</finalName>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
