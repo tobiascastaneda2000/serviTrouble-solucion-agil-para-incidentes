@@ -19,6 +19,10 @@ public class Usuario {
   int intentos;
   boolean sesionAbierta;
 
+  public Localizacion getLocalizacionInteres() {
+    return localizacionInteres;
+  }
+
   Localizacion localizacionInteres;
   List<Entidad> estidadesInteres;
 
