@@ -6,14 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class RepoEntidadesRealizarRankingsTest {
+class RankingsOrdenanListaEntidadesTest {
 
   RepoEntidades repoEntidades = new RepoEntidades();
   Entidad gualmayen;

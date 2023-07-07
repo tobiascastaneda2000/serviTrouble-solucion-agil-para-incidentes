@@ -1,10 +1,9 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.LectorCSV;
 import ar.edu.utn.frba.dds.RepoEntidades;
 import ar.edu.utn.frba.dds.rankings.LaListaEstaVaciaException;
-import ar.edu.utn.frba.dds.rankings.LectorDeRankings;
+import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.mock;
 
-public class LectorRankingsTest {
+public class LectorCSVRankingsTest {
   RepoEntidades repoEntidades = new RepoEntidades();
   Entidad gualmayen;
   Entidad jorgito;
@@ -32,7 +31,7 @@ public class LectorRankingsTest {
 
   @Test
   public void lectorDevuelveArchivotxtConEntidades(){
-    LectorDeRankings lectorDeRankings = new LectorDeRankings();
+    LectorCSVEscritura lectorDeRankings = new LectorCSVEscritura();
     lectorDeRankings.escribirRankings(listadoEntidades);
     String primeraLinea = lectorDeRankings.obtenerPrimeraLinea("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt",1);
     String segundaLinea = lectorDeRankings.obtenerPrimeraLinea("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt",2);
@@ -44,7 +43,7 @@ public class LectorRankingsTest {
 
   @Test
   public void lectorCuandoRecibeListaVaciaLanzaError(){
-    LectorDeRankings lectorDeRankings = new LectorDeRankings();
+    LectorCSVEscritura lectorDeRankings = new LectorCSVEscritura();
     Assertions.assertThrows( LaListaEstaVaciaException.class, ()-> lectorDeRankings.escribirRankings(null));
   }
 }

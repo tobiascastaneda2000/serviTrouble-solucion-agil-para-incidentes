@@ -10,17 +10,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LectorCSV {
+public class LectorCSVLectura {
 
     private String csvPath;
     private File file;
     private BufferedReader fileReader;
 
-    String extensioncsv;
-    List<Entidad> entidades = new ArrayList<>();
+    public String extensioncsv;
+    public List<Entidad> entidades = new ArrayList<>();
 
 
-    public LectorCSV(String csvPath) {
+    public LectorCSVLectura(String csvPath) {
 
         if(csvPath.length() >= 3) {
             this.extensioncsv = csvPath.substring(csvPath.length() - 4);

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Comunidad {
-
   public Set<Miembro> miembros;
   public List<Incidente> incidentes = new ArrayList<>();
   public List<Servicio> serviciosDeInteres = new ArrayList<Servicio>();

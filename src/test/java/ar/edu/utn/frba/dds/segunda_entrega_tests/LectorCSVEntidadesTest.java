@@ -1,5 +1,7 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
+import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.LectorCSVLectura;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;
@@ -12,10 +14,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LectorCSVTest {
-  LectorCSV lectorCSV = new LectorCSV("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
+class LectorCSVEntidadesTest {
+  LectorCSVLectura lectorCSV = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
   //LectorCSV lectorCSV = new LectorCSV("C:\\Users\\usuario\\Desktop\\Facu\\utn\\diseño de sistemas\\2023-tpa-vi-no-grupo-07-main\\src\\main\\java\\ar\\edu\\utn\\frba\\dds\\CSVEntidadesPrestadoras.csv");
-  LectorCSV lectorCSVError = new LectorCSV("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras con error.csv");
+  LectorCSVLectura lectorCSVError = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras con error.csv");
 
   // LectorCSV lectorCSVError = new LectorCSV("C:\\Users\\usuario\\Desktop\\Facu\\utn\\diseño de sistemas\\2023-tpa-vi-no-grupo-07-main\\src\\main\\java\\ar\\edu\\utn\\frba\\dds\\CSVEntidadesPrestadoras con error.csv");
   public String lineaCompleta() {
@@ -32,7 +34,7 @@ class LectorCSVTest {
 
   @Test
   void ElpathdeunCSVescsv() {
-    LectorCSV lector = new LectorCSV("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
     assertEquals(lector.extensioncsv, ".csv");
   }
 
@@ -41,14 +43,14 @@ class LectorCSVTest {
   void NoseAbreArchivoConOtraExtension() {
 
     String path = "src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.txt";
-    assertThrows(PathIncorrectoException.class, () -> new LectorCSV(path));
+    assertThrows(PathIncorrectoException.class, () -> new LectorCSVLectura(path));
   }
 
   @Test
   @DisplayName("Si un CSV no existe tira exception")
   void NoseAbreArchivoCSVsiNoExiste() {
 
-    LectorCSV lector = new LectorCSV("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntiuyudadesPrestadoras.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntiuyudadesPrestadoras.csv");
     assertThrows(ArchivoNoExistenteException.class, () -> lector.obtenerEntidadesDeCSV());
   }
 
@@ -56,7 +58,7 @@ class LectorCSVTest {
   @DisplayName("Si un CSV existe entonces y es correcto entonces carga las entidades")
   void seAbreCSV() {
 
-    LectorCSV lector = new LectorCSV("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
     List<Entidad> lista = lector.obtenerEntidadesDeCSV();
   }
 

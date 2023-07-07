@@ -45,9 +45,9 @@ public class Miembro {
     public List<Incidente> getIncidentesPorEstado(EstadoIncidente estadoIncidente){
      return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
     }*/
- RepoEntidades repoEntidad;
+
   public boolean estaCerca(Servicio servicio){
-   return this.ubicacionMiembro() == repoEntidad.devolverLocalizacion(servicio);
+   return this.ubicacionMiembro() == RepoEntidades.instance.devolverLocalizacion(servicio);
   }
 
   //usar la interfaz

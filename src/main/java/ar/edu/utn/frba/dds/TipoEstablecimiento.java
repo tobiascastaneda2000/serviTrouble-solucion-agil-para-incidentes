@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds;
 
-public enum TIpoEstablecimiento {
+public enum TipoEstablecimiento {
     ESTACION,
     SUCURSAL
 }
