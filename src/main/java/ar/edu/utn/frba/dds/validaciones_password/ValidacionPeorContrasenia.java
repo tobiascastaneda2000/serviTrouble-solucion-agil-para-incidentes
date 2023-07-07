@@ -8,7 +8,7 @@ public class ValidacionPeorContrasenia implements Validacion {
   private final List<String> peoresContrasenias;
 
   public ValidacionPeorContrasenia() {
-    File archivo = new File("src/main/java/ar/edu/utn/frba/dds/validaciones/password-list-top-10000.txt");
+    File archivo = new File("src/main/java/ar/edu/utn/frba/dds/validaciones_password/password-list-top-10000.txt");
     try {
       BufferedReader archivoPeoresContrasenias = new BufferedReader(new FileReader(archivo));
       this.peoresContrasenias = archivoPeoresContrasenias.lines().toList();
