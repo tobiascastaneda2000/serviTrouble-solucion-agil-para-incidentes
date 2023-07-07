@@ -10,6 +10,7 @@ public class RepositorioComunidades {
   public Set<Comunidad> getComunidades() {
     return this.comunidades;
   }
+
   public void guardarComunidad(Comunidad comunidad) {
     comunidades.add(comunidad);
   }

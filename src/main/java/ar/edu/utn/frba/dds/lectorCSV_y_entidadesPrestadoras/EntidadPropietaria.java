@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntidadPropietaria {
-    Usuario usuarioEncargado;
-    List<Entidad> entidades;
+  Usuario usuarioEncargado;
+  List<Entidad> entidades;
 
-    public EntidadPropietaria(Usuario usuarioEncargado){
-        this.entidades = new ArrayList<>();
-        this.usuarioEncargado = usuarioEncargado;
-    }
-    public void recopilarProblematicas() {
+  public EntidadPropietaria(Usuario usuarioEncargado) {
+    this.entidades = new ArrayList<>();
+    this.usuarioEncargado = usuarioEncargado;
+  }
 
-    }
+  public void recopilarProblematicas() {
+
+  }
 }

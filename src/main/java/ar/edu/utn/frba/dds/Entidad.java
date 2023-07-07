@@ -40,51 +40,50 @@ public class Entidad {
 
   //PARA RANKINGS-
 
-  public List<Servicio> getServicios(){
-    return this.establecimientos.stream().flatMap(e->e.getServicio().stream()).toList();
+  public List<Servicio> getServicios() {
+    return this.establecimientos.stream().flatMap(e -> e.getServicio().stream()).toList();
   }
 
 
-  public List<Incidente> getIncidentesCerrados(){
+  public List<Incidente> getIncidentesCerrados() {
     return getServicios().stream()
-        .flatMap(i->i.getHistorialIncidentes().stream()).toList().stream().filter(Incidente::estaCerrado).toList();
+        .flatMap(i -> i.getHistorialIncidentes().stream()).toList().stream().filter(Incidente::estaCerrado).toList();
   }
 
   //PARA PROMEDIOS DE CIERRES DE INCIDENTES
 
-  public Duration duracionTotalDeTodosLosIncidentesCerrados(){
+  public Duration duracionTotalDeTodosLosIncidentesCerrados() {
     return getIncidentesCerrados().stream()
-        .map(Incidente::diferenciaEntreAperturayCierre).toList().stream().reduce(Duration.ZERO,Duration::plus);
+        .map(Incidente::diferenciaEntreAperturayCierre).toList().stream().reduce(Duration.ZERO, Duration::plus);
   }
-  public Duration promedioDuracionIncidentes(){
-    long duracion = duracionTotalDeTodosLosIncidentesCerrados().toSeconds()/ getIncidentesCerrados().size();
+
+  public Duration promedioDuracionIncidentes() {
+    long duracion = duracionTotalDeTodosLosIncidentesCerrados().toSeconds() / getIncidentesCerrados().size();
     return Duration.ofMinutes(duracion); ///Duracio en minutos
   }
 
   //PARA CANTIDAD DE INCIDENTES REPORTADOS
-  public int cantidadDeIncidentesReportados(){
+  public int cantidadDeIncidentesReportados() {
     return filtrarPorCantidadUltimas24Horas().size();
   }
 
-  public List<Incidente> filtrarPorCantidadUltimas24Horas(){
-    return getServicios().stream().flatMap(s->s.incidentesDe24Horas().stream()).toList();
+  public List<Incidente> filtrarPorCantidadUltimas24Horas() {
+    return getServicios().stream().flatMap(s -> s.incidentesDe24Horas().stream()).toList();
   }
 
-  public void crearIncidente(Establecimiento establecimiento,Servicio servicio, String observaciones) {
+  public void crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
 
-    if(this.establecimientos.contains(establecimiento)){
-      if(establecimiento.servicios.contains(servicio)){
+    if (this.establecimientos.contains(establecimiento)) {
+      if (establecimiento.servicios.contains(servicio)) {
         RepoUsuarios repoUsuarios = RepoUsuarios.instance;
         List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
-        Incidente incidente = new Incidente(observaciones);
+        Incidente incidente = new Incidente(observaciones, servicio);
         this.incidentes.add(incidente);
-        usuariosInteresados.forEach(u -> u.medioNotificador.notificar(servicio));
-      }
-      else{
+        usuariosInteresados.forEach(u -> u.medioNotificador.notificar(incidente));
+      } else {
         throw new ServicioIncorrectoException();
       }
-    }
-    else{
+    } else {
       throw new EstablecimientoIncorrectoException();
     }
   }

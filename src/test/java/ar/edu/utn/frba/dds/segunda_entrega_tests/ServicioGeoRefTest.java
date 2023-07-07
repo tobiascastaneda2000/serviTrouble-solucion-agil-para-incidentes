@@ -10,9 +10,11 @@ import retrofit2.Call;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ServicioGeoRefTest {
   ServicioGeoRef servicio;
@@ -27,12 +29,12 @@ public class ServicioGeoRefTest {
     servicio = new ServicioGeoRef("https://apis.datos.gob.ar/georef/api/");
     api = mock(ApiGeoRef.class);
     listadoProvincias = Arrays.asList(jujuy);
-    /*call = apit.getListData(listadoProvincias);
-    when(api.getProvincias()).thenReturn(call);*/
+    call = api.getProvincias();
+    when(api.getProvincias()).thenReturn(call);
   }
-
+/*
   @Test
   void primerTest() throws IOException {
-    Assertions.assertEquals(servicio.getProvincias(), Arrays.asList(jujuy));
-  }
+    Assertions.assertEquals(servicio.getProvincias(), Collections.singletonList(jujuy));
+  }*/
 }

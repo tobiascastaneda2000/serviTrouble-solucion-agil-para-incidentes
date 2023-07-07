@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,14 +50,14 @@ public class Comunidad {
     miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD));
   }
   //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
-  
+
   public Miembro getMiembro(Usuario usuario) {
     return this.miembros.stream().filter(m -> m.getUsuario() == usuario).findFirst().orElse(null);
   }
 
   public void abrirIncidente(Servicio servicio, String observaciones) {
-    Incidente incidente = new Incidente(observaciones);
-    servicio.actualizarEstadoServicio(incidente); //Para ranking
+    Incidente incidente = new Incidente(observaciones, servicio);
+    servicio.aniadirIncidente(incidente); //Para ranking
     efectivizarAperturaIncidente(incidente);
     notificarAperturaIncidente(servicio);
   }
@@ -84,8 +85,8 @@ public class Comunidad {
     return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
   }
 
-  public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente){
-    return this.incidentes.stream().filter(i->i.getEstado() == estadoIncidente).toList();
+  public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
+    return this.incidentes.stream().filter(i -> i.getEstado() == estadoIncidente).toList();
   }
 
   public void notificarMiembros(Incidente incidente) {

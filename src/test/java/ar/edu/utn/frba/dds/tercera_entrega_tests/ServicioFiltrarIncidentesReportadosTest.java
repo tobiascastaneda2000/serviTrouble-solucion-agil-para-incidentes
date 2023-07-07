@@ -36,7 +36,7 @@ class ServicioFiltrarIncidentesReportadosTest {
   @Test
   @DisplayName("Servicio con 1 incidente lo devuelve")
   void servicioConIncidenteUnicoLoDevuelve() {
-    servicio.actualizarEstadoServicio(unIncidente);
+    servicio.aniadirIncidente(unIncidente);
     Assertions.assertEquals(servicio.getHistorialIncidentes(), servicio.incidentesDe24Horas());
   }
 
@@ -47,8 +47,8 @@ class ServicioFiltrarIncidentesReportadosTest {
     when(unIncidente.estaCerrado()).thenReturn(false);
     when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,8,0,0));
     when(unIncidente.estaCerrado()).thenReturn(false);
-    servicio.actualizarEstadoServicio(unIncidente);
-    servicio.actualizarEstadoServicio(otroIncidente);
+    servicio.aniadirIncidente(unIncidente);
+    servicio.aniadirIncidente(otroIncidente);
     Assertions.assertEquals(servicio.incidentesDe24Horas().size(), 2);
   }
 
@@ -59,8 +59,8 @@ class ServicioFiltrarIncidentesReportadosTest {
     when(unIncidente.estaCerrado()).thenReturn(true);
     when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,5,0));
     when(otroIncidente.estaCerrado()).thenReturn(false);
-    servicio.actualizarEstadoServicio(unIncidente);
-    servicio.actualizarEstadoServicio(otroIncidente);
+    servicio.aniadirIncidente(unIncidente);
+    servicio.aniadirIncidente(otroIncidente);
     Assertions.assertTrue(servicio.incidentesDe24Horas().contains(unIncidente));
     Assertions.assertTrue(servicio.incidentesDe24Horas().contains(otroIncidente));
     Assertions.assertEquals(servicio.incidentesDe24Horas().size(), 2);
@@ -73,8 +73,8 @@ class ServicioFiltrarIncidentesReportadosTest {
     when(unIncidente.estaCerrado()).thenReturn(false);
     when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,1));
     when(otroIncidente.estaCerrado()).thenReturn(false);
-    servicio.actualizarEstadoServicio(unIncidente);
-    servicio.actualizarEstadoServicio(otroIncidente);
+    servicio.aniadirIncidente(unIncidente);
+    servicio.aniadirIncidente(otroIncidente);
     Assertions.assertEquals(servicio.incidentesDe24Horas().size(), 1);
     Assertions.assertTrue(servicio.incidentesDe24Horas().contains(unIncidente));
     Assertions.assertFalse(servicio.incidentesDe24Horas().contains(otroIncidente));

@@ -24,6 +24,10 @@ public class Usuario {
 
   List<Servicio> serviciosDeInteres;
 
+  public void setMedioNotificador(MedioNotificador medioNotificador) {
+    this.medioNotificador = medioNotificador;
+  }
+
   public MedioNotificador medioNotificador;
 
   public Usuario(String nombre, String contrasenia, String correo) {
@@ -33,6 +37,7 @@ public class Usuario {
     this.sesionAbierta = false;
     this.correo = correo;
   }
+
 
   public String getUsername() {
     return this.usuario;
@@ -49,7 +54,6 @@ public class Usuario {
   public boolean isSesionAbierta() {
     return sesionAbierta;
   }
-
 
 
   public void iniciarSesion(String username, String contrasenia) {
@@ -81,7 +85,6 @@ public class Usuario {
   public void ejecutarNotificaciones() {
 
   }
-
 
 
   //public accederServiciosCercanos(){}

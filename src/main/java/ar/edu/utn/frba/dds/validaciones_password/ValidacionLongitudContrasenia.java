@@ -23,7 +23,7 @@ public class ValidacionLongitudContrasenia implements Validacion {
     validarLongitudMaxima(passwordConEspaciosRecortados);
   }
 
-  public String recortarEspaciosSeguidos(String password){
+  public String recortarEspaciosSeguidos(String password) {
     return password.replaceAll("\\s+", " ");
   }
 

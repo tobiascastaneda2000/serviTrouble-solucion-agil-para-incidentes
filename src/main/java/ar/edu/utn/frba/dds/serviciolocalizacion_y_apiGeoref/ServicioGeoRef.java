@@ -9,42 +9,41 @@ import java.io.IOException;
 import java.util.List;
 
 public class ServicioGeoRef implements ServicioLocalizacion {
-    private final String url;
-    private ApiGeoRef apiGeoRef;
+  private final String url;
+  private ApiGeoRef apiGeoRef;
 
-    public ServicioGeoRef(String nuevaUrl) {
-        this.url = nuevaUrl;
-        this.apiGeoRef = new Retrofit.Builder()
-                .baseUrl(nuevaUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiGeoRef.class);
-    }
+  public ServicioGeoRef(String nuevaUrl) {
+    this.url = nuevaUrl;
+    this.apiGeoRef = new Retrofit.Builder()
+        .baseUrl(nuevaUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(ApiGeoRef.class);
+  }
 
-    public List<Provincia> getProvincias() throws IOException {
+  public List<Provincia> getProvincias() throws IOException {
 
-        Call<List<Provincia>> requestProvincias = apiGeoRef.getProvincias();
-        Response<List<Provincia>> responsePaises = requestProvincias.execute();
+    Call<List<Provincia>> requestProvincias = apiGeoRef.getProvincias();
+    Response<List<Provincia>> responsePaises = requestProvincias.execute();
 
-        return responsePaises.body();
-    }
+    return responsePaises.body();
+  }
 
-    public List<Municipio> getMunicipios() throws IOException {
+  public List<Municipio> getMunicipios() throws IOException {
 
-        Call<List<Municipio>> requestMunicipios = apiGeoRef.getMunicipios();
-        Response<List<Municipio>> responseMunicipios = requestMunicipios.execute();
+    Call<List<Municipio>> requestMunicipios = apiGeoRef.getMunicipios();
+    Response<List<Municipio>> responseMunicipios = requestMunicipios.execute();
 
-        return responseMunicipios.body();
-    }
+    return responseMunicipios.body();
+  }
 
-    public List<Departamento> getDepartamentos() throws IOException {
+  public List<Departamento> getDepartamentos() throws IOException {
 
-        Call<List<Departamento>> requestDepartamentos = apiGeoRef.getDepartamentos();
-        Response<List<Departamento>> responseDepartamentos = requestDepartamentos.execute();
+    Call<List<Departamento>> requestDepartamentos = apiGeoRef.getDepartamentos();
+    Response<List<Departamento>> responseDepartamentos = requestDepartamentos.execute();
 
-        return responseDepartamentos.body();
-    }
-
+    return responseDepartamentos.body();
+  }
 
 
 }
