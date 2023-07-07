@@ -3,11 +3,13 @@ package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Entidad;
 import ar.edu.utn.frba.dds.Establecimiento;
+import ar.edu.utn.frba.dds.RepoEntidades;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +45,13 @@ public class Miembro {
     public List<Incidente> getIncidentesPorEstado(EstadoIncidente estadoIncidente){
      return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
     }*/
+ RepoEntidades repoEntidad;
+  public boolean estaCerca(Servicio servicio){
+   return this.ubicacionMiembro() == repoEntidad.devolverLocalizacion(servicio);
+  }
 
-
+  //usar la interfaz
+  public Localizacion ubicacionMiembro(){
+    return this.usuario.getLocalizacionInteres();
+  }
 }
