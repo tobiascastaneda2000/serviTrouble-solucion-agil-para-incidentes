@@ -88,4 +88,6 @@ public class LectorCSV {
         return new Entidad(id, razonSocial, email);
     }
 
+
+
 }
