@@ -34,7 +34,6 @@ public class Miembro {
     this.permisoComunidad = permisoComunidad;
     //this.horarios = horarios;
   }
-
   //1. Se agrega el inicidente solo a la comunidad del miembro
   // 2. Se notifica a a los miembros de todas la comunidades que
   // tengan ese servicio como interes y y se encuentre suscrito
