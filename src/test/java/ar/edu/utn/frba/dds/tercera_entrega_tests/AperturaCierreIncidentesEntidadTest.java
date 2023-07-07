@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 public class AperturaCierreIncidentesEntidadTest {
 
   Servicio servicio;
@@ -33,9 +35,15 @@ public class AperturaCierreIncidentesEntidadTest {
 
   @Test
   void seCreaYAgregaElIncidente() {
-    Incidente incidente=unaEntidad.crearIncidente(unEstablecimiento,servicio,"observacion");
+    unaEntidad.crearIncidente(unEstablecimiento,servicio,"observacion");
+    Incidente incidente = devolverIncidente(servicio, "observacion");
     Assertions.assertTrue(unaEntidad.incidentes.contains(incidente));
-    Assertions.assertTrue(unaEntidad.incidentes.size()==1);
+    Assertions.assertEquals(1, unaEntidad.incidentes.size());
+  }
+
+  public Incidente devolverIncidente(Servicio servicio, String obs) {
+    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
+
   }
 
 }

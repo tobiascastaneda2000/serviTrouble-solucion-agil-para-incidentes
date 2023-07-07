@@ -76,13 +76,17 @@ public class Entidad {
   }
 
   //CREAR INCIDENTES EN ENTIDAD
-  public Incidente crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
+  public void crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
 
     RepoUsuarios repoUsuarios = RepoUsuarios.instance;
     List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
     Incidente incidente = new Incidente(observaciones, servicio);
     this.incidentes.add(incidente);
+    servicio.aniadirIncidente(incidente);
+    this.notificarEnEsteMomento(usuariosInteresados, incidente);
+  }
+
+  private void notificarEnEsteMomento(List<Usuario> usuariosInteresados, Incidente incidente) {
     usuariosInteresados.forEach(u -> u.notificar(incidente));
-    return incidente;
   }
 }
