@@ -10,18 +10,17 @@ public class Incidente {
 
   EstadoIncidente estadoIncidente;
   String observacion;
+  LocalDateTime fechaHoraAbre;
+  LocalDateTime fechaHoraCierre;
+  Servicio servicioAsociado;
 
   public LocalDateTime getFechaHoraAbre() {
     return fechaHoraAbre;
   }
 
-  LocalDateTime fechaHoraAbre;
-
   public LocalDateTime getFechaHoraCierre() {
     return fechaHoraCierre;
   }
-
-  LocalDateTime fechaHoraCierre;
 
   public EstadoIncidente getEstado() {
     return estadoIncidente;
@@ -31,10 +30,15 @@ public class Incidente {
     return observacion;
   }
 
-  public Incidente(String observacion) {
+  public Servicio getServicioAsociado() {
+    return this.servicioAsociado;
+  }
+
+  public Incidente(String observacion, Servicio servicioAsociado) {
     this.observacion = observacion;
     this.fechaHoraAbre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.ABIERTO;
+    this.servicioAsociado = servicioAsociado;
   }
 
   public void cerrar() {
