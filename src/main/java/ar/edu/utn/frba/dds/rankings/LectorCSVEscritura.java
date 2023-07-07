@@ -10,16 +10,26 @@ import java.io.IOException;
 import java.util.List;
 
 public class LectorCSVEscritura {
+  String path;
+
+  public LectorCSVEscritura(String path) {
+    this.path = path;
+  }
+
+  //SETTERS
+  public void setPath(String path) {
+    this.path = path;
+  }
+
   public void escribirRankings(List<Entidad> listadoEntidades) {
 
-    if(listadoEntidades == null){
-      throw new LaListaEstaVaciaException();
+    if (listadoEntidades == null) {
+      throw new EntradaListadoEntidadesVacia();
     }
 
-    String string = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt";
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(string))) {
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.path))) {
       for (Entidad entidad : listadoEntidades) {
-        String linea = entidad.getId() + " ; " + entidad.getRazonSocial() + " ; " + entidad.getEmail() ;
+        String linea = entidad.getId() + " ; " + entidad.getRazonSocial() + " ; " + entidad.getEmail();
         bw.write(linea);
         bw.newLine();
       }
@@ -28,12 +38,12 @@ public class LectorCSVEscritura {
     }
   }
 
-  public String obtenerPrimeraLinea(String rutaArchivo, int i) {
-    try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+  public String obtenerNumeroDeLinea(int i) {
+    try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
       int aux = 0;
       String linea = null;
-      while(aux<i){
-         linea = br.readLine();
+      while (aux < i) {
+        linea = br.readLine();
         aux++;
       }
       return linea;
