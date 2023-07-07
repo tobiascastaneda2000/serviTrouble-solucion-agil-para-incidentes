@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,20 +45,12 @@ public class Comunidad {
   }
 
 
-  public void registrarMiembro(Usuario usuario,
-                               //List<Map<Integer, Integer>> horarios,
-                               MedioNotificador medio) {
-    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD,
-        //horarios,
-        medio));
+  public void registrarMiembro(Usuario usuario) {
+    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD));
   }
   //ACLARACION: siempre que se registra un miembro desde comunidado su permiso es USUARIO_COMUNIDAD
-
-  boolean contieneMiembro(Miembro miembro) {
-    return miembros.contains(miembro);
-  }
-
-  public Miembro getUnMiembro(Usuario usuario) {
+  
+  public Miembro getMiembro(Usuario usuario) {
     return this.miembros.stream().filter(m -> m.getUsuario() == usuario).findFirst().orElse(null);
   }
 
@@ -99,7 +89,7 @@ public class Comunidad {
   }
 
   public void notificarMiembros(Incidente incidente) {
-    if(this.contieneServicioDeInteres(incidente.getServicioAsociado())) {
+    if (this.contieneServicioDeInteres(incidente.getServicioAsociado())) {
       this.getMiembros().forEach(miembro -> miembro.getUsuario().notificar(incidente));
     }
   }
