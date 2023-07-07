@@ -40,7 +40,7 @@ public class Miembro {
   // tengan ese servicio como interes y y se encuentre suscrito
 
   public String getCorreo() {
-    return this.usuario.getCorreo();
+    return this.usuario.getContacto();
 
   }
 /*

@@ -29,6 +29,8 @@ public class Usuario {
 
   List<Servicio> serviciosDeInteres;
 
+  ServicioLocalizacion servicioLocalizacion;
+
   private Set<Horario> horariosPlanificados;
 
   public void setMedioNotificador(MedioNotificador medioNotificador) {
@@ -77,8 +79,11 @@ public class Usuario {
   public Localizacion getLocalizacionInteres() throws IOException {
     //Necesitariamos pasarle como parametro al miembro o algun dato del mismo
 
-    ServicioLocalizacion servicioLocalizacion = new ServicioGeoRef("https://apis.datos.gob.ar/georef/api/");
-    return servicioLocalizacion.getDepartamentos().stream().toList().get(0);
+    return this.servicioLocalizacion.getDepartamentos().stream().toList().get(0);
+  }
+
+  public void setServicioLocalizacion(ServicioLocalizacion servicioLocalizacion) {
+    this.servicioLocalizacion = servicioLocalizacion;
   }
 
   public boolean isSesionAbierta() {
