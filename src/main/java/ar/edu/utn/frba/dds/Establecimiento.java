@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Establecimiento {
-
   Localizacion localizacion;
   public List<Servicio> getServicios() {
     return servicios;
   }
-
   List<Servicio> servicios = new ArrayList<>();
 
   public Localizacion getLocalizacion(){
