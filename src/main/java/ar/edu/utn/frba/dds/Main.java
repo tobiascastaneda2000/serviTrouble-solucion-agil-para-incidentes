@@ -1,9 +1,10 @@
 package ar.edu.utn.frba.dds;
 
-import java.util.Collections;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+import ar.edu.utn.frba.dds.RepoUsuarios;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main {
   public static void main(String[] args) {
@@ -14,17 +15,32 @@ public class Main {
     * y solo se puede tener un "Main" por proyecto, de esta manera podemos diferenciarlas.
     *
     */
-    switch(args[0]){
-      case "notificacion": lanzarNotificacion();
-                           break;
-      case "ranking": lanzarRanking();
+
+    String tipoTareaPlanificada = args[0];
+    switch(tipoTareaPlanificada){
+      case "notificacion":
+                        int idUsuario = Integer.parseInt(args[1]);
+                        lanzarNotificacion(idUsuario);
+                        break;
+      case "ranking":
+                      lanzarRanking();
                       break;
       default:;
     }
   }
 
-  public static void lanzarNotificacion() {
+  public static void lanzarNotificacion(int idUsuario) {
+    //Busco a mi usuario con su id en mi reposotorio de usuarios
+    Usuario usuario =
+        RepoUsuarios.getInstance().getUsuarios().stream().filter( user -> user.getId() == idUsuario ).findFirst().orElse(null);
 
+    //Obtengo las comunidades a las que pertenece
+    List<Comunidad> comunidadesDelUsuario =
+        RepositorioComunidades.getInstance().getComunidades().stream().filter(comunidad -> comunidad.contieneUsuario(usuario)).toList();
+
+    List<Incidente> incidentes = comunidadesDelUsuario.stream().flatMap( com -> com.getIncidentes().stream() ).toList();
+
+    usuario.notificar(incidentes);
   }
 
   public static void lanzarRanking(){

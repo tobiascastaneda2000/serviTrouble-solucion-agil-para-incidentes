@@ -82,7 +82,7 @@ public class Entidad {
     List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
     Incidente incidente = new Incidente(observaciones, servicio);
     this.incidentes.add(incidente);
-    usuariosInteresados.forEach(u -> u.medioNotificador.notificar(incidente));
+    usuariosInteresados.forEach(u -> u.notificar(incidente));
     return incidente;
   }
 }

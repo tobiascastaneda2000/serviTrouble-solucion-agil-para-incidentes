@@ -10,7 +10,7 @@ import java.util.Set;
 public class RepoUsuarios {
   public static RepoUsuarios instance = new RepoUsuarios();
 
-  public RepoUsuarios getInstance(){
+  public static RepoUsuarios getInstance(){
     return instance;
   }
   Set<Usuario> usuarios = new HashSet<>();
