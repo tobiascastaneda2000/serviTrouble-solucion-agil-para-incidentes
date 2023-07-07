@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -24,8 +25,14 @@ public class Servicio {
 
   TipoServicio tipoServicio;
 
-  public void actualizarEstadoServicio(Incidente incidente) {
-    historialIncidentes.add(incidente);
+  public void aniadirIncidente(Incidente incidente) {
+    this.historialIncidentes.add(incidente);
+  }
+
+  public void crearIncidente(String observacion) {
+    Incidente incidente = new Incidente(observacion, this);
+    this.aniadirIncidente(incidente);
+    RepositorioComunidades.getInstance().notificarIncidente(incidente);
   }
 
 
