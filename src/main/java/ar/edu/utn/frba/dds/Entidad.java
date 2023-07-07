@@ -17,7 +17,11 @@ public class Entidad {
 
   public List<Establecimiento> establecimientos = new ArrayList<>();
 
-  public List<Incidente> incidentes;
+  public List<Incidente> incidentes = new ArrayList<>();
+
+  public void agregarEstablecimiento(Establecimiento establecimiento){
+    establecimientos.add(establecimiento);
+  }
 
   public Entidad(int id, String razonSocial, String email) {
     this.id = id;
@@ -41,7 +45,7 @@ public class Entidad {
   //PARA RANKINGS-
 
   public List<Servicio> getServicios() {
-    return this.establecimientos.stream().flatMap(e -> e.getServicio().stream()).toList();
+    return this.establecimientos.stream().flatMap(e -> e.getServicios().stream()).toList();
   }
 
 
@@ -71,20 +75,14 @@ public class Entidad {
     return getServicios().stream().flatMap(s -> s.incidentesDe24Horas().stream()).toList();
   }
 
-  public void crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
+  //CREAR INCIDENTES EN ENTIDAD
+  public Incidente crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
 
-    if (this.establecimientos.contains(establecimiento)) {
-      if (establecimiento.servicios.contains(servicio)) {
-        RepoUsuarios repoUsuarios = RepoUsuarios.instance;
-        List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
-        Incidente incidente = new Incidente(observaciones, servicio);
-        this.incidentes.add(incidente);
-        usuariosInteresados.forEach(u -> u.medioNotificador.notificar(incidente));
-      } else {
-        throw new ServicioIncorrectoException();
-      }
-    } else {
-      throw new EstablecimientoIncorrectoException();
-    }
+    RepoUsuarios repoUsuarios = RepoUsuarios.instance;
+    List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
+    Incidente incidente = new Incidente(observaciones, servicio);
+    this.incidentes.add(incidente);
+    usuariosInteresados.forEach(u -> u.medioNotificador.notificar(incidente));
+    return incidente;
   }
 }
