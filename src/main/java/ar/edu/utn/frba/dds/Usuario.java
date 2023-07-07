@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
@@ -40,6 +39,12 @@ public class Usuario {
 
   public MedioNotificador medioNotificador;
 
+  public void setServicioLocalizacion(ServicioLocalizacion servicioLocalizacion) {
+    this.servicioLocalizacion = servicioLocalizacion;
+  }
+
+  public ServicioLocalizacion servicioLocalizacion;
+
   public Usuario(String nombre, String contrasenia, String correo) {
     this.usuario = nombre;
     this.contrasenia = contrasenia;
@@ -71,8 +76,7 @@ public class Usuario {
   public Localizacion getLocalizacionInteres() throws IOException {
     //Necesitariamos pasarle como parametro al miembro o algun dato del mismo
 
-    ServicioLocalizacion servicioLocalizacion = new ServicioGeoRef("https://apis.datos.gob.ar/georef/api/");
-    return servicioLocalizacion.getDepartamentos().stream().toList().get(0);
+    return this.servicioLocalizacion.getDepartamentos().stream().toList().get(0);
   }
 
   public boolean isSesionAbierta() {

@@ -10,6 +10,8 @@ import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,12 +48,12 @@ public class Miembro {
      return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
     }*/
 
-  public boolean estaCerca(Servicio servicio){
+  public boolean estaCerca(Servicio servicio) throws IOException {
    return this.ubicacionMiembro() == RepoEntidades.instance.devolverLocalizacion(servicio);
   }
 
   //usar la interfaz
-  public Localizacion ubicacionMiembro(){
+  public Localizacion ubicacionMiembro() throws IOException {
     return this.usuario.getLocalizacionInteres();
   }
 }
