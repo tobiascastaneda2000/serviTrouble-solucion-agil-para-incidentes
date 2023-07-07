@@ -17,6 +17,10 @@ public class Establecimiento {
     return localizacion;
   }
 
+  public void setLocalizacion(Localizacion localizacion) {
+    this.localizacion = localizacion;
+  }
+
   public void agregarServicio(Servicio servicio){
     servicios.add(servicio);
   }

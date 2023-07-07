@@ -16,7 +16,7 @@ public class MailSender implements MedioNotificador {
 
   }
 
-  public void notificarSuferenciaRevisionIncidente(Servicio servicio){
+  public void notificarSugerenciaRevisionIncidente(Servicio servicio){
 
   }
 

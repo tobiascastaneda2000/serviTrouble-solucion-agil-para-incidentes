@@ -10,5 +10,5 @@ public interface MedioNotificador {
   void notificar(Incidente incidente,String contacto);
 
   void notificar(List<Incidente> incidentes, String contacto);
-  void notificarSuferenciaRevisionIncidente(Servicio servicio);
+  void notificarSugerenciaRevisionIncidente(Servicio servicio);
 }

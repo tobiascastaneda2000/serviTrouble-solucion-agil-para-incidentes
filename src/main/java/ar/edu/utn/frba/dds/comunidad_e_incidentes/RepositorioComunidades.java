@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
 import ar.edu.utn.frba.dds.Servicio;
-
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,12 +25,6 @@ public class RepositorioComunidades {
   }
 
   public void detectarCercania(Servicio servicio){
-    this.comunidades.stream().flatMap(c->c.getMiembros().stream()).filter(m-> {
-      try {
-        return m.estaCerca(servicio);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    }).forEach(m->m.usuario.getMedioNotificador().notificarSuferenciaRevisionIncidente(servicio));
+    this.comunidades.stream().flatMap(c->c.getMiembros().stream()).filter(m->m.estaCerca(servicio)).forEach(m->m.usuario.getMedioNotificador().notificarSugerenciaRevisionIncidente(servicio));
   }
 }
