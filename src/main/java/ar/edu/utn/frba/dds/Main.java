@@ -4,6 +4,10 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.RepoUsuarios;
+import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
+import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+
 import java.util.List;
 
 public class Main {
@@ -44,6 +48,14 @@ public class Main {
   }
 
   public static void lanzarRanking(){
+
+    CriterioRanking criterioPromediosCierres = new PromedioCierresSemanal();
+    CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
+
+    RepoEntidades.instance.generarRankingEnCsv(criterioCantidadReportes);
+    RepoEntidades.instance.generarRankingEnCsv(criterioPromediosCierres);
+    //Se realizan una vez por semana
+
     /*
      * List<Entidad> entidades = RepoEntidades.instance.getEntidades();
      * Entidad gualmayen = new Entidad(12, "Gualmayen ", "mail");
