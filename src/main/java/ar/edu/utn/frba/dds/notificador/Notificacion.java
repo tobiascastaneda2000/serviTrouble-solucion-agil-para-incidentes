@@ -14,6 +14,7 @@ public class Notificacion {
   }
   public void ejecutarse() {
     usuario.notificarIncidente(incidente);
+    usuario.sacarNotificacion(this);
   }
 }
 

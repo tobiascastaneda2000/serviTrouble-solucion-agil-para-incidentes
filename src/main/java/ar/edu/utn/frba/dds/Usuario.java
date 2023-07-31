@@ -104,6 +104,9 @@ public class Usuario {
     return this.serviciosDeInteres();
   }
 
+  public List<Notificacion> getNotificacionesPendientes(){
+    return notificacionesPendientes;
+  }
 
 
   // -----------------------------------------INICIO DE SESION--------------------------------------//
@@ -175,6 +178,10 @@ public class Usuario {
   public void guardarNotificacion(Incidente incidente) {
     Notificacion notificacion = new Notificacion(this,incidente);
     notificacionesPendientes.add(notificacion);
+  }
+
+  public void sacarNotificacion(Notificacion notificacion) {
+    notificacionesPendientes.remove(notificacion);
   }
 
 
