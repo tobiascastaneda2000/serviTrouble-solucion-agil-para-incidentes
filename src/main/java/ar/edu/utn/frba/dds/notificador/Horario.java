@@ -1,18 +1,22 @@
 package ar.edu.utn.frba.dds.notificador;
 
 public class Horario {
-  private String hora;
-  private String minuto;
-  private String diaDelMes;
-  private String mes;
-  private String diaDeLaSemana;
+  private int hora;
+  private int minuto;
 
-  public Horario(String hora, String minuto, String diaDelMes, String mes, String diaDeLaSemana) {
+  public Horario(int hora, int minuto) {
     this.hora = hora;
     this.minuto = minuto;
-    this.diaDelMes = diaDelMes;
-    this.mes = mes;
-    this.diaDeLaSemana = diaDeLaSemana;
+  }
+
+  public boolean esIgual(int hora2,int minuto2){
+
+    if(this.hora == hora2 && this.minuto == minuto2){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   /*
@@ -23,8 +27,8 @@ public class Horario {
   *   No se hizo mucho incapie en estos puntos debido a que cuando se tenga una interfaz gráfica
   *   se podrá visualizar mucho mejor esta "conversion" de horario a CronExpression.
   */
-  public String generarExpresionCron(){
+  /*public String generarExpresionCron(){
     return String.format("%s %s %s %s %s",minuto,hora,diaDelMes,mes,diaDeLaSemana);
-  }
+  }*/
 
 }

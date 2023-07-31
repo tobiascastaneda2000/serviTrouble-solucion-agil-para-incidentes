@@ -7,6 +7,9 @@ import ar.edu.utn.frba.dds.RepoUsuarios;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import java.util.Locale;
+import java.util.Set;
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -23,8 +26,7 @@ public class Main {
     String tipoTareaPlanificada = args[0];
     switch(tipoTareaPlanificada){
       case "notificacion":
-                        int idUsuario = Integer.parseInt(args[1]);
-                        lanzarNotificacion(idUsuario);
+                        notificarUsuarios();
                         break;
       case "ranking":
                       lanzarRanking();
@@ -33,7 +35,20 @@ public class Main {
     }
   }
 
-  public static void lanzarNotificacion(int idUsuario) {
+  //-----------------------------------NOTIFICADOR A USUARIOS SEGUN HORARIO CONFIGURADO-------------------//
+
+  public static void notificarUsuarios(){
+    Set<Usuario> usuarios = RepoUsuarios.instance.getUsuarios();
+    LocalDateTime ahora = LocalDateTime.now();
+    usuarios.forEach(u->u.verificarNotificaciones(ahora));
+  }
+
+
+  //------------------------------------------------------------------------------------------------------//
+
+
+
+  /*public static void lanzarNotificacion(int idUsuario) {
     //Busco a mi usuario con su id en mi reposotorio de usuarios
     Usuario usuario =
         RepoUsuarios.getInstance().getUsuarios().stream().filter( user -> user.getId() == idUsuario ).findFirst().orElse(null);
@@ -45,7 +60,7 @@ public class Main {
     List<Incidente> incidentes = comunidadesDelUsuario.stream().flatMap( com -> com.getIncidentes().stream() ).toList();
 
    // usuario.notificarIncidente(incidentes);
-  }
+  }*/
 
   public static void lanzarRanking(){
 

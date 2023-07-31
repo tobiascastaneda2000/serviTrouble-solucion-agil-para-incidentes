@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.TipoServicio;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class Incidente {
+public class Incidente implements Cloneable {
 
   EstadoIncidente estadoIncidente;
   String observacion;
@@ -59,4 +59,6 @@ public class Incidente {
   public Duration diferenciaEntreAperturayCierre() {
     return Duration.between(this.fechaHoraAbre, this.fechaHoraCierre);
   }
+
+
 }

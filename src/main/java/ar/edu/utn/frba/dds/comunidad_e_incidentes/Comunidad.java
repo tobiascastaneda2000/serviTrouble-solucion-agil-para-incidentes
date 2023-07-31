@@ -9,9 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Comunidad {
+public class Comunidad{
   public Set<Miembro> miembros;
   public List<Incidente> incidentes = new ArrayList<>();
+  public List<Incidente> incidentesCerrados = new ArrayList<>();
   public List<Servicio> serviciosDeInteres = new ArrayList<Servicio>();
 
   //-------------------------CONSTRUCTOR----------------------------------------//
@@ -52,26 +53,30 @@ public class Comunidad {
     return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
   }
 
-
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//
 
   public void abrirIncidente(Incidente incidente) {
 
     incidentes.add(incidente);
-    miembros.forEach(m->m.getUsuario().notificarIncidente(incidente));
+    miembros.forEach(m->m.getUsuario().guardarNotificacion(incidente));
   }
 
-  //-----------------------------------------------------------------------------------------------------//
+  //-------------------------------CIERRE DE INCIDENTE-------------------------------------------------//
 
+  public void cerrarIncidente(Incidente incidente) {
+    Incidente nuevoIncidente = incidente;  // habria que clonar en vez de asignar (para poder cerrar el incidente solo en una comunidad)
+    nuevoIncidente.cerrar();
+    incidentes.remove(incidente);
+    incidentesCerrados.add(nuevoIncidente);
+  }
 
+  //---------------------------------------------------------------------------------------------------//
 
   private List<Miembro> miembrosInteresados(Servicio servicio) {
     return this.miembros.stream().filter(m -> m.usuario.serviciosDeInteres().contains(servicio)).toList();
   }
 
-  public void cerrarIncidente(Incidente incidente) {
-    incidente.cerrar();
-  }
+
 
   public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
     return this.incidentes.stream().filter(i -> i.getEstado() == estadoIncidente).toList();

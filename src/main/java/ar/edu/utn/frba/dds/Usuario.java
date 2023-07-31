@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
+import ar.edu.utn.frba.dds.notificador.Notificacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
@@ -12,6 +13,7 @@ import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +31,8 @@ public class Usuario {
   List<Entidad> estidadesInteres;
   List<Servicio> serviciosDeInteres;
   List<Entidad> entidadesInteres = new ArrayList<>();
+
+  List<Notificacion> notificacionesPendientes = new ArrayList<>();
   ServicioLocalizacion servicioLocalizacion;
 
   private Set<Horario> horariosPlanificados;
@@ -136,9 +140,6 @@ public class Usuario {
     return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
-  public void notificarIncidente(Incidente incidente) {
-    this.medioNotificador.notificar(incidente, this.contacto);
-  }
 
 
   //--------------------------------APERTURA DE INCIDENTE PARA COMUNIDADES----------------------------------------------//
@@ -150,6 +151,35 @@ public class Usuario {
     comunidades.forEach(c->c.abrirIncidente(incidente));
 
   }
+  //--------------------------------------------------------------------------------------------------------------------//
+
+
+  //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
+  public void notificarIncidente(Incidente incidente) {
+    this.medioNotificador.notificar(incidente, this.contacto);
+  }
+
+  public void agregarHorario(Horario horario) {
+    horariosPlanificados.add(horario);
+  }
+
+  public void verificarNotificaciones(LocalDateTime ahora) {
+
+    int hora = ahora.getHour();
+    int minutos = ahora.getMinute();
+    if(horariosPlanificados.stream().anyMatch(h->h.esIgual(hora,minutos))){
+      notificacionesPendientes.forEach(n->n.ejecutarse());
+    }
+  }
+
+  public void guardarNotificacion(Incidente incidente) {
+    Notificacion notificacion = new Notificacion(this,incidente);
+    notificacionesPendientes.add(notificacion);
+  }
+
+
+  //---------------------------------------------------------------------------------------------------------------------//
+
 
 
 
