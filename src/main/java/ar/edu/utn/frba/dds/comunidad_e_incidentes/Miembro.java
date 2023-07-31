@@ -22,30 +22,13 @@ public class Miembro {
     return usuario;
   }
 
-  public List<Entidad> entidadesAsociadas = new ArrayList<>();
-
   public Usuario usuario;
   public PermisoComunidad permisoComunidad;
-
-  //List<Map<Integer, Integer>> horarios;
 
   public Miembro(Usuario usuario, PermisoComunidad permisoComunidad) {
     this.usuario = usuario;
     this.permisoComunidad = permisoComunidad;
-    //this.horarios = horarios;
   }
-  //1. Se agrega el inicidente solo a la comunidad del miembro
-  // 2. Se notifica a a los miembros de todas la comunidades que
-  // tengan ese servicio como interes y y se encuentre suscrito
-
-  public String getCorreo() {
-    return this.usuario.getContacto();
-
-  }
-/*
-    public List<Incidente> getIncidentesPorEstado(EstadoIncidente estadoIncidente){
-     return comunidadDelMiembro().incidentesPorEstado(estadoIncidente);
-    }*/
 
   public boolean estaCerca(Servicio servicio) throws IOException {
    return this.ubicacionMiembro() == RepoEntidades.instance.devolverLocalizacion(servicio);

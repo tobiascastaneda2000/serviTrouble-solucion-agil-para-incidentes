@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,12 +27,13 @@ public class Usuario {
   boolean sesionAbierta;
 
   List<Entidad> estidadesInteres;
-
   List<Servicio> serviciosDeInteres;
-
+  List<Entidad> entidadesInteres = new ArrayList<>();
   ServicioLocalizacion servicioLocalizacion;
 
   private Set<Horario> horariosPlanificados;
+
+  // ---------------------------------SETTERS Y GETTERS----------------------------------------------------//
 
   public void setMedioNotificador(MedioNotificador medioNotificador) {
     this.medioNotificador = medioNotificador;
@@ -90,7 +92,18 @@ public class Usuario {
     return sesionAbierta;
   }
 
-  //INICIO DE SESION
+  public String getContacto() {
+    return this.contacto;
+  }
+
+  public List<Servicio> serviciosDeInteres() {
+    return this.serviciosDeInteres();
+  }
+
+
+
+  // -----------------------------------------INICIO DE SESION--------------------------------------//
+
   public void iniciarSesion(String username, String contrasenia) {
     validarSesionAbierta();
     validarCantidadIntentos();
@@ -117,34 +130,28 @@ public class Usuario {
     }
   }
 
-  //public accederServiciosCercanos(){}
-  //Debe devolver los servicios que tiene en la misma localizacion
-
-
-/*
-  List<Comunidad> comunidadesPertenecientes(){
-    return miembros.stream().map(m->m.devolverComunidad()).toList();
-  }*/
+  //------------------------------------------------------------------------------------------------------//
 
   public List<Comunidad> comunidadesPertenecientes() {
     return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
-  public String getContacto() {
-    return this.contacto;
-  }
-
-  public List<Servicio> serviciosDeInteres() {
-    return this.serviciosDeInteres();
-  }
-
-  public void notificar(Incidente incidente) {
+  public void notificarIncidente(Incidente incidente) {
     this.medioNotificador.notificar(incidente, this.contacto);
   }
 
-  public void notificar(List<Incidente> incidentes) {
-    this.medioNotificador.notificar(incidentes, this.contacto);
+
+  //--------------------------------APERTURA DE INCIDENTE PARA COMUNIDADES----------------------------------------------//
+
+  public void abrirIncidente(Servicio servicio,String observacion) {
+    List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c->c.contieneServicioDeInteres(servicio)).toList();
+    Incidente incidente = new Incidente(observacion, servicio);
+    servicio.aniadirIncidente(incidente); //Para ranking
+    comunidades.forEach(c->c.abrirIncidente(incidente));
+
   }
+
+
 
 }
 

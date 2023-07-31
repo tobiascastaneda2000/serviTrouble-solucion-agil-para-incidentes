@@ -87,6 +87,6 @@ public class Entidad {
   }
 
   private void notificarEnEsteMomento(List<Usuario> usuariosInteresados, Incidente incidente) {
-    usuariosInteresados.forEach(u -> u.notificar(incidente));
+    usuariosInteresados.forEach(u -> u.notificarIncidente(incidente));
   }
 }

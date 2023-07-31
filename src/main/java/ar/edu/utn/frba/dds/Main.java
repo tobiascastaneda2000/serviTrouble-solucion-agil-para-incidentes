@@ -44,7 +44,7 @@ public class Main {
 
     List<Incidente> incidentes = comunidadesDelUsuario.stream().flatMap( com -> com.getIncidentes().stream() ).toList();
 
-    usuario.notificar(incidentes);
+   // usuario.notificarIncidente(incidentes);
   }
 
   public static void lanzarRanking(){
