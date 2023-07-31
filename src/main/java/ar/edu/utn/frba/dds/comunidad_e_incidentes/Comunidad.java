@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
+import ar.edu.utn.frba.dds.RepoUsuarios;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
@@ -67,6 +68,7 @@ public class Comunidad{
     Incidente nuevoIncidente = incidente;  // habria que clonar en vez de asignar (para poder cerrar el incidente solo en una comunidad)
     nuevoIncidente.cerrar();
     incidentes.remove(incidente);
+    RepoUsuarios.instance.sacarIncidentesCerrados(incidente);  // saca al incidente de la lista de notificaciones pendientes de cada usuario para que no notifique un incidente cerrado
     incidentesCerrados.add(nuevoIncidente);
   }
 

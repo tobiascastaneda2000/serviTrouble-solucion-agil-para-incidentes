@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Miembro;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import java.util.HashSet;
@@ -23,5 +24,12 @@ public class RepoUsuarios {
   }
   public List<Usuario> interesadoEnEntidad(Entidad entidad){
     return usuarios.stream().filter(u->u.estidadesInteres.contains(entidad)).toList();
+  }
+
+  public void sacarIncidentesCerrados(Incidente incidente) {
+    List<Usuario> usersConIncidente = usuarios.stream().filter(u->u.contieneIncidentePendiente(incidente)).toList();
+    usersConIncidente.forEach(
+        u->u.notificacionesPendientes.remove(u.obtenerNotificacion(incidente))
+    );
   }
 }

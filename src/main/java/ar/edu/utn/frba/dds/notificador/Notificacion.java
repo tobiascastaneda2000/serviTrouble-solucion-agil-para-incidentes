@@ -8,6 +8,10 @@ public class Notificacion {
   Usuario usuario;
   Incidente incidente;
 
+  public Incidente getIncidente(){
+    return incidente;
+  }
+
   public Notificacion(Usuario usuario, Incidente incidente) {
     this.usuario = usuario;
     this.incidente = incidente;

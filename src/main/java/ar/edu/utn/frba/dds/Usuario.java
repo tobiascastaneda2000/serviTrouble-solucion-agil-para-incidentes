@@ -184,6 +184,21 @@ public class Usuario {
     notificacionesPendientes.remove(notificacion);
   }
 
+  public boolean contieneIncidentePendiente(Incidente incidente) {
+    List<Incidente> incidentes = notificacionesPendientes.stream().map(n->n.getIncidente()).toList();
+    if(incidentes.contains(incidente)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  public Notificacion obtenerNotificacion(Incidente incidente) {
+
+    return notificacionesPendientes.stream().filter(n->n.getIncidente().equals(incidente)).toList().get(0);
+  }
+
 
   //---------------------------------------------------------------------------------------------------------------------//
 
