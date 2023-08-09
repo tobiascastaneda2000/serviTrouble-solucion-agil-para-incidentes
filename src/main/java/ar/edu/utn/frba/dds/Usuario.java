@@ -200,8 +200,19 @@ public class Usuario {
   }
 
 
-  //---------------------------------------------------------------------------------------------------------------------//
+  //------------------------------------------------------------------------------------------------------------//
 
+  //-----------------------------SUGERENCIA REVISION INCIDENTES------------------------------------------//
+
+  ServicioUbicacion servicioUbicacion;
+  public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
+    this.servicioUbicacion = servicioUbicacion;
+  }
+  public void notificarSiEstaCerca(Incidente incidente){
+    if(servicioUbicacion.estaCerca(this,incidente.getServicioAsociado())){
+      notificarIncidente(incidente);
+    }
+  }
 
 
 

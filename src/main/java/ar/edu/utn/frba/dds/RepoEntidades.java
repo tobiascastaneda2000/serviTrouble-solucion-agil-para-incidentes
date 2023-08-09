@@ -42,10 +42,5 @@ public class RepoEntidades {
     return entidades;
   }
 
-  public Localizacion devolverLocalizacion(Servicio servicio) {
-    return this.entidades.stream().flatMap(e -> e.getEstablecimientos().stream()).filter(e -> e.getServicios().contains(servicio)).toList().get(0).getLocalizacion();
-  }
-
-
 
 }

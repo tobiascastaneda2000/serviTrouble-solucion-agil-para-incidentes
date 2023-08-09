@@ -23,5 +23,16 @@ public class Establecimiento {
     servicios.add(servicio);
   }
 
+
+  //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
+  ServicioUbicacion servicioUbicacion;
+  public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
+    this.servicioUbicacion = servicioUbicacion;
+  }
+
+  public Ubicacion ubicacion(){
+    return this.servicioUbicacion.ubicacionEstablecimiento(this);
+  }
+
 }
 

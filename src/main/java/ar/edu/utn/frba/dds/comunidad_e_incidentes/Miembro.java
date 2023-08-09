@@ -30,12 +30,4 @@ public class Miembro {
     this.permisoComunidad = permisoComunidad;
   }
 
-  public boolean estaCerca(Servicio servicio) throws IOException {
-   return this.ubicacionMiembro() == RepoEntidades.instance.devolverLocalizacion(servicio);
-  }
-
-  //usar la interfaz
-  public Localizacion ubicacionMiembro() throws IOException {
-    return this.usuario.getLocalizacionInteres();
-  }
 }

@@ -90,4 +90,17 @@ public class Comunidad{
     }
   }
 
+
+  //--------------------------SUGERENCIA DE INCIDENTES--------------------------------//
+  public void sugerirIncidentes() {
+    miembros.forEach(
+        m-> incidentes.forEach(
+            i-> m.usuario.notificarSiEstaCerca(i)
+        )
+    );
+  }
+
+
+
+
 }

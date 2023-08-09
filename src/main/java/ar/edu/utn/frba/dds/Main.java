@@ -44,7 +44,18 @@ public class Main {
   }
 
 
-  //------------------------------------------------------------------------------------------------------//
+  //------------------------------------SUGERENCIA REVISION INCIDENTES------------------------//
+
+  public static void sugerirIncidentes(){
+    Set<Comunidad> comunidades = RepositorioComunidades.instance.getComunidades();
+    comunidades.forEach(c->c.sugerirIncidentes());
+  }
+
+
+
+
+  //------------------------------------------------------------------------------------------//
+
 
 
 

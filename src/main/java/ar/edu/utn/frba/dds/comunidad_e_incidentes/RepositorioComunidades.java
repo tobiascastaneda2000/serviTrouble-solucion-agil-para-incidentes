@@ -26,13 +26,5 @@ public class RepositorioComunidades {
     this.getComunidades().forEach(comunidad -> comunidad.notificarMiembros(incidente));
   }
 
-  public void detectarCercania(Servicio servicio){
-    this.comunidades.stream().flatMap(c->c.getMiembros().stream()).filter(m-> {
-      try {
-        return m.estaCerca(servicio);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
-    }).forEach(m->m.usuario.getMedioNotificador().notificarSugerenciaRevisionIncidente(servicio));
-  }
+
 }
