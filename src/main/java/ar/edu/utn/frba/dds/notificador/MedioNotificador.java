@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface MedioNotificador {
 
-  void notificar(Incidente incidente,String contacto);
+  void notificarNuevoIncidente(Incidente incidente, String contacto);
 
-  void notificar(List<Incidente> incidentes, String contacto);
+  void notificarNuevoIncidente(List<Incidente> incidentes, String contacto);
   void notificarSugerenciaRevisionIncidente(Servicio servicio);
 }

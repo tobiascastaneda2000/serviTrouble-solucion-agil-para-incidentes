@@ -22,7 +22,6 @@ public class LectorCSVLectura {
   public String extensioncsv;
   public List<Entidad> entidades = new ArrayList<>();
 
-
   public LectorCSVLectura(String csvPath) {
 
     if (csvPath.length() >= 3) {

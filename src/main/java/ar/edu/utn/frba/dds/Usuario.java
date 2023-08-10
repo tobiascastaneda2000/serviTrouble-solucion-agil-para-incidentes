@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
@@ -159,7 +158,7 @@ public class Usuario {
 
   //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
   public void notificarIncidente(Incidente incidente) {
-    this.medioNotificador.notificar(incidente, this.contacto);
+    this.medioNotificador.notificarNuevoIncidente(incidente, this.contacto);
   }
 
   public void agregarHorario(Horario horario) {

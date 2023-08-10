@@ -7,12 +7,12 @@ import java.util.List;
 
 public class WhatsAppSender implements MedioNotificador {
   @Override
-  public void notificar(Incidente incidente, String contacto) {
+  public void notificarNuevoIncidente(Incidente incidente, String contacto) {
     
   }
 
   @Override
-  public void notificar(List<Incidente> incidentes, String contacto) {
+  public void notificarNuevoIncidente(List<Incidente> incidentes, String contacto) {
 
   }
 

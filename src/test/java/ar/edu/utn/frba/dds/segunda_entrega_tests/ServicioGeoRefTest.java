@@ -52,4 +52,6 @@ public class ServicioGeoRefTest {
   void usuarioLlamaAServicioLocalizacion() throws IOException {
     Assertions.assertEquals(jujuy, usuario.getLocalizacionInteres());
   }
+
+  //Testamos usuario, pero no el adapter -> mockear api
 }

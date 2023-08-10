@@ -40,7 +40,6 @@ class DevolverEntidadesOrdenadasSegunCriterioTest {
     when(quatar_aerolines.cantidadDeIncidentesReportados()).thenReturn(10);
     when(jorgito.cantidadDeIncidentesReportados()).thenReturn(20);
 
-
     when(jorgito.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(4));
     when(gualmayen.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(12));
     when(quatar_aerolines.promedioDuracionIncidentes()).thenReturn(Duration.ofHours(20));
