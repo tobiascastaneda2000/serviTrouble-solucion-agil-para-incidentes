@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.WhatsAppSender;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -16,7 +17,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-/*
+@Disabled
 public class NotificionesAperturaTest {
 
   RepositorioComunidades repositorioComunidades;
@@ -30,14 +31,14 @@ public class NotificionesAperturaTest {
 
   @BeforeEach
   void setUp(){
-    repositorioComunidades = new RepositorioComunidades();
+    repositorioComunidades = RepositorioComunidades.getInstance();
     comunidad = new Comunidad();
-
     unUsuario = new Usuario(1, "Messi", "alguien", "mail");
     otroUsuario = new Usuario(2, "Cristiano", "alguien", "otroMail");
     repositorioComunidades.guardarComunidad(comunidad);
     servicio = new Servicio(TipoServicio.ESCALERA_MECANICA);
-    comunidad.abrirIncidente(servicio, "osb");
+    comunidad.registrarMiembro(unUsuario);
+    unUsuario.abrirIncidente(servicio,"abc");
     medioNotificador1 = new WhatsAppSender();
     medioEspiado = spy(medioNotificador1);
     unUsuario.setMedioNotificador(medioEspiado);
@@ -55,4 +56,4 @@ public class NotificionesAperturaTest {
     return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
   }
-}*/
+}

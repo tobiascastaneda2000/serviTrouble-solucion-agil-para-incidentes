@@ -75,8 +75,11 @@ public class Entidad {
     return getServicios().stream().flatMap(s -> s.incidentesDe24Horas().stream()).toList();
   }
 
-  //CREAR INCIDENTES EN ENTIDAD
-  public void crearIncidente(Establecimiento establecimiento, Servicio servicio, String observaciones) {
+  //-------------------------------------------------------------------------------------//
+
+
+  //-------------------CREAR INCIDENTES EN ENTIDAD---------------------------------------//
+  public void crearIncidente(Servicio servicio, String observaciones) {
 
     RepoUsuarios repoUsuarios = RepoUsuarios.instance;
     List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);

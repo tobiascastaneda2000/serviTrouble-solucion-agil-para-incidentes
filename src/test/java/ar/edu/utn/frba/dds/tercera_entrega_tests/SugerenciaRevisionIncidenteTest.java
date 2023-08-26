@@ -24,22 +24,6 @@ import static org.mockito.Mockito.when;
 
 public class SugerenciaRevisionIncidenteTest {
 
-  /*
-  Dentro de Miembro, porque uso this.
-  Miembro<<estaCercaMiembro(servicio) {
-    this.devolverUbicacionMiembro() == RepositorioEntidades.getInstance().devolverUbicacionServicio()
-  }
-
-  RepositorioEntidad<< devolverLocalizacion(Servicio servicio){
-    this.entidades.map(e->e.getEstablecimientos).filter(e->e.getServicios.contains(servicio)).get(0).getLocalizacion()
-  }
-
-  RepositorioComunidad>>detectarCercania(servicio){
-    this.comunidades.flatmap(c->c.getMiembros).filter(m->m.estaCerca(servicio)).forEach(m->m.getUsuario().getMedioNotificacion.notificarSugerenciaRevisionIncidente(servicio))
-  }
-
-   */
-
   Usuario usuarioCaballito;
   Miembro miembroCaballito;
   Localizacion localizacion;

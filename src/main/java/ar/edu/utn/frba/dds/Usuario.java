@@ -61,12 +61,20 @@ public class Usuario {
     this.horariosPlanificados = horariosPlanificados;
   }
 
+  public List<Entidad> getEntidadesInteres() {
+    return entidadesInteres;
+  }
+
   public Set<Horario> getHorariosPlanificados() {
     return horariosPlanificados;
   }
 
   public int getId() {
     return id;
+  }
+
+  public List<Notificacion> getNotificaciones(){
+    return this.notificacionesPendientes;
   }
 
   public String getUsername() {

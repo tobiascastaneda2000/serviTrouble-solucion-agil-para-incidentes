@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
+import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.Establecimiento;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.EstadoIncidente;
@@ -23,69 +25,51 @@ class AperturayCierreIncidentesComunidadTest {
   Usuario usuarioInformante;
   Usuario otroUsuario;
   Comunidad palermoGrupo;
-  Comunidad barracasGrupo;
-  MedioNotificador notificadorWhatsapp;
-  MedioNotificador notificadorMail;
-
+  Comunidad otraComunidad;
   Servicio servicio;
-
-  Miembro otroMiembro;
-
-  Miembro miembroInformante;
-
+  Entidad entidad;
+  Establecimiento establecimiento;
   @BeforeEach
   void setUp() {
     usuarioInformante = new Usuario(1,"Leonardo ", "Dicaprio", "mail@utn.com.ar");
     otroUsuario = new Usuario(1,"Margot ", "Robbie", "mail2@utn.com.ar");
     palermoGrupo = new Comunidad();
-    barracasGrupo = new Comunidad();
-    notificadorWhatsapp = mock(MedioNotificador.class);
-    notificadorMail = mock(MedioNotificador.class);
-    usuarioInformante.setMedioNotificador(notificadorWhatsapp);
-    otroUsuario.setMedioNotificador(notificadorWhatsapp);
+    otraComunidad = new Comunidad();
     palermoGrupo.registrarMiembro(usuarioInformante);
     palermoGrupo.registrarMiembro(otroUsuario);
+    otraComunidad.registrarMiembro(usuarioInformante);
     RepositorioComunidades.getInstance().guardarComunidad(palermoGrupo);
-    RepositorioComunidades.getInstance().guardarComunidad(barracasGrupo);
-    miembroInformante = palermoGrupo.getMiembros().stream().filter(m -> m.getUsuario() == usuarioInformante).toList().get(0);
-    otroMiembro = palermoGrupo.getMiembros().stream().filter(m -> m.getUsuario() == otroUsuario).toList().get(0);;
+    RepositorioComunidades.getInstance().guardarComunidad(otraComunidad);
+    entidad = new Entidad(1,"razonsocial","unEmail");
+    establecimiento = new Establecimiento();
     servicio =new Servicio(TipoServicio.ASCENSOR);
-
-    //Miembro NO se puede instanciar ¿Es algo bueno? De momento se deja  asi para testear
-
+    establecimiento.agregarServicio(servicio);
+    entidad.agregarEstablecimiento(establecimiento);
+    palermoGrupo.serviciosDeInteres.add(servicio);
+    otraComunidad.serviciosDeInteres.add(servicio);
   }
 
   @Test
-  void comunidadEfetivizaAltaIncidente() {
-    palermoGrupo.abrirIncidente(servicio, "algo");
-    Incidente incidente = devolverIncidente(servicio, "algo");
-    Assertions.assertTrue(servicio.getHistorialIncidentes().contains(incidente));
-    Assertions.assertTrue(palermoGrupo.getIncidentes().stream().map(Incidente::getObservacion).toList().contains("algo"));
-    Assertions.assertEquals(incidente.getEstado(),EstadoIncidente.ABIERTO);
+  void seAbreIncidente(){
+    usuarioInformante.abrirIncidente(servicio,"unaObservacion");
+
+    //Se carga el incidente en las distintas comunidades que pertenece el usuario
+    Assertions.assertEquals(palermoGrupo.incidentes.size(),1);
+    Assertions.assertEquals(otraComunidad.incidentes.size(),1);
+
+    //Se guarda la notificacion a los usuarios de esas comunidades
+    Assertions.assertEquals(otroUsuario.getNotificaciones().size(),1);
   }
-/*
-  @Test
-    ///Falla, por que solo le comunica a miembors interezados, hacer test aparte
-  void comunidadNotificaAltaIncidenteATodosLosMiembros() {
-    palermoGrupo.abrirIncidente(servicio, "algo");
-    Incidente incidente = devolverIncidente(servicio, "algo");
-    verify(miembroInformante.getUsuario().medioNotificador).notificar(incidente);
-    verify(otroMiembro.getUsuario().medioNotificador).notificar(incidente);
-  }*/
 
   @Test
   void cerrarIncidente() {
-    palermoGrupo.abrirIncidente(servicio, "algo");
-    Incidente incidente = devolverIncidente(servicio, "algo");
+    usuarioInformante.abrirIncidente(servicio,"unaObservacion");
+    Incidente incidente = palermoGrupo.incidentes.get(0);
     palermoGrupo.cerrarIncidente(incidente);
+
     Assertions.assertEquals(incidente.getEstado(), EstadoIncidente.CERRADO);
     Assertions.assertNotNull(incidente.getFechaHoraCierre());
-
-  }
-
-
-  public Incidente devolverIncidente(Servicio servicio, String obs) {
-    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
+    Assertions.assertEquals(palermoGrupo.incidentes.size(),0);
 
   }
 }
