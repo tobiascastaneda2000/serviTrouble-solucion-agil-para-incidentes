@@ -14,6 +14,7 @@ import ar.edu.utn.frba.dds.notificador.Horario;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Usuario {
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   ServicioLocalizacion servicioLocalizacion;
 
-  private Set<Horario> horariosPlanificados;
+  private Set<Horario> horariosPlanificados = new HashSet<>();
 
   // ---------------------------------SETTERS Y GETTERS----------------------------------------------------//
 
@@ -62,7 +63,6 @@ public class Usuario {
   public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {
     this.horariosPlanificados = horariosPlanificados;
   }
-
   public List<Entidad> getEntidadesInteres() {
     return entidadesInteres;
   }
@@ -185,7 +185,8 @@ public class Usuario {
     int hora = ahora.getHour();
     int minutos = ahora.getMinute();
     if(horariosPlanificados.stream().anyMatch(h->h.esIgual(hora,minutos))){
-      notificacionesPendientes.forEach(n->n.ejecutarse());
+      notificacionesPendientes.stream().filter(n->!n.fueNotificada).forEach(
+          n-> n.ejecutarse(this));
     }
   }
 
