@@ -31,6 +31,8 @@ public class Usuario {
   List<Servicio> serviciosDeInteres;
   List<Entidad> entidadesInteres = new ArrayList<>();
 
+  List<String> logNotificaciones = new ArrayList<>();
+
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   ServicioLocalizacion servicioLocalizacion;
 
@@ -71,6 +73,10 @@ public class Usuario {
 
   public int getId() {
     return id;
+  }
+
+  public List<String> getLogNotificaciones() {
+    return logNotificaciones;
   }
 
   public List<Notificacion> getNotificaciones(){
@@ -154,12 +160,12 @@ public class Usuario {
 
   //--------------------------------APERTURA DE INCIDENTE PARA COMUNIDADES----------------------------------------------//
 
-  public void abrirIncidente(Servicio servicio,String observacion) {
+  public Incidente abrirIncidente(Servicio servicio,String observacion) {
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c->c.contieneServicioDeInteres(servicio)).toList();
     Incidente incidente = new Incidente(observacion, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
     comunidades.forEach(c->c.abrirIncidente(incidente));
-
+    return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
 
@@ -167,6 +173,7 @@ public class Usuario {
   //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
   public void notificarIncidente(Incidente incidente) {
     this.medioNotificador.notificarNuevoIncidente(incidente, this.contacto);
+    this.logNotificaciones.add(incidente.getObservacion());
   }
 
   public void agregarHorario(Horario horario) {
@@ -215,6 +222,11 @@ public class Usuario {
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
   }
+
+  public ServicioUbicacion getServicioUbicacion() {
+    return servicioUbicacion;
+  }
+
   public void notificarSiEstaCerca(Incidente incidente){
     if(servicioUbicacion.estaCerca(this,incidente.getServicioAsociado())){
       notificarIncidente(incidente);
