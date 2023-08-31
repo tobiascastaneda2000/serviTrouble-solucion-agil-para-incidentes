@@ -29,7 +29,6 @@ class RankingEntidadesSegunCriterioTest {
   RepoEntidades repoEntidades = new RepoEntidades();
   Entidad gualmayen;
   Entidad jorgito;
-  Entidad quatar_aerolines;
 
   Establecimiento establecimientoGualmayen;
   Establecimiento establecimientoJorgito;
@@ -85,12 +84,20 @@ class RankingEntidadesSegunCriterioTest {
 
     repoEntidades.guardarEntidad(jorgito);
 
+    //RANKINGS
+
     rankingPromedio = new PromedioCierresSemanal();
     rankingCantidadReportes = new CantidadReportesSemanal();
   }
 
   @Test
-  @DisplayName("Incidentes en distintos servicios, se reportan todos")
+  @DisplayName("Cuando no hay incidentes que reportar, NO rompe")
+  void noHayIncidentesQueReportar() {
+    Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 0);
+  }
+
+  @Test
+  @DisplayName("Cuando hay incidentes en servicios separados, se reportan")
   void guelmayenUnIncidentePorServicio() {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -100,19 +107,17 @@ class RankingEntidadesSegunCriterioTest {
   }
 
   @Test
-  @DisplayName("Incidentes en mismo servicios, reporta solo el primero")
+  @DisplayName("Cuando hay incidentes en un mismo servicio, se reportan SOLO el 1º")
   void guelmayenTieneMasDeUnIncidentePorServicio() {
-    gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "2° incidente");
-    gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");
-    gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "2° incidente");
+    gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "3° incidente");
 
-    Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 3);
+    Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 1);
   }//de 5 incidentes, filtran servicio que se repiten en un mmismo servicio dentro de las 24 horas
 
   @Test
-  @DisplayName("Incidentes en mismo servicio, si el primero fue cerrado, el segundo se reporta tambien")
+  @DisplayName("Cuando hay incidentes en un mismo servicio, pero el primero fue cerrado, se reportan el 1º y el siguiente")
   void servicioTieneMasDeUnIncidentePeroElPrimeroCerro() {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unAscensor, "2° incidente");
@@ -124,7 +129,7 @@ class RankingEntidadesSegunCriterioTest {
   //falta test para probar diferencia de 24 horas
 
   @Test
-  @DisplayName("Ordenar segun cantidad de reportes menor a mayor")
+  @DisplayName("Ranking de cantidad de reportes de incidentes, devuelve entidades ordenadas, de menor a mayor")
   void realizarRankingCantidadIncidentesOrdenados() {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -138,7 +143,7 @@ class RankingEntidadesSegunCriterioTest {
   }
 
   @Test
-  @DisplayName("Se calcula el promedio de cierre de un incidente")
+  @DisplayName("SI hay varios incidentes cerrados, se devuelve el PROMEDIO")
   void guelmayenCalculaPromedioCierreUnIncidente() throws InterruptedException {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -161,7 +166,36 @@ class RankingEntidadesSegunCriterioTest {
   }
 
   @Test
-  @DisplayName("Ordenar segun promedios de cierre menor a mayor")
+  @DisplayName("Cuando no hay incidentes cerrados, la duracion es CERO, NO rompe")
+  void guelmayenNoTieneIncidentesCerrados() throws InterruptedException {
+    gualmayen.crearIncidente(unAscensor, "1° incidente");
+    gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
+    gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");
+
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    TimeUnit.SECONDS.sleep(3);
+
+    Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.ZERO);
+
+    scheduler.shutdown();
+  }
+
+  @Test
+  @DisplayName("Cuando no hay incidentes, la duracion es CERO, NO rompe")
+  void guelmayenNoTieneIncidentes() throws InterruptedException {
+
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    TimeUnit.SECONDS.sleep(3);
+
+    Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.ZERO);
+
+    scheduler.shutdown();
+  }
+
+  @Test
+  @DisplayName("Ranking por promedios de cierres de incidentes, devuelve entidades ordenadas, de menor a mayor")
   void realizarRankingSegunPromedios() throws InterruptedException {
 
     gualmayen.crearIncidente(unAscensor, "1° incidente");
@@ -188,6 +222,8 @@ class RankingEntidadesSegunCriterioTest {
 
     scheduler.shutdown();
   }
+
+  //FUNCIONES AUXILIARES
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {
     return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);

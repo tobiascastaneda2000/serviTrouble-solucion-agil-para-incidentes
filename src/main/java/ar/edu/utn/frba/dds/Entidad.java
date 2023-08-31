@@ -19,7 +19,7 @@ public class Entidad {
 
   public List<Incidente> incidentes = new ArrayList<>();
 
-  public void agregarEstablecimiento(Establecimiento establecimiento){
+  public void agregarEstablecimiento(Establecimiento establecimiento) {
     establecimientos.add(establecimiento);
   }
 
@@ -48,10 +48,13 @@ public class Entidad {
     return this.establecimientos.stream().flatMap(e -> e.getServicios().stream()).toList();
   }
 
-
   public List<Incidente> getIncidentesCerrados() {
+    return getIncidentes().stream().filter(Incidente::estaCerrado).toList();
+  }
+
+  public List<Incidente> getIncidentes() {
     return getServicios().stream()
-        .flatMap(i -> i.getHistorialIncidentes().stream()).toList().stream().filter(Incidente::estaCerrado).toList();
+        .flatMap(i -> i.getHistorialIncidentes().stream()).toList();
   }
 
   //PARA PROMEDIOS DE CIERRES DE INCIDENTES
@@ -62,8 +65,14 @@ public class Entidad {
   }
 
   public Duration promedioDuracionIncidentes() {
-    long duracion = duracionTotalDeTodosLosIncidentesCerrados().toSeconds() / getIncidentesCerrados().size();
-    return Duration.ofMinutes(duracion); ///Duracio en minutos
+    if (getIncidentes().size() != 0 && getIncidentesCerrados().size() != 0) {
+      long duracion = duracionTotalDeTodosLosIncidentesCerrados().toSeconds() / getIncidentesCerrados().size();
+      return Duration.ofMinutes(duracion); ///Duracion en minutos
+    } else {
+      return Duration.ZERO;
+    }
+
+
   }
 
   //PARA CANTIDAD DE INCIDENTES REPORTADOS
