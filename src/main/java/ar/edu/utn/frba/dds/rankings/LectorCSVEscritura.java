@@ -1,33 +1,42 @@
 package ar.edu.utn.frba.dds.rankings;
 
 import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class LectorCSVEscritura {
-  String path;
 
-  public LectorCSVEscritura(String path) {
-    this.path = path;
+  File archivo;
+
+  public File getArchivo() {
+    return archivo;
   }
 
-  //SETTERS
-  public void setPath(String path) {
-    this.path = path;
+  public LectorCSVEscritura(String path) {
+    File unArchivo = new File(path);
+
+    if (unArchivo.exists()) {
+      this.archivo = unArchivo;
+    } else {
+      throw new ArchivoNoExistenteException();
+    }
+
   }
 
   public void escribirRankings(List<Entidad> listadoEntidades) {
 
     if (listadoEntidades == null) {
-      throw new EntradaListadoEntidadesVacia();
+      throw new EntradaNoPuedeSerNull();
     }
 
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.path))) {
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.archivo))) {
       for (Entidad entidad : listadoEntidades) {
         String linea = entidad.getId() + " ; " + entidad.getRazonSocial() + " ; " + entidad.getEmail();
         bw.write(linea);
@@ -38,18 +47,4 @@ public class LectorCSVEscritura {
     }
   }
 
-  public String obtenerNumeroDeLinea(int i) {
-    try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
-      int aux = 0;
-      String linea = null;
-      while (aux < i) {
-        linea = br.readLine();
-        aux++;
-      }
-      return linea;
-    } catch (IOException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
 }
