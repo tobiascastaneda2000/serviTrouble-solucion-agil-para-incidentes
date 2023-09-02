@@ -3,13 +3,10 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class RepoEntidades {
 
@@ -28,15 +25,16 @@ public class RepoEntidades {
     entidades.add(entidad);
   }
 
-  //RANKINGS
+  // ---------------------------------RANKINGS----------------------------------------------------//
+
   public void generarRankingEnCsv(CriterioRanking criterio) {
     LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt");
-    lectorCSVEscritura.escribirRankings(realizarRankingSegunCriterio(criterio));
+    lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
   }
 
-  public List<Entidad> realizarRankingSegunCriterio(CriterioRanking criterioRanking) {
+  public List<Entidad> ordenarEntidadesSegunCriterio(CriterioRanking criterioRanking) {
 
-    List<Entidad> entidades = this.entidades;
+    List<Entidad> entidades = getEntidades();
     Comparator<Entidad> criterio = criterioRanking.criterioDeComparacion();
     entidades.sort(criterio);
     return entidades;

@@ -23,7 +23,7 @@ public class RepoUsuarios {
     usuarios.add(usuario);
   }
   public List<Usuario> interesadoEnEntidad(Entidad entidad){
-    return usuarios.stream().filter(u->u.estidadesInteres.contains(entidad)).toList();
+    return usuarios.stream().filter(u->u.entidadesInteres.contains(entidad)).toList();
   }
 
   public void sacarIncidentesCerrados(Incidente incidente) {

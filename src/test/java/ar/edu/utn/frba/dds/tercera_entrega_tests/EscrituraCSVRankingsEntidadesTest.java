@@ -165,7 +165,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.of(2, ChronoUnit.MINUTES));
     Assertions.assertEquals(jorgito.promedioDuracionIncidentes(), Duration.of(8, ChronoUnit.MINUTES));
-    Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
+    Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
 
     scheduler.shutdown();
 
@@ -187,7 +187,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
     Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 3);
     Assertions.assertEquals(jorgito.cantidadDeIncidentesReportados(), 2);
-    Assertions.assertEquals(repoEntidades.realizarRankingSegunCriterio(rankingCantidadReportes), List.of(jorgito, gualmayen));
+    Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingCantidadReportes), List.of(jorgito, gualmayen));
 
     repoEntidades.generarRankingEnCsv(rankingCantidadReportes);
     String primeraLinea = obtenerNumeroDeLineaN(1);

@@ -83,12 +83,8 @@ public class Main {
     //Se realizan una vez por semana
 
     /*
-     * List<Entidad> entidades = RepoEntidades.instance.getEntidades();
-     * Entidad gualmayen = new Entidad(12, "Gualmayen ", "mail");
-     * Entidad jorgito = new Entidad(11, "Jorgito", "mail");
-     * Entidad quatar_aerolines = new Entidad(10, "Chorros ", "mail");
-     * RepoEntidades.instance.guardarEntidad(gualmayen);
-     * Para ranking Utilizaremos https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-java.util.Comparator-
+    De momento, los rankins se guardan en
+    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt";
      */
   }
 

@@ -28,7 +28,6 @@ public class Usuario {
   int intentos;
   boolean sesionAbierta;
 
-  List<Entidad> estidadesInteres;
   List<Servicio> serviciosDeInteres;
   List<Entidad> entidadesInteres = new ArrayList<>();
 

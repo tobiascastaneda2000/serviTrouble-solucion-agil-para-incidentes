@@ -36,7 +36,7 @@ public class Servicio {
   }
 
 
-  //RANKINGs
+  //DEVOLVER LOS SERVICIOS DE UN MISMO INCIDENTES QUE PASE EL FILTRO DEL CRITERIO CANTIDAD REPORTES
 
   public List<Incidente> incidentesDe24Horas() {
 

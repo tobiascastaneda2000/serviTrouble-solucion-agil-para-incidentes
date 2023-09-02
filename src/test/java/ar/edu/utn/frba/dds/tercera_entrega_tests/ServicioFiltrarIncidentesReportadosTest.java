@@ -41,7 +41,7 @@ class ServicioFiltrarIncidentesReportadosTest {
   }
 
   @Test
-  @DisplayName("Servicio con 2 incidentes, si el anterior NO esta cerrado y plazo es mayor a 24 horas, devuelve ambos")
+  @DisplayName("Servicio con 2 incidentes, si el primero esta ABIERTO y plazo es MAYOR a 24 horas, devuelve ambos")
   void servicioConMuchosIncidentesAbiertosPLazoMayorA24Horas(){
     when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
     when(unIncidente.estaCerrado()).thenReturn(false);
@@ -53,7 +53,7 @@ class ServicioFiltrarIncidentesReportadosTest {
   }
 
   @Test
-  @DisplayName("Servicio con 2 incidentes, si el anterior esta cerrado y el plazo menor a 24 horas, devuelve ambos")
+  @DisplayName("Servicio con 2 incidentes, si el primero esta CERRADO, devuelve ambos")
   void servicioConMuchosIncidentesPlazoMenorA24HorasPrimerIncidenteCerrado(){
     when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
     when(unIncidente.estaCerrado()).thenReturn(true);
@@ -67,7 +67,7 @@ class ServicioFiltrarIncidentesReportadosTest {
   }
 
   @Test
-  @DisplayName("Servicio con 2 incidentes, si el anterior NO esta cerrado y el plazo menor a 24 horas, filtra el segundo")
+  @DisplayName("Servicio con 2 incidentes, si el primero esta ABIERTO y el plazo MENOR a 24 horas, filtra el segundo")
   void servicioConMuchosIncidentesAbiertosConPlazoMenorA24Horas(){
     when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
     when(unIncidente.estaCerrado()).thenReturn(false);
