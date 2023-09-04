@@ -20,7 +20,7 @@ public class MailSender implements MedioNotificador {
   //Hay dos notificar, borrar uno
   @Override
   public void notificarNuevoIncidente(Incidente incidente, String contacto) {
-    String texto = incidente.toString();
+    String texto = incidente.getObservacion();
     enviarCorreo(contacto, texto, "Nuevo incidente");
 
   }

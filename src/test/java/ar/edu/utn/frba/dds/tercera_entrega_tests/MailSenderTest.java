@@ -41,8 +41,8 @@ class MailSenderTest {
     RepoUsuarios repoUsuarios = new RepoUsuarios();
     repoUsuarios.guardarUsuario(usuario);
     // Configura el incidente y el contacto (dirección de correo electrónico)
-    Incidente incidente = new Incidente("Hubo un feo accidente", unAscensor);
-    String contacto = "tobias.2000david@gmail.com"; // Cambia a la dirección de correo electrónico de destino
+    Incidente incidente = new Incidente("Aguante River plate", unAscensor);
+    String contacto = "tomich2088@gmail.com"; // Cambia a la dirección de correo electrónico de destino
 
     // Crea una instancia de MailSender
     MedioNotificador mailSender = new MailSender();
