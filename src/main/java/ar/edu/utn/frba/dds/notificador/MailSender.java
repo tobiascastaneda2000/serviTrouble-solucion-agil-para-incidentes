@@ -32,7 +32,8 @@ public class MailSender implements MedioNotificador {
   public static void enviarCorreo(String correoDestino, String unTexto, String unAsunto) {
 
     final String username = "mailsendergrupo7@gmail.com";
-    final String password = "dds2023v";
+    final String password = "eqvhrzkvmlgasbnm";
+    //La contraseña comun es dds2023v
 
     // Configura las propiedades del sistema
     Properties props = new Properties();

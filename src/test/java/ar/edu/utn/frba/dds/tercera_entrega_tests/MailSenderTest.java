@@ -16,46 +16,42 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MailSenderTest {
 
-    public static void main(String[] args) {
-      RepoEntidades repoEntidades = new RepoEntidades();
-      Entidad gualmayen;
+  public static void main(String[] args) {
+    RepoEntidades repoEntidades = new RepoEntidades();
+    Entidad gualmayen;
 
-      Establecimiento establecimientoGualmayen;
-      Servicio unAscensor;
-      Servicio unaEscaleraMecanicaSubida;
-      Servicio unaEscaleraMecanicaBajada;
-      //CREACION ENTIDAD GUALMAYEN
+    Establecimiento establecimientoGualmayen;
+    Servicio unAscensor;
 
-      unAscensor = new Servicio(TipoServicio.ASCENSOR);
-      unaEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
-      unaEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
+    //CREACION ENTIDAD GUALMAYEN
 
-      establecimientoGualmayen = new Establecimiento();
+    unAscensor = new Servicio(TipoServicio.ASCENSOR);
 
-      gualmayen = new Entidad(12, "Gualmayen", "alfajores.com");
+    establecimientoGualmayen = new Establecimiento();
 
-      gualmayen.agregarEstablecimiento(establecimientoGualmayen);
+    gualmayen = new Entidad(12, "Gualmayen", "alfajores.com");
 
-      establecimientoGualmayen.agregarServicio(unAscensor);
-      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
-      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
+    gualmayen.agregarEstablecimiento(establecimientoGualmayen);
 
-      repoEntidades.guardarEntidad(gualmayen);
+    establecimientoGualmayen.agregarServicio(unAscensor);
 
-      Usuario usuario = new Usuario(1,"Juan ", "Perez", "unMail");
-      RepoUsuarios repoUsuarios = new RepoUsuarios();
-      repoUsuarios.guardarUsuario(usuario);
-      // Configura el incidente y el contacto (dirección de correo electrónico)
-      Incidente incidente = new Incidente("Hubo un feo accidente", unAscensor);
-      String contacto = "tobias.2000david@gmail.com"; // Cambia a la dirección de correo electrónico de destino
+    repoEntidades.guardarEntidad(gualmayen);
 
-      // Crea una instancia de MailSender
-      MedioNotificador mailSender = new MailSender();
+    Usuario usuario = new Usuario(1, "Juan ", "Perez", "unMail");
+    RepoUsuarios repoUsuarios = new RepoUsuarios();
+    repoUsuarios.guardarUsuario(usuario);
+    // Configura el incidente y el contacto (dirección de correo electrónico)
+    Incidente incidente = new Incidente("Hubo un feo accidente", unAscensor);
+    String contacto = "tobias.2000david@gmail.com"; // Cambia a la dirección de correo electrónico de destino
 
-      // Envía el correo electrónico
-      mailSender.notificarNuevoIncidente(incidente, contacto);
+    // Crea una instancia de MailSender
+    MedioNotificador mailSender = new MailSender();
+
+    // Envía el correo electrónico
+    mailSender.notificarNuevoIncidente(incidente, contacto);
 
   }
+
   @BeforeEach
   void setUp() {
   }
