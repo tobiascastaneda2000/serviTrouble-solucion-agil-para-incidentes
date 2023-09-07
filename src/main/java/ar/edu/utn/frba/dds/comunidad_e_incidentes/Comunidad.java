@@ -64,8 +64,8 @@ public class Comunidad{
 
   //-------------------------------CIERRE DE INCIDENTE-------------------------------------------------//
 
-  public void cerrarIncidente(Incidente incidente) {
-    Incidente nuevoIncidente = incidente;  // habria que clonar en vez de asignar (para poder cerrar el incidente solo en una comunidad)
+  public void cerrarIncidente(Incidente incidente) throws CloneNotSupportedException {
+    Incidente nuevoIncidente = (Incidente) incidente.clone();
     nuevoIncidente.cerrar();
     incidentes.remove(incidente);
     RepoUsuarios.instance.sacarIncidentesCerrados(incidente);  // saca al incidente de la lista de notificaciones pendientes de cada usuario para que no notifique un incidente cerrado

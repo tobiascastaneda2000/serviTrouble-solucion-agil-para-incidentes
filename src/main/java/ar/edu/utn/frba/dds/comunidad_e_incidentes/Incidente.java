@@ -14,6 +14,11 @@ public class Incidente implements Cloneable {
   LocalDateTime fechaHoraCierre;
   Servicio servicioAsociado;
 
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+    return super.clone();
+  }
+
   public LocalDateTime getFechaHoraAbre() {
     return fechaHoraAbre;
   }

@@ -62,13 +62,15 @@ class AperturayCierreIncidentesComunidadTest {
   }
 
   @Test
-  void cerrarIncidente() {
+  void cerrarIncidente() throws CloneNotSupportedException {
     usuarioInformante.abrirIncidente(servicio,"unaObservacion");
     Incidente incidente = palermoGrupo.incidentes.get(0);
     palermoGrupo.cerrarIncidente(incidente);
 
-    Assertions.assertEquals(incidente.getEstado(), EstadoIncidente.CERRADO);
-    Assertions.assertNotNull(incidente.getFechaHoraCierre());
+    Incidente incidenteCerrado = palermoGrupo.incidentesCerrados.get(0);
+
+    Assertions.assertEquals(incidenteCerrado.getEstado(), EstadoIncidente.CERRADO);
+    Assertions.assertNotNull(incidenteCerrado.getFechaHoraCierre());
     Assertions.assertEquals(palermoGrupo.incidentes.size(),0);
 
   }
