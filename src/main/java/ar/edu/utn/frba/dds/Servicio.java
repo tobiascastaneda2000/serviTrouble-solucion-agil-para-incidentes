@@ -28,13 +28,7 @@ public class Servicio {
   public void aniadirIncidente(Incidente incidente) {
     this.historialIncidentes.add(incidente);
   }
-
-  public void crearIncidente(String observacion) {
-    Incidente incidente = new Incidente(observacion, this);
-    this.aniadirIncidente(incidente);
-    RepositorioComunidades.getInstance().notificarIncidente(incidente);
-  }
-
+  
 
   //DEVOLVER LOS SERVICIOS DE UN MISMO INCIDENTES QUE PASE EL FILTRO DEL CRITERIO CANTIDAD REPORTES
 
