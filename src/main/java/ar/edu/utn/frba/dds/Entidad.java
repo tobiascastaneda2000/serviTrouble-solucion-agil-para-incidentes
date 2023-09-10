@@ -90,15 +90,15 @@ public class Entidad {
   //-------------------CREAR INCIDENTES EN ENTIDAD---------------------------------------//
   public void crearIncidente(Servicio servicio, String observaciones) {
 
-    RepoUsuarios repoUsuarios = RepoUsuarios.instance;
-    List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
     Incidente incidente = new Incidente(observaciones, servicio);
     this.incidentes.add(incidente);
     servicio.aniadirIncidente(incidente);
-    this.notificarEnEsteMomento(usuariosInteresados, incidente);
+    this.notificarEnEsteMomento(incidente);
   }
 
-  private void notificarEnEsteMomento(List<Usuario> usuariosInteresados, Incidente incidente) {
+  private void notificarEnEsteMomento(Incidente incidente) {
+    RepoUsuarios repoUsuarios = RepoUsuarios.instance;
+    List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
     usuariosInteresados.forEach(u -> u.notificarIncidente(incidente));
   }
 }
