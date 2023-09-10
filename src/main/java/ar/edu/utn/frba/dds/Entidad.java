@@ -5,7 +5,9 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
 
+@Entity
 public class Entidad {
   private int id;
   private String razonSocial;

@@ -74,11 +74,6 @@ public class Comunidad {
 
   //---------------------------------------------------------------------------------------------------//
 
-  private List<Miembro> miembrosInteresados(Servicio servicio) {
-    return this.miembros.stream().filter(m -> m.usuario.serviciosDeInteres().contains(servicio)).toList();
-  }
-
-
   public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
     return this.incidentes.stream().filter(i -> i.getEstado() == estadoIncidente).toList();
   }

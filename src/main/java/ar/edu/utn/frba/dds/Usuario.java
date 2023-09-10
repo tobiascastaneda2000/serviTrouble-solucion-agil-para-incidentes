@@ -113,10 +113,6 @@ public class Usuario {
     return this.contacto;
   }
 
-  public List<Servicio> serviciosDeInteres() {
-    return this.serviciosDeInteres();
-  }
-
   public List<Notificacion> getNotificacionesPendientes() {
     return notificacionesPendientes;
   }
