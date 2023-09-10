@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Usuario {
-  private int id;
+  private long id;
 
   public String usuario;
   public String contrasenia;
@@ -27,14 +27,15 @@ public class Usuario {
   public String contacto;
   int intentos;
   boolean sesionAbierta;
+  public MedioNotificador medioNotificador;
 
-  List<Servicio> serviciosDeInteres;
   List<Entidad> entidadesInteres = new ArrayList<>();
 
   List<String> logNotificaciones = new ArrayList<>();
 
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   ServicioLocalizacion servicioLocalizacion;
+  ServicioUbicacion servicioUbicacion;
 
   private Set<Horario> horariosPlanificados = new HashSet<>();
 
@@ -48,7 +49,6 @@ public class Usuario {
     return medioNotificador;
   }
 
-  public MedioNotificador medioNotificador;
 
   public Usuario(int id, String nombre, String contrasenia, String contacto) {
     this.id = id;
@@ -62,6 +62,7 @@ public class Usuario {
   public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {
     this.horariosPlanificados = horariosPlanificados;
   }
+
   public List<Entidad> getEntidadesInteres() {
     return entidadesInteres;
   }
@@ -70,7 +71,7 @@ public class Usuario {
     return horariosPlanificados;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
@@ -78,7 +79,7 @@ public class Usuario {
     return logNotificaciones;
   }
 
-  public List<Notificacion> getNotificaciones(){
+  public List<Notificacion> getNotificaciones() {
     return this.notificacionesPendientes;
   }
 
@@ -116,7 +117,7 @@ public class Usuario {
     return this.serviciosDeInteres();
   }
 
-  public List<Notificacion> getNotificacionesPendientes(){
+  public List<Notificacion> getNotificacionesPendientes() {
     return notificacionesPendientes;
   }
 
@@ -156,14 +157,13 @@ public class Usuario {
   }
 
 
-
   //--------------------------------APERTURA DE INCIDENTE PARA COMUNIDADES----------------------------------------------//
 
-  public Incidente abrirIncidente(Servicio servicio,String observacion) {
-    List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c->c.contieneServicioDeInteres(servicio)).toList();
+  public Incidente abrirIncidente(Servicio servicio, String observacion) {
+    List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
     Incidente incidente = new Incidente(observacion, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
-    comunidades.forEach(c->c.abrirIncidente(incidente));
+    comunidades.forEach(c -> c.abrirIncidente(incidente));
     return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
@@ -183,14 +183,14 @@ public class Usuario {
 
     int hora = ahora.getHour();
     int minutos = ahora.getMinute();
-    if(horariosPlanificados.stream().anyMatch(h->h.esIgual(hora,minutos))){
-      notificacionesPendientes.stream().filter(n->!n.fueNotificada).forEach(
-          n-> n.ejecutarse(this));
+    if (horariosPlanificados.stream().anyMatch(h -> h.esIgual(hora, minutos))) {
+      notificacionesPendientes.stream().filter(n -> !n.fueNotificada).forEach(
+          n -> n.ejecutarse(this));
     }
   }
 
   public void guardarNotificacion(Incidente incidente) {
-    Notificacion notificacion = new Notificacion(this,incidente);
+    Notificacion notificacion = new Notificacion(this, incidente);
     notificacionesPendientes.add(notificacion);
   }
 
@@ -199,18 +199,17 @@ public class Usuario {
   }
 
   public boolean contieneIncidentePendiente(Incidente incidente) {
-    List<Incidente> incidentes = notificacionesPendientes.stream().map(n->n.getIncidente()).toList();
-    if(incidentes.contains(incidente)){
+    List<Incidente> incidentes = notificacionesPendientes.stream().map(n -> n.getIncidente()).toList();
+    if (incidentes.contains(incidente)) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 
   public Notificacion obtenerNotificacion(Incidente incidente) {
 
-    return notificacionesPendientes.stream().filter(n->n.getIncidente().equals(incidente)).toList().get(0);
+    return notificacionesPendientes.stream().filter(n -> n.getIncidente().equals(incidente)).toList().get(0);
   }
 
 
@@ -218,7 +217,7 @@ public class Usuario {
 
   //-----------------------------SUGERENCIA REVISION INCIDENTES------------------------------------------//
 
-  ServicioUbicacion servicioUbicacion;
+
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
   }
@@ -227,12 +226,11 @@ public class Usuario {
     return servicioUbicacion;
   }
 
-  public void notificarSiEstaCerca(Incidente incidente){
-    if(servicioUbicacion.estaCerca(this,incidente.getServicioAsociado())){
+  public void notificarSiEstaCerca(Incidente incidente) {
+    if (servicioUbicacion.estaCerca(this, incidente.getServicioAsociado())) {
       notificarIncidente(incidente);
     }
   }
-
 
 
 }

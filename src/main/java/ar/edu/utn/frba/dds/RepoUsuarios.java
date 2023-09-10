@@ -19,9 +19,11 @@ public class RepoUsuarios {
   public Set<Usuario> getUsuarios() {
     return this.usuarios;
   }
+
   public void guardarUsuario(Usuario usuario) {
     usuarios.add(usuario);
   }
+
   public List<Usuario> interesadoEnEntidad(Entidad entidad){
     return usuarios.stream().filter(u->u.entidadesInteres.contains(entidad)).toList();
   }
