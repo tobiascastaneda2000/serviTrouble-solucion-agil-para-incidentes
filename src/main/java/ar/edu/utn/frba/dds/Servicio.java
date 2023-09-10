@@ -18,12 +18,12 @@ public class Servicio {
   }
 
   List<Incidente> historialIncidentes = new ArrayList<>();
+  TipoServicio tipoServicio;
 
   public Servicio(TipoServicio tipoServicio) {
     this.tipoServicio = tipoServicio;
   }
 
-  TipoServicio tipoServicio;
 
   public void aniadirIncidente(Incidente incidente) {
     this.historialIncidentes.add(incidente);

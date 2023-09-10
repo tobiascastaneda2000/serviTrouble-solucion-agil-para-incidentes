@@ -15,7 +15,7 @@ class PruebaMailSender {
     MedioNotificador mailSender = new MailSender();
 
     // Envía el correo electrónico
-    mailSender.notificarNuevoIncidente(incidente, correoDestino);
+    mailSender.notificarUnIncidente(incidente, correoDestino);
 
   }
 

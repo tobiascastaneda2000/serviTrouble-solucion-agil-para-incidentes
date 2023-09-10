@@ -19,13 +19,9 @@ public class MailSender implements MedioNotificador {
 
   //Hay dos notificar, borrar uno
   @Override
-  public void notificarNuevoIncidente(Incidente incidente, String contacto) {
+  public void notificarUnIncidente(Incidente incidente, String contacto) {
     String texto = incidente.getObservacion();
     enviarCorreo(contacto, texto, "Nuevo incidente");
-
-  }
-
-  public void notificarSugerenciaRevisionIncidente(Servicio servicio) {
 
   }
 
@@ -41,8 +37,8 @@ public class MailSender implements MedioNotificador {
     props.put("mail.smtp.port", "465"); // Cambia esto al puerto SMTP correspondiente (por ejemplo, 25, 465 o 587)
     props.put("mail.smtp.auth", "true"); // Habilita la autenticación SMTP si es necesario
     props.put("mail.smtp.ssl.enable", "true"); // Habilita SSL si es necesario
-    props.put("mail.smtp.user", username); // Tu dirección de correo electrónico
-    props.put("mail.smtp.password", password); // Tu contraseña de correo electrónico
+    props.put("mail.smtp.user", username); // Dirección de correo electrónico del remitente
+    props.put("mail.smtp.password", password); // Contraseña de correo electrónico del remitente
 
     Session session = Session.getInstance(props,
         new javax.mail.Authenticator() {
@@ -53,7 +49,7 @@ public class MailSender implements MedioNotificador {
 
     try {
 
-      // Define message
+      //Escribimos los atributos del mensaje
       MimeMessage message = new MimeMessage(session);
       message.setFrom(new InternetAddress(username));
       message.setSubject(unAsunto);

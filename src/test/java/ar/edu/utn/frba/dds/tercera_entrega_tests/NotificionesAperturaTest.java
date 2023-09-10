@@ -48,8 +48,8 @@ public class NotificionesAperturaTest {
 
   @Test
   public void notificaATodosLosUsuario(){
-    verify(medioEspiado, times(1)).notificarNuevoIncidente(incidente,unUsuario.getContacto());
-    verify(medioEspiado, times(1)).notificarNuevoIncidente(incidente,"otroMail");
+    verify(medioEspiado, times(1)).notificarUnIncidente(incidente,unUsuario.getContacto());
+    verify(medioEspiado, times(1)).notificarUnIncidente(incidente,"otroMail");
   }
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {

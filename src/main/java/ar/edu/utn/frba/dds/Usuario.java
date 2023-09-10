@@ -163,7 +163,7 @@ public class Usuario {
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
     Incidente incidente = new Incidente(observacion, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
-    comunidades.forEach(c -> c.abrirIncidente(incidente));
+    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(incidente));
     return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
@@ -171,7 +171,7 @@ public class Usuario {
 
   //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
   public void notificarIncidente(Incidente incidente) {
-    this.medioNotificador.notificarNuevoIncidente(incidente, this.contacto);
+    this.medioNotificador.notificarUnIncidente(incidente, this.contacto);
     this.logNotificaciones.add(incidente.getObservacion());
   }
 

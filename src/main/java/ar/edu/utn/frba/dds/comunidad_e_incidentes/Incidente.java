@@ -12,6 +12,11 @@ public class Incidente implements Cloneable {
   String observacion;
   LocalDateTime fechaHoraAbre;
   LocalDateTime fechaHoraCierre;
+
+  public Servicio getServicioAsociado() {
+    return servicioAsociado;
+  }
+
   Servicio servicioAsociado;
 
   @Override
@@ -35,9 +40,6 @@ public class Incidente implements Cloneable {
     return observacion;
   }
 
-  public Servicio getServicioAsociado() {
-    return this.servicioAsociado;
-  }
 
   public Incidente(String observacion, Servicio servicioAsociado) {
     this.observacion = observacion;
@@ -46,12 +48,14 @@ public class Incidente implements Cloneable {
     this.servicioAsociado = servicioAsociado;
   }
 
+  //-------------------------CERRAR INCIDENTES---------------------------------//
+
   public void cerrar() {
     this.fechaHoraCierre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.CERRADO;
   }
 
-  //Para rankings
+  //-------------------------RANKINGS----------------------------------------//
   public boolean estaAbierto() {
     return estadoIncidente == EstadoIncidente.ABIERTO;
   }
@@ -60,7 +64,6 @@ public class Incidente implements Cloneable {
     return !estaAbierto();
   }
 
-  //PARA RANKINGS
   public Duration diferenciaEntreAperturayCierre() {
     return Duration.between(this.fechaHoraAbre, this.fechaHoraCierre);
   }

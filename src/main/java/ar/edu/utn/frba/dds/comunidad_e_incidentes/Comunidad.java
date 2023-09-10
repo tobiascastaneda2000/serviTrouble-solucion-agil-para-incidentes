@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Comunidad{
+public class Comunidad {
   public Set<Miembro> miembros;
   public List<Incidente> incidentes = new ArrayList<>();
   public List<Incidente> incidentesCerrados = new ArrayList<>();
@@ -56,10 +56,10 @@ public class Comunidad{
 
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//
 
-  public void abrirIncidente(Incidente incidente) {
+  public void abrirIncidenteEnComunidad(Incidente incidente) {
 
     incidentes.add(incidente);
-    miembros.forEach(m->m.getUsuario().guardarNotificacion(incidente));
+    miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
   }
 
   //-------------------------------CIERRE DE INCIDENTE-------------------------------------------------//
@@ -79,7 +79,6 @@ public class Comunidad{
   }
 
 
-
   public List<Incidente> incidentesPorEstado(EstadoIncidente estadoIncidente) {
     return this.incidentes.stream().filter(i -> i.getEstado() == estadoIncidente).toList();
   }
@@ -94,13 +93,11 @@ public class Comunidad{
   //--------------------------SUGERENCIA DE INCIDENTES--------------------------------//
   public void sugerirIncidentes() {
     miembros.forEach(
-        m-> incidentes.forEach(
-            i-> m.usuario.notificarSiEstaCerca(i)
+        m -> incidentes.forEach(
+            i -> m.usuario.notificarSiEstaCerca(i)
         )
     );
   }
-
-
 
 
 }
