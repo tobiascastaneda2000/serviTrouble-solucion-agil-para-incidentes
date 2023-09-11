@@ -17,6 +17,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -30,7 +32,8 @@ public class Servicio {
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
   }
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "servicio_id")
   List<Incidente> historialIncidentes = new ArrayList<>();
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;

@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.TipoServicio;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -15,7 +17,7 @@ public class Incidente implements Cloneable {
   @Id
   @GeneratedValue
   Long id;
-  @Transient
+  @Enumerated(EnumType.STRING)
   EstadoIncidente estadoIncidente;
   String observacion;
   LocalDateTime fechaHoraAbre;
