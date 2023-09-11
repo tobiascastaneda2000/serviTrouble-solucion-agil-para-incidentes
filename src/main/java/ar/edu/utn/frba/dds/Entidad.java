@@ -5,12 +5,20 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Transient;
 
 @Entity
 public class Entidad {
   @Id
+  @GeneratedValue
   private int id;
 
   private String razonSocial;
@@ -20,8 +28,10 @@ public class Entidad {
     return establecimientos;
   }
 
+  @OneToMany
+  @JoinColumn(name = "entidad_id")
   public List<Establecimiento> establecimientos = new ArrayList<>();
-
+  @Transient
   public List<Incidente> incidentes = new ArrayList<>();
 
   public void agregarEstablecimiento(Establecimiento establecimiento) {

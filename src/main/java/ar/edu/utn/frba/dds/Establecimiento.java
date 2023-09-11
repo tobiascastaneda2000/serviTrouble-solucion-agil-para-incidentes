@@ -3,12 +3,24 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
+@Entity
 public class Establecimiento {
+  @Id
+  @GeneratedValue
+  Long id;
+  @Transient
   Localizacion localizacion;
+  String nombre;
+
   public List<Servicio> getServicios() {
     return servicios;
   }
+  @Transient
   List<Servicio> servicios = new ArrayList<>();
 
   public Localizacion getLocalizacion(){
@@ -25,6 +37,7 @@ public class Establecimiento {
 
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
+  @Transient
   ServicioUbicacion servicioUbicacion;
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
