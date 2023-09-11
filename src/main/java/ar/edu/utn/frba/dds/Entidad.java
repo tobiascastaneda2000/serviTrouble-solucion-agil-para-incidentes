@@ -31,7 +31,8 @@ public class Entidad {
   @OneToMany
   @JoinColumn(name = "entidad_id")
   public List<Establecimiento> establecimientos = new ArrayList<>();
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "entidad_id")
   public List<Incidente> incidentes = new ArrayList<>();
 
   public void agregarEstablecimiento(Establecimiento establecimiento) {

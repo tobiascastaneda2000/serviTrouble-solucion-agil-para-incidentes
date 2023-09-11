@@ -3,9 +3,12 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -13,14 +16,15 @@ public class Establecimiento {
   @Id
   @GeneratedValue
   Long id;
-  @Transient
+  @Transient //Embeber? Tiene Herencia también
   Localizacion localizacion;
   String nombre;
 
   public List<Servicio> getServicios() {
     return servicios;
   }
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "Establecimiento_id")
   List<Servicio> servicios = new ArrayList<>();
 
   public Localizacion getLocalizacion(){

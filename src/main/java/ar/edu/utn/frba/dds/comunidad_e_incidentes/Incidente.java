@@ -5,9 +5,17 @@ import ar.edu.utn.frba.dds.TipoServicio;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
+@Entity
 public class Incidente implements Cloneable {
-
+  @Id
+  @GeneratedValue
+  Long id;
+  @Transient
   EstadoIncidente estadoIncidente;
   String observacion;
   LocalDateTime fechaHoraAbre;
@@ -17,6 +25,7 @@ public class Incidente implements Cloneable {
     return servicioAsociado;
   }
 
+  @Transient
   Servicio servicioAsociado;
 
   @Override

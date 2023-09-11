@@ -4,20 +4,35 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
+@Entity
 public class Servicio {
+
+  @Id
+  @GeneratedValue
+  Long id;
+
 
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
   }
-
+  @Transient
   List<Incidente> historialIncidentes = new ArrayList<>();
+  @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;
 
   public Servicio(TipoServicio tipoServicio) {
