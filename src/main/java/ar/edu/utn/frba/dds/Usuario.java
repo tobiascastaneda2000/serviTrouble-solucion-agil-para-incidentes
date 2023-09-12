@@ -11,6 +11,12 @@ import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionExce
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,26 +24,54 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Entity
 public class Usuario {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   public String usuario;
   public String contrasenia;
 
   public String contacto;
+  @Transient
   int intentos;
+
+  @Transient
   boolean sesionAbierta;
+
+  @Transient
   public MedioNotificador medioNotificador;
 
+  @OneToMany
   List<Entidad> entidadesInteres = new ArrayList<>();
 
+  @Transient
   List<String> logNotificaciones = new ArrayList<>();
 
+  @Transient
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
+  @Transient
   ServicioLocalizacion servicioLocalizacion;
+  @Transient
   ServicioUbicacion servicioUbicacion;
 
+  @Transient
   private Set<Horario> horariosPlanificados = new HashSet<>();
+
+  //---------------------CONSTRUCTOR----------------------------------///
+  protected Usuario() {
+  }
+
+  public Usuario(int id, String nombre, String contrasenia, String contacto) {
+    this.id = id;
+    this.usuario = nombre;
+    this.contrasenia = contrasenia;
+    this.intentos = 0;
+    this.sesionAbierta = false;
+    this.contacto = contacto;
+  }
+
 
   // ---------------------------------SETTERS Y GETTERS----------------------------------------------------//
 
@@ -47,16 +81,6 @@ public class Usuario {
 
   public MedioNotificador getMedioNotificador() {
     return medioNotificador;
-  }
-
-
-  public Usuario(int id, String nombre, String contrasenia, String contacto) {
-    this.id = id;
-    this.usuario = nombre;
-    this.contrasenia = contrasenia;
-    this.intentos = 0;
-    this.sesionAbierta = false;
-    this.contacto = contacto;
   }
 
   public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {

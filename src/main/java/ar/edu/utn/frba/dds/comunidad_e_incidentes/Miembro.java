@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
@@ -24,19 +25,28 @@ import javax.persistence.Transient;
 public class Miembro {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
-  public Usuario getUsuario() {
-    return usuario;
-  }
+
   @Transient
   public Usuario usuario;
   @Transient
   public PermisoComunidad permisoComunidad;
 
+  //-------------------------CONSTRUCTOR----------------------------------------//
+  protected Miembro() {
+
+  }
+
   public Miembro(Usuario usuario, PermisoComunidad permisoComunidad) {
     this.usuario = usuario;
     this.permisoComunidad = permisoComunidad;
+  }
+
+  //-------------------------GETTERS----------------------------------------//
+
+  public Usuario getUsuario() {
+    return usuario;
   }
 
 }

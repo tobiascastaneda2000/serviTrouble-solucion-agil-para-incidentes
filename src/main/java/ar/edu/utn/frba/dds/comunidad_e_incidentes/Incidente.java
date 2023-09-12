@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
 @Entity
 public class Incidente implements Cloneable {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
   @Enumerated(EnumType.STRING)
   EstadoIncidente estadoIncidente;
@@ -23,12 +24,23 @@ public class Incidente implements Cloneable {
   LocalDateTime fechaHoraAbre;
   LocalDateTime fechaHoraCierre;
 
-  public Servicio getServicioAsociado() {
-    return servicioAsociado;
+  //-------------------------CONSTRUCTOR----------------------------------------//
+  protected Incidente() {
+  }
+
+  public Incidente(String observacion, Servicio servicioAsociado) {
+    this.observacion = observacion;
+    this.fechaHoraAbre = LocalDateTime.now();
+    this.estadoIncidente = EstadoIncidente.ABIERTO;
+    this.servicioAsociado = servicioAsociado;
   }
 
   @Transient
   Servicio servicioAsociado;
+
+  public Servicio getServicioAsociado() {
+    return servicioAsociado;
+  }
 
   @Override
   public Object clone() throws CloneNotSupportedException {
@@ -51,13 +63,6 @@ public class Incidente implements Cloneable {
     return observacion;
   }
 
-
-  public Incidente(String observacion, Servicio servicioAsociado) {
-    this.observacion = observacion;
-    this.fechaHoraAbre = LocalDateTime.now();
-    this.estadoIncidente = EstadoIncidente.ABIERTO;
-    this.servicioAsociado = servicioAsociado;
-  }
 
   //-------------------------CERRAR INCIDENTES---------------------------------//
 
