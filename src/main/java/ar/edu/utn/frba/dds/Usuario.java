@@ -11,12 +11,7 @@ import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionExce
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,7 +44,8 @@ public class Usuario {
   @Transient
   List<String> logNotificaciones = new ArrayList<>();
 
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "usuario_id")
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   @Transient
   ServicioLocalizacion servicioLocalizacion;
