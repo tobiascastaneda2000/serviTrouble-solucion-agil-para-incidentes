@@ -21,14 +21,16 @@ public class ServicioGeoRef implements ServicioLocalizacion {
         .create(ApiGeoRef.class);
   }
 
+  /* Devuelve un T_BODY en lugar de una lista */
   public List<Provincia> getProvincias() throws IOException {
 
     Call<List<Provincia>> requestProvincias = apiGeoRef.getProvincias();
-    Response<List<Provincia>> responsePaises = requestProvincias.execute();
+    Response<List<Provincia>> responseProvincias = requestProvincias.execute();
 
-    return responsePaises.body();
+    return responseProvincias.body();
   }
 
+  /* Devuelve un T_BODY en lugar de una lista */
   public List<Municipio> getMunicipios() throws IOException {
 
     Call<List<Municipio>> requestMunicipios = apiGeoRef.getMunicipios();
@@ -37,6 +39,7 @@ public class ServicioGeoRef implements ServicioLocalizacion {
     return responseMunicipios.body();
   }
 
+  /* Devuelve un T_BODY en lugar de una lista */
   public List<Departamento> getDepartamentos() throws IOException {
 
     Call<List<Departamento>> requestDepartamentos = apiGeoRef.getDepartamentos();
