@@ -21,8 +21,8 @@ public class Comunidad {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
-  String nombre;
+  private Long id;
+  private String nombre;
   @OneToMany
   @JoinColumn(name = "comunidad_id")
   public Set<Miembro> miembros;

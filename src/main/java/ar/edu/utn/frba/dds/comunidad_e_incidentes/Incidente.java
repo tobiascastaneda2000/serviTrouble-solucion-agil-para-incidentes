@@ -17,12 +17,12 @@ import javax.persistence.Transient;
 public class Incidente implements Cloneable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+  private Long id;
   @Enumerated(EnumType.STRING)
-  EstadoIncidente estadoIncidente;
-  String observacion;
-  LocalDateTime fechaHoraAbre;
-  LocalDateTime fechaHoraCierre;
+  public EstadoIncidente estadoIncidente;
+  public String observacion;
+  public LocalDateTime fechaHoraAbre;
+  public LocalDateTime fechaHoraCierre;
 
   //-------------------------CONSTRUCTOR----------------------------------------//
   protected Incidente() {

@@ -11,7 +11,12 @@ import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionExce
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,13 +44,12 @@ public class Usuario {
   public MedioNotificador medioNotificador;
 
   @OneToMany
-  List<Entidad> entidadesInteres = new ArrayList<>();
+  Set<Entidad> entidadesInteres = new HashSet<>();
 
   @Transient
   List<String> logNotificaciones = new ArrayList<>();
 
-  @OneToMany
-  @JoinColumn(name = "usuario_id")
+  @Transient
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   @Transient
   ServicioLocalizacion servicioLocalizacion;
@@ -83,7 +87,7 @@ public class Usuario {
     this.horariosPlanificados = horariosPlanificados;
   }
 
-  public List<Entidad> getEntidadesInteres() {
+  public Set<Entidad> getEntidadesInteres() {
     return entidadesInteres;
   }
 

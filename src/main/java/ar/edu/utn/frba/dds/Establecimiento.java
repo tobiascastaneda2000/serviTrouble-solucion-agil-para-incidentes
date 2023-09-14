@@ -16,10 +16,10 @@ import javax.persistence.Transient;
 public class Establecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+  private Long id;
   @Transient //Embeber? Tiene Herencia también
-  Localizacion localizacion;
-  String nombre;
+  private Localizacion localizacion;
+  private String nombre;
 
   public List<Servicio> getServicios() {
     return servicios;
