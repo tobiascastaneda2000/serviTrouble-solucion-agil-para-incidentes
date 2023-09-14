@@ -1,21 +1,17 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.PermisoComunidad;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderColumn;
-import javax.persistence.Transient;
 
 @Entity
 public class Entidad {

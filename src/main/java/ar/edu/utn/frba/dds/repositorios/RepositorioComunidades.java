@@ -1,8 +1,8 @@
-package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.Servicio;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 

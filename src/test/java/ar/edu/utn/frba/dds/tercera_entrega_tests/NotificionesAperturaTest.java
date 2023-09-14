@@ -5,7 +5,7 @@ import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.WhatsAppSender;
 import org.junit.jupiter.api.BeforeEach;

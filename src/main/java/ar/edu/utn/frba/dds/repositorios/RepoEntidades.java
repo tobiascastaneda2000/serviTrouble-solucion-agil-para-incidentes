@@ -1,16 +1,25 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.repositorios;
 
+import ar.edu.utn.frba.dds.Entidad;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
+import ar.edu.utn.frba.dds.repositorios.daos.DAO;
+import ar.edu.utn.frba.dds.repositorios.daos.DAOHibernate;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class RepoEntidades {
+public class RepoEntidades { // Hacer que extienda de Repositorios
 
   public static RepoEntidades instance = new RepoEntidades();
+
+  /*
+  public RepoEntidades(DAOHibernate<Entidad> dao) { // Pasar a private y que usen el singleton
+    super(dao);
+  }
+   */
   List<Entidad> entidades = new ArrayList<>();
 
   public RepoEntidades getInstance() {

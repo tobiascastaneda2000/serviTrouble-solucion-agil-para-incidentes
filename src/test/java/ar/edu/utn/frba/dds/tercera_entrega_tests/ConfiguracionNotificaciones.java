@@ -1,8 +1,5 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.Establecimiento;
-import ar.edu.utn.frba.dds.RepoUsuarios;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
@@ -15,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ConfiguracionNotificaciones {
 

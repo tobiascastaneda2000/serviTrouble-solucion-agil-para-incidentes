@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.RepositorioComunidades;
+import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;

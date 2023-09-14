@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.Entidad;
 import ar.edu.utn.frba.dds.Establecimiento;
-import ar.edu.utn.frba.dds.RepoEntidades;
+import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;

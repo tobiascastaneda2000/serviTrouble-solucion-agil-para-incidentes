@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 
-import ar.edu.utn.frba.dds.RepoUsuarios;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,9 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity
 public class Comunidad {
