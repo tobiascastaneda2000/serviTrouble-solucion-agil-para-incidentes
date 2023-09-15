@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.io.IOException;
@@ -34,29 +36,30 @@ public class Usuario {
   public String contrasenia;
 
   public String contacto;
-  @Transient
+
   int intentos;
 
-  @Transient
+
   boolean sesionAbierta;
 
-  @Transient
+  @Transient  // FALTA
   public MedioNotificador medioNotificador;
 
-  @OneToMany
+  @ManyToMany
   Set<Entidad> entidadesInteres = new HashSet<>();
 
   @Transient
   List<String> logNotificaciones = new ArrayList<>();
 
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "usuario_id")
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
-  @Transient
+  @Transient  // FALTA
   ServicioLocalizacion servicioLocalizacion;
-  @Transient
+  @Transient  // FALTA
   ServicioUbicacion servicioUbicacion;
-
-  @Transient
+  @OneToMany
+  @JoinColumn(name = "usuario_id")
   private Set<Horario> horariosPlanificados = new HashSet<>();
 
   //---------------------CONSTRUCTOR----------------------------------///

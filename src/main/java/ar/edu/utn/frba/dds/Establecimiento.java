@@ -17,7 +17,7 @@ public class Establecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Transient //Embeber? Tiene Herencia también
+  @Transient // FALTA Embeber? Tiene Herencia también
   private Localizacion localizacion;
   private String nombre;
 
@@ -42,7 +42,7 @@ public class Establecimiento {
 
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
-  @Transient
+  @Transient // FALTA
   ServicioUbicacion servicioUbicacion;
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;

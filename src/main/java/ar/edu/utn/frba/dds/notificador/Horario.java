@@ -18,10 +18,6 @@ public class Horario {
   private int hora;
   private int minuto;
 
-  @ManyToOne
-  @JoinColumn(name = "usuario_id")
-  public Usuario usuario;
-
   public Horario(int hora, int minuto) {
     this.hora = hora;
     this.minuto = minuto;
@@ -37,16 +33,5 @@ public class Horario {
     }
   }
 
-  /*
-  *   Faltaria validar:
-  *     - Los input del constructor -> Cada campo tenga los valores permitidos.
-  *     - Salida del generador -> que la salida sea la correspondiente.
-  *
-  *   No se hizo mucho incapie en estos puntos debido a que cuando se tenga una interfaz gráfica
-  *   se podrá visualizar mucho mejor esta "conversion" de horario a CronExpression.
-  */
-  /*public String generarExpresionCron(){
-    return String.format("%s %s %s %s %s",minuto,hora,diaDelMes,mes,diaDeLaSemana);
-  }*/
 
 }
