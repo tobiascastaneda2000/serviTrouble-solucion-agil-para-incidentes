@@ -17,7 +17,7 @@ public class Establecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Transient // FALTA Embeber? Tiene Herencia también
+  @Transient // FALTA; Tiene Herencia también
   private Localizacion localizacion;
   private String nombre;
 

@@ -62,7 +62,7 @@ public class Usuario {
   @JoinColumn(name = "usuario_id")
   private Set<Horario> horariosPlanificados = new HashSet<>();
 
-  //---------------------CONSTRUCTOR----------------------------------///
+  ///---------------------CONSTRUCTOR----------------------------------///
   protected Usuario() {
   }
 
