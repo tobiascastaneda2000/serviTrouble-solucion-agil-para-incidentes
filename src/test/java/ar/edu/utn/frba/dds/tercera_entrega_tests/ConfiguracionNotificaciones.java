@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class ConfiguracionNotificaciones {
 
@@ -45,5 +45,7 @@ public class ConfiguracionNotificaciones {
 
     Assertions.assertEquals(usuario.getLogNotificaciones().size(),1);
     Assertions.assertEquals(usuario.getNotificaciones().get(0).fueNotificada,true);
+
+    //verify(medioNotificador.notificarUnIncidente(incidente,any()),times(1)).
   }
 }

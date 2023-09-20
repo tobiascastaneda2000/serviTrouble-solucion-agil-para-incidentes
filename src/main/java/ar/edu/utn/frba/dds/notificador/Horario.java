@@ -23,6 +23,10 @@ public class Horario {
     this.minuto = minuto;
   }
 
+  protected Horario() {
+
+  }
+
   public boolean esIgual(int hora2,int minuto2){
 
     if(this.hora == hora2 && this.minuto == minuto2){

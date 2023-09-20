@@ -30,8 +30,7 @@ public class Servicio {
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
   }
-  @OneToMany
-  @JoinColumn(name = "servicio_id")
+  @OneToMany(mappedBy = "servicioAsociado")
   List<Incidente> historialIncidentes = new ArrayList<>();
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;

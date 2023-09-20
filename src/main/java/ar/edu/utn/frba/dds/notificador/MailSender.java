@@ -58,7 +58,7 @@ public class MailSender implements MedioNotificador {
       // Envia el mensaje
       Transport.send(message);
     } catch (MessagingException e) {
-      e.printStackTrace();
+      e.printStackTrace();//Ni imprimir por pantalla
     }
 
   }

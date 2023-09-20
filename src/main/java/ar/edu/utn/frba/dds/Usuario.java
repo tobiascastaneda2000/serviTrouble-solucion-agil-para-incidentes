@@ -226,7 +226,7 @@ public class Usuario {
     if (incidentes.contains(incidente)) {
       return true;
     } else {
-      return false;
+      return false; //Sacar booleano
     }
   }
 

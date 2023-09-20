@@ -57,6 +57,12 @@ public class SugerenciaRevisionIncidenteTest {
 
   }
 
+  @BeforeEach
+  public void borrar(){
+    RepositorioComunidades repositorioComunidades = RepositorioComunidades.instance;
+    repositorioComunidades.clear();
+  }
+
   @Test
   @DisplayName("Notificar al miembro cercano")
   void notificarMiembroCercano() {

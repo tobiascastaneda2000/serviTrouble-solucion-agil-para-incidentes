@@ -27,4 +27,7 @@ public class RepositorioComunidades {
   }
 
 
+  public void clear() {
+    comunidades = new HashSet<>();
+  }
 }
