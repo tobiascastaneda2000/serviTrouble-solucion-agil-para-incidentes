@@ -1,11 +1,5 @@
 package ar.edu.utn.frba.dds.notificador;
 
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -13,33 +7,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.List;
+import java.util.Properties;
 
-public class MailSender implements MedioNotificador {
+public class CorreoGmail {
 
-  CorreoGmail correoGmail;
+  Session session;
+  String correoRemitente;
 
-  public MailSender(CorreoGmail correoGmail) {
-    this.correoGmail = correoGmail;
-  }
-
-  //Hay dos notificar, borrar uno
-  @Override
-  public void notificarUnIncidente(Incidente incidente, String contacto) {
-    String texto = incidente.getObservacion();
-    //enviarCorreo(contacto, texto, "Nuevo incidente");
-    correoGmail.configurarPropiedades("mailsendergrupo7@gmail.com","eqvhrzkvmlgasbnm");
-    correoGmail.enviarCorreo(contacto, texto, "Nuevo incidente");
-
-  }
-/*
-  public static void enviarCorreo(String correoDestino, String unTexto, String unAsunto) {
-
-    final String correoRemitente = "mailsendergrupo7@gmail.com";
-    final String passwordRemitente = "eqvhrzkvmlgasbnm";
-    //La contraseña comun es dds2023v
-
-    // Configura las propiedades del sistema
+  public void configurarPropiedades(String correoRemitente, String passwordRemitente){
     Properties props = new Properties();
     props.put("mail.smtp.host", "smtp.gmail.com"); // Cambia esto al servidor SMTP que estés utilizando
     props.put("mail.smtp.port", "465"); // Cambia esto al puerto SMTP correspondiente (por ejemplo, 25, 465 o 587)
@@ -48,26 +23,30 @@ public class MailSender implements MedioNotificador {
     props.put("mail.smtp.user", correoRemitente); // Dirección de correo electrónico del remitente
     props.put("mail.smtp.password", passwordRemitente); // Contraseña de correo electrónico del remitente
 
-    Session session = Session.getInstance(props,
+    this.session = javax.mail.Session.getInstance(props,
         new javax.mail.Authenticator() {
           protected PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(correoRemitente, passwordRemitente);
           }
         });
 
+    this.correoRemitente =correoRemitente;
+  }
+
+  public void enviarCorreo(String correoDestino, String unTexto, String unAsunto){
     try {
 
       //Escribimos los atributos del mensaje
-      MimeMessage message = new MimeMessage(session);
-      message.setFrom(new InternetAddress(correoRemitente));
+      MimeMessage message = new MimeMessage(this.session);
+      message.setFrom(new InternetAddress(this.correoRemitente));
       message.setSubject(unAsunto);
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestino));
       message.setText(unTexto);
       // Envia el mensaje
       Transport.send(message);
     } catch (MessagingException e) {
-       throw new RuntimeException("Hubo un error en el Servidor, espere unos minutos..");
+      //e.printStackTrace();
+      throw new RuntimeException("Hubo un error en el Servidor, espere unos minutos..");
     }
-
-  }*/
+  }
 }

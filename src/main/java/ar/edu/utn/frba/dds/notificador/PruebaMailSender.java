@@ -10,9 +10,9 @@ class PruebaMailSender {
     Servicio servicio = new Servicio(TipoServicio.ASCENSOR);
     Incidente incidente = new Incidente("Comentario que aparecera como texto del mensaje :)", servicio);
 
-    String correoDestino = ""; // Agregar la dirección de correo electrónico de destino
+    String correoDestino = "tobias.2000david@gmail.com"; // Agregar la dirección de correo electrónico de destino
 
-    MedioNotificador mailSender = new MailSender();
+    MedioNotificador mailSender = new MailSender(new CorreoGmail());
 
     // Envía el correo electrónico
     mailSender.notificarUnIncidente(incidente, correoDestino);
