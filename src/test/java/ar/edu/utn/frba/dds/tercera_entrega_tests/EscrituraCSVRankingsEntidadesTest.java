@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.EntradaNoPuedeSerNull;
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,9 @@ import org.junit.jupiter.api.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Clock;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +107,11 @@ public class EscrituraCSVRankingsEntidadesTest {
     path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt";
   }
 
+  @AfterEach
+  void clear(){
+    repoEntidades.clear();
+  }
+
   @Test
   @DisplayName("lector devuelve listado de entidades ORDENADA")
   public void lectorDevuelveArchivotxtConEntidades() {
@@ -143,7 +151,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
   @Test
   @DisplayName("Archivo CSV por promedios de cierres de incidentes, escribe entidades ordenadas, de menor a mayor")
-  void escribirArchivoSegunPromedios() throws InterruptedException {
+  void escribirArchivoSegunPromedios(){
 
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -155,19 +163,28 @@ public class EscrituraCSVRankingsEntidadesTest {
     Incidente incidenteGuelmayen2 = devolverIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     Incidente incidenteJorgito = devolverIncidente(otroAscensor, "1° incidente");
 
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    incidenteGuelmayen1.cerrar();
+    incidenteGuelmayen2.cerrar();
+    incidenteJorgito.cerrar();
 
-    scheduler.schedule(() -> incidenteGuelmayen1.cerrar(), 1, TimeUnit.SECONDS);
-    scheduler.schedule(() -> incidenteGuelmayen2.cerrar(), 3, TimeUnit.SECONDS);
-    scheduler.schedule(() -> incidenteJorgito.cerrar(), 8, TimeUnit.SECONDS);
+    ///
+    Clock baseClock = Clock.systemDefaultZone();
 
-    TimeUnit.SECONDS.sleep(10);
+    // result clock will be later than baseClock
+    Clock clock1 = Clock.offset(baseClock, Duration.ofSeconds(1));
+    Clock clock2 = Clock.offset(baseClock, Duration.ofSeconds(3));
+    Clock clock3 = Clock.offset(baseClock, Duration.ofSeconds(8));
+
+    incidenteGuelmayen1.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteGuelmayen1.setFechaHoraCierre(LocalDateTime.now(clock1));
+    incidenteGuelmayen2.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteGuelmayen2.setFechaHoraCierre(LocalDateTime.now(clock2));
+    incidenteJorgito.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteJorgito.setFechaHoraCierre(LocalDateTime.now(clock3));
 
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.of(2, ChronoUnit.MINUTES));
     Assertions.assertEquals(jorgito.promedioDuracionIncidentes(), Duration.of(8, ChronoUnit.MINUTES));
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
-
-    scheduler.shutdown();
 
     repoEntidades.generarRankingEnCsv(rankingPromedio);
     String primeraLinea = obtenerNumeroDeLineaN(1);

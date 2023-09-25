@@ -9,12 +9,18 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Clock;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
@@ -90,6 +96,11 @@ class RankingEntidadesSegunCriterioTest {
     rankingCantidadReportes = new CantidadReportesSemanal();
   }
 
+  @AfterEach
+  void clear(){
+    repoEntidades.clear();
+  }
+
   @Test
   @DisplayName("Cuando no hay incidentes que reportar, NO rompe")
   void noHayIncidentesQueReportar() {
@@ -126,7 +137,23 @@ class RankingEntidadesSegunCriterioTest {
     Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 2);
   }
 
-  //falta test para probar diferencia de 24 horas
+  @Test
+  @DisplayName("Cuando hay 2 incidentes abiertos, pero con mas de 24 horas de diferencia, se suman al conteo")
+  void servicioAbreIncidenteDespuesDe24HorasDeOtroIncidenteAbierto() {
+    gualmayen.crearIncidente(unAscensor, "1° incidente");
+    gualmayen.crearIncidente(unAscensor, "2° incidente");
+    Incidente incidente = devolverIncidente(unAscensor, "1° incidente");
+    Incidente incidente2 = devolverIncidente(unAscensor, "2° incidente");
+
+    Clock clock1 = Clock.systemDefaultZone();
+    Clock clock2 = Clock.offset(clock1, Duration.ofHours(25));
+
+    incidente.setFechaHoraAbre(LocalDateTime.now(clock1));
+    incidente2.setFechaHoraAbre(LocalDateTime.now(clock2));
+
+    Assertions.assertEquals(gualmayen.cantidadDeIncidentesReportados(), 2);
+  }
+
 
   @Test
   @DisplayName("Ranking de cantidad de reportes de incidentes, devuelve entidades ordenadas, de menor a mayor")
@@ -144,7 +171,7 @@ class RankingEntidadesSegunCriterioTest {
 
   @Test
   @DisplayName("SI hay varios incidentes cerrados, se devuelve el PROMEDIO")
-  void guelmayenCalculaPromedioCierreUnIncidente() throws InterruptedException {
+  void guelmayenCalculaPromedioCierreUnIncidente(){
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");
@@ -152,51 +179,45 @@ class RankingEntidadesSegunCriterioTest {
     Incidente incidente = devolverIncidente(unAscensor, "1° incidente");
     Incidente incidente2 = devolverIncidente(unaEscaleraMecanicaBajada, "1° incidente");
 
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    incidente.cerrar();
+    incidente2.cerrar();
 
-    scheduler.schedule(() -> incidente.cerrar(), 5, TimeUnit.SECONDS);
-    scheduler.schedule(() -> incidente2.cerrar(), 3, TimeUnit.SECONDS);
+    Clock baseClock = Clock.systemDefaultZone();
 
-    TimeUnit.SECONDS.sleep(6);
+    // Setteo parametros
+    Clock clock1 = Clock.offset(baseClock, Duration.ofSeconds(5));
+    Clock clock2 = Clock.offset(baseClock, Duration.ofSeconds(3));
+
+    incidente.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidente.setFechaHoraCierre(LocalDateTime.now(clock1));
+    incidente2.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidente2.setFechaHoraCierre(LocalDateTime.now(clock2));
 
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.of(4, ChronoUnit.MINUTES));
     //El promedio entre 3 y 5 es igual a 4
 
-    scheduler.shutdown();
   }
 
   @Test
   @DisplayName("Cuando no hay incidentes cerrados, la duracion es CERO, NO rompe")
-  void guelmayenNoTieneIncidentesCerrados() throws InterruptedException {
+  void guelmayenNoTieneIncidentesCerrados() {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");
 
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-    TimeUnit.SECONDS.sleep(3);
-
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.ZERO);
 
-    scheduler.shutdown();
   }
 
   @Test
   @DisplayName("Cuando no hay incidentes, la duracion es CERO, NO rompe")
-  void guelmayenNoTieneIncidentes() throws InterruptedException {
-
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-    TimeUnit.SECONDS.sleep(3);
-
+  void guelmayenNoTieneIncidentes() {
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.ZERO);
-
-    scheduler.shutdown();
   }
 
   @Test
   @DisplayName("Ranking por promedios de cierres de incidentes, devuelve entidades ordenadas, de menor a mayor")
-  void realizarRankingSegunPromedios() throws InterruptedException {
+  void realizarRankingSegunPromedios() {
 
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -208,20 +229,31 @@ class RankingEntidadesSegunCriterioTest {
     Incidente incidenteGuelmayen2 = devolverIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     Incidente incidenteJorgito = devolverIncidente(otroAscensor, "1° incidente");
 
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    incidenteGuelmayen1.cerrar();
+    incidenteGuelmayen2.cerrar();
+    incidenteJorgito.cerrar();
 
-    scheduler.schedule(() -> incidenteGuelmayen1.cerrar(), 1, TimeUnit.SECONDS);
-    scheduler.schedule(() -> incidenteGuelmayen2.cerrar(), 3, TimeUnit.SECONDS);
-    scheduler.schedule(() -> incidenteJorgito.cerrar(), 8, TimeUnit.SECONDS);
+    ///// Setteo parametros
+    Clock baseClock = Clock.systemDefaultZone();
 
-    TimeUnit.SECONDS.sleep(10);
+    Clock clock1 = Clock.offset(baseClock, Duration.ofSeconds(1));
+    Clock clock2 = Clock.offset(baseClock, Duration.ofSeconds(3));
+    Clock clock3 = Clock.offset(baseClock, Duration.ofSeconds(8));
+
+    incidenteGuelmayen1.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteGuelmayen1.setFechaHoraCierre(LocalDateTime.now(clock1));
+    incidenteGuelmayen2.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteGuelmayen2.setFechaHoraCierre(LocalDateTime.now(clock2));
+    incidenteJorgito.setFechaHoraAbre(LocalDateTime.now(baseClock));
+    incidenteJorgito.setFechaHoraCierre(LocalDateTime.now(clock3));
 
     Assertions.assertEquals(gualmayen.promedioDuracionIncidentes(), Duration.of(2, ChronoUnit.MINUTES));
     Assertions.assertEquals(jorgito.promedioDuracionIncidentes(), Duration.of(8, ChronoUnit.MINUTES));
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
 
-    scheduler.shutdown();
+
   }
+
 
   //FUNCIONES AUXILIARES
 

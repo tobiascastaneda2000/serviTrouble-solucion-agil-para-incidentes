@@ -61,7 +61,7 @@ public class Entidad {
   }
 
 
-  //PARA RANKINGS-
+  //------------------------- RANKINGS----------------------------------//
 
   public List<Servicio> getServicios() {
     return this.establecimientos.stream().flatMap(e -> e.getServicios().stream()).toList();

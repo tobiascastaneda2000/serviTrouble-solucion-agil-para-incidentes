@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.repositorios.daos.DAOHibernate;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class RepoEntidades { // Hacer que extienda de Repositorios
@@ -47,6 +48,10 @@ public class RepoEntidades { // Hacer que extienda de Repositorios
     Comparator<Entidad> criterio = criterioRanking.criterioDeComparacion();
     entidades.sort(criterio);
     return entidades;
+  }
+
+  public void clear() {
+    this.entidades = new ArrayList<>();
   }
 
 

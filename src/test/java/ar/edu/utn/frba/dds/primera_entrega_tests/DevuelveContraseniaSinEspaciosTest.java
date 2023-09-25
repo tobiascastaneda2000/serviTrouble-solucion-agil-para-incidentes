@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.primera_entrega_tests;
 
 import ar.edu.utn.frba.dds.validaciones_password.ValidacionLongitudContrasenia;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

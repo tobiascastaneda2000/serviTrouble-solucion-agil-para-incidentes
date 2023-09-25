@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.comunidad_e_incidentes;
 import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
@@ -24,6 +25,15 @@ public class Incidente implements Cloneable {
   public EstadoIncidente estadoIncidente;
   public String observacion;
   public LocalDateTime fechaHoraAbre;
+
+  public void setFechaHoraAbre(LocalDateTime fechaHoraAbre) {
+    this.fechaHoraAbre = fechaHoraAbre;
+  }
+
+  public void setFechaHoraCierre(LocalDateTime fechaHoraCierre) {
+    this.fechaHoraCierre = fechaHoraCierre;
+  }
+
   public LocalDateTime fechaHoraCierre;
 
   //-------------------------CONSTRUCTOR----------------------------------------//
@@ -70,6 +80,7 @@ public class Incidente implements Cloneable {
   //-------------------------CERRAR INCIDENTES---------------------------------//
 
   public void cerrar() {
+
     this.fechaHoraCierre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.CERRADO;
   }

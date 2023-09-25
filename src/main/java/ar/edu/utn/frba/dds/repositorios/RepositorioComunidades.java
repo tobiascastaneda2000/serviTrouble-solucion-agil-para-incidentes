@@ -28,6 +28,6 @@ public class RepositorioComunidades {
 
 
   public void clear() {
-    comunidades = new HashSet<>();
+    this.comunidades = new HashSet<>();
   }
 }
