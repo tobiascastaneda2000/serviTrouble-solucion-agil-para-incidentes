@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.Servicio;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,11 @@ public class AperturaCierreIncidentesEntidadTest {
   public Incidente devolverIncidente(Servicio servicio, String obs) {
     return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
+  }
+
+  @AfterEach
+  void clear(){
+    repoUsuarios.clear();
   }
 
 }

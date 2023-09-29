@@ -15,11 +15,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LectorCSVEntidadesTest {
+
   LectorCSVLectura lectorCSV = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
-  //LectorCSV lectorCSV = new LectorCSV("C:\\Users\\usuario\\Desktop\\Facu\\utn\\diseño de sistemas\\2023-tpa-vi-no-grupo-07-main\\src\\main\\java\\ar\\edu\\utn\\frba\\dds\\CSVEntidadesPrestadoras.csv");
   LectorCSVLectura lectorCSVError = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras con error.csv");
 
-  // LectorCSV lectorCSVError = new LectorCSV("C:\\Users\\usuario\\Desktop\\Facu\\utn\\diseño de sistemas\\2023-tpa-vi-no-grupo-07-main\\src\\main\\java\\ar\\edu\\utn\\frba\\dds\\CSVEntidadesPrestadoras con error.csv");
   public String lineaCompleta() {
     return "10;DDS.SA;sistemas@dds.com";
   }

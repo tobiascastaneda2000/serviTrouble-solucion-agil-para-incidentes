@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,15 +32,16 @@ public class SugerenciaRevisionIncidenteTest {
   Comunidad comunidad;
   ServicioUbicacion servicioUbicacion;
   MedioNotificador medioNotificador;
+  RepositorioComunidades repositorioComunidades;
 
   @BeforeEach
-  void setUp() throws IOException {
+  void setUp()  {
     usuarioInformante = new Usuario(2, "a", "b", "mail@gmail.com");
     usuario = new Usuario(1, "a", "b", "mail@gmail.com");
     comunidad = new Comunidad();
     comunidad.registrarMiembro(usuario);
     comunidad.registrarMiembro(usuarioInformante);
-    RepositorioComunidades repositorioComunidades = RepositorioComunidades.instance;
+    repositorioComunidades = RepositorioComunidades.instance;
     repositorioComunidades.guardarComunidad(comunidad);
     entidad = new Entidad(1,"a","mail");
     establecimiento = new Establecimiento();
@@ -57,9 +59,8 @@ public class SugerenciaRevisionIncidenteTest {
 
   }
 
-  @BeforeEach
+  @AfterEach
   public void borrar(){
-    RepositorioComunidades repositorioComunidades = RepositorioComunidades.instance;
     repositorioComunidades.clear();
   }
 

@@ -34,4 +34,8 @@ public class RepoUsuarios {
         u->u.getNotificaciones().remove(u.obtenerNotificacion(incidente))
     );
   }
+
+  public void clear() {
+    this.usuarios = new HashSet<>();
+  }
 }

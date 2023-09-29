@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.TipoServicio;
 import ar.edu.utn.frba.dds.Usuario;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,8 @@ class AperturayCierreIncidentesComunidadTest {
   Servicio servicio;
   Entidad entidad;
   Establecimiento establecimiento;
+  RepositorioComunidades repositorioComunidades;
+
   @BeforeEach
   void setUp() {
     usuarioInformante = new Usuario(1,"Leonardo ", "Dicaprio", "mail@utn.com.ar");
@@ -34,8 +37,8 @@ class AperturayCierreIncidentesComunidadTest {
     palermoGrupo.registrarMiembro(usuarioInformante);
     palermoGrupo.registrarMiembro(otroUsuario);
     otraComunidad.registrarMiembro(usuarioInformante);
-    RepositorioComunidades.getInstance().guardarComunidad(palermoGrupo);
-    RepositorioComunidades.getInstance().guardarComunidad(otraComunidad);
+    repositorioComunidades.guardarComunidad(palermoGrupo);
+    repositorioComunidades.guardarComunidad(otraComunidad);
     entidad = new Entidad(1,"razonsocial","unEmail");
     establecimiento = new Establecimiento();
     servicio =new Servicio(TipoServicio.ASCENSOR);
@@ -43,6 +46,11 @@ class AperturayCierreIncidentesComunidadTest {
     entidad.agregarEstablecimiento(establecimiento);
     palermoGrupo.serviciosDeInteres.add(servicio);
     otraComunidad.serviciosDeInteres.add(servicio);
+  }
+
+  @AfterEach
+  void clear(){
+    repositorioComunidades.clear();
   }
 
   @Test
@@ -70,4 +78,6 @@ class AperturayCierreIncidentesComunidadTest {
     Assertions.assertEquals(palermoGrupo.incidentes.size(),0);
 
   }
+
+
 }
