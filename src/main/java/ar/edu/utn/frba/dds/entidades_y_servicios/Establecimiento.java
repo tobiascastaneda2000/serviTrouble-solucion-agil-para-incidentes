@@ -1,9 +1,10 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.entidades_y_servicios;
 
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Ubicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,7 +44,7 @@ public class Establecimiento {
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
   @Transient // FALTA
-  ServicioUbicacion servicioUbicacion;
+      ServicioUbicacion servicioUbicacion;
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
   }

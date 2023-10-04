@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
@@ -11,7 +12,7 @@ import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import java.util.Set;
 import java.time.LocalDateTime;
 
-public class Main {
+public class MainTareasPlanificadas {
   public static void main(String[] args) {
 
     /*

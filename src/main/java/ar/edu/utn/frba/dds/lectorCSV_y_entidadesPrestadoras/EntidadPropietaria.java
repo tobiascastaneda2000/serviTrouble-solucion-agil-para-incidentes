@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;

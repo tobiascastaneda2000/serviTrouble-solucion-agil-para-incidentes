@@ -1,8 +1,9 @@
-package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 
+import ar.edu.utn.frba.dds.incidentes.EstadoIncidente;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,6 +35,9 @@ public class Comunidad {
   @ManyToMany
   public List<Servicio> serviciosDeInteres = new ArrayList<Servicio>();
 
+  public void agregarServicioInteres(Servicio servicio){
+    this.serviciosDeInteres.add(servicio);
+  }
   //-------------------------CONSTRUCTOR----------------------------------------//
 
   public Comunidad() {

@@ -1,12 +1,14 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;

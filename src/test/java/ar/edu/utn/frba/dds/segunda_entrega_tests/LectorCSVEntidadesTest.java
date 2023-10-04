@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.LectorCSVLectura;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;

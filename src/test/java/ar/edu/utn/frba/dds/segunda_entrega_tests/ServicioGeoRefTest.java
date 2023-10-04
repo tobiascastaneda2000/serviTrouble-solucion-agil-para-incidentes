@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ApiGeoRef;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Departamento;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Provincia;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
 import org.junit.jupiter.api.Assertions;
@@ -13,10 +12,8 @@ import org.junit.jupiter.api.Test;
 import retrofit2.Call;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

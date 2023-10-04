@@ -1,6 +1,7 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.entidades_y_servicios;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 
 import java.time.Duration;

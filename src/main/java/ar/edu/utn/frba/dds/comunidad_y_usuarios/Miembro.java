@@ -1,7 +1,5 @@
-package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 
-
-import ar.edu.utn.frba.dds.Usuario;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 @Entity
 public class Miembro {

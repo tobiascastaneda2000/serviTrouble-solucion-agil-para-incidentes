@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.Establecimiento;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
@@ -28,9 +28,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static org.mockito.Mockito.mock;
 

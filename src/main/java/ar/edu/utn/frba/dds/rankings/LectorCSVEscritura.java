@@ -1,12 +1,10 @@
 package ar.edu.utn.frba.dds.rankings;
 
-import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;

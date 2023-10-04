@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.notificador;
 
-import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 import javax.persistence.*;
 
@@ -14,6 +14,10 @@ public class Notificacion {
   @JoinColumn(name = "incidente_id")
   Incidente incidente;
   public Boolean fueNotificada = false;
+
+  protected Notificacion() {
+
+  }
 
   public Incidente getIncidente(){
     return incidente;

@@ -1,10 +1,6 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras;
 
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadYaCargadaException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.PathIncorrectoException;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 
 import java.io.BufferedReader;
 import java.io.File;

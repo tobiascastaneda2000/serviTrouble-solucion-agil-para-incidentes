@@ -1,6 +1,6 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.entidades_y_servicios;
 
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity

@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.rankings;
 
-import ar.edu.utn.frba.dds.Entidad;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 
 import java.util.Comparator;
-import java.util.List;
 
 public interface CriterioRanking {
   Comparator<Entidad> criterioDeComparacion();

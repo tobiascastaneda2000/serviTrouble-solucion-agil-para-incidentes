@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.WhatsAppSender;

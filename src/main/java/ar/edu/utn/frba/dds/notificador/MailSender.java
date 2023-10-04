@@ -1,19 +1,6 @@
 package ar.edu.utn.frba.dds.notificador;
 
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.List;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 public class MailSender implements MedioNotificador {
 

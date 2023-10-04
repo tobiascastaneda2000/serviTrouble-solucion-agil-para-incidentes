@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.notificador;
 
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 class PruebaMailSender {
 

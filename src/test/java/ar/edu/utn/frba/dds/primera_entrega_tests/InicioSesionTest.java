@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.primera_entrega_tests;
 
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import org.junit.jupiter.api.*;
 
 public class InicioSesionTest {

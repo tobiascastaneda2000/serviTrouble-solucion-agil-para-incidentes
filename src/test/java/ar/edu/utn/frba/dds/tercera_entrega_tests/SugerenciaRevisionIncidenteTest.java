@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.Establecimiento;
-import ar.edu.utn.frba.dds.Main;
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.ServicioUbicacion;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.Usuario;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
+import ar.edu.utn.frba.dds.MainTareasPlanificadas;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
+import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import org.junit.jupiter.api.AfterEach;
@@ -16,8 +16,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -70,7 +68,7 @@ public class SugerenciaRevisionIncidenteTest {
     boolean booleano = true;
     Incidente incidente = usuarioInformante.abrirIncidente(servicio,"obs");
     when(servicioUbicacion.estaCerca(usuario,incidente.getServicioAsociado())).thenReturn(booleano);
-    Main.sugerirIncidentes();
+    MainTareasPlanificadas.sugerirIncidentes();
 
     Assertions.assertEquals(comunidad.incidentes.size(),1);
     Assertions.assertEquals(usuario.getLogNotificaciones().size(),1);

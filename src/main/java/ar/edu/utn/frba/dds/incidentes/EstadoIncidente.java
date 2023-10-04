@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.comunidad_e_incidentes;
+package ar.edu.utn.frba.dds.incidentes;
 
 public enum EstadoIncidente {
   ABIERTO, CERRADO
