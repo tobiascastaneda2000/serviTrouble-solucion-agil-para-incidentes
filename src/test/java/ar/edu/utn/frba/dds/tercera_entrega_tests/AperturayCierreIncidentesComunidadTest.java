@@ -1,14 +1,10 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.Entidad;
-import ar.edu.utn.frba.dds.Establecimiento;
-import ar.edu.utn.frba.dds.Servicio;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.EstadoIncidente;
-import ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente;
+
+import ar.edu.utn.frba.dds.entidades_y_servicios.*;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
-import ar.edu.utn.frba.dds.TipoServicio;
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.incidentes.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +30,7 @@ class AperturayCierreIncidentesComunidadTest {
     otroUsuario = new Usuario(1,"Margot ", "Robbie", "mail2@utn.com.ar");
     palermoGrupo = new Comunidad();
     otraComunidad = new Comunidad();
+    repositorioComunidades = RepositorioComunidades.getInstance();
     palermoGrupo.registrarMiembro(usuarioInformante);
     palermoGrupo.registrarMiembro(otroUsuario);
     otraComunidad.registrarMiembro(usuarioInformante);

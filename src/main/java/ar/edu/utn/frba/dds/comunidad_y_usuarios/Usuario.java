@@ -188,7 +188,7 @@ public class Usuario {
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
     Incidente incidente = new Incidente(observacion, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
-    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(incidente));
+    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(observacion,servicio));
     return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
@@ -217,19 +217,6 @@ public class Usuario {
   public void guardarNotificacion(Incidente incidente) {
     Notificacion notificacion = new Notificacion(this, incidente);
     notificacionesPendientes.add(notificacion);
-  }
-
-  public void sacarNotificacion(Notificacion notificacion) {
-    notificacionesPendientes.remove(notificacion);
-  }
-
-  public boolean contieneIncidentePendiente(Incidente incidente) {
-    List<Incidente> incidentes = notificacionesPendientes.stream().map(n -> n.getIncidente()).toList();
-    if (incidentes.contains(incidente)) {
-      return true;
-    } else {
-      return false; //Sacar booleano
-    }
   }
 
   public Notificacion obtenerNotificacion(Incidente incidente) {

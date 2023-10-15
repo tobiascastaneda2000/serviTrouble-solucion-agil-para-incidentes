@@ -78,20 +78,20 @@ public class Comunidad {
 
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//
 
-  public void abrirIncidenteEnComunidad(Incidente incidente) {
+  public void abrirIncidenteEnComunidad(String observacion, Servicio servicio) {
 
+    Incidente incidente = new Incidente(observacion, servicio);
     incidentes.add(incidente);
     miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
   }
 
   //-------------------------------CIERRE DE INCIDENTE-------------------------------------------------//
 
-  public void cerrarIncidente(Incidente incidente) throws CloneNotSupportedException {
-    Incidente nuevoIncidente = (Incidente) incidente.clone();
-    nuevoIncidente.cerrar();
+  public void cerrarIncidente(Incidente incidente) {
+    incidente.cerrar();
     incidentes.remove(incidente);
-    RepoUsuarios.instance.sacarIncidentesCerrados(incidente);  // saca al incidente de la lista de notificaciones pendientes de cada usuario para que no notifique un incidente cerrado
-    incidentesCerrados.add(nuevoIncidente);
+    miembros.forEach(m->m.usuario.getNotificaciones().remove(m.usuario.obtenerNotificacion(incidente)));
+    incidentesCerrados.add(incidente);
   }
 
   //---------------------------------------------------------------------------------------------------//

@@ -28,13 +28,6 @@ public class RepoUsuarios {
     return usuarios.stream().filter(u->u.getEntidadesInteres().contains(entidad)).toList();
   }
 
-  public void sacarIncidentesCerrados(Incidente incidente) {
-    List<Usuario> usersConIncidente = usuarios.stream().filter(u->u.contieneIncidentePendiente(incidente)).toList();
-    usersConIncidente.forEach(
-        u->u.getNotificaciones().remove(u.obtenerNotificacion(incidente))
-    );
-  }
-
   public void clear() {
     this.usuarios = new HashSet<>();
   }

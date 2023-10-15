@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Incidente implements Cloneable {
+public class Incidente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -50,11 +50,6 @@ public class Incidente implements Cloneable {
 
   public Servicio getServicioAsociado() {
     return servicioAsociado;
-  }
-
-  @Override
-  public Object clone() throws CloneNotSupportedException {
-    return super.clone();
   }
 
   public LocalDateTime getFechaHoraAbre() {
