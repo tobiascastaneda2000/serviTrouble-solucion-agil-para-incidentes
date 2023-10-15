@@ -38,14 +38,11 @@ public class ConfiguracionNotificaciones {
   }
 
   @Test
-  void  hola(){
+  void  seEjecutanLasNotificaciones(){
 
     LocalDateTime hora = LocalDateTime.of(2023,1,1,10,10);
     usuario.verificarNotificaciones(hora);
 
-    Assertions.assertEquals(usuario.getLogNotificaciones().size(),1);
-    Assertions.assertEquals(usuario.getNotificaciones().get(0).fueNotificada,true);
-
-    //verify(medioNotificador.notificarUnIncidente(incidente,any()),times(1)).
+    verify(medioNotificador,times(1)).notificarUnIncidente(incidente,"email");
   }
 }

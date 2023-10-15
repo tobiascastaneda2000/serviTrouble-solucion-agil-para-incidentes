@@ -11,13 +11,18 @@ import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
+import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class SugerenciaRevisionIncidenteTest {
@@ -34,7 +39,7 @@ public class SugerenciaRevisionIncidenteTest {
 
   @BeforeEach
   void setUp()  {
-    usuarioInformante = new Usuario(2, "a", "b", "mail@gmail.com");
+    usuarioInformante = new Usuario(2, "a", "b", "contacto");
     usuario = new Usuario(1, "a", "b", "mail@gmail.com");
     comunidad = new Comunidad();
     comunidad.registrarMiembro(usuario);
@@ -54,7 +59,6 @@ public class SugerenciaRevisionIncidenteTest {
     usuario.setMedioNotificador(medioNotificador);
     usuario.setServicioUbicacion(servicioUbicacion);
 
-
   }
 
   @AfterEach
@@ -68,9 +72,10 @@ public class SugerenciaRevisionIncidenteTest {
     boolean booleano = true;
     Incidente incidente = usuarioInformante.abrirIncidente(servicio,"obs");
     when(servicioUbicacion.estaCerca(usuario,incidente.getServicioAsociado())).thenReturn(booleano);
+    when(servicioUbicacion.estaCerca(usuarioInformante,incidente.getServicioAsociado())).thenReturn(booleano);
     MainTareasPlanificadas.sugerirIncidentes();
 
     Assertions.assertEquals(comunidad.incidentes.size(),1);
-    Assertions.assertEquals(usuario.getLogNotificaciones().size(),1);
+    verify(medioNotificador,times(2)).notificarUnIncidente(any(),anyString());
   }
 }

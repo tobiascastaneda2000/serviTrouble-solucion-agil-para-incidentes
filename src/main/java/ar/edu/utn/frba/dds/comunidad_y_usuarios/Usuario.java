@@ -50,9 +50,6 @@ public class Usuario {
   @ManyToMany
   Set<Entidad> entidadesInteres = new HashSet<>();
 
-  @Transient
-  List<String> logNotificaciones = new ArrayList<>();
-
   @OneToMany
   @JoinColumn(name = "usuario_id")
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
@@ -102,10 +99,6 @@ public class Usuario {
 
   public long getId() {
     return id;
-  }
-
-  public List<String> getLogNotificaciones() {
-    return logNotificaciones;
   }
 
   public List<Notificacion> getNotificaciones() {
@@ -197,7 +190,6 @@ public class Usuario {
   //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
   public void notificarIncidente(Incidente incidente) {
     this.medioNotificador.notificarUnIncidente(incidente, this.contacto);
-    this.logNotificaciones.add(incidente.getObservacion());
   }
 
   public void agregarHorario(Horario horario) {

@@ -15,10 +15,6 @@ public class Notificacion {
   Incidente incidente;
   public Boolean fueNotificada = false;
 
-  protected Notificacion() {
-
-  }
-
   public Incidente getIncidente(){
     return incidente;
   }
