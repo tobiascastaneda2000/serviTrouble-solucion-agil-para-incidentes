@@ -8,11 +8,12 @@ class PruebaMailSender {
 
   public static void main(String[] args) {
     Servicio servicio = new Servicio(TipoServicio.ASCENSOR);
-    Incidente incidente = new Incidente("Comentario que aparecera como texto del mensaje :)", servicio);
+    Incidente incidente = new Incidente("El 4/11 es la presentacion de la 5° entrega :)", servicio);
 
     String correoDestino = "tobias.2000david@gmail.com"; // Agregar la dirección de correo electrónico de destino
 
-    MedioNotificador mailSender = new MailSender(new CorreoGmail());
+    //MedioNotificador mailSender = new MailSender(new CorreoGmail());
+    MedioNotificador mailSender = new MailSender();
 
     // Envía el correo electrónico
     mailSender.notificarUnIncidente(incidente, correoDestino);
