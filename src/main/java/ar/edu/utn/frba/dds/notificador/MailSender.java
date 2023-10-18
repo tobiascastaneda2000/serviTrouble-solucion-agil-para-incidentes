@@ -57,6 +57,7 @@ public class MailSender implements MedioNotificador {
     }
   }
 
+
   private void enviar()  {
     try{
       Transport.send(message);
