@@ -17,6 +17,9 @@
     <class>package ar.edu.utn.frba.dds.Usuario</class>
     <class>package ar.edu.utn.frba.dds.notificador.Notificacion</class>
     <class>package ar.edu.utn.frba.dds.notificador.Horario</class>
+    <class>package ar.edu.utn.frba.dds.notificador.MedioNotificador</class>
+    <class>package ar.edu.utn.frba.dds.notificador.WhatsAppSender</class>
+    <class>package ar.edu.utn.frba.dds.notificador.MailSender</class>
 
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>

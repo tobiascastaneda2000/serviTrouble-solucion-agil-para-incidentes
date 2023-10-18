@@ -15,16 +15,27 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
-public class MailSender implements MedioNotificador {
+@Entity
+@DiscriminatorValue("mailSender")
+public class MailSender extends MedioNotificador {
+
+  @Transient
   final String correoRemitente = "mailsendergrupo7@gmail.com";
+
+  @Transient
   String passwordRemitente = "qxaetsrxgepggvxu";
   //String passwordRemitente = null;
 
+  @Transient
   Session session = null;
-
+  @Transient
   MimeMessage message = null;
-
+  @Transient
   Properties props = new Properties();
 
 
