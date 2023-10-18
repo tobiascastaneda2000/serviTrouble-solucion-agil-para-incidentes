@@ -28,8 +28,7 @@ public class MailSender extends MedioNotificador {
   final String correoRemitente = "mailsendergrupo7@gmail.com";
 
   @Transient
-  String passwordRemitente = "qxaetsrxgepggvxu";
-  //String passwordRemitente = null;
+  String passwordRemitente = null;
 
   @Transient
   Session session = null;
@@ -67,10 +66,10 @@ public class MailSender extends MedioNotificador {
   }
 
 
-  private void enviar()  {
-    try{
+  private void enviar() {
+    try {
       Transport.send(message);
-    }catch (MessagingException e) {
+    } catch (MessagingException e) {
       Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, e);
     }
     // Envia el mensaje
@@ -95,21 +94,21 @@ public class MailSender extends MedioNotificador {
   private void configurarPropiedades() {
 
 
-      this.cargarContrasenia();
-      props.put("mail.smtp.host", "smtp.gmail.com"); // Cambia esto al servidor SMTP que estés utilizando
-      props.put("mail.smtp.port", "587");
-      props.put("mail.smtp.auth", "true"); // Habilita la autenticación SMTP si es necesario
-      props.put("mail.smtp.starttls.enable", "true");
-      props.put("mail.smtp.user", correoRemitente); // Dirección de correo electrónico del remitente
-      props.put("mail.smtp.password", passwordRemitente); // Contraseña de correo electrónico del remitente
-      props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+    this.cargarContrasenia();
+    props.put("mail.smtp.host", "smtp.gmail.com"); // Cambia esto al servidor SMTP que estés utilizando
+    props.put("mail.smtp.port", "587");
+    props.put("mail.smtp.auth", "true"); // Habilita la autenticación SMTP si es necesario
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.user", correoRemitente); // Dirección de correo electrónico del remitente
+    props.put("mail.smtp.password", passwordRemitente); // Contraseña de correo electrónico del remitente
+    props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-       session = Session.getInstance(props,
-          new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-              return new PasswordAuthentication(correoRemitente, passwordRemitente);
-            }
-          });
+    session = Session.getInstance(props,
+        new javax.mail.Authenticator() {
+          protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(correoRemitente, passwordRemitente);
+          }
+        });
 
   }
 
