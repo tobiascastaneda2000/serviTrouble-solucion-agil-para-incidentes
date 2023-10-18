@@ -9,24 +9,33 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
-public class MailSender implements MedioNotificador {
+@Entity
+@DiscriminatorValue("mailSender")
+public class MailSender extends MedioNotificador {
+
+  @Transient
   final String correoRemitente = "mailsendergrupo7@gmail.com";
 
+  @Transient
+  String passwordRemitente = "qxaetsrxgepggvxu";
+  //String passwordRemitente = null;
 
-  //La contraseña comun es: dds2023v
-  //La contraseña para la app esta guardada en src->main->resources-> myConfigs.password
-  String passwordRemitente = null;
-
+  @Transient
   Session session = null;
-
+  @Transient
   MimeMessage message = null;
-
+  @Transient
   Properties props = new Properties();
 
 
