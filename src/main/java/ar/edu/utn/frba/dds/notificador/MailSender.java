@@ -9,7 +9,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -18,8 +17,11 @@ import java.util.logging.Logger;
 
 public class MailSender implements MedioNotificador {
   final String correoRemitente = "mailsendergrupo7@gmail.com";
-  String passwordRemitente = "qxaetsrxgepggvxu";
-  //String passwordRemitente = null;
+
+
+  //La contraseña comun es: dds2023v
+  //La contraseña para la app esta guardada en src->main->resources-> myConfigs.password
+  String passwordRemitente = null;
 
   Session session = null;
 
@@ -43,8 +45,8 @@ public class MailSender implements MedioNotificador {
 
   private void cargarContrasenia() {
     try {
-
-      InputStream inputStream = new FileInputStream("myConfigs.properties");
+      ClassLoader loader = Thread.currentThread().getContextClassLoader();
+      InputStream inputStream = loader.getResourceAsStream("myConfigs.password.txt");
 
       props.load(inputStream);
 
@@ -82,8 +84,8 @@ public class MailSender implements MedioNotificador {
 
   private void configurarPropiedades() {
 
-      //La contraseña comun es dds2023v
-      //this.cargarContrasenia();
+
+      this.cargarContrasenia();
       props.put("mail.smtp.host", "smtp.gmail.com"); // Cambia esto al servidor SMTP que estés utilizando
       props.put("mail.smtp.port", "587");
       props.put("mail.smtp.auth", "true"); // Habilita la autenticación SMTP si es necesario
