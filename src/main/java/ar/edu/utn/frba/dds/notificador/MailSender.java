@@ -51,6 +51,7 @@ public class MailSender extends MedioNotificador {
 
   }
 
+  //Guarda la contraseña cargada en un archivo de texto
   private void cargarContrasenia() {
     try {
       ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -65,17 +66,17 @@ public class MailSender extends MedioNotificador {
     }
   }
 
-
+  //Envia el mensaje
   private void enviar() {
     try {
       Transport.send(message);
     } catch (MessagingException e) {
       Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, e);
     }
-    // Envia el mensaje
 
   }
 
+  //Arma la estructura del mensaje
   private void armarMensaje(String correoDestino, String unTexto, String unAsunto) {
     try {
 
@@ -91,12 +92,12 @@ public class MailSender extends MedioNotificador {
     }
   }
 
+  //Configura el entorno para el envio de mails e inicia la sesion
   private void configurarPropiedades() {
-
 
     this.cargarContrasenia();
     props.put("mail.smtp.host", "smtp.gmail.com"); // Cambia esto al servidor SMTP que estés utilizando
-    props.put("mail.smtp.port", "587");
+    props.put("mail.smtp.port", "587"); //Puerto
     props.put("mail.smtp.auth", "true"); // Habilita la autenticación SMTP si es necesario
     props.put("mail.smtp.starttls.enable", "true");
     props.put("mail.smtp.user", correoRemitente); // Dirección de correo electrónico del remitente
