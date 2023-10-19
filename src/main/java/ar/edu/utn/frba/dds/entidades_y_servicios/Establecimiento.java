@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -18,7 +19,7 @@ public class Establecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Transient // FALTA; Tiene Herencia también
+  @ManyToOne
   private Localizacion localizacion;
   private String nombre;
 
@@ -43,7 +44,7 @@ public class Establecimiento {
 
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
-  @Transient // FALTA
+  @Transient
       ServicioUbicacion servicioUbicacion;
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
