@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.main;
 
 
-import ar.edu.utn.frba.dds.controller.DemoController;
+import ar.edu.utn.frba.dds.controller.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
 import spark.Spark;
@@ -22,11 +22,20 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.staticFileLocation("/public");
 
     HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-    DemoController demoController = new DemoController();
+    //DemoController demoController = new DemoController();
+    DemoControllerHome demoControllerhome = new DemoControllerHome();
+    ControllerLogin controllerLogin = new ControllerLogin();
 
-    Spark.get("/", (request, response) -> "¡Hola mundo!");
 
-    /*Spark.get("/", demoController::listar, engine);
+
+    //Spark.get("/", (request, response) -> "¡Hola mundo!");
+
+    Spark.get("/", demoControllerhome::mostrarInicio, engine);
+    Spark.get("/login", controllerLogin::mostrarLogin, engine);
+    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
+    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
+    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
+
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500"); //TODO
@@ -34,7 +43,7 @@ public class Routes implements WithSimplePersistenceUnit {
 
     Spark.before((request, response) -> {
       entityManager().clear();
-    });*/
+    });
   }
 
 
