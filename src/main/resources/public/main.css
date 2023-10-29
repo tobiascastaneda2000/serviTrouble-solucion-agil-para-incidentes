@@ -33,7 +33,7 @@ footer {
       background-color: #FF5733;
       color: #fff;
       padding: 10px 20px;
-      margin-left: 850px;
+      margin-left: 800px;
       margin-top: 15px;
       border: none;
       border-radius: 5px;
@@ -53,6 +53,7 @@ footer {
           margin-right: 20px;
     }
 
+
 .logo {
   width: 90%;
 }
@@ -62,3 +63,4 @@ margin-left: 10px;
 margin-right: 10px;
 margin-top: 5px;
 }
+
