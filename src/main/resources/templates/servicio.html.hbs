@@ -1,21 +1,13 @@
 {{#partial "principal" }}
 
-<ul>
-        {{#entidades}}
-            <li><a href="servicio/{{id}}">{{razonSocial}}</a></li>
-        {{/entidades}}
-</ul>
-
 <form method="POST">
 
     <label for="opciones">Servicio:</label>
     <select id="opciones" name="opciones">
         {{#servicios}}
-            <option value={{razonSocial}}>Opción 1</option>
+            <option value="">{{nombre}}</option>
         {{/servicios}}
     </select>
-
-
     <label>Observacion</label>
     <input type="textarea" name="observacion" maxlength="50">
     <input type="submit" value="Abrir Incidente">

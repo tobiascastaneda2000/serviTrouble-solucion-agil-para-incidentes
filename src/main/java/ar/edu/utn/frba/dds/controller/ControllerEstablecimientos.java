@@ -33,7 +33,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     String idEstablecimiento = request.params(":id");
     Establecimiento establecimiento = entityManager()
         .createQuery("from Establecimiento where id = :id", Establecimiento.class)
-        .setParameter("id", idEstablecimiento)
+        .setParameter("id", Long.parseLong(idEstablecimiento))
         .getResultList()
         .get(0);
     Map<String, Object> modelo = new HashMap<>();
@@ -42,7 +42,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("servicios", servicios);
     return new ModelAndView(modelo, "servicio.html.hbs");
   }
-
+/*
   public ModelAndView crearIncidente(Request request, Response response) {
 
 
@@ -58,6 +58,6 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("servicios", servicios);
     return new ModelAndView(modelo, "servicio.html.hbs");
-  }
+  }*/
   
 }

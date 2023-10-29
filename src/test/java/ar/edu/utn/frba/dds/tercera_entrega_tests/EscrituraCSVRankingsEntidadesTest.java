@@ -61,7 +61,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     unaEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
     unaEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
-    establecimientoGualmayen = new Establecimiento();
+    establecimientoGualmayen = new Establecimiento("nombre");
 
     gualmayen = new Entidad("Gualmayen", "alfajores.com");
 
@@ -80,7 +80,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     otroEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
     otroEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
-    establecimientoJorgito = new Establecimiento();
+    establecimientoJorgito = new Establecimiento("nombre");
 
     jorgito = new Entidad( "Jorgito", "jorgito.com");
 

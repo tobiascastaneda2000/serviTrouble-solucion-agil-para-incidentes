@@ -19,12 +19,9 @@ public class Servicio {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+  public Long id;
 
-  protected Servicio() {
-
-  }
-
+  public String nombre;
 
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
@@ -34,10 +31,19 @@ public class Servicio {
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;
 
-  public Servicio(TipoServicio tipoServicio) {
+  public Servicio(String nombre,TipoServicio tipoServicio) {
+    this.nombre = nombre;
     this.tipoServicio = tipoServicio;
   }
 
+  protected Servicio(){}
+  public Long getId(){
+    return id;
+  }
+
+  public String getNombre(){
+    return nombre;
+  }
 
   public void aniadirIncidente(Incidente incidente) {
     this.historialIncidentes.add(incidente);

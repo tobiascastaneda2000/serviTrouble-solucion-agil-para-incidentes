@@ -18,10 +18,9 @@ import javax.persistence.Transient;
 public class Establecimiento {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  public Long id;
   @ManyToOne
   private Localizacion localizacion;
-
   public String nombre;
 
   public List<Servicio> getServicios() {
@@ -29,14 +28,19 @@ public class Establecimiento {
   }
   @OneToMany
   @JoinColumn(name = "Establecimiento_id")
-  List<Servicio> servicios = new ArrayList<>();
+  public List<Servicio> servicios = new ArrayList<>();
 
   protected Establecimiento(){}
   public Establecimiento(String nombre) {
     this.nombre = nombre;
   }
 
-
+  public String getNombre(){
+    return nombre;
+  }
+  public Long getId(){
+    return id;
+  }
   public Localizacion getLocalizacion(){
     return localizacion;
   }

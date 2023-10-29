@@ -40,7 +40,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/entidades", controllerEntidades::mostrarEntidades, engine);
     Spark.get("/entidades/:id", controllerEstablecimientos::mostrarEstablecimientos, engine);
     Spark.get("/establecimientos/:id", controllerEstablecimientos::cargarIncidente, engine);
-    Spark.post("/establecimientos/:id", controllerEstablecimientos::crearIncidente, engine);
+    //Spark.post("/establecimientos/:id", controllerEstablecimientos::crearIncidente, engine);
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");

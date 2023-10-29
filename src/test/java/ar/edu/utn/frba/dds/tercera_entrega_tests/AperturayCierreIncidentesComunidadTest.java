@@ -37,7 +37,7 @@ class AperturayCierreIncidentesComunidadTest {
     repositorioComunidades.guardarComunidad(palermoGrupo);
     repositorioComunidades.guardarComunidad(otraComunidad);
     entidad = new Entidad("razonsocial","unEmail");
-    establecimiento = new Establecimiento();
+    establecimiento = new Establecimiento("nombre");
     servicio =new Servicio(TipoServicio.ASCENSOR);
     establecimiento.agregarServicio(servicio);
     entidad.agregarEstablecimiento(establecimiento);

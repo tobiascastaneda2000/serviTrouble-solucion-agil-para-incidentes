@@ -33,13 +33,14 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidad1.agregarEstablecimiento(establecimiento2);
       persist(entidad1);
 
-      Servicio servicio1 = new Servicio(TipoServicio.BAÑO);
+      Servicio servicio1 = new Servicio("baño primer piso",TipoServicio.BAÑO);
       persist(servicio1);
       establecimiento1.agregarServicio(servicio1);
 
-      Servicio servicio2 = new Servicio(TipoServicio.BAÑO);
+      Servicio servicio2 = new Servicio("baño segundo piso",TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio2);
       persist(servicio2);
+      persist(establecimiento1);
 
 
     });
