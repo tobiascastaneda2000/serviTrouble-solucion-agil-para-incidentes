@@ -54,7 +54,7 @@ class RankingEntidadesSegunCriterioTest {
 
     establecimientoGualmayen = new Establecimiento();
 
-    gualmayen = new Entidad(12, "Gualmayen", "alfajores.com");
+    gualmayen = new Entidad("Gualmayen", "alfajores.com");
 
     gualmayen.agregarEstablecimiento(establecimientoGualmayen);
 
@@ -73,7 +73,7 @@ class RankingEntidadesSegunCriterioTest {
 
     establecimientoJorgito = new Establecimiento();
 
-    jorgito = new Entidad(32, "Jorgito", "jorgito.com");
+    jorgito = new Entidad("Jorgito", "jorgito.com");
 
     jorgito.agregarEstablecimiento(establecimientoJorgito);
 

@@ -46,7 +46,7 @@ public class SugerenciaRevisionIncidenteTest {
     comunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades = RepositorioComunidades.instance;
     repositorioComunidades.guardarComunidad(comunidad);
-    entidad = new Entidad(1,"a","mail");
+    entidad = new Entidad("a","mail");
     establecimiento = new Establecimiento();
     entidad.agregarEstablecimiento(establecimiento);
     servicio = new Servicio(TipoServicio.ASCENSOR);
