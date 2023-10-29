@@ -31,11 +31,13 @@ footer {
       background-color: #FF5733;
       color: #fff;
       padding: 10px 20px;
-      margin-left: 1000px;
+      margin-left: 850px;
+      margin-top: 15px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
+      display: flex;
     }
 
 .navbar ul {
@@ -48,3 +50,8 @@ footer {
 .navbar li {
           margin-right: 20px;
     }
+
+.logo {
+  width: 90%;
+
+}
