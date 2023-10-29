@@ -29,6 +29,7 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerLogin controllerLogin = new ControllerLogin();
     ControllerEntidades controllerEntidades = new ControllerEntidades();
     ControllerEstablecimientos controllerEstablecimientos = new ControllerEstablecimientos();
+    ControllerIncidentes controllerIncidentes = new ControllerIncidentes();
 
 
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
@@ -40,7 +41,9 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/entidades", controllerEntidades::mostrarEntidades, engine);
     Spark.get("/entidades/:id", controllerEstablecimientos::mostrarEstablecimientos, engine);
     Spark.get("/establecimientos/:id", controllerEstablecimientos::cargarIncidente, engine);
-    //Spark.post("/establecimientos/:id", controllerEstablecimientos::crearIncidente, engine);
+    Spark.post("/establecimientos/:id", controllerEstablecimientos::crearIncidente);
+    Spark.get("/incidente-creado", controllerIncidentes::mostrarIncidenteCreado, engine);
+    Spark.get("/Incidente-No-Creado", controllerIncidentes::errorIncidente, engine);
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");

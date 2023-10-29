@@ -42,22 +42,28 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("servicios", servicios);
     return new ModelAndView(modelo, "servicio.html.hbs");
   }
-/*
+
   public ModelAndView crearIncidente(Request request, Response response) {
 
 
-    Incidente incidente = new Incidente();
-    String idEstablecimiento = request.params(":id");
-    Establecimiento establecimiento = entityManager()
-        .createQuery("from Establecimiento where id = :id", Establecimiento.class)
-        .setParameter("id", idEstablecimiento)
-        .getResultList()
-        .get(0);
-    Map<String, Object> modelo = new HashMap<>();
-    List<Servicio> servicios = establecimiento.getServicios();
-    modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("servicios", servicios);
-    return new ModelAndView(modelo, "servicio.html.hbs");
-  }*/
+    try {
+          String id = request.queryParams("servicio");
+          String observacion = request.queryParams("observacion");
+          Servicio servicio = entityManager()
+          .createQuery("from Servicio where id = :id", Servicio.class)
+          .setParameter("id", Long.parseLong(id))
+          .getResultList()
+          .get(0);
+          Long userid = request.session().attribute("user_id");
+          Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(userid);
+          usuario.abrirIncidente(servicio,observacion);
+          response.redirect("/incidente-creado");
+      return null;
+    } catch (Exception e) {
+      System.out.println("error");
+      response.redirect("/Incidente-No-Creado");
+      return null;
+    }
+  }
   
 }

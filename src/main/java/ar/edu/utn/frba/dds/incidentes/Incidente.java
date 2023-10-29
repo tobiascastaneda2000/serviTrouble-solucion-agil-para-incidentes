@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
 public class Incidente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  public Long id;
   @Enumerated(EnumType.STRING)
   public EstadoIncidente estadoIncidente;
   public String observacion;
@@ -66,6 +67,9 @@ public class Incidente {
 
   public String getObservacion() {
     return observacion;
+  }
+  public Long getId(){
+    return id;
   }
 
 

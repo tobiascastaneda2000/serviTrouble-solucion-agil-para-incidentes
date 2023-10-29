@@ -13,6 +13,7 @@ import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionExce
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import javax.persistence.Entity;
@@ -183,7 +184,7 @@ public class Usuario {
 
   public Incidente abrirIncidente(Servicio servicio, String observacion) {
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
-    Incidente incidente = new Incidente(observacion, servicio);
+    Incidente incidente = new Incidente(observacion,servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
     comunidades.forEach(c -> c.abrirIncidenteEnComunidad(observacion,servicio));
     return incidente;

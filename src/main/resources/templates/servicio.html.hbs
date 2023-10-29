@@ -3,9 +3,9 @@
 <form method="POST">
 
     <label for="opciones">Servicio:</label>
-    <select id="opciones" name="opciones">
+    <select id="servicio" name="servicio">
         {{#servicios}}
-            <option value="">{{nombre}}</option>
+            <option value={{id}}>{{nombre}}</option>
         {{/servicios}}
     </select>
     <label>Observacion</label>
