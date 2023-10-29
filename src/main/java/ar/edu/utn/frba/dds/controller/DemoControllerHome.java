@@ -15,4 +15,18 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
     modelo.put("anio", LocalDate.now().getYear());
     return new ModelAndView(modelo, "index.html.hbs");
   }
+
+  public ModelAndView mostrarHome(Request request, Response response) {
+
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      return new ModelAndView(modelo, "home.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+  }
 }

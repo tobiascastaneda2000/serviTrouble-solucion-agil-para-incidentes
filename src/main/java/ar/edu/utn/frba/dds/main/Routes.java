@@ -4,6 +4,7 @@ package ar.edu.utn.frba.dds.main;
 import ar.edu.utn.frba.dds.controller.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
+import spark.Session;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -28,21 +29,16 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerLogin controllerLogin = new ControllerLogin();
 
 
-
-    //Spark.get("/", (request, response) -> "¡Hola mundo!");
-
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
     Spark.get("/login", controllerLogin::mostrarLogin, engine);
     Spark.post("/login", controllerLogin::crearSesion);
     Spark.get("/login-error", controllerLogin::mostrarLoginError, engine);
     Spark.post("/login-error", controllerLogin::crearSesion);
-    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
-    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
-    //Spark.get("/", demoControllerhome::mostrarInicio, engine);
+    Spark.get("/home", demoControllerhome::mostrarHome, engine);
 
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
-      response.redirect("/500"); //TODO
+      response.redirect("/500");
     });
 
     Spark.before((request, response) -> {

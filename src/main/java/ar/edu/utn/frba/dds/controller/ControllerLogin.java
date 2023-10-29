@@ -30,7 +30,7 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
           request.queryParams("contrasenia"));
 
       request.session().attribute("user_id", usuario.getId());
-      response.redirect("/");
+      response.redirect("/home");
       return null;
     } catch (Exception e) {
       response.redirect("/login-error");
