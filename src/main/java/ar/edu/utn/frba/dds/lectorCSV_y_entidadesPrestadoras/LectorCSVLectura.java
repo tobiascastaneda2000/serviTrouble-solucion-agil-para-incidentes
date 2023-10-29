@@ -80,7 +80,7 @@ public class LectorCSVLectura {
     if (razonSocial.equals("") || email.equals("")) {
       throw new CampoDeEntidadVacioException();
     }
-    return new Entidad(id, razonSocial, email);
+    return new Entidad(razonSocial, email);
   }
 
 

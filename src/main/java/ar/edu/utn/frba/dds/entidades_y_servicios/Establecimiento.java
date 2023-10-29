@@ -21,7 +21,8 @@ public class Establecimiento {
   private Long id;
   @ManyToOne
   private Localizacion localizacion;
-  private String nombre;
+
+  public String nombre;
 
   public List<Servicio> getServicios() {
     return servicios;
@@ -29,6 +30,12 @@ public class Establecimiento {
   @OneToMany
   @JoinColumn(name = "Establecimiento_id")
   List<Servicio> servicios = new ArrayList<>();
+
+  protected Establecimiento(){}
+  public Establecimiento(String nombre) {
+    this.nombre = nombre;
+  }
+
 
   public Localizacion getLocalizacion(){
     return localizacion;

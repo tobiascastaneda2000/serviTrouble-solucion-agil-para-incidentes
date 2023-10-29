@@ -43,8 +43,7 @@ public class Entidad {
     establecimientos.add(establecimiento);
   }
 
-  public Entidad(int id, String razonSocial, String email) {
-    this.id = id;
+  public Entidad(String razonSocial, String email) {
     this.razonSocial = razonSocial;
     this.email = email;
   }
