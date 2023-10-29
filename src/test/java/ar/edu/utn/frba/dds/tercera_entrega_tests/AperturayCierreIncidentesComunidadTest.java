@@ -26,8 +26,8 @@ class AperturayCierreIncidentesComunidadTest {
 
   @BeforeEach
   void setUp() {
-    usuarioInformante = new Usuario(1,"Leonardo ", "Dicaprio", "mail@utn.com.ar");
-    otroUsuario = new Usuario(1,"Margot ", "Robbie", "mail2@utn.com.ar");
+    usuarioInformante = new Usuario("Leonardo ", "Dicaprio", "mail@utn.com.ar");
+    otroUsuario = new Usuario("Margot ", "Robbie", "mail2@utn.com.ar");
     palermoGrupo = new Comunidad();
     otraComunidad = new Comunidad();
     repositorioComunidades = RepositorioComunidades.getInstance();

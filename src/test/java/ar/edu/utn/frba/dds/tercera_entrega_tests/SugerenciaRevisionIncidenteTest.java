@@ -39,8 +39,8 @@ public class SugerenciaRevisionIncidenteTest {
 
   @BeforeEach
   void setUp()  {
-    usuarioInformante = new Usuario(2, "a", "b", "contacto");
-    usuario = new Usuario(1, "a", "b", "mail@gmail.com");
+    usuarioInformante = new Usuario("a", "b", "contacto");
+    usuario = new Usuario("a", "b", "mail@gmail.com");
     comunidad = new Comunidad();
     comunidad.registrarMiembro(usuario);
     comunidad.registrarMiembro(usuarioInformante);

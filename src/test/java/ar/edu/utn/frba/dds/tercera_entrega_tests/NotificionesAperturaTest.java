@@ -34,8 +34,8 @@ public class NotificionesAperturaTest {
   void setUp(){
     repositorioComunidades = RepositorioComunidades.getInstance();
     comunidad = new Comunidad();
-    unUsuario = new Usuario(1, "Messi", "alguien", "mail");
-    otroUsuario = new Usuario(2, "Cristiano", "alguien", "otroMail");
+    unUsuario = new Usuario( "Messi", "alguien", "mail");
+    otroUsuario = new Usuario("Cristiano", "alguien", "otroMail");
     repositorioComunidades.guardarComunidad(comunidad);
     servicio = new Servicio(TipoServicio.ESCALERA_MECANICA);
     comunidad.registrarMiembro(unUsuario);

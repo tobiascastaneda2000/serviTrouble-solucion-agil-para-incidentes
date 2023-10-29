@@ -30,7 +30,7 @@ public class AperturaCierreIncidentesEntidadTest {
   @BeforeEach
   void setUp() {
 
-    usuario = new Usuario(1,"Juan ", "Perez", "unMail");
+    usuario = new Usuario("Juan ", "Perez", "unMail");
     repoUsuarios.guardarUsuario(usuario);
     servicio =new Servicio(TipoServicio.ASCENSOR);
     unEstablecimiento = new Establecimiento();

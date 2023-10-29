@@ -4,7 +4,8 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
+import ar.edu.utn.frba.dds.repositorios.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,5 +15,20 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     return new ModelAndView(modelo, "login.html.hbs");
+  }
+
+  public Void crearSesion(Request request, Response response) {
+    try {
+      Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+          request.queryParams("nombre"),
+          request.queryParams("contrasenia"));
+
+      request.session().attribute("user_id", usuario.getId());
+      response.redirect("/");
+      return null;
+    } catch (Exception e) {
+      response.redirect("/login");
+      return null;
+    }
   }
 }

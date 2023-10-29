@@ -13,6 +13,8 @@ import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionExce
 import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,7 +47,6 @@ public class Usuario {
 
   int intentos;
 
-
   boolean sesionAbierta;
 
   @ManyToOne
@@ -69,10 +70,9 @@ public class Usuario {
   protected Usuario() {
   }
 
-  public Usuario(int id, String nombre, String contrasenia, String contacto) {
-    this.id = id;
+  public Usuario(String nombre, String contrasenia, String contacto) {
     this.usuario = nombre;
-    this.contrasenia = contrasenia;
+    this.contrasenia =  contrasenia;
     this.intentos = 0;
     this.sesionAbierta = false;
     this.contacto = contacto;
@@ -239,7 +239,6 @@ public class Usuario {
       notificarIncidente(incidente);
     }
   }
-
 
 }
 

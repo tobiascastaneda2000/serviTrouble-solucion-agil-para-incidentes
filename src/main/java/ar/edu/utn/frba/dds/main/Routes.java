@@ -18,6 +18,7 @@ public class Routes implements WithSimplePersistenceUnit {
   public void start() {
     System.out.println("Iniciando servidor");
 
+    new Bootstrap().run();
     Spark.port(8080);
     Spark.staticFileLocation("/public");
 
@@ -32,6 +33,7 @@ public class Routes implements WithSimplePersistenceUnit {
 
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
     Spark.get("/login", controllerLogin::mostrarLogin, engine);
+    Spark.post("/login", controllerLogin::crearSesion);
     //Spark.get("/", demoControllerhome::mostrarInicio, engine);
     //Spark.get("/", demoControllerhome::mostrarInicio, engine);
     //Spark.get("/", demoControllerhome::mostrarInicio, engine);

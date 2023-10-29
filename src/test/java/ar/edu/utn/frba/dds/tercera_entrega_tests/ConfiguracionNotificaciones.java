@@ -27,7 +27,7 @@ public class ConfiguracionNotificaciones {
 
   medioNotificador = mock(MedioNotificador.class);
   horario = new Horario(10,10);
-  usuario = new Usuario(1,"pepe","1234","email");
+  usuario = new Usuario("pepe","1234","email");
   usuario.setMedioNotificador(medioNotificador);
   usuario.agregarHorario(horario);
   servicio = new Servicio(TipoServicio.ASCENSOR);

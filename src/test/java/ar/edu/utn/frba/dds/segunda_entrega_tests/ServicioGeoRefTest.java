@@ -29,7 +29,7 @@ public class ServicioGeoRefTest {
 
   @BeforeEach
   void setUp() throws IOException {
-    usuario = new Usuario(11,"Pepe", "jfisjfijs", "mail");
+    usuario = new Usuario("Pepe", "jfisjfijs", "mail");
 
     jujuy = new Departamento();
     listadoProvincias = Collections.singletonList(jujuy);
