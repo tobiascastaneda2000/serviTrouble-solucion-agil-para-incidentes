@@ -34,7 +34,7 @@ public class AperturaCierreIncidentesEntidadTest {
     repoUsuarios.guardarUsuario(usuario);
     servicio =new Servicio(TipoServicio.ASCENSOR);
     unEstablecimiento = new Establecimiento();
-    unaEntidad= new Entidad(1,"razonsocial","unMail");
+    unaEntidad= new Entidad("razonsocial","unMail");
     unEstablecimiento.agregarServicio(servicio);
     unaEntidad.agregarEstablecimiento(unEstablecimiento);
     usuario.getEntidadesInteres().add(unaEntidad);
