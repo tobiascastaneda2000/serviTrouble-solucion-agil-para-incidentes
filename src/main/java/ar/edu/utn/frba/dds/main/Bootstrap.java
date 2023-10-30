@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.main;
 
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.Miembro;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoComunidad;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
@@ -20,6 +23,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
   public void run() {
     withTransaction(() -> {
+
       Usuario usuario = new Usuario("facu", "123456","contacto");
       persist(usuario);
       Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
@@ -42,6 +46,14 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       persist(servicio2);
       persist(establecimiento1);
 
+      Comunidad comunidad1 = new Comunidad("nombre1");
+      comunidad1.aniadirServicioInteres(servicio1);
+      entityManager().persist(comunidad1);
+      Comunidad comunidad2 = new Comunidad("nombre2");
+      entityManager().persist(comunidad2);
+
+      comunidad1.agregarUsuario(usuario);
+      persist(comunidad1);
 
     });
   }

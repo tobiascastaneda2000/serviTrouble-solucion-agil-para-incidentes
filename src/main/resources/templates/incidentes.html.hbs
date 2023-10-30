@@ -1,0 +1,17 @@
+{{#partial "principal" }}
+
+<ul>
+        {{#incidentesAbiertos}}
+            <li><a>{{observacion}}</a></li>
+        {{/incidentesAbiertos}}
+</ul>
+
+<ul>
+        {{#incidentesCerrados}}
+            <li><a>{{observacion}}</a></li>
+        {{/incidentesCerrados}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

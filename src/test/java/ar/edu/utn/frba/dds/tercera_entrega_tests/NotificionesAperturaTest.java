@@ -33,11 +33,11 @@ public class NotificionesAperturaTest {
   @BeforeEach
   void setUp(){
     repositorioComunidades = RepositorioComunidades.getInstance();
-    comunidad = new Comunidad();
+    comunidad = new Comunidad("nombre");
     unUsuario = new Usuario( "Messi", "alguien", "mail");
     otroUsuario = new Usuario("Cristiano", "alguien", "otroMail");
     repositorioComunidades.guardarComunidad(comunidad);
-    servicio = new Servicio(TipoServicio.ESCALERA_MECANICA);
+    servicio = new Servicio("nombre",TipoServicio.ESCALERA_MECANICA);
     comunidad.registrarMiembro(unUsuario);
     unUsuario.abrirIncidente(servicio,"abc");
     medioNotificador1 = new WhatsAppSender();

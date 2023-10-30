@@ -2,9 +2,9 @@ package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 
 import ar.edu.utn.frba.dds.incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
-import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,12 +18,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Comunidad {
+public class Comunidad implements WithSimplePersistenceUnit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String nombre;
+  public Long id;
+
+  public String nombre;
   @OneToMany
   @JoinColumn(name = "comunidad_id")
   public Set<Miembro> miembros;
@@ -40,8 +41,18 @@ public class Comunidad {
   }
   //-------------------------CONSTRUCTOR----------------------------------------//
 
-  public Comunidad() {
+  protected Comunidad(){
+  }
+
+  public Comunidad(String nombre) {
+    this.nombre = nombre;
     this.miembros = new HashSet<>();
+  }
+
+  public void agregarUsuario(Usuario usuario){
+    Miembro miembro = new Miembro(usuario,PermisoComunidad.USUARIO_COMUNIDAD);
+    miembros.add(miembro);
+    persist(miembro);
   }
 
   //-------------------------GETTERS-------------------------------------------//
@@ -74,6 +85,14 @@ public class Comunidad {
 
   public boolean contieneUsuario(Usuario usuario) {
     return miembros.stream().map(Miembro::getUsuario).toList().contains(usuario);
+  }
+
+  public Long getId(){
+    return id;
+  }
+
+  public String getNombre(){
+    return nombre;
   }
 
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//

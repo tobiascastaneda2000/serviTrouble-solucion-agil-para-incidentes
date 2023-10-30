@@ -8,7 +8,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
-
+import java.util.*;
 import java.util.Set;
 import java.time.LocalDateTime;
 
@@ -46,7 +46,7 @@ public class MainTareasPlanificadas {
   //------------------------------------SUGERENCIA REVISION INCIDENTES------------------------//
 
   public static void sugerirIncidentes(){
-    Set<Comunidad> comunidades = RepositorioComunidades.instance.getComunidades();
+    List<Comunidad> comunidades = RepositorioComunidades.instance.getComunidades();
     comunidades.forEach(c->c.sugerirIncidentes());
   }
 

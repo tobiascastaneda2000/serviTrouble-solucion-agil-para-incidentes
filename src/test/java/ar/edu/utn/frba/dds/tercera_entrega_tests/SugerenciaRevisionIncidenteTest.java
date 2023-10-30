@@ -41,7 +41,7 @@ public class SugerenciaRevisionIncidenteTest {
   void setUp()  {
     usuarioInformante = new Usuario("a", "b", "contacto");
     usuario = new Usuario("a", "b", "mail@gmail.com");
-    comunidad = new Comunidad();
+    comunidad = new Comunidad("nombre");
     comunidad.registrarMiembro(usuario);
     comunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades = RepositorioComunidades.instance;
@@ -49,7 +49,7 @@ public class SugerenciaRevisionIncidenteTest {
     entidad = new Entidad("a","mail");
     establecimiento = new Establecimiento("nombre");
     entidad.agregarEstablecimiento(establecimiento);
-    servicio = new Servicio(TipoServicio.ASCENSOR);
+    servicio = new Servicio("nombre",TipoServicio.ASCENSOR);
     comunidad.aniadirServicioInteres(servicio);
     establecimiento.agregarServicio(servicio);
     servicioUbicacion = mock(ServicioUbicacion.class);

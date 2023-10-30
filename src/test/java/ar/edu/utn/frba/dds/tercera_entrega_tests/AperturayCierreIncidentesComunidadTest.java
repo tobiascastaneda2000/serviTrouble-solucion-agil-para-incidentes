@@ -28,8 +28,8 @@ class AperturayCierreIncidentesComunidadTest {
   void setUp() {
     usuarioInformante = new Usuario("Leonardo ", "Dicaprio", "mail@utn.com.ar");
     otroUsuario = new Usuario("Margot ", "Robbie", "mail2@utn.com.ar");
-    palermoGrupo = new Comunidad();
-    otraComunidad = new Comunidad();
+    palermoGrupo = new Comunidad("uno");
+    otraComunidad = new Comunidad("dos");
     repositorioComunidades = RepositorioComunidades.getInstance();
     palermoGrupo.registrarMiembro(usuarioInformante);
     palermoGrupo.registrarMiembro(otroUsuario);
@@ -38,7 +38,7 @@ class AperturayCierreIncidentesComunidadTest {
     repositorioComunidades.guardarComunidad(otraComunidad);
     entidad = new Entidad("razonsocial","unEmail");
     establecimiento = new Establecimiento("nombre");
-    servicio =new Servicio(TipoServicio.ASCENSOR);
+    servicio =new Servicio("nombre",TipoServicio.ASCENSOR);
     establecimiento.agregarServicio(servicio);
     entidad.agregarEstablecimiento(establecimiento);
     palermoGrupo.serviciosDeInteres.add(servicio);

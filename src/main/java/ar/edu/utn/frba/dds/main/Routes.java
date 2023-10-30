@@ -24,26 +24,34 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.staticFileLocation("/public");
 
     HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-    //DemoController demoController = new DemoController();
     DemoControllerHome demoControllerhome = new DemoControllerHome();
     ControllerLogin controllerLogin = new ControllerLogin();
     ControllerEntidades controllerEntidades = new ControllerEntidades();
     ControllerEstablecimientos controllerEstablecimientos = new ControllerEstablecimientos();
     ControllerIncidentes controllerIncidentes = new ControllerIncidentes();
+    ControllerComunidades controllerComunidades = new ControllerComunidades();
 
 
+    //LOGIN Y HOME
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
     Spark.get("/login", controllerLogin::mostrarLogin, engine);
     Spark.post("/login", controllerLogin::crearSesion);
     Spark.get("/login-error", controllerLogin::mostrarLoginError, engine);
     Spark.post("/login-error", controllerLogin::crearSesion);
     Spark.get("/home", demoControllerhome::mostrarHome, engine);
+
+   //APERTURA DE INCIDENTES
     Spark.get("/entidades", controllerEntidades::mostrarEntidades, engine);
     Spark.get("/entidades/:id", controllerEstablecimientos::mostrarEstablecimientos, engine);
     Spark.get("/establecimientos/:id", controllerEstablecimientos::cargarIncidente, engine);
     Spark.post("/establecimientos/:id", controllerEstablecimientos::crearIncidente);
     Spark.get("/incidente-creado", controllerIncidentes::mostrarIncidenteCreado, engine);
     Spark.get("/Incidente-No-Creado", controllerIncidentes::errorIncidente, engine);
+
+    //VISUALIZACION Y CIERRE DE INCIDENTES
+    Spark.get("/comunidades", controllerComunidades::mostrarComunidades, engine);
+    Spark.get("/comunidades/:id", controllerComunidades::mostrarIncidentes, engine);
+
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");
