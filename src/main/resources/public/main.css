@@ -62,5 +62,50 @@ main{
 margin-left: 10px;
 margin-right: 10px;
 margin-top: 5px;
+
+display: block;
+justify-content: space-around;
+align-items: center;
 }
 
+.full-screen-buttons {
+  display: inline;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+
+.full-screen-button1 {
+  padding: 100px 100px;
+  font-size: 20px;
+  background-color: #2f2d3d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin: 9px 15px;
+  width: 630px;
+}
+
+.full-screen-button2 {
+  padding: 50px 100px;
+  font-size: 20px;
+  background-color: #2f2d3d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin: 9px 15px;
+  width: 1300px;
+}
+
+.full-screen-button:hover {
+  background-color: #2980b9;
+}
