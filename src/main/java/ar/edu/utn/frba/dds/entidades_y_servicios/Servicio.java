@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -48,7 +49,17 @@ public class Servicio {
   public void aniadirIncidente(Incidente incidente) {
     this.historialIncidentes.add(incidente);
   }
-  
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Servicio: ");
+    sb.append("[id]: "+this.id+" ");
+    sb.append("[nombre]: "+this.nombre+" ");
+    sb.append("[incidentes]: { "+this.historialIncidentes.toString()+" }");
+    return sb.toString();
+  }
+
 
   //DEVOLVER LOS SERVICIOS DE UN MISMO INCIDENTES QUE PASE EL FILTRO DEL CRITERIO CANTIDAD REPORTES
 

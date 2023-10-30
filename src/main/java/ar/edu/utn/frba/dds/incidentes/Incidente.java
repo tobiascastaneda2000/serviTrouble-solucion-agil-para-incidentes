@@ -94,5 +94,14 @@ public class Incidente {
     return Duration.between(this.fechaHoraAbre, this.fechaHoraCierre);
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Incidente: ");
+    sb.append("[id]: "+this.id+" ");
+    sb.append("[estado]: "+this.estadoIncidente+" ");
+    sb.append("[obs]: "+this.observacion+" ");
+    return sb.toString();
+  }
 
 }
