@@ -19,28 +19,45 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarEstablecimientos(Request request, Response response) {
 
-    String id = request.params(":id");
-    Entidad entidad = RepoEntidades.instance.buscarPorId(Integer.parseInt(id));
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    List<Establecimiento> establecimientos = entidad.getEstablecimientos();
-    modelo.put("establecimientos", establecimientos);
-    return new ModelAndView(modelo, "establecimientos.html.hbs");
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Entidad entidad = RepoEntidades.instance.buscarPorId(Integer.parseInt(id));
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      List<Establecimiento> establecimientos = entidad.getEstablecimientos();
+      modelo.put("establecimientos", establecimientos);
+      return new ModelAndView(modelo, "establecimientos.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
   }
 
   public ModelAndView cargarIncidente(Request request, Response response) {
 
-    String idEstablecimiento = request.params(":id");
-    Establecimiento establecimiento = entityManager()
-        .createQuery("from Establecimiento where id = :id", Establecimiento.class)
-        .setParameter("id", Long.parseLong(idEstablecimiento))
-        .getResultList()
-        .get(0);
-    Map<String, Object> modelo = new HashMap<>();
-    List<Servicio> servicios = establecimiento.getServicios();
-    modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("servicios", servicios);
-    return new ModelAndView(modelo, "servicio.html.hbs");
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String idEstablecimiento = request.params(":id");
+      Establecimiento establecimiento = entityManager()
+          .createQuery("from Establecimiento where id = :id", Establecimiento.class)
+          .setParameter("id", Long.parseLong(idEstablecimiento))
+          .getResultList()
+          .get(0);
+      Map<String, Object> modelo = new HashMap<>();
+      List<Servicio> servicios = establecimiento.getServicios();
+      modelo.put("anio", LocalDate.now().getYear());
+      modelo.put("servicios", servicios);
+      return new ModelAndView(modelo, "servicio.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
   }
 
   public ModelAndView crearIncidente(Request request, Response response) {

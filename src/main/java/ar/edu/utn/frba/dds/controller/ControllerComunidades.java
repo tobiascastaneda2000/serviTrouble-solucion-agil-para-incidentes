@@ -20,27 +20,43 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarComunidades(Request request, Response response) {
 
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    List<Comunidad> comunidades = RepositorioComunidades.getInstance().listarComunidades();
-    modelo.put("comunidades", comunidades);
-    return new ModelAndView(modelo, "comunidades.html.hbs");
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      List<Comunidad> comunidades = RepositorioComunidades.getInstance().listarComunidades();
+      modelo.put("comunidades", comunidades);
+      return new ModelAndView(modelo, "comunidades.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
   }
 
   public ModelAndView mostrarIncidentes(Request request, Response response) {
 
-    String id = request.params(":id");
-    Comunidad com = entityManager().find(Comunidad.class,Long.parseLong(id));
-    Comunidad comunidad = RepositorioComunidades.instance.buscarPorId(Long.parseLong(id));
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    List<Incidente> incidentesAbiertos = comunidad.incidentes;
-    System.out.println(comunidad.incidentes.size());
-    System.out.println(com.incidentes.size());
-    List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
-    modelo.put("incidentesAbiertos", incidentesAbiertos);
-    modelo.put("incidentesCerrados", incidentesCerrados);
-    return new ModelAndView(modelo, "incidentes.html.hbs");
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Comunidad com = entityManager().find(Comunidad.class,Long.parseLong(id));
+      Comunidad comunidad = RepositorioComunidades.instance.buscarPorId(Long.parseLong(id));
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      List<Incidente> incidentesAbiertos = comunidad.incidentes;
+      System.out.println(comunidad.incidentes.size());
+      System.out.println(com.incidentes.size());
+      List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
+      modelo.put("incidentesAbiertos", incidentesAbiertos);
+      modelo.put("incidentesCerrados", incidentesCerrados);
+      return new ModelAndView(modelo, "incidentes.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
   }
 
 }

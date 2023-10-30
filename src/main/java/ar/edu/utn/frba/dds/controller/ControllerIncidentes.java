@@ -17,16 +17,33 @@ import java.util.List;
 public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarIncidenteCreado(Request request, Response response) {
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    return new ModelAndView(modelo, "incidenteCreado.html.hbs");
+
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      return new ModelAndView(modelo, "incidenteCreado.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
   }
 
   public ModelAndView errorIncidente(Request request, Response response) {
 
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
   }
 
 }
