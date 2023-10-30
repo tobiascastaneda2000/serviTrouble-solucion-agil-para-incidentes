@@ -28,10 +28,11 @@ public class Comunidad implements WithSimplePersistenceUnit {
   @OneToMany
   @JoinColumn(name = "comunidad_id")
   public Set<Miembro> miembros;
-  @ManyToMany //ya que creamos un incidente para varias comunidades
-  public List<Incidente> incidentes = new ArrayList<>();
   @OneToMany
   @JoinColumn(name = "comunidad_id")
+  public List<Incidente> incidentes = new ArrayList<>();
+  @OneToMany
+  @JoinColumn(name = "comunidad2_id")
   public List<Incidente> incidentesCerrados = new ArrayList<>();
   @ManyToMany
   public List<Servicio> serviciosDeInteres = new ArrayList<Servicio>();
@@ -101,7 +102,12 @@ public class Comunidad implements WithSimplePersistenceUnit {
 
     Incidente incidente = new Incidente(observacion, servicio);
     incidentes.add(incidente);
+    persist(incidente);
+    entityManager().getTransaction().begin();
+    entityManager().flush();
+    entityManager().getTransaction().commit();
     miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
+
   }
 
   //-------------------------------CIERRE DE INCIDENTE-------------------------------------------------//
