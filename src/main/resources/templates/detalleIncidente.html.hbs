@@ -1,0 +1,16 @@
+{{#partial "principal" }}
+
+<h1>DETALLE DEL INCIDENTE</h1>
+
+<ul>
+{{#incidente}}
+     <li>Observacion: {{observacion}}</li>
+     <li>Estado: {{estado}}</li>
+     <li>Fecha Apertura: {{fechaApertura}}</li>
+     <li>Servicio: {{servicioAsociado.nombre}}</li>
+{{/incidente}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

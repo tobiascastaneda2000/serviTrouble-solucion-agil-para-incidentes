@@ -4,7 +4,10 @@
 
 <ul>
         {{#incidentesAbiertos}}
-            <li><a>{{observacion}}</a></li>
+            <li>
+            <a>{{observacion}}</a>
+            <a href="/incidente/{{id}}">Detalles</a>
+            </li>
         {{/incidentesAbiertos}}
 </ul>
 

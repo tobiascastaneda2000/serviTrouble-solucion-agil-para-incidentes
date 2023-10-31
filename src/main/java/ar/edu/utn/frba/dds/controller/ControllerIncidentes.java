@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarIncidenteCreado(Request request, Response response) {
@@ -38,6 +39,30 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
+  }
+
+
+  public ModelAndView verDetalle(Request request, Response response) {
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
+          .setParameter("id",Long.parseLong(id)).getResultList().get(0);
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      modelo.put("incidente",incidente);
+      modelo.put("estado",incidente.estadoIncidente.toString());
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+      String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
+      modelo.put("fechaApertura",fechaAperturaFormateada);
+      return new ModelAndView(modelo, "detalleIncidente.html.hbs");
     }
     else{
       response.redirect("/");
