@@ -22,9 +22,11 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
+      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
-      List<Comunidad> comunidades = RepositorioComunidades.getInstance().listarComunidades();
+      //List<Comunidad> comunidades = RepositorioComunidades.getInstance().listarComunidades();
+      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
       modelo.put("comunidades", comunidades);
       return new ModelAndView(modelo, "comunidades.html.hbs");
     }

@@ -11,9 +11,16 @@ import java.util.Map;
 public class DemoControllerHome implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarInicio(Request request, Response response) {
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    return new ModelAndView(modelo, "index.html.hbs");
+    Long id = request.session().attribute("user_id");
+    if (id == null) {
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      return new ModelAndView(modelo, "index.html.hbs");
+    }
+    else{
+      response.redirect("/home");
+      return null;
+    }
   }
 
   public ModelAndView mostrarHome(Request request, Response response) {

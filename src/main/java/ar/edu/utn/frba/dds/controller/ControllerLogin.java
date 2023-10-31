@@ -9,6 +9,8 @@ import ar.edu.utn.frba.dds.repositorios.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import spark.Session;
+
 public class ControllerLogin implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarLogin(Request request, Response response) {
@@ -37,4 +39,13 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
       return null;
     }
   }
+
+
+  public ModelAndView cerrarSesion(Request request, Response response) {
+
+    request.session().removeAttribute("user_id");
+    response.redirect("/");
+    return null;
+  }
+
 }

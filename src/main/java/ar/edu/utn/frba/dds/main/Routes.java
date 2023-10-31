@@ -38,6 +38,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.post("/login", controllerLogin::crearSesion);
     Spark.get("/login-error", controllerLogin::mostrarLoginError, engine);
     Spark.post("/login-error", controllerLogin::crearSesion);
+    Spark.get("/cerrar-sesion",controllerLogin::cerrarSesion);
     Spark.get("/home", demoControllerhome::mostrarHome, engine);
 
    //APERTURA DE INCIDENTES
