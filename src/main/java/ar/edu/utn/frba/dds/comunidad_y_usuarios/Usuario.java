@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Usuario {
+public class Usuario implements WithSimplePersistenceUnit{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
@@ -214,6 +214,11 @@ public class Usuario {
   public void guardarNotificacion(Incidente incidente) {
     Notificacion notificacion = new Notificacion(this, incidente);
     notificacionesPendientes.add(notificacion);
+    persist(incidente);
+    persist(notificacion);
+    entityManager().getTransaction().begin();
+    entityManager().flush();
+    entityManager().getTransaction().commit();
   }
 
   public Notificacion obtenerNotificacion(Incidente incidente) {

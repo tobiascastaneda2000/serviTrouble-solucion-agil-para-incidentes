@@ -39,6 +39,12 @@ public class RepositorioComunidades implements WithSimplePersistenceUnit {
         .getResultList();
   }
 
+  public Comunidad contieneIncidente(Incidente incidente){
+
+    List<Comunidad>comunidades = listarComunidades();
+    return comunidades.stream().filter(c->c.contieneIncidente(incidente)).toList().get(0);
+  }
+
   public Comunidad buscarPorId(Long id) {
 
     return entityManager()

@@ -47,7 +47,6 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   }
 
-
   public ModelAndView verDetalle(Request request, Response response) {
 
     Long idsession = request.session().attribute("user_id");
@@ -69,6 +68,17 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       return null;
     }
 
+  }
+
+  public ModelAndView cerrarIncidente(Request request, Response response) {
+
+    String id = request.params(":id");
+    Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
+        .setParameter("id",Long.parseLong(id)).getResultList().get(0);
+    Comunidad comunidad = RepositorioComunidades.instance.contieneIncidente(incidente);
+    comunidad.cerrarIncidente(incidente);
+    response.redirect("/home");
+    return null;
   }
 
 }

@@ -102,11 +102,13 @@ public class Comunidad implements WithSimplePersistenceUnit {
 
     Incidente incidente = new Incidente(observacion, servicio);
     incidentes.add(incidente);
+    miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
     persist(incidente);
     entityManager().getTransaction().begin();
     entityManager().flush();
     entityManager().getTransaction().commit();
-    miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
+
+
 
   }
 
@@ -115,8 +117,13 @@ public class Comunidad implements WithSimplePersistenceUnit {
   public void cerrarIncidente(Incidente incidente) {
     incidente.cerrar();
     incidentes.remove(incidente);
-    miembros.forEach(m->m.usuario.getNotificaciones().remove(m.usuario.obtenerNotificacion(incidente)));
+    //miembros.forEach(m->m.usuario.getNotificaciones().remove(m.usuario.obtenerNotificacion(incidente)));
     incidentesCerrados.add(incidente);
+    persist(incidente);
+    entityManager().getTransaction().begin();
+    entityManager().flush();
+    entityManager().getTransaction().commit();
+
   }
 
   //---------------------------------------------------------------------------------------------------//
@@ -142,4 +149,7 @@ public class Comunidad implements WithSimplePersistenceUnit {
   }
 
 
+  public boolean contieneIncidente(Incidente incidente) {
+    return incidentes.contains(incidente);
+  }
 }

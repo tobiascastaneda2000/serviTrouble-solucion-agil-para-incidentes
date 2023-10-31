@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.incidentes;
 
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Incidente {
+public class Incidente implements WithSimplePersistenceUnit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
@@ -79,6 +80,10 @@ public class Incidente {
 
     this.fechaHoraCierre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.CERRADO;
+    persist(this);
+    entityManager().getTransaction().begin();
+    entityManager().flush();
+    entityManager().getTransaction().commit();
   }
 
   //-------------------------RANKINGS----------------------------------------//

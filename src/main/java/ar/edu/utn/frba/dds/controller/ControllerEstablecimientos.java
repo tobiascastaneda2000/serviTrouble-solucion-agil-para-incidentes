@@ -77,6 +77,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           response.redirect("/incidente-creado");
       return null;
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("error");
       response.redirect("/Incidente-No-Creado");
       return null;
