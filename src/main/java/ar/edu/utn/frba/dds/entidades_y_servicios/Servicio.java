@@ -32,6 +32,10 @@ public class Servicio {
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;
 
+  public Servicio(TipoServicio tipoServicio){
+    this.tipoServicio = tipoServicio;
+    this.nombre = "";
+  }
   public Servicio(String nombre,TipoServicio tipoServicio) {
     this.nombre = nombre;
     this.tipoServicio = tipoServicio;

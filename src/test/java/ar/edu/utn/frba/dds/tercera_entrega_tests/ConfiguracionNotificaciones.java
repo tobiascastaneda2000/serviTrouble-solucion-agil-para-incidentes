@@ -30,7 +30,7 @@ public class ConfiguracionNotificaciones {
   usuario = new Usuario("pepe","1234","email");
   usuario.setMedioNotificador(medioNotificador);
   usuario.agregarHorario(horario);
-  servicio = new Servicio(TipoServicio.ASCENSOR);
+  servicio = new Servicio("unNombre", TipoServicio.ASCENSOR);
   incidente = new Incidente("obs",servicio);
   notificacion = new Notificacion(usuario,incidente);
   usuario.getNotificaciones().add(notificacion);
