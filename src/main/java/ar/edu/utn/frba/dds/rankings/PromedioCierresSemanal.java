@@ -11,4 +11,8 @@ public class PromedioCierresSemanal implements CriterioRanking {
     return Comparator.comparing(Entidad::promedioDuracionIncidentes);
   }
 
+  public String nombreDelRanking(){
+    return "Promedio de cierre de incidentes";
+  }
+
 }

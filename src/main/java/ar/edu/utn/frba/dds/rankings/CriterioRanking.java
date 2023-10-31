@@ -6,4 +6,6 @@ import java.util.Comparator;
 
 public interface CriterioRanking {
   Comparator<Entidad> criterioDeComparacion();
+
+  String nombreDelRanking();
 }

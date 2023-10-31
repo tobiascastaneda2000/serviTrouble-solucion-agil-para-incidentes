@@ -10,4 +10,8 @@ public class CantidadReportesSemanal implements CriterioRanking {
   public Comparator<Entidad> criterioDeComparacion() {
     return Comparator.comparing(Entidad::cantidadDeIncidentesReportados);
   }
+
+  public String nombreDelRanking(){
+    return "Cantidad de incidentes reportado";
+  }
 }

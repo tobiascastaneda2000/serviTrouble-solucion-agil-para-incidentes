@@ -3,8 +3,6 @@ package ar.edu.utn.frba.dds.main;
 
 import ar.edu.utn.frba.dds.controller.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import spark.ModelAndView;
-import spark.Session;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -30,6 +28,9 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerEstablecimientos controllerEstablecimientos = new ControllerEstablecimientos();
     ControllerIncidentes controllerIncidentes = new ControllerIncidentes();
     ControllerComunidades controllerComunidades = new ControllerComunidades();
+    ControllerMenuRankings controllerMenuRanking = new ControllerMenuRankings();
+    ControllerRankingCantidadReportes controllerRankingCantidadReportes = new ControllerRankingCantidadReportes();
+    ControllerRankingPromedioCierres controllerRankingPromedioCierres = new ControllerRankingPromedioCierres();
 
 
     //LOGIN Y HOME
@@ -53,6 +54,12 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/comunidades", controllerComunidades::mostrarComunidades, engine);
     Spark.get("/comunidades/:id", controllerComunidades::mostrarIncidentes, engine);
     Spark.get("/incidente/:id",controllerIncidentes::verDetalle,engine);
+
+
+    //RANKINGS
+    Spark.get("/rankings", controllerMenuRanking::mostrarTodosRankings, engine);
+    Spark.get("/rankings/cantidad-reportes", controllerRankingCantidadReportes::mostrarRankingCantidadReportes, engine);
+    Spark.get("/rankings/promedio-cierres", controllerRankingPromedioCierres::mostrarRankingPromediosCierre, engine);
 
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {

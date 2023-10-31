@@ -1,0 +1,20 @@
+{{#partial "principal" }}
+
+    Rankings : {{nombre-ranking}}:
+
+    <ul>
+        {{#entidades}}
+            <li><a>
+                {{id}}
+                {{razonSocial}}
+
+            </a></li>
+        {{/entidades}}
+
+    </ul>
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
