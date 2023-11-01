@@ -7,19 +7,12 @@
      <li>Observacion: {{observacion}}</li>
      <li>Estado: {{estado}}</li>
      <li>Fecha Apertura: {{fechaApertura}}</li>
+     <li>Fecha Cierre: {{fechaCierre}}</li>
      <li>Servicio: {{servicioAsociado.nombre}}</li>
 </ul>
+
 <a href="/comunidades">Volver</a>
 
-<form method="POST">
-    <input onclick="mostrarAlerta()" type="submit" value="Cerrar Incidente">
-
-    <script>
-    function mostrarAlerta() {
-        alert('Incidente Cerrado!');
-    }
-    </script>
-</form>
 {{/incidente}}
 
 {{/partial}}

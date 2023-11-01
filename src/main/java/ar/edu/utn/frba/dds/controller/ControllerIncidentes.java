@@ -70,6 +70,31 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   }
 
+  public ModelAndView verDetalleIncidenteCerrado(Request request, Response response) {
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
+          .setParameter("id",Long.parseLong(id)).getResultList().get(0);
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      modelo.put("incidente",incidente);
+      modelo.put("estado",incidente.estadoIncidente.toString());
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+      String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
+      String fechaCierreFormateada = incidente.fechaHoraCierre.format(formatter);
+      modelo.put("fechaApertura",fechaAperturaFormateada);
+      modelo.put("fechaCierre",fechaCierreFormateada);
+      return new ModelAndView(modelo, "detalleIncidenteCerrado.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+
+  }
+
   public ModelAndView cerrarIncidente(Request request, Response response) {
 
     String id = request.params(":id");
