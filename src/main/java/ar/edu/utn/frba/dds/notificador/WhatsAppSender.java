@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @Entity
 @DiscriminatorValue("whatsAppSender")
 public class WhatsAppSender extends MedioNotificador {
+
   @Override
   public void notificarUnIncidente(Incidente incidente, String contacto) {
 

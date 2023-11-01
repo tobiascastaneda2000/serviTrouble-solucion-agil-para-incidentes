@@ -25,7 +25,6 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     String id = request.params(":id");
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
-    System.out.println(usuario.usuario);
     if(usuario.medioNotificador != null){
       modelo.put("medioNoti",usuario.medioNotificador.toString());
     }
@@ -33,9 +32,26 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       modelo.put("medioNoti","");
     }
     modelo.put("entidadesInteres",usuario.getEntidadesInteres());
+    modelo.put("horarios",usuario.getHorariosPlanificados());
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("usuarioDetalle",usuario);
     return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
   }
 
+
+  public ModelAndView eliminarUsuario(Request request, Response response) {
+    String id = request.params(":id");
+    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
+    List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
+    try {
+      getTransaction().begin();
+      miembrosDeUsuario.forEach(m->remove(m));
+      remove(usuario);
+      getTransaction().commit();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    response.redirect("/home");
+    return null;
+  }
 }

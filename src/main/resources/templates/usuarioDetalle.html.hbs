@@ -13,8 +13,24 @@
                <li>{{razonSocial}}</li>
             {{/entidadesInteres}}
             </a></li>
+            <li><a>
+            Horarios de Notificacion:
+            {{#horarios}}
+                <li>{{hora}}:{{minuto}}</li>
+            {{/horarios}}
+            </a></li>
         {{/usuarioDetalle}}
 </ul>
+
+<form method="POST">
+    <input onclick="mostrarAlerta()" type="submit" value="Eliminar Usuario">
+
+    <script>
+    function mostrarAlerta() {
+        alert('Usuario Eliminado!');
+    }
+    </script>
+</form>
 
 {{/partial}}
 

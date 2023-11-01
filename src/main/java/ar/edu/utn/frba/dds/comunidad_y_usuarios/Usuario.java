@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
@@ -146,6 +147,13 @@ public class Usuario implements WithSimplePersistenceUnit{
   public List<Notificacion> getNotificacionesPendientes() {
     return notificacionesPendientes;
   }
+
+  public List<Miembro> obtenerMiembros(){
+    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getComunidades();
+    List<Miembro> miembros = comunidades.stream().map(c->c.miembros).flatMap(m->m.stream()).toList();
+    return miembros.stream().filter(m->m.usuario.equals(this)).toList();
+  }
+
 
 
   // -----------------------------------------INICIO DE SESION--------------------------------------//

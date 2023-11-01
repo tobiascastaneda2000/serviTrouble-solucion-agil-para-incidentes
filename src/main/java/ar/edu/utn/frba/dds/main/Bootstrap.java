@@ -9,6 +9,10 @@ import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.notificador.Horario;
+import ar.edu.utn.frba.dds.notificador.MailSender;
+import ar.edu.utn.frba.dds.notificador.MedioNotificador;
+import ar.edu.utn.frba.dds.notificador.WhatsAppSender;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 /**
@@ -26,6 +30,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
     withTransaction(() -> {
 
       Usuario usuario = new Usuario("facu", "123456","contacto");
+      Horario unHorario = new Horario(10,30);
+      usuario.agregarHorario(unHorario);
+      persist(unHorario);
       persist(usuario);
       Usuario usuario2 = new Usuario("admin", "123456","contacto");
       usuario2.permisoUsuario = PermisoUsuario.ADMIN;

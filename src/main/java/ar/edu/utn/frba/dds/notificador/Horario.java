@@ -10,8 +10,8 @@ public class Horario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
-  private int hora;
-  private int minuto;
+  public int hora;
+  public int minuto;
 
   public Horario(int hora, int minuto) {
     this.hora = hora;
@@ -20,6 +20,14 @@ public class Horario {
 
   protected Horario() {
 
+  }
+
+  public int getHora(){
+    return hora;
+  }
+
+  public int getMinuto(){
+    return minuto;
   }
 
   public boolean esIgual(int hora2,int minuto2){
