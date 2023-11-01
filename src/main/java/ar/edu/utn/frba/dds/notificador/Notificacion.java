@@ -19,6 +19,7 @@ public class Notificacion {
     return incidente;
   }
 
+  protected Notificacion(){}
   public Notificacion(Usuario usuario, Incidente incidente) {
     this.incidente = incidente;
   }

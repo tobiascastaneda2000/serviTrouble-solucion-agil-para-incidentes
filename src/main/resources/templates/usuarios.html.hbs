@@ -1,0 +1,13 @@
+{{#partial "principal" }}
+
+<h1>USUARIOS</h1>
+
+<ul>
+        {{#usuarios}}
+            <li><a href="/usuarios/{{id}}">{{usuario}}</a></li>
+        {{/usuarios}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.main;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Miembro;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoComunidad;
+import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoUsuario;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
@@ -26,6 +27,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       Usuario usuario = new Usuario("facu", "123456","contacto");
       persist(usuario);
+      Usuario usuario2 = new Usuario("admin", "123456","contacto");
+      usuario2.permisoUsuario = PermisoUsuario.ADMIN;
+      persist(usuario2);
       Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
       Entidad entidad2 = new Entidad("Pixel Innovators", "pixel@mail.com");
       persist(entidad2);

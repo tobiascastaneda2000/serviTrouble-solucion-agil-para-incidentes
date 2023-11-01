@@ -39,7 +39,7 @@ import java.util.Set;
 public class Usuario implements WithSimplePersistenceUnit{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  public long id;
 
   public String usuario;
   public String contrasenia;
@@ -67,6 +67,8 @@ public class Usuario implements WithSimplePersistenceUnit{
   @JoinColumn(name = "usuario_id")
   private Set<Horario> horariosPlanificados = new HashSet<>();
 
+  public PermisoUsuario permisoUsuario;
+
   ///---------------------CONSTRUCTOR----------------------------------///
   protected Usuario() {
   }
@@ -77,6 +79,7 @@ public class Usuario implements WithSimplePersistenceUnit{
     this.intentos = 0;
     this.sesionAbierta = false;
     this.contacto = contacto;
+    this.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
   }
 
 
@@ -110,7 +113,7 @@ public class Usuario implements WithSimplePersistenceUnit{
     return this.notificacionesPendientes;
   }
 
-  public String getUsername() {
+  public String getUsuario() {
     return this.usuario;
   }
 
@@ -164,7 +167,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   }
 
   private boolean coincideUsuarioYContrasenia(String username, String contrasenia) {
-    return getUsername().equals(username) && getContrasenia().equals(contrasenia);
+    return getUsuario().equals(username) && getContrasenia().equals(contrasenia);
   }
 
   private void validarCantidadIntentos() {

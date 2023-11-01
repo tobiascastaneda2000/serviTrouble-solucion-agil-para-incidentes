@@ -31,7 +31,7 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerMenuRankings controllerMenuRanking = new ControllerMenuRankings();
     ControllerRankingCantidadReportes controllerRankingCantidadReportes = new ControllerRankingCantidadReportes();
     ControllerRankingPromedioCierres controllerRankingPromedioCierres = new ControllerRankingPromedioCierres();
-
+    ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
 
     //LOGIN Y HOME
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
@@ -61,6 +61,10 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/rankings", controllerMenuRanking::mostrarTodosRankings, engine);
     Spark.get("/rankings/cantidad-reportes", controllerRankingCantidadReportes::mostrarRankingCantidadReportes, engine);
     Spark.get("/rankings/promedio-cierres", controllerRankingPromedioCierres::mostrarRankingPromediosCierre, engine);
+
+    //USUARIOS
+    Spark.get("/usuarios",controllerUsuarios::mostrarUsuarios,engine);
+    Spark.get("/usuarios/:id",controllerUsuarios::mostrarDetalleUsuario,engine);
 
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {

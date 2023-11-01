@@ -52,4 +52,10 @@ public class RepoUsuarios implements WithSimplePersistenceUnit {
         .getResultList()
         .get(0);
   }
+
+  public List<Usuario> listarUsuarios(){
+    return entityManager()
+        .createQuery("from Usuario", Usuario.class)
+        .getResultList();
+  }
 }

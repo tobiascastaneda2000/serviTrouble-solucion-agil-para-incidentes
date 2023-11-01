@@ -1,0 +1,21 @@
+{{#partial "principal" }}
+
+<h1>USUARIO</h1>
+
+<ul>
+        {{#usuarioDetalle}}
+            <li><a>Usuario: {{usuario}}</a></li>
+            <li><a>Contacto: {{contacto}}</a></li>
+            <li><a>Medio Notificador: {{medioNoti}}</a></li>
+            <li><a>
+            Entidades de Interes:
+            {{#entidadesInteres}}
+               <li>{{razonSocial}}</li>
+            {{/entidadesInteres}}
+            </a></li>
+        {{/usuarioDetalle}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
