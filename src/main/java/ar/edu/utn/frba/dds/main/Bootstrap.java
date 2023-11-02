@@ -34,12 +34,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
-      Usuario usuario = new Usuario("facu", "123456","contacto");
-      Horario unHorario = new Horario(10,30);
+      Usuario usuario = new Usuario("facu", "123456", "contacto");
+      Horario unHorario = new Horario(10, 30);
       usuario.agregarHorario(unHorario);
       persist(unHorario);
       persist(usuario);
-      Usuario usuario2 = new Usuario("admin", "123456","contacto");
+      Usuario usuario2 = new Usuario("admin", "123456", "contacto");
       usuario2.permisoUsuario = PermisoUsuario.ADMIN;
       persist(usuario2);
       Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
@@ -53,11 +53,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidad1.agregarEstablecimiento(establecimiento2);
       persist(entidad1);
 
-      Servicio servicio1 = new Servicio("baño primer piso",TipoServicio.BAÑO);
+      Servicio servicio1 = new Servicio("baño primer piso", TipoServicio.BAÑO);
       persist(servicio1);
       establecimiento1.agregarServicio(servicio1);
 
-      Servicio servicio2 = new Servicio("baño segundo piso",TipoServicio.BAÑO);
+      Servicio servicio2 = new Servicio("baño segundo piso", TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio2);
       persist(servicio2);
       persist(establecimiento1);
@@ -68,7 +68,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Comunidad comunidad2 = new Comunidad("nombre2");
       entityManager().persist(comunidad2);
 
-      comunidad1.agregarUsuario(usuario,PermisoComunidad.ADMIN_COMUNIDAD);
+      comunidad1.agregarUsuario(usuario, PermisoComunidad.ADMIN_COMUNIDAD);
       persist(comunidad1);
 
       //CARGA CRITERIOS RANKINGS
@@ -81,10 +81,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entityManager().persist(criterioPromedioCierre);
       entityManager().persist(criterioCantidadReportes);
 
-      // Deberia andar pero lanza error
-      //Exception in thread "main" javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: could not prepare statement
-      //Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
-      //Caused by: org.hsqldb.HsqlException: usuario no tiene privilegios suficientes o objeto no encontrado: CRITERIORANKING
 
       MainTareasPlanificadas.lanzarRanking();
 

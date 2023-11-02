@@ -1,0 +1,13 @@
+{{#partial "principal" }}
+
+    <h1>RANKINGS POR {{nombre}}:</h1>
+
+    <ul>
+        {{#entidadesOrdenadas}}
+            <li><a>{{id}} ++ {{razonSocial}}</a></li>
+        {{/entidadesOrdenadas}}
+    </ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
