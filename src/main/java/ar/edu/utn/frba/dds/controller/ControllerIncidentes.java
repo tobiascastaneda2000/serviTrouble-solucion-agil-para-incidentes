@@ -106,4 +106,18 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     return null;
   }
 
+  public ModelAndView mostrarIncidentesSugeridos(Request request, Response response){
+    Long user_id = revisarSesionIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(user_id);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("usuario", usuario);
+    return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+    //return null;
+  }
+
+  public Long revisarSesionIniciada(Request request, Response response){
+    if (request.session().attribute("user_id")==null) response.redirect("/");
+    return request.session().attribute("user_id");
+  }
+
 }
