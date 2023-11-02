@@ -1,11 +1,17 @@
 {{#partial "principal" }}
-    <form method="POST">
-           <label>Nombre</label>
-           <input type="text" name="nombre">
-           <label>Contraseña</label>
-           <input type="password" name="contrasenia">
-           <input type="submit">
-    </form>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+           <div class="mb-3">
+               <label>Nombre</label>
+               <input type="text" class="form-control" name="nombre">
+           </div>
+           <div class="mb-3">
+               <label>Contraseña</label>
+               <input type="password" class="form-control" name="contrasenia">
+           </div>
+           <input type="submit" class="btn btn-secondary">
+        </form>
+    </div>
 {{/partial}}
 
 {{> layout.html.hbs }}

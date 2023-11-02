@@ -9,13 +9,19 @@
 </head>
 
 <body>
-	<nav class="navbar">
-	    <ul>
-           <li><a href="/home"><img src="Logo.jpg" alt="logo" class="logo"></a></li>
-           <li><a href="/" class="perfil">Mi Perfil</a></li>
-           <li><a href="/cerrar-sesion" class="login-button">Cerrar Sesion</a></li>
-	    </ul>
-	</nav>
+
+	<nav class="navbar" style="background-color: #005b54;">
+	    <div class="container-fluid">
+           <a class="navbar-brand" href="/">
+               <img src="logo.png" alt="logo"  width="30" height="24" class="d-inline-block align-text-top">
+           </a>
+               SERVITROUBLETRACKER
+           <div class="d-flex">
+               <a href="/" type="button" class="perfil btn btn-outline-light">Mi Perfil</a>
+               <a href="/cerrar-sesion" type="button" class="btn btn-outline-light">Cerrar Sesión</a>
+           </div>
+        </div>
+    </nav>
 	<main>
 
      {{#block "principal" }}

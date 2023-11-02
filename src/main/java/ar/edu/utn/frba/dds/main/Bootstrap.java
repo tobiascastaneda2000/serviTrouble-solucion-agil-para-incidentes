@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.main;
 
+import ar.edu.utn.frba.dds.MainTareasPlanificadas;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Miembro;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoComunidad;
@@ -81,7 +82,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       //Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
       //Caused by: org.hsqldb.HsqlException: usuario no tiene privilegios suficientes o objeto no encontrado: CRITERIORANKING
 
-
+      MainTareasPlanificadas.lanzarRanking();
 
 
     });

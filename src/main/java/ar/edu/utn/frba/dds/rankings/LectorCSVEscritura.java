@@ -35,8 +35,11 @@ public class LectorCSVEscritura {
     }
 
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.archivo))) {
+      String cabecera =  "id ; razonSocial ; email";
+      bw.write(cabecera);
+      bw.newLine();
       for (Entidad entidad : listadoEntidades) {
-        String linea = entidad.getId() + " ; " + entidad.getRazonSocial() + " ; " + entidad.getEmail();
+        String linea = entidad.getId() + ";" + entidad.getRazonSocial() + " ; " + entidad.getEmail();
         bw.write(linea);
         bw.newLine();
       }

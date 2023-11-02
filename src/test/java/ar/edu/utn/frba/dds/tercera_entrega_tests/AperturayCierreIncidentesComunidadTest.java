@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.entidades_y_servicios.*;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.incidentes.*;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class AperturayCierreIncidentesComunidadTest {
+class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUnit {
 
   Usuario usuarioInformante;
   Usuario otroUsuario;
@@ -33,6 +34,7 @@ class AperturayCierreIncidentesComunidadTest {
     repositorioComunidades = RepositorioComunidades.getInstance();
     palermoGrupo.registrarMiembro(usuarioInformante);
     palermoGrupo.registrarMiembro(otroUsuario);
+    persist(palermoGrupo);
     otraComunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades.guardarComunidad(palermoGrupo);
     repositorioComunidades.guardarComunidad(otraComunidad);
