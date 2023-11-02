@@ -50,8 +50,8 @@ public class Comunidad implements WithSimplePersistenceUnit {
     this.miembros = new HashSet<>();
   }
 
-  public void agregarUsuario(Usuario usuario){
-    Miembro miembro = new Miembro(usuario,PermisoComunidad.USUARIO_COMUNIDAD);
+  public void agregarUsuario(Usuario usuario,PermisoComunidad permiso){
+    Miembro miembro = new Miembro(usuario,permiso);
     miembros.add(miembro);
     persist(miembro);
   }
@@ -151,5 +151,10 @@ public class Comunidad implements WithSimplePersistenceUnit {
 
   public boolean contieneIncidente(Incidente incidente) {
     return incidentes.contains(incidente);
+  }
+
+  public boolean miembroEsAdmin(Usuario usuario) {
+    return miembros.stream().filter(m->m.usuario.equals(usuario))
+        .toList().get(0).permisoComunidad.equals(PermisoComunidad.ADMIN_COMUNIDAD);
   }
 }

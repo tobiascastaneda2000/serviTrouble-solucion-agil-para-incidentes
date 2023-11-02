@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.text.CompactNumberFormat;
+import java.util.ArrayList;
+import net.bytebuddy.matcher.StringMatcher;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -36,6 +38,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
   }
 
+
   public ModelAndView mostrarIncidentes(Request request, Response response) {
 
 
@@ -56,5 +59,65 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       return null;
     }
   }
+
+
+  public ModelAndView verComunidadesAdministrables(Request request, Response response){
+
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+      List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c->c.miembroEsAdmin(usuario)).toList();
+      if(comunidadesAdmin.isEmpty()){
+        String vacio = "No eres administrador de ninguna comunidad";
+        modelo.put("vacio",vacio);
+      }
+      modelo.put("comunidades", comunidadesAdmin);
+      return new ModelAndView(modelo, "comunidadesAdministrables.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+  }
+
+
+  public ModelAndView verComunidadAdministrable(Request request, Response response){
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      Comunidad comunidad = RepositorioComunidades.getInstance().buscarPorId(Long.parseLong(id));
+      modelo.put("comunidad",comunidad);
+      return new ModelAndView(modelo, "verDetalleComunidad.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+  }
+
+  public ModelAndView verMiembros(Request request, Response response){
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+      String id = request.params(":id");
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      Comunidad comunidad = RepositorioComunidades.getInstance().buscarPorId(Long.parseLong(id));
+      List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
+      modelo.put("usuarios",usuarios);
+      return new ModelAndView(modelo, "verUsuariosComunidad.html.hbs");
+    }
+    else{
+      response.redirect("/");
+      return null;
+    }
+  }
+
 
 }

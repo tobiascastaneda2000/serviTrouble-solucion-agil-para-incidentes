@@ -68,7 +68,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Comunidad comunidad2 = new Comunidad("nombre2");
       entityManager().persist(comunidad2);
 
-      comunidad1.agregarUsuario(usuario);
+      comunidad1.agregarUsuario(usuario,PermisoComunidad.ADMIN_COMUNIDAD);
       persist(comunidad1);
 
       //CARGA CRITERIOS RANKINGS

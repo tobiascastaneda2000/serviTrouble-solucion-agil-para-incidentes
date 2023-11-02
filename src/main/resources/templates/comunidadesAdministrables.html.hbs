@@ -1,0 +1,15 @@
+{{#partial "principal" }}
+
+<h1>MIS COMUNIDADES</h1>
+
+{{vacio}}
+
+<ul>
+        {{#comunidades}}
+            <li><a href="/administrar-comunidad/{{id}}">{{nombre}}</a></li>
+        {{/comunidades}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

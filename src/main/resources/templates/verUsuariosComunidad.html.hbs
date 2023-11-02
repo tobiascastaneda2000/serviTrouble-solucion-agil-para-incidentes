@@ -1,0 +1,18 @@
+{{#partial "principal" }}
+
+<h1>USUARIOS</h1>
+
+<ul>
+        {{#usuarios}}
+            <li><a>{{usuario}}</a></li>
+            <form method="POST">
+                <input type="submit" value="Eliminar Miembro">
+            </form>
+        {{/usuarios}}
+</ul>
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
