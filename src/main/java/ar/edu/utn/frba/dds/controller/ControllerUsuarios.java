@@ -21,6 +21,30 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       return new ModelAndView(modelo, "usuarios.html.hbs");
     }
 
+    public ModelAndView crearUsuario(Request request, Response response) {
+    String nombre = request.queryParams("nombre");
+    String contrasenia = request.queryParams("contrasenia");
+    String contacto = request.queryParams("contacto");
+    if(RepoUsuarios.getInstance().buscarPorUsuario(nombre).size() >0){
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
+      modelo.put("usuarios",usuarios);
+      return new ModelAndView(modelo, "usuariosError.html.hbs");
+    }
+    else {
+      Usuario usuario = new Usuario(nombre, contrasenia, contacto);
+      usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
+      persist(usuario);
+      getTransaction().begin();
+      entityManager().flush();
+      getTransaction().commit();
+      response.redirect("/usuarios");
+    }
+
+    return null;
+    }
+
   public ModelAndView mostrarDetalleUsuario(Request request, Response response) {
     String id = request.params(":id");
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));

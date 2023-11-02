@@ -66,6 +66,7 @@ public class Routes implements WithSimplePersistenceUnit {
 
     //USUARIOS
     Spark.get("/usuarios",controllerUsuarios::mostrarUsuarios,engine);
+    Spark.post("/usuarios",controllerUsuarios::crearUsuario,engine);
     Spark.get("/usuarios/:id",controllerUsuarios::mostrarDetalleUsuario,engine);
     Spark.post("/usuarios/:id",controllerUsuarios::eliminarUsuario);
 
