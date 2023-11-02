@@ -3,10 +3,17 @@
     Rankings por:
 
     <ul>
-            <li><a href="/rankings/cantidad-reportes">Cantidad de Reportes</a></li>
-            <li><a href="/rankings/promedio-cierres">Promedio de Cierres</a></li>
-
+        {{#criterios}}
+            <li><a>{{id}}</a></li>
+        {{/criterios}}
     </ul>
+
+    <!--
+<ul>
+    <li><a href="/rankings/cantidad-reportes">Cantidad de Reportes</a></li>
+    <li><a href="/rankings/promedio-cierres">Promedio de Cierres</a></li>
+</ul>
+-->
 
 {{/partial}}
 

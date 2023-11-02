@@ -7,11 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.util.Comparator;
 @Entity
-@DiscriminatorValue("promedio-cierres-incidentes")
+@DiscriminatorValue("promedio_cierres_incidentes")
 public class PromedioCierresSemanal extends CriterioRanking {
 
   @Transient
  Comparator<Entidad> criterio = Comparator.comparing(Entidad::promedioDuracionIncidentes);
+
+  public PromedioCierresSemanal() {
+  }
 
 
   @Override

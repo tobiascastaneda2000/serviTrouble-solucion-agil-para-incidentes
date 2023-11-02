@@ -16,7 +16,7 @@ import java.util.Comparator;
 
 @Entity(name="CriterioRanking")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo-de-criterio", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_de_criterio", discriminatorType = DiscriminatorType.STRING)
 public abstract class CriterioRanking {
 
   @Id

@@ -77,7 +77,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
 
       RepoRanking.instance.agregarRanking(criterioPromedioCierre);
-      //entityManager().persist(criterioPromedioCierre); Deberia andar pero lanza error
+      RepoRanking.instance.agregarRanking(criterioCantidadReportes);
+      entityManager().persist(criterioPromedioCierre);
+      entityManager().persist(criterioCantidadReportes);
+
+      // Deberia andar pero lanza error
       //Exception in thread "main" javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: could not prepare statement
       //Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
       //Caused by: org.hsqldb.HsqlException: usuario no tiene privilegios suficientes o objeto no encontrado: CRITERIORANKING
