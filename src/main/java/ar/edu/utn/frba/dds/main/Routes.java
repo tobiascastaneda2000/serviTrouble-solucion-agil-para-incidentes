@@ -79,7 +79,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/admin-comunidades", controllerComunidades::verComunidadesAdministrables, engine);
     Spark.get("/administrar-comunidad/:id", controllerComunidades::verComunidadAdministrable, engine);
     Spark.get("/administrar-comunidad/:id/miembros", controllerComunidades::verMiembros, engine);
-
+    Spark.post("/administrar-comunidad/:id/miembros",controllerComunidades::eliminarMiembro);
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");

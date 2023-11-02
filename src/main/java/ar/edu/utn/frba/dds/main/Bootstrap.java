@@ -42,6 +42,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Usuario usuario2 = new Usuario("admin", "123456", "contacto");
       usuario2.permisoUsuario = PermisoUsuario.ADMIN;
       persist(usuario2);
+      Usuario usuario3 = new Usuario("pepe", "123456","contacto");
+      persist(usuario3);
       Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
       Entidad entidad2 = new Entidad("Pixel Innovators", "pixel@mail.com");
       persist(entidad2);
@@ -69,6 +71,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entityManager().persist(comunidad2);
 
       comunidad1.agregarUsuario(usuario, PermisoComunidad.ADMIN_COMUNIDAD);
+      comunidad1.agregarUsuario(usuario3,PermisoComunidad.USUARIO_COMUNIDAD);
       persist(comunidad1);
 
       //CARGA CRITERIOS RANKINGS
