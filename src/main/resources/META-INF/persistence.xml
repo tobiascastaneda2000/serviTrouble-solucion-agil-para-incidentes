@@ -20,6 +20,10 @@
     <class>package ar.edu.utn.frba.dds.notificador.MedioNotificador</class>
     <class>package ar.edu.utn.frba.dds.notificador.WhatsAppSender</class>
     <class>package ar.edu.utn.frba.dds.notificador.MailSender</class>
+    <class>package ar.edu.utn.frba.dds.rankings.CriterioRanking</class>
+    <class>package ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal</class>
+    <class>package ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal</class>
+
 
     <properties>
       <property name="hibernate.archive.autodetection" value="class"/>

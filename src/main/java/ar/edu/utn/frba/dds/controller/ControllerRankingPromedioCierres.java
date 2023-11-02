@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.controller;
 
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
-import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
@@ -22,9 +21,9 @@ public class ControllerRankingPromedioCierres implements WithSimplePersistenceUn
     modelo.put("anio", LocalDate.now().getYear());
     CriterioRanking criterioRanking = new PromedioCierresSemanal();
     List<Entidad> entidades = RepoEntidades.instance.listarEntidades();
-    entidades.sort(criterioRanking.criterioDeComparacion());
+    entidades.sort(criterioRanking.getCriterio());
     modelo.put("entidades", entidades);
-    modelo.put("nombre-ranking", criterioRanking.nombreDelRanking());
+
     return new ModelAndView(modelo, "rankingsPromedioCierres.html.hbs");
   }
 }

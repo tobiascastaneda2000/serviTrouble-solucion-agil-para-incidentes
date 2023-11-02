@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
@@ -14,6 +12,7 @@ import java.util.List;
 public class RepoEntidades implements WithSimplePersistenceUnit { // Hacer que extienda de Repositorios
 
   public static RepoEntidades instance = new RepoEntidades();
+
 
   /*
   public RepoEntidades(DAOHibernate<Entidad> dao) { // Pasar a private y que usen el singleton
@@ -45,7 +44,7 @@ public class RepoEntidades implements WithSimplePersistenceUnit { // Hacer que e
   public List<Entidad> ordenarEntidadesSegunCriterio(CriterioRanking criterioRanking) {
 
     List<Entidad> entidades = getEntidades();
-    Comparator<Entidad> criterio = criterioRanking.criterioDeComparacion();
+    Comparator<Entidad> criterio = criterioRanking.getCriterio();
     entidades.sort(criterio);
     return entidades;
   }

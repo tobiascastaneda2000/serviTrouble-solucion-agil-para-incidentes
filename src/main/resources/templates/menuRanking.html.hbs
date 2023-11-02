@@ -1,0 +1,13 @@
+{{#partial "principal" }}
+
+    Rankings por:
+
+    <ul>
+        {{#criterios}}
+            <li><a href="rankings/{{id}}">{{tipo-de-criterio}}</a></li>
+        {{/criterios}}
+    </ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

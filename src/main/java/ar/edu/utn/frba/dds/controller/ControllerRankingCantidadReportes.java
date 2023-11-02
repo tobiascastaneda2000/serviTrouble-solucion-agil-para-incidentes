@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 public class ControllerRankingCantidadReportes implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarRankingCantidadReportes(Request request, Response response) {
@@ -21,9 +21,8 @@ public class ControllerRankingCantidadReportes implements WithSimplePersistenceU
     modelo.put("anio", LocalDate.now().getYear());
     CriterioRanking criterioRanking = new CantidadReportesSemanal();
     List<Entidad> entidades = RepoEntidades.instance.listarEntidades();
-    entidades.sort(criterioRanking.criterioDeComparacion());
+    entidades.sort(criterioRanking.getCriterio());
     modelo.put("entidades", entidades);
-    modelo.put("nombre-ranking", criterioRanking.nombreDelRanking());
     return new ModelAndView(modelo, "rankingsCantidadReportes.html.hbs");
   }
 }

@@ -13,6 +13,10 @@ import ar.edu.utn.frba.dds.notificador.Horario;
 import ar.edu.utn.frba.dds.notificador.MailSender;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.WhatsAppSender;
+import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
+import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 /**
@@ -65,6 +69,20 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       comunidad1.agregarUsuario(usuario);
       persist(comunidad1);
+
+      //CARGA CRITERIOS RANKINGS
+      CriterioRanking criterioPromedioCierre = new PromedioCierresSemanal();
+      CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
+
+
+      RepoRanking.instance.agregarRanking(criterioPromedioCierre);
+      //entityManager().persist(criterioPromedioCierre); Deberia andar pero lanza error
+      //Exception in thread "main" javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: could not prepare statement
+      //Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
+      //Caused by: org.hsqldb.HsqlException: usuario no tiene privilegios suficientes o objeto no encontrado: CRITERIORANKING
+
+
+
 
     });
   }
