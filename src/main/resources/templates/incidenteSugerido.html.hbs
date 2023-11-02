@@ -1,6 +1,20 @@
 {{#partial "principal" }}
 
-Incidentes sugeridos
+<h2>Incidentes sugeridos</h2>
+        <table class="tabla_incidentes_sugeridos">
+            <tr>
+                <th>Fecha Apertura</th>
+                <th>Servicio</th>
+                <th>Observacion</th>
+            </tr>
+            {{#incidentes}}
+            <tr>
+                <td>{{fechaHoraAbre}}</td>
+                <td>{{servicioAsociado.nombre}}</td>
+                <td>{{observacion}}</td>
+            </tr>
+            {{/incidentes}}
+        </table>
 
 <a href="/home">Volver al Menú</a>
 
