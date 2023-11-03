@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RepositorioComunidades extends Repositorio<Comunidad> {
-  public static RepositorioComunidades instance = null;
+  private static RepositorioComunidades instance = null;
   Set<Comunidad> comunidades = new HashSet<>();
 
   private RepositorioComunidades() {

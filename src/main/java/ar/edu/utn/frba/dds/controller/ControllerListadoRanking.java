@@ -23,7 +23,7 @@ public class ControllerListadoRanking implements WithSimplePersistenceUnit {
     CriterioRanking criterioRanking = RepoRanking.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
-    List<Entidad> entidades = RepoEntidades.instance.getAll();
+    List<Entidad> entidades = RepoEntidades.getInstance().getAll();
     entidades.sort(criterioRanking.getCriterio());
     modelo.put("entidadesOrdenadas", entidades);
     modelo.put("nombre", criterioRanking.getNombre_criterio());
