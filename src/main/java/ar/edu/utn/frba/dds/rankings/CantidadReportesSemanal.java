@@ -20,7 +20,7 @@ public class CantidadReportesSemanal extends CriterioRanking {
     return nombre_criterio;
   }
 
-  public String nombre_criterio = "cantidad_incidentes_reportados";
+  public String nombre_criterio = "cantidad de incidentes reportados";
 
   public CantidadReportesSemanal() {
   }

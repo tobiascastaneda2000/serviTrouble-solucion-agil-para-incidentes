@@ -34,6 +34,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
+      //CARGA USUARIO
+
       Usuario usuario = new Usuario("facu", "123456", "contacto");
       Horario unHorario = new Horario(10, 30);
       usuario.agregarHorario(unHorario);
@@ -42,18 +44,19 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Usuario usuario2 = new Usuario("admin", "123456", "contacto");
       usuario2.permisoUsuario = PermisoUsuario.ADMIN;
       persist(usuario2);
-      Usuario usuario3 = new Usuario("pepe", "123456","contacto");
+      Usuario usuario3 = new Usuario("pepe", "123456", "contacto");
       persist(usuario3);
-      Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
-      Entidad entidad2 = new Entidad("Pixel Innovators", "pixel@mail.com");
-      persist(entidad2);
+
+
+      //CARGA ENTIDAD FANTASY
+      Entidad entidadFantasy = new Entidad("Fantasy Co.", "fantasy@mail.com");
+      persist(entidadFantasy);
       Establecimiento establecimiento1 = new Establecimiento("nombre 1");
       persist(establecimiento1);
-      entidad1.agregarEstablecimiento(establecimiento1);
+      entidadFantasy.agregarEstablecimiento(establecimiento1);
       Establecimiento establecimiento2 = new Establecimiento("nombre 2");
       persist(establecimiento2);
-      entidad1.agregarEstablecimiento(establecimiento2);
-      persist(entidad1);
+      entidadFantasy.agregarEstablecimiento(establecimiento2);
 
       Servicio servicio1 = new Servicio("baño primer piso", TipoServicio.BAÑO);
       persist(servicio1);
@@ -64,6 +67,29 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       persist(servicio2);
       persist(establecimiento1);
 
+
+      //CARGA ENTIDAD PIXEL
+      Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
+      persist(entidadPixel);
+
+      Establecimiento establecimientoA = new Establecimiento("establecimiento A");
+      persist(establecimientoA);
+      entidadPixel.agregarEstablecimiento(establecimientoA);
+      Establecimiento establecimientoB = new Establecimiento("establecimiento B");
+      persist(establecimientoB);
+      entidadPixel.agregarEstablecimiento(establecimientoB);
+
+      Servicio servicio3 = new Servicio("baño tercer piso", TipoServicio.BAÑO);
+      persist(servicio3);
+      establecimientoA.agregarServicio(servicio3);
+
+      Servicio servicio4 = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      establecimientoB.agregarServicio(servicio4);
+      persist(servicio4);
+
+
+      //CARGA COMUNIDADES
+
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
       entityManager().persist(comunidad1);
@@ -71,18 +97,18 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entityManager().persist(comunidad2);
 
       comunidad1.agregarUsuario(usuario, PermisoComunidad.ADMIN_COMUNIDAD);
-      comunidad1.agregarUsuario(usuario3,PermisoComunidad.USUARIO_COMUNIDAD);
+      comunidad1.agregarUsuario(usuario3, PermisoComunidad.USUARIO_COMUNIDAD);
       persist(comunidad1);
 
       //CARGA CRITERIOS RANKINGS
       CriterioRanking criterioPromedioCierre = new PromedioCierresSemanal();
       CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
 
-
       RepoRanking.instance.agregarRanking(criterioPromedioCierre);
       RepoRanking.instance.agregarRanking(criterioCantidadReportes);
       entityManager().persist(criterioPromedioCierre);
       entityManager().persist(criterioCantidadReportes);
+
 
 
       MainTareasPlanificadas.lanzarRanking();

@@ -22,7 +22,7 @@ public class PromedioCierresSemanal extends CriterioRanking {
     return nombre_criterio;
   }
 
-  public String nombre_criterio = "promedio_cierres_incidentes";
+  public String nombre_criterio = "promedio de cierres de incidentes";
 
 
   @Override
