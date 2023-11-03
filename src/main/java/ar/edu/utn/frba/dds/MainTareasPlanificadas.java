@@ -77,7 +77,7 @@ public class MainTareasPlanificadas {
     CriterioRanking criterioPromediosCierres = new PromedioCierresSemanal();
     CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
 
-    //DESCOMENTAR
+
     RepoEntidades.getInstance().generarRankingCSVSegunCriterio(criterioCantidadReportes);
     RepoEntidades.getInstance().generarRankingCSVSegunCriterio(criterioPromediosCierres);
 
