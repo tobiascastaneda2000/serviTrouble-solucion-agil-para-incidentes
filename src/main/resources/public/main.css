@@ -208,5 +208,16 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+}
+
+.presentation-container{
+    height: 100vh;
+}
+
+#lista-usuarios{
+    width: 200px;
+}
+
+#lista-usuarios > thead{
+    width: 150px;
 }

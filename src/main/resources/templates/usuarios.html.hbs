@@ -2,6 +2,7 @@
 
 <h1 class="titulo">USUARIOS</h1>
 
+<div class="presentation-container">
 <div class="cont-form">
     <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
        <h3>Crear nuevo usuario:</h3>
@@ -22,7 +23,7 @@
 </div>
 
 <div class="container d-flex justify-content-center align-items-center ">
-<table class="table table-bordered table-hover caption-top row border rounded-5 p-3 bg-white shadow box-area">
+<table id="lista-usuarios" class="table table-bordered table-hover caption-top row border rounded-5 p-3 bg-white shadow box-area">
     <caption>Lista de usuarios</caption>
     <thead>
         <tr>
@@ -39,6 +40,7 @@
         {{/usuarios}}
     </tbody>
 </table>
+</div>
 </div>
 
 {{/partial}}
