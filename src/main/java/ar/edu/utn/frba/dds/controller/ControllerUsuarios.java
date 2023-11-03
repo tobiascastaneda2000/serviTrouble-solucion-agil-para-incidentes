@@ -21,6 +21,30 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       return new ModelAndView(modelo, "usuarios.html.hbs");
     }
 
+    public ModelAndView modificarUsuario(Request request, Response response){
+      String nombre = request.queryParams("nombre");
+      String contrasenia = request.queryParams("contrasenia");
+      String contacto = request.queryParams("contacto");
+      // String medioNotificador = request.queryParams("medioNoti");
+      // String horarios = request.queryParams("horarios");
+      // Quiza en medioNotificador se pueda poner un dropDown con los medios de notificacion, despues habria que mapearlo al
+      // enum MedioNotificador eventualmente
+      // Para horario parsear hora y minuto y mapearlo a horario
+      return null;
+    }
+
+    public ModelAndView postUsuarios(Request request, Response response) {
+      String metodo = request.queryParams("_method");
+
+        if(metodo.equals("PUT")){
+            return modificarUsuario(request, response);
+        }
+        //else if(metodo.equals("DELETE")){ Quiza podriamos hacer esto para el delete del user
+        //    return eliminarUsuario(request, response);
+        //}
+      return crearUsuario(request, response);
+    }
+
     public ModelAndView crearUsuario(Request request, Response response) {
     String nombre = request.queryParams("nombre");
     String contrasenia = request.queryParams("contrasenia");
@@ -60,6 +84,18 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("usuarioDetalle",usuario);
     return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
+  }
+
+  public ModelAndView mostrarPerfil(Request request, Response response) {
+    Long id = request.session().attribute("user_id");
+    Usuario usuario = RepoUsuarios.getInstance().getOne((id));
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("id", usuario.id);
+    modelo.put("entidadesInteres",usuario.getEntidadesInteres());
+    modelo.put("horarios",usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle",usuario);
+    return new ModelAndView(modelo, "perfilUsuario.html.hbs");
   }
 
 
