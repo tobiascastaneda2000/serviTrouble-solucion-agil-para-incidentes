@@ -1,0 +1,30 @@
+{{#partial "principal" }}
+
+<h2>Incidentes sugeridos</h2>
+        <table class="tabla_incidentes_sugeridos" style="border: 2px solid #000; background-color: #81f4c3; margin:auto;">
+            <tr style="background-color: #126945; text-align: center;">
+                <th style="padding:6px">Fecha Apertura</th>
+                <th style="padding:6px">Servicio</th>
+                <th style="padding:6px">Observacion</th>
+                <th style="padding:6px"></th>
+            </tr>
+            {{#incidentes}}
+            <tr style="border: 1px solid #000">
+                <td style="border: 1px solid #000;">
+                    <form style="margin:0" method="POST" action="/incidente/{{id}}">
+                        <input type="hidden" value="{{id}}" name="incidente"></input>
+                        <input type="submit" value="Cerrar Incidente" class="btn btn-secondary"/>
+                    </form>
+                </td>
+                <td style="border: 1px solid #000; padding:4px;">{{fechaHoraAbre}}</td>
+                <td style="border: 1px solid #000; padding:4px;">{{servicioAsociado.nombre}}</td>
+                <td style="border: 1px solid #000; padding:4px;">{{observacion}}</td>
+            </tr>
+            {{/incidentes}}
+        </table>
+
+<a href="/home">Volver al Menú</a>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

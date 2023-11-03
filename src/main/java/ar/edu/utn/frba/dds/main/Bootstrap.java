@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
 import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.notificador.Horario;
 import ar.edu.utn.frba.dds.notificador.MailSender;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
@@ -65,8 +66,14 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Servicio servicio2 = new Servicio("baño segundo piso", TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio2);
       persist(servicio2);
+
+      Servicio servicio5 = new Servicio("Ascensor discapacitados",TipoServicio.ASCENSOR);
+      establecimiento1.agregarServicio(servicio5);
+      persist(servicio5);
       persist(establecimiento1);
 
+      Incidente incidente = new Incidente("Botonera rota",servicio5);
+      persist(incidente);
 
       //CARGA ENTIDAD PIXEL
       Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
@@ -87,12 +94,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       establecimientoB.agregarServicio(servicio4);
       persist(servicio4);
 
-
       //CARGA COMUNIDADES
-
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
+      comunidad1.incidentes.add(incidente);
       entityManager().persist(comunidad1);
+
       Comunidad comunidad2 = new Comunidad("nombre2");
       entityManager().persist(comunidad2);
 
