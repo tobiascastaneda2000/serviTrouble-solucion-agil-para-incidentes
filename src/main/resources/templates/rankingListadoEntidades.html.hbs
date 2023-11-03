@@ -1,18 +1,13 @@
-{{#partial "principal" }}
+{{#partial "principal"}}
 
     <div class="titulo">
         Ranking semanal por {{nombre}}:
     </div>
-    <table style="margin: 20px auto;
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ccc;">
-        <thead>
-        <tr>
+    <table class="tabla">
+        <tr class="cabecera">
             <th>Id</th>
             <th>Razon social</th>
         </tr>
-        </thead>
         <tbody>
         {{#entidadesOrdenadas}}
             <tr>

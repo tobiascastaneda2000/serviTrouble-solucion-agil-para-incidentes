@@ -222,33 +222,33 @@ main {
     width: 150px;
 }
 
-#back-to-home{
+.btn-background{
     margin: 20px;
     background-color: var(--bs-primary);
 }
 
-.tabla_incidentes_sugeridos{
+.tabla{
     border: 2px solid #000;
     background-color: var(--bs-primary);
     margin:auto;
 }
 
-.tabla_incidentes_sugeridos tr{
+.tabla tr{
     border: 1px solid #000;
 }
 
-.tabla_incidentes_sugeridos td{
+.tabla td{
     border: 1px solid #000;
     padding:4px;
 }
 
-.tabla_incidentes_sugeridos th{
+.tabla th{
     color: #FFF;
     border: 2px solid #000;
     padding:6px;
 }
 
-#incidentes_sugeridos-cabecera{
+.cabecera{
     background-color: var(--bs-primary-text-emphasis);
     text-align: center;
 }
