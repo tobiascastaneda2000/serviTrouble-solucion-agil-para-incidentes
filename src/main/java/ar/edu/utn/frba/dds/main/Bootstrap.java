@@ -33,8 +33,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   }
 
   public void run() {
-    withTransaction(() -> {
-
       //CARGA USUARIO
 
       Usuario usuario = new Usuario("facu", "123456", "contacto");
@@ -111,13 +109,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       CriterioRanking criterioPromedioCierre = new PromedioCierresSemanal();
       CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
 
-      RepoRanking.instance.agregarRanking(criterioPromedioCierre);
-      RepoRanking.instance.agregarRanking(criterioCantidadReportes);
+      RepoRanking.getInstance().add(criterioPromedioCierre);
+      RepoRanking.getInstance().add(criterioCantidadReportes);
 
       MainTareasPlanificadas.lanzarRanking();
 
-
-    });
   }
 
 }

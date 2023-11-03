@@ -19,7 +19,7 @@ public class ControllerMenuRankings implements WithSimplePersistenceUnit {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
 
-    List<CriterioRanking> criterio = RepoRanking.instance.listarCriterio();
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
 
     return new ModelAndView(modelo, "menuRanking.html.hbs");

@@ -20,10 +20,10 @@ public class ControllerListadoRanking implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarListaDeRanking(Request request, Response response) {
     String id = request.params(":id");
-    CriterioRanking criterioRanking = RepoRanking.instance.buscarPorId(Integer.parseInt(id));
+    CriterioRanking criterioRanking = RepoRanking.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
-    List<Entidad> entidades = RepoEntidades.instance.listarEntidades();
+    List<Entidad> entidades = RepoEntidades.instance.getAll();
     entidades.sort(criterioRanking.getCriterio());
     modelo.put("entidadesOrdenadas", entidades);
     modelo.put("nombre", criterioRanking.getNombre_criterio());

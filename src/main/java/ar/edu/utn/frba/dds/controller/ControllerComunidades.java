@@ -125,7 +125,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     if (idsession != null) {
       String id = request.params(":id");
       String idusuario = request.queryParams("idusuario");
-      Comunidad comunidad = RepositorioComunidades.getInstance().buscarPorId(Long.parseLong(id));
+      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(idusuario));
       Miembro miembro = comunidad.miembros.stream().filter(m->m.usuario.equals(usuario)).toList().get(0);
       getTransaction().begin();
