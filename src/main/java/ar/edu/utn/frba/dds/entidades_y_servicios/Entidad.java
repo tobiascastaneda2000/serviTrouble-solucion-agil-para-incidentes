@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 public class Entidad {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private String razonSocial;
   private String email;
@@ -48,7 +48,7 @@ public class Entidad {
     this.email = email;
   }
 
-  public int getId() {
+  public Long getId() {
     return id;
   }
 

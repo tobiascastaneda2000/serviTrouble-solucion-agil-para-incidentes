@@ -22,7 +22,7 @@ public class ControllerEntidades implements WithSimplePersistenceUnit {
     if (id != null) {
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
-      List<Entidad> entidades = RepoEntidades.instance.listarEntidades();
+      List<Entidad> entidades = RepoEntidades.getInstance().getAll();
       modelo.put("entidades", entidades);
       return new ModelAndView(modelo, "entidades.html.hbs");
     }

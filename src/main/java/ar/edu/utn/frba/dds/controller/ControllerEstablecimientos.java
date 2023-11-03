@@ -23,7 +23,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     Long idsession = request.session().attribute("user_id");
     if (idsession != null) {
       String id = request.params(":id");
-      Entidad entidad = RepoEntidades.instance.buscarPorId(Integer.parseInt(id));
+      Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(id));
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Establecimiento> establecimientos = entidad.getEstablecimientos();
