@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ImpServicioUbicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
@@ -15,6 +16,7 @@ import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import org.hibernate.query.criteria.internal.expression.SelectionImpl;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import javax.persistence.*;
@@ -70,6 +72,7 @@ public class Usuario implements WithSimplePersistenceUnit{
     this.sesionAbierta = false;
     this.contacto = contacto;
     this.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
+    this.servicioUbicacion = new ImpServicioUbicacion();
   }
 
 
@@ -259,7 +262,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   }
 
   public boolean esIncidenteCercano(Incidente incidente){
-    return servicioUbicacion.estaCerca(this, incidente.getServicioAsociado());
+    return new ImpServicioUbicacion().estaCerca(this, incidente.getServicioAsociado());
   }
 
   public List<Incidente> obtenerIncidentesCercanos(List<Incidente> incidentesAbiertos){

@@ -32,6 +32,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       usuario.setUsername(nombre);
       usuario.setContrasenia(contrasenia);
       usuario.setContacto(contacto);
+      RepoUsuarios.getInstance().update(usuario);
 
       response.redirect("/home");
       return null;

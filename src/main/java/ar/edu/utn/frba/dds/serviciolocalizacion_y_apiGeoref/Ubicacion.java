@@ -2,11 +2,24 @@ package ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref;
 
 public class Ubicacion {
 
-  double latitud;
-  double longitud;
+  private double latitud;
+  private double longitud;
 
-  public void Ubicacion(double latitud,double longitud){
+  public Ubicacion(double latitud,double longitud){
     this.latitud=latitud;
     this.longitud=longitud;
   }
+
+  public double getLatitud() {
+    return latitud;
+  }
+
+  public double getLongitud() {
+    return longitud;
+  }
+
+  public boolean mismaUbicacion(Ubicacion ubicacion){
+    return (this.latitud == ubicacion.getLatitud()) && (this.longitud == ubicacion.getLongitud());
+  }
+
 }
