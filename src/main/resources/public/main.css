@@ -12,19 +12,29 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
 body {
-    font-family: Lato, sans-serif;
-    font-weight: 300;
-    margin: 0px;
-    background-image: url("fondo2.jpg");
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  margin: 0px;
+  background-image: url("fondo2.jpg");
 }
 
-h1 {
-    font-weight: 300;
-}
-
-h2 {
-    font-weight: 300;
+h1, h2 {
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,6 +49,8 @@ footer {
 }
 
 .navbar {
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
     position: relative;
     top: 0;
     left: 0;
@@ -159,7 +171,7 @@ main {
 .carousel-caption {
     color: #fff; /* Color del texto */
     font-size: 30px; /* Tamaño del texto */
-    font-family: 'Arial', sans-serif; /* Tipo de letra */
+    font-family: 'Open Sans', sans-serif; /* Tipo de letra */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombreado */
 }
 
@@ -168,8 +180,10 @@ main {
     background-color: #f8f9fa;
     color: #343a40;
     font-family: 'Nunito', sans-serif;
+    margin: 1%;
 }
 .titulo{
+    font-family: 'Nunito', sans-serif;
     text-align: center;
     font-size: 36px;
     font-weight: bold;
