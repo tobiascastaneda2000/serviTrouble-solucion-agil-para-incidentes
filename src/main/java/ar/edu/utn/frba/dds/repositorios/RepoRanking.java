@@ -19,12 +19,20 @@ public class RepoRanking implements WithSimplePersistenceUnit {
   List<CriterioRanking> criterios = new ArrayList<>();
 
 
-  public void agregarRanking(CriterioRanking criterioRanking){
+  public void agregarRanking(CriterioRanking criterioRanking) {
     criterios.add(criterioRanking);
   }
 
   public List<CriterioRanking> listarCriterio() {
     return entityManager().createQuery("from CriterioRanking", CriterioRanking.class)
         .getResultList();
+  }
+
+  public CriterioRanking buscarPorId(int id) {
+    return entityManager()
+        .createQuery("from CriterioRanking where id = :id", CriterioRanking.class)
+        .setParameter("id", id)
+        .getResultList()
+        .get(0);
   }
 }

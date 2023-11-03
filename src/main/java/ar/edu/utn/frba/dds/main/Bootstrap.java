@@ -35,41 +35,66 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     withTransaction(() -> {
 
-      Usuario usuario = new Usuario("facu", "123456","contacto");
-      Horario unHorario = new Horario(10,30);
+      //CARGA USUARIO
+
+      Usuario usuario = new Usuario("facu", "123456", "contacto");
+      Horario unHorario = new Horario(10, 30);
       usuario.agregarHorario(unHorario);
       persist(unHorario);
       persist(usuario);
-      Usuario usuario2 = new Usuario("admin", "123456","contacto");
+      Usuario usuario2 = new Usuario("admin", "123456", "contacto");
       usuario2.permisoUsuario = PermisoUsuario.ADMIN;
       persist(usuario2);
-      Entidad entidad1 = new Entidad("Fantasy Co.", "fantasy@mail.com");
-      Entidad entidad2 = new Entidad("Pixel Innovators", "pixel@mail.com");
-      persist(entidad2);
+      Usuario usuario3 = new Usuario("pepe", "123456", "contacto");
+      persist(usuario3);
+
+
+      //CARGA ENTIDAD FANTASY
+      Entidad entidadFantasy = new Entidad("Fantasy Co.", "fantasy@mail.com");
+      persist(entidadFantasy);
       Establecimiento establecimiento1 = new Establecimiento("nombre 1");
       persist(establecimiento1);
-      entidad1.agregarEstablecimiento(establecimiento1);
+      entidadFantasy.agregarEstablecimiento(establecimiento1);
       Establecimiento establecimiento2 = new Establecimiento("nombre 2");
       persist(establecimiento2);
-      entidad1.agregarEstablecimiento(establecimiento2);
-      persist(entidad1);
+      entidadFantasy.agregarEstablecimiento(establecimiento2);
 
-      Servicio servicio1 = new Servicio("baño primer piso",TipoServicio.BAÑO);
+      Servicio servicio1 = new Servicio("baño primer piso", TipoServicio.BAÑO);
       persist(servicio1);
       establecimiento1.agregarServicio(servicio1);
 
-      Servicio servicio2 = new Servicio("baño segundo piso",TipoServicio.BAÑO);
+      Servicio servicio2 = new Servicio("baño segundo piso", TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio2);
       persist(servicio2);
 
-      Servicio servicio3 = new Servicio("Ascensor discapacitados",TipoServicio.ASCENSOR);
-      establecimiento1.agregarServicio(servicio3);
-      persist(servicio3);
+      Servicio servicio5 = new Servicio("Ascensor discapacitados",TipoServicio.ASCENSOR);
+      establecimiento1.agregarServicio(servicio5);
+      persist(servicio5);
       persist(establecimiento1);
 
-      Incidente incidente = new Incidente("Botonera rota",servicio3);
+      Incidente incidente = new Incidente("Botonera rota",servicio5);
       persist(incidente);
 
+      //CARGA ENTIDAD PIXEL
+      Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
+      persist(entidadPixel);
+
+      Establecimiento establecimientoA = new Establecimiento("establecimiento A");
+      persist(establecimientoA);
+      entidadPixel.agregarEstablecimiento(establecimientoA);
+      Establecimiento establecimientoB = new Establecimiento("establecimiento B");
+      persist(establecimientoB);
+      entidadPixel.agregarEstablecimiento(establecimientoB);
+
+      Servicio servicio3 = new Servicio("baño tercer piso", TipoServicio.BAÑO);
+      persist(servicio3);
+      establecimientoA.agregarServicio(servicio3);
+
+      Servicio servicio4 = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      establecimientoB.agregarServicio(servicio4);
+      persist(servicio4);
+
+      //CARGA COMUNIDADES
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
       comunidad1.incidentes.add(incidente);
@@ -78,23 +103,20 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Comunidad comunidad2 = new Comunidad("nombre2");
       entityManager().persist(comunidad2);
 
-      comunidad1.agregarUsuario(usuario,PermisoComunidad.ADMIN_COMUNIDAD);
+      comunidad1.agregarUsuario(usuario, PermisoComunidad.ADMIN_COMUNIDAD);
+      comunidad1.agregarUsuario(usuario3, PermisoComunidad.USUARIO_COMUNIDAD);
       persist(comunidad1);
 
       //CARGA CRITERIOS RANKINGS
       CriterioRanking criterioPromedioCierre = new PromedioCierresSemanal();
       CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
 
-
       RepoRanking.instance.agregarRanking(criterioPromedioCierre);
       RepoRanking.instance.agregarRanking(criterioCantidadReportes);
       entityManager().persist(criterioPromedioCierre);
       entityManager().persist(criterioCantidadReportes);
 
-      // Deberia andar pero lanza error
-      //Exception in thread "main" javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: could not prepare statement
-      //Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
-      //Caused by: org.hsqldb.HsqlException: usuario no tiene privilegios suficientes o objeto no encontrado: CRITERIORANKING
+
 
       MainTareasPlanificadas.lanzarRanking();
 

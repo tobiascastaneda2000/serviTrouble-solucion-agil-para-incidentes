@@ -13,7 +13,14 @@ import java.util.Comparator;
 public class CantidadReportesSemanal extends CriterioRanking {
 
   @Transient
-  Comparator<Entidad> criterio = Comparator.comparing(Entidad::cantidadDeIncidentesReportados);
+  public Comparator<Entidad> criterio = Comparator.comparing(Entidad::cantidadDeIncidentesReportados);
+
+  @Override
+  public String getNombre_criterio() {
+    return nombre_criterio;
+  }
+
+  public String nombre_criterio = "cantidad de incidentes reportados";
 
   public CantidadReportesSemanal() {
   }
