@@ -77,13 +77,13 @@ public class MainTareasPlanificadas {
     CriterioRanking criterioPromediosCierres = new PromedioCierresSemanal();
     CriterioRanking criterioCantidadReportes = new CantidadReportesSemanal();
 
-    RepoEntidades.instance.generarRankingEnCsv(criterioCantidadReportes);
-    RepoEntidades.instance.generarRankingEnCsv(criterioPromediosCierres);
+    RepoEntidades.instance.generarRankingEnCsvCantidadReportes(criterioCantidadReportes);
+    RepoEntidades.instance.generarRankingEnCsvPromedioCierres(criterioPromediosCierres);
     //Se realizan una vez por semana
 
     /*
     De momento, los rankins se guardan en
-    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt";
+    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv";
      */
   }
 

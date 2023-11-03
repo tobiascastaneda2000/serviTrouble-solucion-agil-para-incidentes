@@ -36,14 +36,19 @@ public class RepoEntidades implements WithSimplePersistenceUnit { // Hacer que e
 
   // ---------------------------------RANKINGS----------------------------------------------------//
 
-  public void generarRankingEnCsv(CriterioRanking criterio) {
-    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt");
+  public void generarRankingEnCsvCantidadReportes(CriterioRanking criterio) {
+    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv");
+    lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
+  }
+
+  public void generarRankingEnCsvPromedioCierres(CriterioRanking criterio) {
+    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-pc.csv");
     lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
   }
 
   public List<Entidad> ordenarEntidadesSegunCriterio(CriterioRanking criterioRanking) {
 
-    List<Entidad> entidades = getEntidades();
+    List<Entidad> entidades = listarEntidades();
     Comparator<Entidad> criterio = criterioRanking.getCriterio();
     entidades.sort(criterio);
     return entidades;

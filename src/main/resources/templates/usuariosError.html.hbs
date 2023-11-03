@@ -18,28 +18,18 @@
             <input type="text" class="form-control" name="contacto">
        </div>
        <input type="submit" class="btn btn-secondary">
+        <div class="alert alert-warning" role="alert">
+          El usuario ya existe
+        </div>
     </form>
 </div>
 
-<div class="container d-flex justify-content-center align-items-center ">
-<table class="table table-bordered table-hover caption-top row border rounded-5 p-3 bg-white shadow box-area">
-    <caption>Lista de usuarios</caption>
-    <thead>
-        <tr>
-           <th scope="col">ID</th>
-           <th scope="col">Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
+<h3>Lista de usuarios</h3>
+<ul>
         {{#usuarios}}
-            <tr>
-               <th scope="row">{{id}}</th>
-               <td><a href="/usuarios/{{id}}">{{usuario}}</a></td>
-            </tr>
+            <li><a href="/usuarios/{{id}}">{{usuario}}</a></li>
         {{/usuarios}}
-    </tbody>
-</table>
-</div>
+</ul>
 
 {{/partial}}
 

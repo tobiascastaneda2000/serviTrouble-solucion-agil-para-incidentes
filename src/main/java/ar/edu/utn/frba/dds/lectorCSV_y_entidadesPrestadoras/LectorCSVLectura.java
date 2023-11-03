@@ -24,7 +24,7 @@ public class LectorCSVLectura {
       this.extensioncsv = csvPath.substring(csvPath.length() - 4);
       if (extensioncsv.equals(".csv")) {
         this.csvPath = csvPath;
-        file = new File(this.csvPath);
+        file = new File(csvPath);
       } else {
         throw new PathIncorrectoException();
       }
