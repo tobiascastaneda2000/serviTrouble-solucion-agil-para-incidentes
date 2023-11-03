@@ -45,7 +45,7 @@ public class SugerenciaRevisionIncidenteTest {
     comunidad.registrarMiembro(usuario);
     comunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades = RepositorioComunidades.instance;
-    repositorioComunidades.guardarComunidad(comunidad);
+    repositorioComunidades.getInstance().add(comunidad);
     entidad = new Entidad("a","mail");
     establecimiento = new Establecimiento("nombre");
     entidad.agregarEstablecimiento(establecimiento);
@@ -63,7 +63,7 @@ public class SugerenciaRevisionIncidenteTest {
 
   @AfterEach
   public void borrar(){
-    repositorioComunidades.clear();
+    repositorioComunidades.getInstance().clean();
   }
 
   @Test

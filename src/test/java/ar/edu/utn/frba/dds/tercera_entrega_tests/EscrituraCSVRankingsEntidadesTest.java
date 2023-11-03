@@ -33,7 +33,7 @@ import static org.mockito.Mockito.mock;
 
 public class EscrituraCSVRankingsEntidadesTest {
 
-  RepoEntidades repoEntidades = new RepoEntidades();
+  RepoEntidades repoEntidades = RepoEntidades.getInstance(); // Habra que mockear calculo, o conectarlo a una db de pruebas, ni idea
   Entidad gualmayen;
   Entidad jorgito;
   List<Entidad> listadoEntidades;
@@ -71,7 +71,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
     establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
 
-    repoEntidades.guardarEntidad(gualmayen);
+    repoEntidades.getInstance().add(gualmayen);
 
 
     //CREACION ENTIDAD JORGITO
@@ -91,7 +91,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
     establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
 
-    repoEntidades.guardarEntidad(jorgito);
+    repoEntidades.getInstance().add(jorgito);
 
     //RANKINGS
 
@@ -106,7 +106,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
   @AfterEach
   void clear(){
-    repoEntidades.clear();
+    repoEntidades.getInstance().clean();
   }
 
   @Test

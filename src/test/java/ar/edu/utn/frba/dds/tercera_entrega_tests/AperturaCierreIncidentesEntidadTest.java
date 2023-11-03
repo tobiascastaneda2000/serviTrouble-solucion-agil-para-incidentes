@@ -23,7 +23,7 @@ public class AperturaCierreIncidentesEntidadTest {
   Servicio servicio;
   Entidad unaEntidad;
   Establecimiento unEstablecimiento;
-  RepoUsuarios repoUsuarios = new RepoUsuarios();
+  RepoUsuarios repoUsuarios = RepoUsuarios.getInstance();
   Usuario usuario;
 
 
@@ -31,7 +31,7 @@ public class AperturaCierreIncidentesEntidadTest {
   void setUp() {
 
     usuario = new Usuario("Juan ", "Perez", "unMail");
-    repoUsuarios.guardarUsuario(usuario);
+    repoUsuarios.add(usuario);
     servicio =new Servicio("unNombre",TipoServicio.ASCENSOR);
     unEstablecimiento = new Establecimiento("nombre");
     unaEntidad= new Entidad("razonsocial","unMail");
@@ -57,7 +57,7 @@ public class AperturaCierreIncidentesEntidadTest {
 
   @AfterEach
   void clear(){
-    repoUsuarios.clear();
+    repoUsuarios.clean();
   }
 
 }

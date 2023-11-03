@@ -36,7 +36,7 @@ public class NotificionesAperturaTest {
     comunidad = new Comunidad("nombre");
     unUsuario = new Usuario( "Messi", "alguien", "mail");
     otroUsuario = new Usuario("Cristiano", "alguien", "otroMail");
-    repositorioComunidades.guardarComunidad(comunidad);
+    repositorioComunidades.getInstance().add(comunidad);
     servicio = new Servicio("nombre",TipoServicio.ESCALERA_MECANICA);
     comunidad.registrarMiembro(unUsuario);
     unUsuario.abrirIncidente(servicio,"abc");
@@ -60,6 +60,6 @@ public class NotificionesAperturaTest {
 
   @AfterEach
   void clear(){
-    repositorioComunidades.clear();
+    repositorioComunidades.getInstance().clean();
   }
 }
