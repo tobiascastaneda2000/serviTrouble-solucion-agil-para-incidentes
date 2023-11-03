@@ -218,6 +218,41 @@ main {
     width: 200px;
 }
 
-#lista-usuarios > thead{
+#lista-usuarios thead{
     width: 150px;
+}
+
+#back-to-home{
+    margin: 20px;
+    background-color: var(--bs-primary);
+}
+
+.tabla_incidentes_sugeridos{
+    border: 2px solid #000;
+    background-color: var(--bs-primary);
+    margin:auto;
+}
+
+.tabla_incidentes_sugeridos tr{
+    border: 1px solid #000;
+}
+
+.tabla_incidentes_sugeridos td{
+    border: 1px solid #000;
+    padding:4px;
+}
+
+.tabla_incidentes_sugeridos th{
+    color: #FFF;
+    border: 2px solid #000;
+    padding:6px;
+}
+
+#incidentes_sugeridos-cabecera{
+    background-color: var(--bs-primary-text-emphasis);
+    text-align: center;
+}
+
+.incidente_sugeridos-form{
+    margin:0;
 }
