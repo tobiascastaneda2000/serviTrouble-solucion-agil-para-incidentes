@@ -1,12 +1,25 @@
 {{#partial "principal" }}
     <div class="titulo">
-        ENTIDADES:
+        ENTIDADES
     </div>
-    <ul>
-        {{#entidades}}
-            <li><a href="entidades/{{id}}">{{razonSocial}}</a></li>
-        {{/entidades}}
-    </ul>
+<div class="container d-flex justify-content-center align-items-center">
+    <table class="table table-bordered table-hover row border rounded-5 p-3 bg-white shadow box-area">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Razón Social</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#entidades}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td><a href="entidades/{{id}}">{{razonSocial}}</a></td>
+            </tr>
+            {{/entidades}}
+        </tbody>
+    </table>
+</div>
 
 {{/partial}}
 

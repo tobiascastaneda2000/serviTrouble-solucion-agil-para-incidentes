@@ -1,36 +1,39 @@
 {{#partial "principal" }}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <h1 class="display-5" style="font-weight: bold; text-align: center">USUARIO</h1>
 
-<h1>USUARIO</h1>
+        <ul>
+                {{#usuarioDetalle}}
+                    <li><a><span style="font-weight: bold">Usuario:</span> {{usuario}}</a></li>
+                    <li><a><span style="font-weight: bold">Contacto:</span> {{contacto}}</a></li>
+                    <li><a><span style="font-weight: bold">Medio Notificador:</span> {{medioNoti}}</a></li>
+                    <li><a>
+                    <span style="font-weight: bold;">Entidades de Interés:</span>
+                    {{#entidadesInteres}}
+                       <li>{{razonSocial}}</li>
+                    {{/entidadesInteres}}
+                    </a></li>
+                    <li><a>
+                    <span style="font-weight: bold">Horarios de Notificación:</span>
+                    {{#horarios}}
+                    {{hora}}:{{minuto}}
+                    {{/horarios}}
+                    </a></li>
+                {{/usuarioDetalle}}
+        </ul>
 
-<ul>
-        {{#usuarioDetalle}}
-            <li><a>Usuario: {{usuario}}</a></li>
-            <li><a>Contacto: {{contacto}}</a></li>
-            <li><a>Medio Notificador: {{medioNoti}}</a></li>
-            <li><a>
-            Entidades de Interes:
-            {{#entidadesInteres}}
-               <li>{{razonSocial}}</li>
-            {{/entidadesInteres}}
-            </a></li>
-            <li><a>
-            Horarios de Notificacion:
-            {{#horarios}}
-                <li>{{hora}}:{{minuto}}</li>
-            {{/horarios}}
-            </a></li>
-        {{/usuarioDetalle}}
-</ul>
+        <form method="POST" class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <input onclick="mostrarAlerta()" type="submit" class="btn btn-danger" value="Eliminar Usuario">
 
-<form method="POST">
-    <input onclick="mostrarAlerta()" type="submit" value="Eliminar Usuario">
-
-    <script>
-    function mostrarAlerta() {
-        alert('Usuario Eliminado!');
-    }
-    </script>
-</form>
+            <script>
+            function mostrarAlerta() {
+                alert('Usuario Eliminado!');
+            }
+            </script>
+        </form>
+    </div>
+</div>
 
 {{/partial}}
 

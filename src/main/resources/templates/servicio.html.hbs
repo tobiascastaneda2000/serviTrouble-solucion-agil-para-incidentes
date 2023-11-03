@@ -1,19 +1,24 @@
 {{#partial "principal" }}
 
-<h1>CARGAR INCIDENTE</h1>
+<h1 class="titulo">CARGAR INCIDENTE</h1>
 
-<form method="POST">
-
-    <label for="opciones">Servicio:</label>
-    <select id="servicio" name="servicio">
-        {{#servicios}}
-            <option value={{id}}>{{nombre}}</option>
-        {{/servicios}}
-    </select>
-    <label>Observacion</label>
-    <input type="textarea" name="observacion" maxlength="50">
-    <input type="submit" value="Abrir Incidente">
-</form>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="mb-3">
+           <label for="opciones">Servicio:</label>
+           <select id="servicio" class="form-select" name="servicio">
+               {{#servicios}}
+                   <option value={{id}}>{{nombre}}</option>
+               {{/servicios}}
+           </select>
+        </div>
+        <div class="mb-3">
+           <label>Observación</label>
+           <input type="textarea" class="form-control"  name="observacion" maxlength="50">
+        </div>
+        <input type="submit" value="Abrir Incidente" class="btn btn-primary">
+    </form>
+</div>
 
 {{/partial}}
 

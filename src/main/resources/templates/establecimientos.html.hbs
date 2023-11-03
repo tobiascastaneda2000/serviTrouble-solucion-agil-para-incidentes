@@ -2,11 +2,24 @@
     <div class="titulo">
         ESTABLECIMIENTOS
     </div>
-    <ul>
-        {{#establecimientos}}
-            <li><a href="../establecimientos/{{id}}">{{nombre}}</a></li>
-        {{/establecimientos}}
-    </ul>
+<div class="container d-flex justify-content-center align-items-center ">
+    <table class="table table-bordered table-hover row border rounded-5 p-3 bg-white shadow box-area">
+        <thead>
+            <tr>
+               <th scope="col">ID</th>
+               <th scope="col">Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#establecimientos}}
+            <tr>
+               <th scope="row">{{id}}</th>
+               <td><a href="../establecimientos/{{id}}">{{nombre}}</a></td>
+            </tr>
+            {{/establecimientos}}
+        </tbody>
+    </table>
+</div>
 
 {{/partial}}
 
