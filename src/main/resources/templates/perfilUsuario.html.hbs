@@ -1,28 +1,31 @@
 {{#partial "principal" }}
 
-<h1>USUARIO</h1>
+
 
 {{#with usuarioDetalle}}
-
-         <ul>
-            <li>Usuario: {{usuario}}</li>
+<div class="cont-form">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <h2 class="text-center">MI USUARIO</h2>
+         <ul class="list-group">
+            <li class="list-group-item">Usuario:      {{usuario}}</li>
             <br>
-            <li>Contacto: {{contacto}}</li>
+            <li class="list-group-item">Contacto:      {{contacto}}</li>
             <br>
-            <li>Contraseña: {{contrasenia}}</li>
+            <li class="list-group-item">Contraseña:      {{contrasenia}}</li>
             <br>
-            <li>Medio Notificador: {{medioNoti}}</li>
+            <li class="list-group-item">Medio Notificador:      {{medioNoti}}</li>
             <br>
-            <li>Horarios de Notificacion:</li>
+            <li class="list-group-item">Horarios de Notificacion:
             {{#horarios}}
-                    {{hora}}:{{minuto}}
+                {{hora}}:{{minuto}}
+            {{/horarios}}</li>
             <br>
-            {{/horarios}}
             <form method="POST">
-            <input type="submit" value="Modificar Perfil">
+            <input type="submit" class="btn btn-primary" value="Modificar Perfil">
             </form>
          </ul>
-
+      <div>
+</div>
     {{/with}}
 
 
