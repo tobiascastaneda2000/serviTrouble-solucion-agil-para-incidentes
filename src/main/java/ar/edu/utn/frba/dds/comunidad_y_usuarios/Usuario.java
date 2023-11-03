@@ -17,18 +17,7 @@ import ar.edu.utn.frba.dds.notificador.Horario;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,20 +40,20 @@ public class Usuario implements WithSimplePersistenceUnit{
 
   boolean sesionAbierta;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   public MedioNotificador medioNotificador;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   Set<Entidad> entidadesInteres = new HashSet<>();
 
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "usuario_id")
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
   @Transient  // FALTA
   ServicioLocalizacion servicioLocalizacion;
   @Transient  // FALTA
   ServicioUbicacion servicioUbicacion;
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "usuario_id")
   private Set<Horario> horariosPlanificados = new HashSet<>();
 
@@ -96,6 +85,18 @@ public class Usuario implements WithSimplePersistenceUnit{
 
   public void setHorariosPlanificados(Set<Horario> horariosPlanificados) {
     this.horariosPlanificados = horariosPlanificados;
+  }
+
+  public void setContrasenia(String contrasenia) {
+    this.contrasenia = contrasenia;
+  }
+
+  public void setUsername(String username) {
+    this.usuario = username;
+  }
+
+  public void setContacto(String contacto) {
+    this.contacto = contacto;
   }
 
   public Set<Entidad> getEntidadesInteres() {
@@ -149,7 +150,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   }
 
   public List<Miembro> obtenerMiembros(){
-    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getComunidades();
+    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
     List<Miembro> miembros = comunidades.stream().map(c->c.miembros).flatMap(m->m.stream()).toList();
     return miembros.stream().filter(m->m.usuario.equals(this)).toList();
   }
@@ -187,7 +188,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   //------------------------------------------------------------------------------------------------------//
 
   public List<Comunidad> comunidadesPertenecientes() {
-    return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
+    return RepositorioComunidades.getInstance().getAll().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
 

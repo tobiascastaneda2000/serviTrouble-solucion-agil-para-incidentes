@@ -24,7 +24,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
@@ -45,7 +45,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     Long idsession = request.session().attribute("user_id");
     if (idsession != null) {
       String id = request.params(":id");
-      Comunidad comunidad = RepositorioComunidades.instance.buscarPorId(Long.parseLong(id));
+      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Incidente> incidentesAbiertos = comunidad.incidentes;
@@ -65,7 +65,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
@@ -91,7 +91,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       String id = request.params(":id");
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
-      Comunidad comunidad = RepositorioComunidades.getInstance().buscarPorId(Long.parseLong(id));
+      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       modelo.put("comunidad",comunidad);
       return new ModelAndView(modelo, "verDetalleComunidad.html.hbs");
     }
@@ -108,7 +108,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       String id = request.params(":id");
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
-      Comunidad comunidad = RepositorioComunidades.getInstance().buscarPorId(Long.parseLong(id));
+      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
       modelo.put("usuarios",usuarios);
       return new ModelAndView(modelo, "verUsuariosComunidad.html.hbs");

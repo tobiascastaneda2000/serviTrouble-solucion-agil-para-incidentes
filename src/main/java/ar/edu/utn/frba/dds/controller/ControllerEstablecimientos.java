@@ -23,7 +23,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     Long idsession = request.session().attribute("user_id");
     if (idsession != null) {
       String id = request.params(":id");
-      Entidad entidad = RepoEntidades.instance.buscarPorId(Integer.parseInt(id));
+      Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(id));
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Establecimiento> establecimientos = entidad.getEstablecimientos();
@@ -72,7 +72,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           .getResultList()
           .get(0);
           Long userid = request.session().attribute("user_id");
-          Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(userid);
+          Usuario usuario = RepoUsuarios.getInstance().getOne(userid);
           usuario.abrirIncidente(servicio,observacion);
           response.redirect("/incidente-creado");
       return null;

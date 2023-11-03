@@ -36,8 +36,8 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     palermoGrupo.registrarMiembro(otroUsuario);
     persist(palermoGrupo);
     otraComunidad.registrarMiembro(usuarioInformante);
-    repositorioComunidades.guardarComunidad(palermoGrupo);
-    repositorioComunidades.guardarComunidad(otraComunidad);
+    repositorioComunidades.getInstance().add(palermoGrupo);
+    repositorioComunidades.getInstance().add(otraComunidad);
     entidad = new Entidad("razonsocial","unEmail");
     establecimiento = new Establecimiento("nombre");
     servicio =new Servicio("nombre",TipoServicio.ASCENSOR);
@@ -49,7 +49,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
 
   @AfterEach
   void clear(){
-    repositorioComunidades.clear();
+    repositorioComunidades.getInstance().clean();
   }
 
   @Test

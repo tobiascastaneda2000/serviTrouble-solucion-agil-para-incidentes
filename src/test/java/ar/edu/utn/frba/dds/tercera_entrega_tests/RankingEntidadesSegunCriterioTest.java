@@ -26,7 +26,7 @@ import static org.mockito.Mockito.mock;
 
 class RankingEntidadesSegunCriterioTest {
 
-  RepoEntidades repoEntidades = new RepoEntidades();
+  RepoEntidades repoEntidades = RepoEntidades.getInstance(); //mock?
   Entidad gualmayen;
   Entidad jorgito;
 
@@ -62,7 +62,7 @@ class RankingEntidadesSegunCriterioTest {
     establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
     establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
 
-    repoEntidades.guardarEntidad(gualmayen);
+    repoEntidades.getInstance().add(gualmayen);
 
 
     //CREACION ENTIDAD JORGITO
@@ -82,7 +82,7 @@ class RankingEntidadesSegunCriterioTest {
     establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
     establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
 
-    repoEntidades.guardarEntidad(jorgito);
+    repoEntidades.getInstance().add(jorgito);
 
     //RANKINGS
 
@@ -92,7 +92,7 @@ class RankingEntidadesSegunCriterioTest {
 
   @AfterEach
   void clear(){
-    repoEntidades.clear();
+    repoEntidades.getInstance().clean();
   }
 
   @Test

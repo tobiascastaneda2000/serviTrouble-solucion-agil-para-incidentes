@@ -1,0 +1,38 @@
+{{#partial "principal" }}
+
+<h1>USUARIO</h1>
+
+    {{#with usuarioDetalle}}
+        <form method="POST" action="/usuarios/{{id}}" type="submit" value="Modificar Usuario">
+            <!-- Campo oculto para tratar la request como PUT -->
+
+            <input type="hidden" name="_method" value="PUT">
+            <label for="usuario">Usuario:</label>
+            <input type="text" name="usuario" value="{{usuario}}">
+            <br>
+            <label for="contacto">Contacto:</label>
+            <input type="text" name="contacto" value="{{contacto}}">
+            <br>
+            <label for="contrasenia">Contraseña:</label>
+            <input type="password" name="contrasenia" value="{{contacto}}">
+            <br>
+            <label for="medioNoti">Medio Notificador:</label>
+            <input type="text" name="medioNoti" value="{{medioNoti}}">
+            <br>
+            <label for="entidadesInteres">Entidades de Interes:</label>
+            {{#entidadesInteres}}
+                <input type="text" name="entidadesInteres" value="{{razonSocial}}">
+                <br>
+            {{/entidadesInteres}}
+            <label for="horarios">Horarios de Notificacion:</label>
+            {{#horarios}}
+                <input type="text" name="horarios" value="{{hora}}:{{minuto}}">
+                <br>
+            {{/horarios}}
+            <input type="submit" value="Modificar">
+        </form>
+    {{/with}}
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
+

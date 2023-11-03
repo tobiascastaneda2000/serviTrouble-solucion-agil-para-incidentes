@@ -21,6 +21,32 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       return new ModelAndView(modelo, "usuarios.html.hbs");
     }
 
+    public ModelAndView modificarUsuario(Request request, Response response){
+      String nombre = request.queryParams("usuario");
+      String contrasenia = request.queryParams("contrasenia");
+      String contacto = request.queryParams("contacto");
+      String id = request.params(":id");
+
+      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+
+      usuario.setUsername(nombre);
+      usuario.setContrasenia(contrasenia);
+      usuario.setContacto(contacto);
+
+      response.redirect("/home");
+      return null;
+    }
+
+    public ModelAndView postUsuarios(Request request, Response response) {
+      String metodo = request.queryParams("_method");
+
+        if(metodo.equals("PUT")){
+            return modificarUsuario(request, response);
+        }
+
+        return eliminarUsuario(request, response);
+    }
+
     public ModelAndView crearUsuario(Request request, Response response) {
     String nombre = request.queryParams("nombre");
     String contrasenia = request.queryParams("contrasenia");
@@ -47,7 +73,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
 
   public ModelAndView mostrarDetalleUsuario(Request request, Response response) {
     String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     if(usuario.medioNotificador != null){
       modelo.put("medioNoti",usuario.medioNotificador.toString());
@@ -62,10 +88,22 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
   }
 
+  public ModelAndView mostrarPerfil(Request request, Response response) {
+    Long id = request.session().attribute("user_id");
+    Usuario usuario = RepoUsuarios.getInstance().getOne((id));
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("id", usuario.id);
+    modelo.put("entidadesInteres",usuario.getEntidadesInteres());
+    modelo.put("horarios",usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle",usuario);
+    return new ModelAndView(modelo, "perfilUsuario.html.hbs");
+  }
+
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
     String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
     try {
       getTransaction().begin();

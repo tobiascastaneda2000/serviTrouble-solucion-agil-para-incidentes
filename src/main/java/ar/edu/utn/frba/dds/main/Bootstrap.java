@@ -113,10 +113,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       RepoRanking.instance.agregarRanking(criterioPromedioCierre);
       RepoRanking.instance.agregarRanking(criterioCantidadReportes);
-      entityManager().persist(criterioPromedioCierre);
-      entityManager().persist(criterioCantidadReportes);
-
-
 
       MainTareasPlanificadas.lanzarRanking();
 
