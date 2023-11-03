@@ -21,6 +21,11 @@ public class RepoUsuarios extends Repositorio<Usuario> {
     return instance;
   }
 
+
+  public Set<Usuario> getUsuariosComoSet() {
+    return new HashSet<>(this.getAll());
+  }
+
   public List<Usuario> interesadoEnEntidad(Entidad entidad){
     return getAll().stream().filter(u->u.getEntidadesInteres().contains(entidad)).toList();
   }

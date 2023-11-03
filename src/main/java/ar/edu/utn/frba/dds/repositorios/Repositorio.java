@@ -4,7 +4,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 
 public class Repositorio<T> implements WithSimplePersistenceUnit {
@@ -17,8 +17,8 @@ public class Repositorio<T> implements WithSimplePersistenceUnit {
     this.type = type;
   }
 
-  public Set<T> getAll() {
-    return new HashSet<T>(entityManager().createQuery("FROM " + type.getSimpleName()).getResultList());
+  public List<T> getAll() {
+    return entityManager().createQuery("FROM " + type.getSimpleName()).getResultList();
   }
 
   public T getOne(Long id) {
