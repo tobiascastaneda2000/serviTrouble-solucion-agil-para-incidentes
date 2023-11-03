@@ -37,7 +37,7 @@ public class MainTareasPlanificadas {
   //-----------------------------------NOTIFICADOR A USUARIOS SEGUN HORARIO CONFIGURADO-------------------//
 
   public static void notificarUsuarios(){
-    Set<Usuario> usuarios = RepoUsuarios.instance.getUsuarios();
+    Set<Usuario> usuarios = RepoUsuarios.getInstance().getUsuariosComoSet();;
     LocalDateTime ahora = LocalDateTime.now();
     usuarios.forEach(u->u.verificarNotificaciones(ahora));
   }
@@ -46,7 +46,7 @@ public class MainTareasPlanificadas {
   //------------------------------------SUGERENCIA REVISION INCIDENTES------------------------//
 
   public static void sugerirIncidentes(){
-    List<Comunidad> comunidades = RepositorioComunidades.instance.getComunidades();
+    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
     comunidades.forEach(c->c.sugerirIncidentes());
   }
 

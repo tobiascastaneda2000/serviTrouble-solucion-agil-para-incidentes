@@ -138,7 +138,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   }
 
   public List<Miembro> obtenerMiembros(){
-    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getComunidades();
+    List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
     List<Miembro> miembros = comunidades.stream().map(c->c.miembros).flatMap(m->m.stream()).toList();
     return miembros.stream().filter(m->m.usuario.equals(this)).toList();
   }
@@ -176,7 +176,7 @@ public class Usuario implements WithSimplePersistenceUnit{
   //------------------------------------------------------------------------------------------------------//
 
   public List<Comunidad> comunidadesPertenecientes() {
-    return RepositorioComunidades.getInstance().getComunidades().stream().filter(c -> c.contieneUsuario(this)).toList();
+    return RepositorioComunidades.getInstance().getAll().stream().filter(c -> c.contieneUsuario(this)).toList();
   }
 
 
