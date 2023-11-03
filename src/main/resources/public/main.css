@@ -153,3 +153,10 @@ main {
     padding: 20px;
     text-align: center;
 }
+
+.cont-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
