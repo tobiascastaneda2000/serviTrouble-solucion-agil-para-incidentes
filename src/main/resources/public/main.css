@@ -2,7 +2,7 @@ body {
     font-family: Lato, sans-serif;
     font-weight: 300;
     margin: 0px;
-    background-image: url("fondo.jpg");
+    background-image: url("fondo2.jpg");
 }
 
 h1 {
@@ -15,6 +15,7 @@ h2 {
 
 
 footer {
+    width: 100%;
     position: absolute;
     bottom: 0;
 }
