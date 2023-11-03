@@ -24,7 +24,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
@@ -65,7 +65,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();

@@ -30,7 +30,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
 
     Long id = request.session().attribute("user_id");
     if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       if(usuario.permisoUsuario.equals(PermisoUsuario.USUARIO_COMUN)){
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("anio", LocalDate.now().getYear());

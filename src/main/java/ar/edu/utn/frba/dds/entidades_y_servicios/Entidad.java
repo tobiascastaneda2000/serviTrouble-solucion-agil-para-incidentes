@@ -116,7 +116,7 @@ public class Entidad {
   }
 
   private void notificarEnEsteMomento(Incidente incidente) {
-    RepoUsuarios repoUsuarios = RepoUsuarios.instance;
+    RepoUsuarios repoUsuarios = RepoUsuarios.getInstance();
     List<Usuario> usuariosInteresados = repoUsuarios.interesadoEnEntidad(this);
     usuariosInteresados.forEach(u -> u.notificarIncidente(incidente));
   }

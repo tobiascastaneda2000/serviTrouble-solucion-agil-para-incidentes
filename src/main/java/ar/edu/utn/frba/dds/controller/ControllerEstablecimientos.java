@@ -72,7 +72,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           .getResultList()
           .get(0);
           Long userid = request.session().attribute("user_id");
-          Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(userid);
+          Usuario usuario = RepoUsuarios.getInstance().getOne(userid);
           usuario.abrirIncidente(servicio,observacion);
           response.redirect("/incidente-creado");
       return null;

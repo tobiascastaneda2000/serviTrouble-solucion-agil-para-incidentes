@@ -47,7 +47,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
 
   public ModelAndView mostrarDetalleUsuario(Request request, Response response) {
     String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     if(usuario.medioNotificador != null){
       modelo.put("medioNoti",usuario.medioNotificador.toString());
@@ -65,7 +65,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
     String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(id));
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
     try {
       getTransaction().begin();
