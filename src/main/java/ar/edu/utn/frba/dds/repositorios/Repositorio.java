@@ -1,40 +1,54 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.repositorios.daos.DAO;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.util.List;
-public class Repositorio<T> {
-  protected DAO<T> dao;
 
-  public Repositorio(DAO<T> dao) {
-    this.dao = dao;
+public class Repositorio<T> implements WithSimplePersistenceUnit {
+
+  private Class<T> type;
+
+  private static Repositorio instance;
+
+  public Repositorio(Class<T> type) {
+    this.type = type;
   }
 
-  public void setDao(DAO<T> dao) {
-    this.dao = dao;
+  public Set<T> getAll() {
+    return new HashSet<T>(entityManager().createQuery("FROM " + type.getSimpleName()).getResultList());
   }
 
-  public List<T> all(){
-    return this.dao.all();
+  public T getOne(Long id) {
+    return entityManager().find(type, id);
   }
 
-  public T get(int id){
-    return this.dao.get(id);
+  public void add(Object object) {
+    entityManager().getTransaction().begin();
+    entityManager().persist(object);
+    entityManager().getTransaction().commit();
   }
 
-  public void add(Object object){
-    this.dao.add(object);
+  public void update(Object object) {
+    entityManager().getTransaction().begin();
+    entityManager().merge(object);
+    entityManager().getTransaction().commit();
   }
 
-  public void update(Object object){
-    this.dao.update(object);
-  }
-
-  public void delete(Object object){
-    this.dao.delete(object);
+  public void delete(Object object) {
+    entityManager().getTransaction().begin();
+    entityManager().remove(object);
+    entityManager().getTransaction().commit();
   }
 
   public void clean() {
-    this.dao.clean();
+    entityManager().getTransaction().begin();
+    CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
+    CriteriaQuery<T> query = criteriaBuilder.createQuery(type);
+    query.from(type);
+    entityManager().createQuery(query).getResultList().forEach(entityManager()::remove);
+    entityManager().getTransaction().commit();
   }
 }
