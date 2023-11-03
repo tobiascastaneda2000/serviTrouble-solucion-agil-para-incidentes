@@ -11,8 +11,6 @@ public class Repositorio<T> implements WithSimplePersistenceUnit {
 
   private Class<T> type;
 
-  private static Repositorio instance;
-
   public Repositorio(Class<T> type) {
     this.type = type;
   }
