@@ -1,17 +1,22 @@
 {{#partial "principal" }}
 
 <h2>Incidentes sugeridos</h2>
-        <table class="tabla_incidentes_sugeridos">
-            <tr>
-                <th>Fecha Apertura</th>
-                <th>Servicio</th>
-                <th>Observacion</th>
+        <table class="tabla_incidentes_sugeridos" style="border: 2px solid #000; background-color: #81f4c3; margin:auto;">
+            <tr style="background-color: #126945; text-align: center;">
+                <th style="padding:6px"></th>
+                <th style="padding:6px">Fecha Apertura</th>
+                <th style="padding:6px">Servicio</th>
+                <th style="padding:6px">Observacion</th>
             </tr>
             {{#incidentes}}
-            <tr>
-                <td>{{fechaHoraAbre}}</td>
-                <td>{{servicioAsociado.nombre}}</td>
-                <td>{{observacion}}</td>
+            <tr style="border: 1px solid #000">
+                <td style="border: 1px solid #000; padding:4px;">
+                    <input type="checkbox" id="{{id}}" value="{{id}}" />
+                    {{incidente.id}}
+                </td>
+                <td style="border: 1px solid #000; padding:4px;">{{fechaHoraAbre}}</td>
+                <td style="border: 1px solid #000; padding:4px;">{{servicioAsociado.nombre}}</td>
+                <td style="border: 1px solid #000; padding:4px;">{{observacion}}</td>
             </tr>
             {{/incidentes}}
         </table>
