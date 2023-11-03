@@ -87,6 +87,18 @@ public class Usuario implements WithSimplePersistenceUnit{
     this.horariosPlanificados = horariosPlanificados;
   }
 
+  public void setContrasenia(String contrasenia) {
+    this.contrasenia = contrasenia;
+  }
+
+  public void setUsername(String username) {
+    this.usuario = username;
+  }
+
+  public void setContacto(String contacto) {
+    this.contacto = contacto;
+  }
+
   public Set<Entidad> getEntidadesInteres() {
     return entidadesInteres;
   }
