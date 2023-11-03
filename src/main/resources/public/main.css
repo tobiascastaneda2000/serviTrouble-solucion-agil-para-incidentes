@@ -128,6 +128,23 @@ main {
     object-fit: cover;
 }
 
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según tus preferencias */
+}
+
+.carousel-caption {
+    color: #fff; /* Color del texto */
+    font-size: 30px; /* Tamaño del texto */
+    font-family: 'Arial', sans-serif; /* Tipo de letra */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombreado */
+}
+
 .presentacion {
     text-align: center;
     font-family: sans-serif;
