@@ -1,32 +1,45 @@
 {{#partial "principal" }}
 
- <h1>USUARIO</h1>
+
 
 
  {{#with usuarioDetalle}}
+ <div class="cont-form">
+     <div class="row border rounded-5 p-3 bg-white shadow box-area">
+      <h2 class="text-center">MODIFICAR MI USUARIO</h1>
         <form method="POST" action="/usuarios/{{id}}" type="submit" value="Modificar Usuario">
             <!-- Campo oculto para tratar la request como PUT -->
-
-            <input type="hidden" name="_method" value="PUT">
-            <label for="usuario">Usuario:</label>
-            <input type="text" name="usuario" value="{{usuario}}">
-            <br>
-            <label for="contacto">Contacto:</label>
-            <input type="text" name="contacto" value="{{contacto}}">
-            <br>
-            <label for="contrasenia">Contraseña:</label>
-            <input type="password" name="contrasenia" value="{{contrasenia}}">
-            <br>
-            <label for="medioNoti">Medio Notificador:</label>
-            <input type="text" name="medioNoti" value="{{medioNoti}}">
-            <br>
-            <label for="horarios">Horarios de Notificacion:</label>
-            {{#horarios}}
-                <input type="text" name="horarios" value="{{hora}}:{{minuto}}">
-                <br>
-            {{/horarios}}
-            <input type="submit" value="Guardar">
+                <input type="hidden" class="form-control" name="_method" value="PUT">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="usuario" value="{{usuario}}">
+                    <label for="usuario">Usuario:</label>
+                    <br>
+                </div>
+                <div class="form-floating mb-3">
+                     <input type="text" class="form-control" name="contacto" value="{{contacto}}">
+                     <label for="contacto">Contacto:</label>
+                      <br>
+                </div>
+                <div class="form-floating mb-3">
+                     <input type="password" class="form-control" name="contrasenia" value="{{contrasenia}}">
+                     <label for="contrasenia">Contraseña:</label>
+                     <br>
+                </div>
+                <div class="form-floating mb-3">
+                      <input type="text" class="form-control" name="medioNoti" value="{{medioNoti}}">
+                      <label for="medioNoti">Medio Notificador:</label>
+                      <br>
+                </div>
+                <div class="form-floating mb-3">
+                         {{#horarios}}
+                          <input type="text" class="form-control" name="horarios" value="{{hora}}:{{minuto}}">
+                          {{/horarios}}
+                         <label for="horarios">Horarios de Notificacion:</label>
+                </div>
+                <input type="submit" value="Guardar">
         </form>
+     </div>
+   </div>
     {{/with}}
 
 
