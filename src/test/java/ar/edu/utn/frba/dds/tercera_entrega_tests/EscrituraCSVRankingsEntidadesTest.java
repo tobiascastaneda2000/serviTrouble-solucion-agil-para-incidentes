@@ -101,7 +101,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     //OTROS DATOS
 
     listadoEntidades = new ArrayList<>(List.of(gualmayen, jorgito));
-    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades.txt";
+    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv";
   }
 
   @AfterEach
@@ -183,7 +183,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     Assertions.assertEquals(jorgito.promedioDuracionIncidentes(), Duration.of(8, ChronoUnit.MINUTES));
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
 
-    repoEntidades.generarRankingEnCsv(rankingPromedio);
+    repoEntidades.generarRankingEnCsvPromedioCierres(rankingPromedio);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
     Assertions.assertEquals(primeraLinea, (gualmayen.getId()+" ; Gualmayen ; alfajores.com"));
@@ -203,7 +203,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     Assertions.assertEquals(jorgito.cantidadDeIncidentesReportados(), 2);
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingCantidadReportes), List.of(jorgito, gualmayen));
 
-    repoEntidades.generarRankingEnCsv(rankingCantidadReportes);
+    repoEntidades.generarRankingEnCsvCantidadReportes(rankingCantidadReportes);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
     Assertions.assertEquals(primeraLinea, jorgito.getId()+" ; Jorgito ; jorgito.com");
