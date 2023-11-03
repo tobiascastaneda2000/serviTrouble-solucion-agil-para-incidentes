@@ -1,18 +1,21 @@
 {{#partial "principal" }}
 
-<h1>COMUNIDAD</h1>
-
-<ul>
-        {{#comunidad}}
-            <li><a>Nombre: {{nombre}}</a></li>
-            <li>Miembros: <a href="/administrar-comunidad/{{id}}/miembros">Administrar miembros</a></li>
-            <li><a>
-            Servicio de Interes:
-            {{#serviciosDeInteres}}
-               <li>{{nombre}}</li>
-            {{/serviciosDeInteres}}
-        {{/comunidad}}
-</ul>
+<h1 class="text-center">COMUNIDAD</h1>
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <ul>
+                {{#comunidad}}
+                    <li><a><span style="font-weight: bold">Nombre:</span> {{nombre}}</a></li>
+                    <li><span style="font-weight: bold">Miembros:</span> <a href="/administrar-comunidad/{{id}}/miembros">Administrar miembros</a></li>
+                    <li><a><span style="font-weight: bold">
+                    Servicio de Interés:</span>
+                    {{#serviciosDeInteres}}
+                       <li>{{nombre}}</li>
+                    {{/serviciosDeInteres}}
+                {{/comunidad}}
+        </ul>
+    </div>
+</div>
 
 {{/partial}}
 

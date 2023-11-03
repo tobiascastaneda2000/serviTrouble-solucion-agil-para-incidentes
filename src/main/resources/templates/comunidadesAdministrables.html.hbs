@@ -1,14 +1,19 @@
 {{#partial "principal" }}
     <div class="titulo">
-        MIS COMUNIDADES
+        <h2 class="text-center">MIS COMUNIDADES ADMINISTRABLES</h2>
+        <a class="text-center text-uppercase fw-bolder warning">{{vacio}}</a>
     </div>
-    {{vacio}}
 
-    <ul>
-        {{#comunidades}}
-            <li><a href="/administrar-comunidad/{{id}}">{{nombre}}</a></li>
-        {{/comunidades}}
-    </ul>
+
+<div class="container-md">
+    <div class="list-group">
+    {{#comunidades}}
+      <a href="/administrar-comunidad/{{id}}" class="list-group-item list-group-item-action active text-center" aria-current="true">
+        {{nombre}}
+      </a>
+      {{/comunidades}}
+    </div>
+</div>
 
 {{/partial}}
 

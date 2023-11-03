@@ -2,15 +2,17 @@
 
 <h1>USUARIOS</h1>
 
+<div class="container d-flex justify-content-center align-items-center">
 <ul>
         {{#usuarios}}
-            <form method="POST">
-                <li>{{usuario}}</li>
+            <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+                {{usuario}}
                 <input type="hidden" name="idusuario" value="{{id}}">
-                <input type="submit" value="Eliminar Miembro">
+                <input type="submit" value="Eliminar Miembro" class="btn btn-danger">
             </form>
         {{/usuarios}}
 </ul>
+</div>
 
 
 
