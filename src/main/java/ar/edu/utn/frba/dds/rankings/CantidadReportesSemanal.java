@@ -20,6 +20,19 @@ public class CantidadReportesSemanal extends CriterioRanking {
     return nombre_criterio;
   }
 
+  @Override
+  public String getPath() {
+    return path;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+
+  @Transient
+  public String path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv";
+
   public String nombre_criterio = "cantidad de incidentes reportados";
 
   public CantidadReportesSemanal() {

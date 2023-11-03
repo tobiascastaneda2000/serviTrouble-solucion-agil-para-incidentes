@@ -38,6 +38,11 @@ public class RepoEntidades extends Repositorio<Entidad> { // Hacer que extienda 
     lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
   }
 
+  public void generarRankingCSVSegunCriterio(CriterioRanking criterio){
+    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura(criterio.getPath());
+    lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
+  }
+
   public List<Entidad> ordenarEntidadesSegunCriterio(CriterioRanking criterioRanking) {
 
     List<Entidad> entidades = getAll();

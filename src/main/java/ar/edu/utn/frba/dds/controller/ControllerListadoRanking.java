@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controller;
 
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
@@ -23,8 +24,14 @@ public class ControllerListadoRanking implements WithSimplePersistenceUnit {
     CriterioRanking criterioRanking = RepoRanking.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
+/*
     List<Entidad> entidades = RepoEntidades.getInstance().getAll();
     entidades.sort(criterioRanking.getCriterio());
+*/
+
+    LectorCSVLectura lectorCSVLectura = new LectorCSVLectura(criterioRanking.getPath());
+    List<Entidad> entidades = lectorCSVLectura.obtenerEntidadesDeCSV();
+
     modelo.put("entidadesOrdenadas", entidades);
     modelo.put("nombre", criterioRanking.getNombre_criterio());
     return new ModelAndView(modelo, "rankingListadoEntidades.html.hbs");

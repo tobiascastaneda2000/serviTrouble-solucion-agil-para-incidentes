@@ -28,6 +28,13 @@ public abstract class CriterioRanking {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
 
+  public String getPath() {
+    return path;
+  }
+
+  @Transient
+  public String path;
+
   public String nombre_criterio;
 
   public String getNombre_criterio() {

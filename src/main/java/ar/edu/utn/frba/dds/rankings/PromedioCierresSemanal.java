@@ -17,10 +17,21 @@ public class PromedioCierresSemanal extends CriterioRanking {
   public PromedioCierresSemanal() {
   }
 
+  public Long getId() {
+    return id;
+  }
+
   @Override
   public String getNombre_criterio() {
     return nombre_criterio;
   }
+  @Override
+  public String getPath() {
+    return path;
+  }
+
+  @Transient
+  public String path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-pc.csv";
 
   public String nombre_criterio = "promedio de cierres de incidentes";
 
