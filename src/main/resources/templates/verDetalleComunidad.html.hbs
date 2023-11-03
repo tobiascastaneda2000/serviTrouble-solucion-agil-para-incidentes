@@ -1,0 +1,19 @@
+{{#partial "principal" }}
+
+<h1>COMUNIDAD</h1>
+
+<ul>
+        {{#comunidad}}
+            <li><a>Nombre: {{nombre}}</a></li>
+            <li>Miembros: <a href="/administrar-comunidad/{{id}}/miembros">Administrar miembros</a></li>
+            <li><a>
+            Servicio de Interes:
+            {{#serviciosDeInteres}}
+               <li>{{nombre}}</li>
+            {{/serviciosDeInteres}}
+        {{/comunidad}}
+</ul>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

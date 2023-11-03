@@ -1,13 +1,21 @@
 {{#partial "principal" }}
-
-    Rankings por:
-
+    <div class="titulo">
+        Rankings por:
+    </div>
     <ul>
-            <li><a href="/rankings/cantidad-reportes">Cantidad de Reportes</a></li>
-            <li><a href="/rankings/promedio-cierres">Promedio de Cierres</a></li>
-
+        {{#criterios}}
+            <li><a href="/rankings/{{id}}">{{nombre_criterio}}</a></li>
+        {{/criterios}}
     </ul>
 
+
+{{!--
+<ul>
+    <li><a href="/rankings/cantidad-reportes">Cantidad de Reportes</a></li>
+    <li><a href="/rankings/promedio-cierres">Promedio de Cierres</a></li>
+</ul>
+
+--}}
 {{/partial}}
 
 {{> layoutSesionIniciada.html.hbs }}

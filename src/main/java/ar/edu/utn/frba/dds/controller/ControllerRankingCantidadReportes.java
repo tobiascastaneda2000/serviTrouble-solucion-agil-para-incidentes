@@ -34,9 +34,9 @@ public class ControllerRankingCantidadReportes implements WithSimplePersistenceU
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     //path del ranking csv
-    LectorCSVLectura lector = new LectorCSVLectura("C:\\Users\\fmartinez\\Downloads\\2023-tpa-vi-no-grupo-07-prueba\\2023-tpa-vi-no-grupo-07\\src\\main\\java\\ar\\edu\\utn\\frba\\dds\\rankings\\rankings-entidades-cr.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv");
     List<Entidad> entidadesOrdenadas = lector.obtenerEntidadesDeCSV();
-    modelo.put("entidades",entidadesOrdenadas);
+    modelo.put("entidades", entidadesOrdenadas);
     return new ModelAndView(modelo, "rankingsCantidadReportes.html.hbs");
   }
 }
