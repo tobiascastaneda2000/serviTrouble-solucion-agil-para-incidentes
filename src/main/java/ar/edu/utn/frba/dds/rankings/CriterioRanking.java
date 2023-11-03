@@ -19,14 +19,14 @@ import java.util.Comparator;
 @DiscriminatorColumn(name = "tipo_de_criterio", discriminatorType = DiscriminatorType.STRING)
 public abstract class CriterioRanking {
 
-  public int getId() {
+  public Long getId() {
     return id;
   }
 
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public int id;
+  public Long id;
 
   public String nombre_criterio;
 
