@@ -1,12 +1,27 @@
 {{#partial "principal" }}
 
-    <h1>Ranking semanal por {{nombre}}:</h1>
-
-    <ul>
+    <div class="titulo">
+        Ranking semanal por {{nombre}}:
+    </div>
+    <table style="margin: 20px auto;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ccc;">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Razon social</th>
+        </tr>
+        </thead>
+        <tbody>
         {{#entidadesOrdenadas}}
-            <li><a>{{id}} ++ {{razonSocial}}</a></li>
+            <tr>
+                <td>{{id}}</td>
+                <td>{{razonSocial}}</td>
+            </tr>
         {{/entidadesOrdenadas}}
-    </ul>
+        </tbody>
+    </table>
 
 {{/partial}}
 
