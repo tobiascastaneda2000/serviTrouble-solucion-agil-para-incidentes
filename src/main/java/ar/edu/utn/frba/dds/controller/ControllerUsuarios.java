@@ -101,6 +101,17 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     return new ModelAndView(modelo, "perfilUsuario.html.hbs");
   }
 
+  public ModelAndView modificarPerfil(Request request, Response response) {
+    Long id = request.session().attribute("user_id");
+    Usuario usuario = RepoUsuarios.getInstance().getOne((id));
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("id", usuario.id);
+    modelo.put("entidadesInteres",usuario.getEntidadesInteres());
+    modelo.put("horarios",usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle",usuario);
+    return new ModelAndView(modelo, "modificarPerfil.html.hbs");
+  }
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
     String id = request.params(":id");
