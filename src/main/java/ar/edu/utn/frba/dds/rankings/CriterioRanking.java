@@ -14,21 +14,32 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Transient;
 import java.util.Comparator;
 
-@Entity(name="CriterioRanking")
+@Entity(name = "CriterioRanking")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_de_criterio", discriminatorType = DiscriminatorType.STRING)
 public abstract class CriterioRanking {
 
+  public int getId() {
+    return id;
+  }
+
   @Id
-  @Column(name="id")
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  long id;
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public int id;
+
+  public String nombre_criterio;
+
+  public String getNombre_criterio() {
+    return nombre_criterio;
+  }
 
   @Transient
-  Comparator<Entidad> criterio;
+  public Comparator<Entidad> criterio;
 
-  public  Comparator<Entidad> getCriterio() {
+  public Comparator<Entidad> getCriterio() {
     return this.criterio;
   }
+
 
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ControllerMenuRankings implements WithSimplePersistenceUnit {
-/*
+
   public ModelAndView mostrarTodosRankings(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
@@ -24,12 +24,14 @@ public class ControllerMenuRankings implements WithSimplePersistenceUnit {
 
     return new ModelAndView(modelo, "menuRanking.html.hbs");
   }
-*/
+
+
+  /*
   public ModelAndView mostrarTodosRankings(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     return new ModelAndView(modelo, "menuRanking.html.hbs");
-  }
+  }*/
 
 
 }

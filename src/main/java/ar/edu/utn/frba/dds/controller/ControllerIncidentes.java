@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
+
 public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarIncidenteCreado(Request request, Response response) {
@@ -104,6 +106,22 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     comunidad.cerrarIncidente(incidente);
     response.redirect("/home");
     return null;
+  }
+
+  public ModelAndView mostrarIncidentesSugeridos(Request request, Response response){
+    Long user_id = revisarSesionIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(user_id);
+    Map<String, Object> modelo = new HashMap<>();
+    List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+    List<Incidente> incidentes = comunidades.stream().flatMap( comunidad -> comunidad.getIncidentes().stream() ).collect(Collectors.toList());
+    modelo.put("usuario", usuario);
+    modelo.put("incidentes", incidentes);
+    return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+  }
+
+  public Long revisarSesionIniciada(Request request, Response response){
+    if (request.session().attribute("user_id")==null) response.redirect("/");
+    return request.session().attribute("user_id");
   }
 
 }

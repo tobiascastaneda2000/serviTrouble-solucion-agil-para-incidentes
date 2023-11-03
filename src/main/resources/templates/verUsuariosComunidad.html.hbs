@@ -4,8 +4,9 @@
 
 <ul>
         {{#usuarios}}
-            <li><a>{{usuario}}</a></li>
             <form method="POST">
+                <li>{{usuario}}</li>
+                <input type="hidden" name="idusuario" value="{{id}}">
                 <input type="submit" value="Eliminar Miembro">
             </form>
         {{/usuarios}}

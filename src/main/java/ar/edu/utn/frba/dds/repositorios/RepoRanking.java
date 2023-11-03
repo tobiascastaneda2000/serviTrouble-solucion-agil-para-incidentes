@@ -16,4 +16,12 @@ public class RepoRanking extends Repositorio<CriterioRanking> {
     }
     return instance;
   }
+
+  public CriterioRanking buscarPorId(int id) {
+    return entityManager()
+        .createQuery("from CriterioRanking where id = :id", CriterioRanking.class)
+        .setParameter("id", id)
+        .getResultList()
+        .get(0);
+  }
 }

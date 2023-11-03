@@ -253,9 +253,18 @@ public class Usuario implements WithSimplePersistenceUnit{
   }
 
   public void notificarSiEstaCerca(Incidente incidente) {
-    if (servicioUbicacion.estaCerca(this, incidente.getServicioAsociado())) {
+    if (esIncidenteCercano(incidente)) {
       notificarIncidente(incidente);
     }
+  }
+
+  public boolean esIncidenteCercano(Incidente incidente){
+    return servicioUbicacion.estaCerca(this, incidente.getServicioAsociado());
+  }
+
+  public List<Incidente> obtenerIncidentesCercanos(List<Incidente> incidentesAbiertos){
+    incidentesAbiertos.stream().filter( incidente -> esIncidenteCercano(incidente) );
+    return incidentesAbiertos;
   }
 
 }
