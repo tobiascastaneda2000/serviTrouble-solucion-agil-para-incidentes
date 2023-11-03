@@ -22,14 +22,18 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     }
 
     public ModelAndView modificarUsuario(Request request, Response response){
-      String nombre = request.queryParams("nombre");
+      String nombre = request.queryParams("usuario");
       String contrasenia = request.queryParams("contrasenia");
       String contacto = request.queryParams("contacto");
-      // String medioNotificador = request.queryParams("medioNoti");
-      // String horarios = request.queryParams("horarios");
-      // Quiza en medioNotificador se pueda poner un dropDown con los medios de notificacion, despues habria que mapearlo al
-      // enum MedioNotificador eventualmente
-      // Para horario parsear hora y minuto y mapearlo a horario
+      String id = request.params(":id");
+
+      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+
+      usuario.setUsername(nombre);
+      usuario.setContrasenia(contrasenia);
+      usuario.setContacto(contacto);
+
+      response.redirect("/home");
       return null;
     }
 
@@ -39,10 +43,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
         if(metodo.equals("PUT")){
             return modificarUsuario(request, response);
         }
-        //else if(metodo.equals("DELETE")){ Quiza podriamos hacer esto para el delete del user
-        //    return eliminarUsuario(request, response);
-        //}
-      return crearUsuario(request, response);
+
+        return eliminarUsuario(request, response);
     }
 
     public ModelAndView crearUsuario(Request request, Response response) {
