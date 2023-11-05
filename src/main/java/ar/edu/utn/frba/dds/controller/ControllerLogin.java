@@ -25,7 +25,7 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
     return new ModelAndView(modelo, "loginError.html.hbs");
   }
 
-  public Void crearSesion(Request request, Response response) {
+  public ModelAndView crearSesion(Request request, Response response) {
     try {
       Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
           request.queryParams("nombre"),
@@ -35,8 +35,9 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
       response.redirect("/home");
       return null;
     } catch (Exception e) {
-      response.redirect("/login-error");
-      return null;
+      Map<String, Object> modelo = new HashMap<>();
+      modelo.put("anio", LocalDate.now().getYear());
+      return new ModelAndView(modelo, "loginError.html.hbs");
     }
   }
 
