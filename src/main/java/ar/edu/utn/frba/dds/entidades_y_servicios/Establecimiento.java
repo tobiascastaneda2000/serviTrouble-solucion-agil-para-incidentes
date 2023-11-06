@@ -65,5 +65,6 @@ public class Establecimiento {
     return this.servicioUbicacion.ubicacionEstablecimiento(this);
   }
 
+
 }
 
