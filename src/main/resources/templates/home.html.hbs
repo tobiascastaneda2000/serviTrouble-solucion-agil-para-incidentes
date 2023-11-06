@@ -12,9 +12,6 @@
         <li class="nav-item mx-4">
           <a class="nav-link text-white" href="/admin-comunidades">Administrador de comunidad</a>
         </li>
-        <li class="nav-item mx-4">
-            <a class="nav-link text-white" href="/rankings">Rankings de entidades</a>
-          </li>
       </ul>
 </div>
 
@@ -25,43 +22,21 @@
     <div class="container  my-2">
         <div class="text-center">
             <div class="row">
+                {{#incidentes}}
                 <div class="col">
                   <div class="card" style="width: 16rem;">
                       <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-amarillo">Cerrar incidente</a>
+                        <h5 class="card-title">{{servicioAsociado.nombre}}</h5>
+                        <p class="card-text">{{observacion}}</p>
+                        <form class="incidente_sugeridos-form" method="POST" action="/incidente/{{id}}">
+                            <input type="hidden" value="{{id}}" name="incidente"></input>
+                            <input type="submit" value="Cerrar Incidente" class="btn btn-amarillo"/>
+                        </form>
                       </div>
                     </div>
                 </div>
-                <div class="col">
-                  <div class="card" style="width: 16rem;">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-amarillo">Cerrar incidente</a>
-                      </div>
-                    </div>
-                </div>
-                <div class="col">
-                  <div class="card" style="width: 16rem;">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-amarillo">Cerrar incidente</a>
-                      </div>
-                    </div>
-                </div>
-                <div class="col">
-                  <div class="card" style="width: 16rem;">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-amarillo">Cerrar incidente</a>
-                      </div>
-                    </div>
-                </div>
-              </div>
+                {{/incidentes}}
+            </div>
         </div>
         <a href="/incidente-sugerido"><p class="text-end mt-3">Ver más</p></a>
       </div>

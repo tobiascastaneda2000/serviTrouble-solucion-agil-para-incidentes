@@ -72,6 +72,12 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       Incidente incidente = new Incidente("Botonera rota",servicio5);
       persist(incidente);
+      Incidente incidente2 = new Incidente("Puerta rota",servicio5);
+      persist(incidente2);
+      Incidente incidente3 = new Incidente("Falta un espejo",servicio5);
+      persist(incidente3);
+      Incidente incidente4 = new Incidente("El piso se esta levantando",servicio5);
+      persist(incidente4);
 
       //CARGA ENTIDAD PIXEL
       Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
@@ -96,6 +102,9 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
       comunidad1.incidentes.add(incidente);
+      comunidad1.incidentes.add(incidente2);
+      comunidad1.incidentes.add(incidente3);
+      comunidad1.incidentes.add(incidente4);
       entityManager().persist(comunidad1);
 
       Comunidad comunidad2 = new Comunidad("nombre2");

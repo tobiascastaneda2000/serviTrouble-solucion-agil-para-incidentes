@@ -43,9 +43,10 @@
                         <a class="dropdown-toggle text-decoration-none text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                              RANKING DE ENTIDADES
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <ul class="dropdown-menu bg-marron">
+                             {{#criterios}}
+                                 <li><a href="/rankings/{{id}}" class="dropdown-item text-white text-decoration-none bg-marron">{{nombre_criterio}}</a></li>
+                             {{/criterios}}
                           </ul>
                     </li>
                   </ul>
