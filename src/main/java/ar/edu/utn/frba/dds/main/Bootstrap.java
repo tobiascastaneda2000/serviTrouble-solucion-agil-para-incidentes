@@ -102,6 +102,50 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       establecimientoB.agregarServicio(servicio4);
       persist(servicio4);
 
+      //CARGA ENTIDAD MCDONALDS
+      Entidad entidadMcDonald = new Entidad("McDonald", "mcdonald@mail.com");
+      entidadMcDonald.setDescripcion("una descripcion de la organizacion");
+      entidadMcDonald.setImg("mc.jpg");
+      persist(entidadMcDonald);
+
+      Establecimiento establecimientoZ = new Establecimiento("Mc Donald Belgrano");
+      entidadMcDonald.agregarEstablecimiento(establecimientoZ);
+      persist(establecimientoZ);
+      Establecimiento establecimientoX = new Establecimiento("Mc Donald Urquiza");
+      entidadMcDonald.agregarEstablecimiento(establecimientoX);
+      persist(establecimientoX);
+
+      Servicio servicioZ = new Servicio("baño primer piso", TipoServicio.BAÑO);
+      establecimientoA.agregarServicio(servicioZ);
+      persist(servicioZ);
+
+      Servicio servicioX = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      establecimientoB.agregarServicio(servicioX);
+      persist(servicioX);
+
+      //CARGA ENTIDAD BURGER KING
+      Entidad entidadburger = new Entidad("Burguer King", "bking@mail.com");
+      entidadburger.setDescripcion("una descripcion de la organizacion");
+      entidadburger.setImg("burger.jpg");
+      persist(entidadburger);
+
+      Establecimiento establecimientoW = new Establecimiento("Burger king Belgrano");
+      entidadburger.agregarEstablecimiento(establecimientoW);
+      persist(establecimientoW);
+      Establecimiento establecimientoM = new Establecimiento("Burger king Urquiza");
+      entidadburger.agregarEstablecimiento(establecimientoM);
+      persist(establecimientoM);
+
+      Servicio servicioW = new Servicio("baño primer piso", TipoServicio.BAÑO);
+      establecimientoW.agregarServicio(servicioW);
+      persist(servicioW);
+
+      Servicio servicioM = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      establecimientoM.agregarServicio(servicioM);
+      persist(servicioM);
+
+
+
       //CARGA COMUNIDADES
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
