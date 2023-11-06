@@ -9,27 +9,58 @@
 </head>
 
 <body>
-	<nav class="navbar bg-primary">
+    <nav class="navbar bg-azul">
 	    <div class="container-fluid">
            <a class="navbar-brand text-white" href="/">
                <img src="logo.png" alt="logo"  width="30" height="24" class="d-inline-block align-text-top">
-               SERVITROUBLETRACKER
+               SERVITROUBLE
            </a>
            <div class="d-flex">
-               <a href="/profile" type="button" class="perfil btn btn-outline-light">Mi Perfil</a>
-               <a href="/cerrar-sesion" type="button" class="btn btn-outline-light">Cerrar Sesión</a>
-           </div>
+               <a href="/profile" type="button" class="perfil btn btn-outline-amarillo text-white mx-2">Mi Perfil</a>
+               <a href="/cerrar-sesion" type="button" class="btn btn-outline-amarillo text-white mx-2">Cerrar Sesión</a>
+                <a class="mx-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </nav>
+
+
+
+    <div class="offcanvas offcanvas-end bg-marron" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title text-white mt-3" id="offcanvasExampleLabel">MENÚ</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item bg-marron text-white"><a class="text-decoration-none text-white" href="/entidades">ABRIR INCIDENTE</a></li>
+                    <li class="list-group-item bg-marron text-white"><a class="text-decoration-none text-white" href="/comunidades">MIS COMUNIDADES</a></li>
+                    <li class="list-group-item bg-marron text-white"><a class="text-decoration-none text-white" href="/admin-comunidades">ADMINISTRADOR DE COMUNIDAD</a></li>
+                    <li class="list-group-item bg-marron text-white">
+                        <a class="dropdown-toggle text-decoration-none text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             RANKING DE ENTIDADES
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                          </ul>
+                    </li>
+                  </ul>
+            </div>
+          </div>
+
 	<main>
 
      {{#block "principal" }}
      {{/block}}
 
 	</main>
-	<footer class="text-center text-white bg-primary">
-    	<div class="text-center p-4"> © {{anio}} Copyright</div>
-    </footer>
+	<footer class="text-center text-white bg-azul">
+		<div class="text-center "> © {{anio}} Copyright</div>
+	</footer>
 </body>
 
 </html>

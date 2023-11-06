@@ -1,13 +1,12 @@
-
 .image-container {
     position: relative;
     display: inline-block; /* Para asegurarse de que el contenedor se ajuste al tamaño de la imagen */
   }
-  
+
   .image-container img {
     width: 100%; /* Asegura que la imagen ocupe todo el espacio del contenedor */
   }
-  
+
   .image-container button {
     position: absolute;
     top: 85%; /* Ajusta la posición verticalmente */
@@ -18,6 +17,15 @@
     background: #5D77A3;
   }
 
+  .bg-gris{
+    background: #565C66;
+  }
+
+  .bg-marron{
+    background: #8B774C;
+  }
+
+
   .btn-amarillo{
     background: #E0A72F;
   }
@@ -25,6 +33,7 @@
   .btn-outline-amarillo{
     border-color: #E0A72F;
   }
+
 
   footer {
     position: absolute;
