@@ -3,8 +3,8 @@ package ar.edu.utn.frba.dds.main;
 
 import ar.edu.utn.frba.dds.MainTareasPlanificadas;
 import ar.edu.utn.frba.dds.controller.*;
+import com.sun.tools.javac.Main;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import org.jboss.jandex.Main;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -42,7 +42,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
     Spark.get("/login", controllerLogin::mostrarLogin, engine);
     Spark.post("/login", controllerLogin::crearSesion,engine);
-    Spark.get("/cerrar-sesion", controllerLogin::cerrarSesion);
+    Spark.get("/sesion", controllerLogin::cerrarSesion);
     Spark.get("/home", demoControllerhome::mostrarHome, engine);
 
     //APERTURA DE INCIDENTES

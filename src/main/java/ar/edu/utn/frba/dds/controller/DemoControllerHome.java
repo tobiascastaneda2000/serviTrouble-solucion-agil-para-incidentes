@@ -32,6 +32,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
     }
   }
 
+
   public ModelAndView mostrarHome(Request request, Response response) {
 
     Long id = request.session().attribute("user_id");

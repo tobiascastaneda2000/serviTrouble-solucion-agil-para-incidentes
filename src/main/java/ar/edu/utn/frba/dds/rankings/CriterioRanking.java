@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.rankings;
 
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -11,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import java.util.Comparator;
 
@@ -35,6 +39,9 @@ public abstract class CriterioRanking {
   @Transient
   public String path;
 
+  @OneToMany
+  @JoinColumn(name = "ranking_id")
+  public List<Entidad> entidadesOrdenadas = new ArrayList<>();
   public String nombre_criterio;
 
   public String getNombre_criterio() {
@@ -49,4 +56,10 @@ public abstract class CriterioRanking {
   }
 
 
+  public void setEntidadesOrdenadas(List<Entidad> entidadesOrdenadas) {
+    this.entidadesOrdenadas = entidadesOrdenadas;
+  }
+  public List<Entidad> getEntidadesOrdenadas() {
+    return entidadesOrdenadas;
+  }
 }
