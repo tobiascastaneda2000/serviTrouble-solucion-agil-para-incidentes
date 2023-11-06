@@ -20,6 +20,8 @@ public class Entidad {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  public String img;
+  public String descripcion;
   private String razonSocial;
   private String email;
 
@@ -30,6 +32,22 @@ public class Entidad {
 
   public List<Establecimiento> getEstablecimientos() {
     return establecimientos;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public String getImg() {
+    return img;
+  }
+
+  public void setImg(String img) {
+    this.img = img;
   }
 
   @OneToMany

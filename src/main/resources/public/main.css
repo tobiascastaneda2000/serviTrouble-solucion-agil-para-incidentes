@@ -25,6 +25,9 @@
     background: #8B774C;
   }
 
+  .bg-claro{
+    background: #E4E8F0;
+  }
 
   .btn-amarillo{
     background: #E0A72F;
@@ -42,3 +45,4 @@
     height: 30px;
     color: white;
   }
+

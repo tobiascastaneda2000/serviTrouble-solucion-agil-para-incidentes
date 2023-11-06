@@ -49,6 +49,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       //CARGA ENTIDAD FANTASY
       Entidad entidadFantasy = new Entidad("Fantasy Co.", "fantasy@mail.com");
+      entidadFantasy.setDescripcion("una descripcion de la organizacion");
+      entidadFantasy.setImg("fantasy.jpg");
       persist(entidadFantasy);
       Establecimiento establecimiento1 = new Establecimiento("nombre 1");
       persist(establecimiento1);
@@ -81,6 +83,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       //CARGA ENTIDAD PIXEL
       Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
+      entidadPixel.setDescripcion("una descripcion de la organizacion");
+      entidadPixel.setImg("pixel.jpg");
       persist(entidadPixel);
 
       Establecimiento establecimientoA = new Establecimiento("establecimiento A");

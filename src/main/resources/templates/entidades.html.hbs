@@ -1,24 +1,19 @@
 {{#partial "principal" }}
-    <div class="titulo">
-        ENTIDADES
-    </div>
+
+        <h2 class="text-center my-4">ENTIDADES</h2>
+
+
 <div class="container d-flex justify-content-center align-items-center">
-    <table class="table table-bordered table-hover row border rounded-5 p-3 bg-white shadow box-area">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Razón Social</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#entidades}}
-            <tr>
-                <th scope="row">{{id}}</th>
-                <td><a href="entidades/{{id}}">{{razonSocial}}</a></td>
-            </tr>
-            {{/entidades}}
-        </tbody>
-    </table>
+{{#entidades}}
+<div class="card mx-5 border border-warning border-2 rounded-2" style="width: 15rem;">
+  <img src={{img}} class="card-img-top" alt="logo">
+  <div class="card-body">
+    <h5 class="card-title">{{razonSocial}}</h5>
+    <p class="card-text">{{descripcion}}</p>
+    <a href="entidades/{{id}}" class="btn btn-amarillo">Ver establecimientos</a>
+  </div>
+</div>
+{{/entidades}}
 </div>
 
 {{/partial}}

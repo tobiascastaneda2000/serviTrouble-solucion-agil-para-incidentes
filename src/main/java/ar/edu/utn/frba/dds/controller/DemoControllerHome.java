@@ -43,10 +43,14 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
       List<Incidente> incidentesCercanos = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream() )
           .filter(incidente -> usuario.esIncidenteCercano(incidente) ).collect(Collectors.toList());
       List<Incidente> cuatroIncidentes = incidentesCercanos.stream().limit(4).collect(Collectors.toList());
+     if(cuatroIncidentes.isEmpty()){
+       modelo.put("mensajeIncidentes","No tienes incidentes cercanos para revisar");
+      }
       modelo.put("incidentes",cuatroIncidentes);
       if(usuario.permisoUsuario.equals(PermisoUsuario.USUARIO_COMUN)){
         List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
         modelo.put("criterios", criterio);
+
         return new ModelAndView(modelo, "home.html.hbs");
       }
       if(usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
