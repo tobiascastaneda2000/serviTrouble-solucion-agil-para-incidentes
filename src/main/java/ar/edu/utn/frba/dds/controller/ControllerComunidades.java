@@ -4,6 +4,7 @@ package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.text.CompactNumberFormat;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
       modelo.put("comunidades", comunidades);
       return new ModelAndView(modelo, "comunidades.html.hbs");
@@ -52,6 +55,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
       modelo.put("incidentesAbiertos", incidentesAbiertos);
       modelo.put("incidentesCerrados", incidentesCerrados);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "incidentes.html.hbs");
     }
     else{
@@ -67,6 +72,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     if (id != null) {
       Usuario usuario = RepoUsuarios.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       modelo.put("anio", LocalDate.now().getYear());
       List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
       List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c->c.miembroEsAdmin(usuario)).toList();
@@ -90,6 +97,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     if (idsession != null) {
       String id = request.params(":id");
       Map<String, Object> modelo = new HashMap<>();
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       modelo.put("anio", LocalDate.now().getYear());
       Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       modelo.put("comunidad",comunidad);
@@ -108,6 +117,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       String id = request.params(":id");
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
       modelo.put("usuarios",usuarios);

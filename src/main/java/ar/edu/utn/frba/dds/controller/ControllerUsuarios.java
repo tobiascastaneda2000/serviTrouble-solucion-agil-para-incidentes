@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.controller;
 
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
+import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
@@ -18,6 +20,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       modelo.put("anio", LocalDate.now().getYear());
       List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
       modelo.put("usuarios",usuarios);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "usuarios.html.hbs");
     }
 
@@ -57,6 +61,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       modelo.put("anio", LocalDate.now().getYear());
       List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
       modelo.put("usuarios",usuarios);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "usuariosError.html.hbs");
     }
     else {
@@ -86,6 +92,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     modelo.put("horarios",usuario.getHorariosPlanificados());
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("usuarioDetalle",usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
   }
 
@@ -98,6 +106,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     modelo.put("horarios",usuario.getHorariosPlanificados());
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("usuarioDetalle",usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "perfilUsuario.html.hbs");
   }
 
@@ -110,6 +120,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     modelo.put("horarios",usuario.getHorariosPlanificados());
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("usuarioDetalle",usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "modificarPerfil.html.hbs");
   }
 

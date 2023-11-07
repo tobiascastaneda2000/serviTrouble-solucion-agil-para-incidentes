@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import ar.edu.utn.frba.dds.entidades_y_servicios.*;
 import spark.ModelAndView;
@@ -26,6 +27,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(id));
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       List<Establecimiento> establecimientos = entidad.getEstablecimientos();
       modelo.put("establecimientos", establecimientos);
       return new ModelAndView(modelo, "establecimientos.html.hbs");
@@ -48,6 +51,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           .getResultList()
           .get(0);
       Map<String, Object> modelo = new HashMap<>();
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       List<Servicio> servicios = establecimiento.getServicios();
       modelo.put("nombreEstablecimiento",establecimiento.nombre);
       modelo.put("anio", LocalDate.now().getYear());

@@ -1,22 +1,47 @@
 {{#partial "principal"}}
 
-    <div class="titulo">
-        Ranking semanal por {{nombre}}:
+    <h2 class="text-center my-3 text-uppercase">RANKING SEMANAL POR {{nombre}}</h2>
+
+    <div class="container text-center my-4 ">
+        <div class="row r">
+            <div class="col-6 col-md-4 align-self-start pt-4 mt-4 d-flex justify-content-center">
+                <div class="card border border-warning-subtle border border-3 "  style="width: 15rem;">
+                    <img src="/2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <p class="card-text">{{segundaEntidad.razonSocial}}</p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-6 col-md-4 align-self-start d-flex justify-content-center">
+                <div class="card border border-warning-subtle border border-3 " style="width: 15rem;">
+                    <img src="/1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <p class="card-text">{{primeraEntidad.razonSocial}}</p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-6 col-md-4 align-self-end pt-5 mt-5 d-flex justify-content-center">
+                <div class="card border border-warning-subtle border border-3 " style="width: 15rem;">
+                    <img src="/3.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <p class="card-text">{{terceraEntidad.razonSocial}}</p>
+                    </div>
+                  </div>
+            </div>
+          </div>
     </div>
-    <table class="tabla">
-        <tr class="cabecera">
-            <th>Mail</th>
-            <th>Razon social</th>
-        </tr>
-        <tbody>
-        {{#entidadesOrdenadas}}
-            <tr>
-                <td>{{email}}</td>
-                <td>{{razonSocial}}</td>
-            </tr>
-        {{/entidadesOrdenadas}}
-        </tbody>
-    </table>
+
+    <div class="container d-flex justify-content-center">
+        <div class="col-5 text-center" >
+            <ul class="list-group list-group-flush">
+                {{#entidadesOrdenadas}}
+                <li class="list-group-item">{{razonSocial}}</li>
+                {{/entidadesOrdenadas}}
+            </ul>
+        </div>
+
+    </div>
+
 
 {{/partial}}
 

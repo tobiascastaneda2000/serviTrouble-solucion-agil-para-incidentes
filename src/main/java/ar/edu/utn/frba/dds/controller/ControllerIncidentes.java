@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
+import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import ar.edu.utn.frba.dds.entidades_y_servicios.*;
 import spark.ModelAndView;
@@ -25,6 +26,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     if (id != null) {
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "incidenteCreado.html.hbs");
     }
     else{
@@ -40,6 +43,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     if (id != null) {
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
     }
     else{
@@ -63,6 +68,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
       String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
       modelo.put("fechaApertura",fechaAperturaFormateada);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "detalleIncidente.html.hbs");
     }
     else{
@@ -88,6 +95,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       String fechaCierreFormateada = incidente.fechaHoraCierre.format(formatter);
       modelo.put("fechaApertura",fechaAperturaFormateada);
       modelo.put("fechaCierre",fechaCierreFormateada);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
       return new ModelAndView(modelo, "detalleIncidenteCerrado.html.hbs");
     }
     else{
@@ -116,6 +125,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     List<Incidente> incidentes = comunidades.stream().flatMap( comunidad -> comunidad.getIncidentes().stream() ).filter( incidente -> usuario.esIncidenteCercano(incidente) ).collect(Collectors.toList());
     modelo.put("usuario", usuario);
     modelo.put("incidentes", incidentes);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
   }
 
