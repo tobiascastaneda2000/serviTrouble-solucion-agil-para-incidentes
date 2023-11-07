@@ -49,6 +49,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           .get(0);
       Map<String, Object> modelo = new HashMap<>();
       List<Servicio> servicios = establecimiento.getServicios();
+      modelo.put("nombreEstablecimiento",establecimiento.nombre);
       modelo.put("anio", LocalDate.now().getYear());
       modelo.put("servicios", servicios);
       return new ModelAndView(modelo, "servicio.html.hbs");
@@ -62,7 +63,6 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
 
   public ModelAndView crearIncidente(Request request, Response response) {
 
-
     try {
           String id = request.queryParams("servicio");
           String observacion = request.queryParams("observacion");
@@ -75,11 +75,9 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           Usuario usuario = RepoUsuarios.getInstance().getOne(userid);
           usuario.abrirIncidente(servicio,observacion);
           response.redirect("/incidente-creado");
-      return null;
+          return null;
     } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("error");
-      response.redirect("/Incidente-No-Creado");
+      response.redirect("/incidente-error");
       return null;
     }
   }
