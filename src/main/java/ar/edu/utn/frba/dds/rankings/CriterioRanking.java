@@ -36,7 +36,6 @@ public abstract class CriterioRanking {
     return path;
   }
 
-  @Transient
   public String path;
 
   @OneToMany

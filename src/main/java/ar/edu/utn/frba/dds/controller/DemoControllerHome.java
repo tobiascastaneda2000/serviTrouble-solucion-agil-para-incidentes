@@ -3,7 +3,9 @@ package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoUsuario;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
+import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
@@ -51,7 +53,18 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
       if(usuario.permisoUsuario.equals(PermisoUsuario.USUARIO_COMUN)){
         List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
         modelo.put("criterios", criterio);
-
+        CriterioRanking criterioRanking1 = RepoRanking.getInstance().getOne(Long.parseLong("1"));
+        CriterioRanking criterioRanking2 = RepoRanking.getInstance().getOne(Long.parseLong("2"));
+        LectorCSVLectura lectorCSVLectura1 = new LectorCSVLectura(criterioRanking1.getPath());
+        LectorCSVLectura lectorCSVLectura2 = new LectorCSVLectura(criterioRanking2.getPath());
+        List<Entidad> entidades1 = lectorCSVLectura1.obtenerEntidadesDeCSV();
+        List<Entidad> entidades2 = lectorCSVLectura2.obtenerEntidadesDeCSV();
+        List<Entidad> entidades1Diez = entidades1.stream().limit(10).collect(Collectors.toList());
+        List<Entidad> entidades2Diez = entidades2.stream().limit(10).collect(Collectors.toList());
+        modelo.put("criterio1",criterio.get(0));
+        modelo.put("criterio2",criterio.get(1));
+        modelo.put("ranking1",entidades1Diez);
+        modelo.put("ranking2",entidades2Diez);
         return new ModelAndView(modelo, "home.html.hbs");
       }
       if(usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
