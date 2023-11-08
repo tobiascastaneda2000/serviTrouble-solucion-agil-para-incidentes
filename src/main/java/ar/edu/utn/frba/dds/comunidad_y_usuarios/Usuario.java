@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.comunidad_y_usuarios;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
-import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
@@ -12,13 +11,10 @@ import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
-import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import org.hibernate.query.criteria.internal.expression.SelectionImpl;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+
 import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -28,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Usuario implements WithSimplePersistenceUnit{
+public class Usuario implements WithSimplePersistenceUnit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   public long id;
@@ -39,8 +35,6 @@ public class Usuario implements WithSimplePersistenceUnit{
   public String contacto;
 
   int intentos;
-
-  boolean sesionAbierta;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   public MedioNotificador medioNotificador;
@@ -67,9 +61,8 @@ public class Usuario implements WithSimplePersistenceUnit{
 
   public Usuario(String nombre, String contrasenia, String contacto) {
     this.usuario = nombre;
-    this.contrasenia =  contrasenia;
+    this.contrasenia = contrasenia;
     this.intentos = 0;
-    this.sesionAbierta = false;
     this.contacto = contacto;
     this.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
     this.servicioUbicacion = new ImpServicioUbicacion();
@@ -140,10 +133,6 @@ public class Usuario implements WithSimplePersistenceUnit{
     this.servicioLocalizacion = servicioLocalizacion;
   }
 
-  public boolean isSesionAbierta() {
-    return sesionAbierta;
-  }
-
   public String getContacto() {
     return this.contacto;
   }
@@ -152,31 +141,22 @@ public class Usuario implements WithSimplePersistenceUnit{
     return notificacionesPendientes;
   }
 
-  public List<Miembro> obtenerMiembros(){
+  public List<Miembro> obtenerMiembros() {
     List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
-    List<Miembro> miembros = comunidades.stream().map(c->c.miembros).flatMap(m->m.stream()).toList();
-    return miembros.stream().filter(m->m.usuario.equals(this)).toList();
+    List<Miembro> miembros = comunidades.stream().map(c -> c.miembros).flatMap(m -> m.stream()).toList();
+    return miembros.stream().filter(m -> m.usuario.equals(this)).toList();
   }
-
 
 
   // -----------------------------------------INICIO DE SESION--------------------------------------//
 
   public void iniciarSesion(String username, String contrasenia) {
-    validarSesionAbierta();
     validarCantidadIntentos();
-    if (coincideUsuarioYContrasenia(username, contrasenia)) {
-      sesionAbierta = true;
-    } else {
+    if (!coincideUsuarioYContrasenia(username, contrasenia)) {
       this.intentos++;
     }
   }
 
-  private void validarSesionAbierta() {
-    if (isSesionAbierta()) {
-      throw new SesionYaEstaAbiertaException("La sesion correspondiente ya se encuentra iniciada");
-    }
-  }
 
   private boolean coincideUsuarioYContrasenia(String username, String contrasenia) {
     return getUsuario().equals(username) && getContrasenia().equals(contrasenia);
@@ -199,9 +179,9 @@ public class Usuario implements WithSimplePersistenceUnit{
 
   public Incidente abrirIncidente(Servicio servicio, String observacion) {
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
-    Incidente incidente = new Incidente(observacion,servicio);
+    Incidente incidente = new Incidente(observacion, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
-    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(observacion,servicio));
+    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(observacion, servicio));
     return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
@@ -261,12 +241,12 @@ public class Usuario implements WithSimplePersistenceUnit{
     }
   }
 
-  public boolean esIncidenteCercano(Incidente incidente){
+  public boolean esIncidenteCercano(Incidente incidente) {
     return new ImpServicioUbicacion().estaCerca(this, incidente.getServicioAsociado());
   }
 
-  public List<Incidente> obtenerIncidentesCercanos(List<Incidente> incidentesAbiertos){
-    incidentesAbiertos.stream().filter( incidente -> esIncidenteCercano(incidente) );
+  public List<Incidente> obtenerIncidentesCercanos(List<Incidente> incidentesAbiertos) {
+    incidentesAbiertos.stream().filter(incidente -> esIncidenteCercano(incidente));
     return incidentesAbiertos;
   }
 

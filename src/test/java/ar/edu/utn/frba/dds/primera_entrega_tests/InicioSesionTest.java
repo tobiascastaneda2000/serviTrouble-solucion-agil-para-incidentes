@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.primera_entrega_tests;
 
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
-import ar.edu.utn.frba.dds.validaciones_password.SesionYaEstaAbiertaException;
 import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
 import org.junit.jupiter.api.*;
 
@@ -27,20 +26,10 @@ public class InicioSesionTest {
   }
 
   @Test
-  @DisplayName("Intentar iniciar sesion cuando esta abierta lanza excepccion")
-  void sesionYaFueAbierta() {
-
-    Assertions.assertTrue(usuarioSesionAbierta.isSesionAbierta());
-    Assertions.assertThrows(SesionYaEstaAbiertaException.class, () -> usuarioSesionAbierta.iniciarSesion("Camila", "Zoe"));
-    Assertions.assertThrows(SesionYaEstaAbiertaException.class, () -> usuarioSesionAbierta.iniciarSesion("Miguel", "Rodriguez"));
-  }
-
-  @Test
   @DisplayName("Ingresar usuario erroneo suma un intento")
   void usuarioErroneoSumaUnIntento() {
     usuarioSesionCerrada.iniciarSesion("Adrian", "Rodriguez");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 1);
-    Assertions.assertFalse(usuarioSesionCerrada.isSesionAbierta());
   }
 
   @Test
@@ -48,7 +37,6 @@ public class InicioSesionTest {
   void contraseniaErroneaSumaUnIntento() {
     usuarioSesionCerrada.iniciarSesion("Miguel", "Rincon");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 1);
-    Assertions.assertFalse(usuarioSesionCerrada.isSesionAbierta());
   }
 
   @Test
@@ -56,7 +44,6 @@ public class InicioSesionTest {
   void datosCorrectosAbrenSesion() {
     usuarioSesionCerrada.iniciarSesion("Miguel", "Rodriguez");
     Assertions.assertEquals(usuarioSesionCerrada.getIntentos(), 0);
-    Assertions.assertTrue(usuarioSesionCerrada.isSesionAbierta());
   }
 
 
