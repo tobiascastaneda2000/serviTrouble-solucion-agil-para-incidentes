@@ -8,10 +8,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LectorCSVEscritura {
 
   File archivo;
+  Logger logger = null;
 
   public File getArchivo() {
     return archivo;
@@ -35,7 +38,7 @@ public class LectorCSVEscritura {
     }
 
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.archivo))) {
-      String cabecera =  "id ; razonSocial ; email";
+      String cabecera = "id ; razonSocial ; email";
       bw.write(cabecera);
       bw.newLine();
       for (Entidad entidad : listadoEntidades) {
@@ -44,7 +47,7 @@ public class LectorCSVEscritura {
         bw.newLine();
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.log(Level.SEVERE, "Error al escribir entidades en archivo", e);
     }
   }
 

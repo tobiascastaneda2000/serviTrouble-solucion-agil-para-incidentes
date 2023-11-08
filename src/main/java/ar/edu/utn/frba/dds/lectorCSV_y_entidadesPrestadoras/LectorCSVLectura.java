@@ -8,12 +8,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LectorCSVLectura {
 
   private String csvPath;
   private File file;
   private BufferedReader fileReader;
+
+  private Logger logger = null;
 
   public String extensioncsv;
   public List<Entidad> entidades = new ArrayList<>();
@@ -61,7 +65,7 @@ public class LectorCSVLectura {
         }
         fileReader.close();
       } catch (IOException ex) {
-        ex.printStackTrace();
+        logger.log(Level.SEVERE, "Error al bajar entidades de archivo", ex);
       }
       return entidades;
     } else {
