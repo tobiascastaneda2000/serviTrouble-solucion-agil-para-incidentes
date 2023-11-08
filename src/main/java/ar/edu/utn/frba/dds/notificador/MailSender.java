@@ -9,7 +9,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Transient;
 
 @Entity
@@ -37,6 +35,8 @@ public class MailSender extends MedioNotificador {
   @Transient
   Properties props = new Properties();
 
+  @Transient
+  Logger logger = null;
 
   public MailSender() {
   }
@@ -47,22 +47,19 @@ public class MailSender extends MedioNotificador {
     this.configurarPropiedades();
     this.armarMensaje(contacto, texto, "Nuevo incidente");
     this.enviar();
-
-
   }
 
   //Guarda la contraseña cargada en un archivo de texto
   private void cargarContrasenia() {
-    try {
-      ClassLoader loader = Thread.currentThread().getContextClassLoader();
-      InputStream inputStream = loader.getResourceAsStream("myConfigs.password.txt");
+    ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    try (InputStream inputStream = loader.getResourceAsStream("myConfigs.password.txt")) {
 
       props.load(inputStream);
 
       passwordRemitente = props.getProperty("passwordRemitente");
 
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.log(Level.SEVERE, "Error al cargar la contrasenia", e);
     }
   }
 
@@ -71,7 +68,7 @@ public class MailSender extends MedioNotificador {
     try {
       Transport.send(message);
     } catch (MessagingException e) {
-      Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, e);
+      logger.log(Level.SEVERE, "Error al enviar el mensaje", e);
     }
 
   }
@@ -88,7 +85,7 @@ public class MailSender extends MedioNotificador {
       message.setText(unTexto);
 
     } catch (MessagingException e) {
-      Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, e);
+      logger.log(Level.SEVERE, "Error en el Armado del mensaje", e);
     }
   }
 
