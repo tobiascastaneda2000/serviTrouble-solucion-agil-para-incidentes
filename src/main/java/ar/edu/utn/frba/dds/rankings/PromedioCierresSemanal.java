@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.rankings;
 
 import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
 
-import java.util.ArrayList;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -29,13 +28,14 @@ public class PromedioCierresSemanal extends CriterioRanking {
   public String getNombre_criterio() {
     return nombre_criterio;
   }
+
   @Override
   public String getPath() {
     return path;
   }
 
   @Transient
-  public String path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-pc.csv";
+  public String path = "src/main/resources/rankings-entidades-pc.csv";
 
   public String nombre_criterio = "promedio de cierres de incidentes";
 
@@ -44,7 +44,6 @@ public class PromedioCierresSemanal extends CriterioRanking {
   public Comparator<Entidad> getCriterio() {
     return this.criterio;
   }
-
 
 
 }
