@@ -90,6 +90,9 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     Map<String, Object> modelo = new HashMap<>();
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     List<Incidente> incidentes = comunidades.stream().flatMap( comunidad -> comunidad.getIncidentes().stream() ).filter( incidente -> usuario.esIncidenteCercano(incidente) ).collect(Collectors.toList());
+    if(incidentes.isEmpty()){
+      modelo.put("mensajeIncidentes","No tienes incidentes cercanos para revisar");
+    }
     modelo.put("usuario", usuario);
     modelo.put("incidentes", incidentes);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();

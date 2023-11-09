@@ -59,9 +59,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.post("/incidente/:id", controllerIncidentes::cerrarIncidente);
 
     //RANKINGS
-    Spark.get("/rankings", controllerMenuRanking::mostrarTodosRankings, engine);
-    //Spark.get("/rankings/cantidad-reportes", controllerRankingCantidadReportes::mostrarRankingCantidadReportes, engine);
-    //Spark.get("/rankings/promedio-cierres", controllerRankingPromedioCierres::mostrarRankingPromedioCierre, engine);
+    Spark.get("/rankings/:id", controllerListadoRanking::mostrarListaDeRanking, engine);
 
     //USUARIOS
     Spark.get("/usuarios",controllerUsuarios::mostrarUsuarios,engine);
@@ -75,13 +73,6 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/admin-comunidades",controllerComunidades::verComunidadesAdministrables,engine);
     Spark.get("/administrar-comunidad/:id",controllerComunidades::verComunidadAdministrable,engine);
     Spark.get("/administrar-comunidad/:id/miembros",controllerComunidades::verMiembros,engine);
-    Spark.get("/rankings/:id", controllerListadoRanking::mostrarListaDeRanking, engine);
-
-    //USUARIOS
-    Spark.get("/usuarios", controllerUsuarios::mostrarUsuarios, engine);
-    Spark.post("/usuarios", controllerUsuarios::crearUsuario, engine);
-    Spark.get("/usuarios/:id", controllerUsuarios::mostrarDetalleUsuario, engine);
-    Spark.post("/usuarios/:id", controllerUsuarios::eliminarUsuario);
 
     //INCIDENTES SUGERIDOS
     Spark.get("/incidente-sugerido", controllerIncidentes::mostrarIncidentesSugeridos,engine);
