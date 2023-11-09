@@ -57,7 +57,13 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       modelo.put("nombreEstablecimiento",establecimiento.nombre);
       modelo.put("anio", LocalDate.now().getYear());
       modelo.put("servicios", servicios);
-      return new ModelAndView(modelo, "servicio.html.hbs");
+      if(request.cookie("creado")==null){
+        return new ModelAndView(modelo, "servicio.html.hbs");
+      }
+      else{
+        response.removeCookie("creado");
+        return new ModelAndView(modelo,"incidenteCreado.html.hbs");
+      }
     }
     else{
       response.redirect("/");
@@ -69,6 +75,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
   public ModelAndView crearIncidente(Request request, Response response) {
 
     try {
+      String idEstablecimiento = request.params(":id");
           String id = request.queryParams("servicio");
           String observacion = request.queryParams("observacion");
           Servicio servicio = entityManager()
@@ -79,7 +86,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           Long userid = request.session().attribute("user_id");
           Usuario usuario = RepoUsuarios.getInstance().getOne(userid);
           usuario.abrirIncidente(servicio,observacion);
-          response.redirect("/incidente-creado");
+          response.cookie("creado","si");
+          response.redirect("/establecimientos/"+idEstablecimiento);
           return null;
     } catch (Exception e) {
       response.redirect("/incidente-error");
