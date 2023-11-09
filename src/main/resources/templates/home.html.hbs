@@ -37,7 +37,7 @@
                         <p class="card-text">{{observacion}}</p>
                         <form class="incidente_sugeridos-form" method="POST" action="/incidente/{{id}}">
                             <input type="hidden" value="{{id}}" name="incidente"></input>
-                            <input type="submit" value="Cerrar Incidente" class="btn btn-amarillo"/>
+                            <input type="submit" onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-amarillo"/>
                         </form>
                       </div>
                     </div>

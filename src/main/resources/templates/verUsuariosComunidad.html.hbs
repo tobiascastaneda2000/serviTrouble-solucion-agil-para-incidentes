@@ -1,17 +1,25 @@
 {{#partial "principal" }}
 
-<h1>USUARIOS</h1>
+<div class="container text-center my-4">
+<h1 class="text-uppercase">USUARIOS DE {{nombreComunidad}}</h1>
+</div>
 
 <div class="container d-flex justify-content-center align-items-center">
-<ul>
+<div class="col-6">
+<ul class="list-group">
         {{#usuarios}}
-            <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+            <form method="POST" >
+              <li class="list-group-item d-flex justify-content-between align-items-center rounded-4">
                 {{usuario}}
                 <input type="hidden" name="idusuario" value="{{id}}">
-                <input type="submit" value="Eliminar Miembro" class="btn btn-danger">
+                <input type="submit" value="Eliminar Miembro" class="btn btn-warning">
+              </li>
+
+
             </form>
         {{/usuarios}}
 </ul>
+</div>
 </div>
 
 

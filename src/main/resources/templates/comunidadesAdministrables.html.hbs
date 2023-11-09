@@ -13,9 +13,9 @@
 
 
 <div class="container justify-content-center">
-    <div class="titulo my-5">
+    <div class="titulo my-5 text-center">
         <h2 class="text-center">MIS COMUNIDADES ADMINISTRABLES</h2>
-        <a class="text-center text-uppercase fw-bolder warning">{{vacio}}</a>
+        <a class="text-center text-uppercase text-decoration-none">{{vacio}}</a>
     </div>
 
 <div class="row justify-content-center my-4">
@@ -24,7 +24,7 @@
   {{#comunidades}}
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button text-uppercase" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <button class="accordion-button text-uppercase fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
         {{nombre}}
       </button>
     </h2>
@@ -37,7 +37,7 @@
            {{/serviciosDeInteres}}
            </ul>
            <div class="d-md-flex justify-content-md-end">
-           <a href="/administrar-comunidad/{{id}}/miembros"><button type="button" class="btn btn-warning">Miembros</button></a>
+           <a href="/admin-comunidades/{{id}}/miembros"><button type="button" class="btn btn-warning">Miembros</button></a>
            </div>
       </div>
     </div>

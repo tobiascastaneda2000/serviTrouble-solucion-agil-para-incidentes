@@ -91,24 +91,6 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
   }
 
 
-  public ModelAndView verComunidadAdministrable(Request request, Response response){
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Map<String, Object> modelo = new HashMap<>();
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      modelo.put("anio", LocalDate.now().getYear());
-      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-      modelo.put("comunidad",comunidad);
-      return new ModelAndView(modelo, "verDetalleComunidad.html.hbs");
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
-  }
 
   public ModelAndView verMiembros(Request request, Response response){
 
@@ -121,6 +103,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       modelo.put("criterios", criterio);
       Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
       List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
+      modelo.put("nombreComunidad",comunidad.nombre);
       modelo.put("usuarios",usuarios);
       return new ModelAndView(modelo, "verUsuariosComunidad.html.hbs");
     }
