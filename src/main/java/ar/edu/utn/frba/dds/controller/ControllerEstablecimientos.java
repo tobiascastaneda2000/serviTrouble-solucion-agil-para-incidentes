@@ -90,8 +90,21 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           response.redirect("/establecimientos/"+idEstablecimiento);
           return null;
     } catch (Exception e) {
-      response.redirect("/incidente-error");
-      return null;
+
+        String idEstablecimiento = request.params(":id");
+        Establecimiento establecimiento = entityManager()
+            .createQuery("from Establecimiento where id = :id", Establecimiento.class)
+            .setParameter("id", Long.parseLong(idEstablecimiento))
+            .getResultList()
+            .get(0);
+        Map<String, Object> modelo = new HashMap<>();
+        List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+        modelo.put("criterios", criterio);
+        List<Servicio> servicios = establecimiento.getServicios();
+        modelo.put("nombreEstablecimiento",establecimiento.nombre);
+        modelo.put("anio", LocalDate.now().getYear());
+        modelo.put("servicios", servicios);
+        return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
     }
   }
   

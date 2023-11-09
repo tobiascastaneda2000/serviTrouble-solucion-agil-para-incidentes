@@ -1,12 +1,48 @@
 {{#partial "principal" }}
 
-    <div class="mensaje-box-error">
-        ERROR!!
-        SU INCIDENTE NO HA SIDO CREADO CORRECTAMENTE.
-        INTENTE DE NUEVO POR FAVOR.
 
-        <a href="/home">Volver al Menú</a>
-    </div>
+      <div class="bg-gris py-2 align-items-center text-white">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+            <li class="breadcrumb-item text-white text-decoration-none"><a href="/entidades" class="text-decoration-none text-white">Entidades</a></li>
+            <li class="breadcrumb-item text-white" aria-current="page">Cargar Incidente</li>
+
+          </ol>
+        </nav>
+        </div>
+
+
+<h2 class="text-center my-5">CARGAR INCIDENTE</h1>
+
+<div class="container d-flex justify-content-center align-items-center ">
+    <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="mb-3">
+           <div class="mb-3">
+               <label for="disabledTextInput">Establecimiento</label>
+               <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombreEstablecimiento}}" disabled>
+           </div>
+           <label for="opciones">Servicio</label>
+           <select id="servicio" class="form-select" name="servicio">
+               {{#servicios}}
+                   <option value={{id}}>{{nombre}}</option>
+               {{/servicios}}
+           </select>
+        </div>
+        <div class="mb-3">
+           <label>Observación</label>
+           <input type="textarea" class="form-control"  name="observacion" maxlength="50">
+        </div>
+        <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+            <input type="submit" class="btn btn-amarillo" value="Abrir Incidente">
+        </div>
+        <div class="alert alert-danger" role="alert">
+          El incidente no pudo ser creado!
+        </div>
+    </form>
+</div>
+
+
 {{/partial}}
 
 {{> layoutSesionIniciada.html.hbs }}
