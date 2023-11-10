@@ -56,10 +56,8 @@ public class Routes implements WithSimplePersistenceUnit {
     //VISUALIZACION Y CIERRE DE INCIDENTES
     Spark.get("/comunidades", controllerComunidades::mostrarComunidades, engine);
     Spark.get("/comunidades/:id", controllerComunidades::mostrarIncidentes, engine);
-    Spark.get("/incidente-cerrado/:id", controllerIncidentes::verDetalleIncidenteCerrado, engine);
-    Spark.get("/incidente/:id", controllerIncidentes::verDetalle, engine);
-    Spark.post("/incidente/:id", controllerIncidentes::cerrarIncidente);
-
+    Spark.post("/comunidades/:id", controllerIncidentes::cerrarIncidente);
+    Spark.post("/incidente/:id",controllerIncidentes::cerrarIncidente);
     //RANKINGS
     Spark.get("/rankings/:id", controllerListadoRanking::mostrarListaDeRanking, engine);
 

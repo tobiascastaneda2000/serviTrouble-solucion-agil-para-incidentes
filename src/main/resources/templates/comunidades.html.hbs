@@ -1,26 +1,39 @@
 {{#partial "principal" }}
-    <div class="titulo">
-        MIS COMUNIDADES
+
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Comunidades</li>
+  </ol>
+</nav>
+</div>
+
+
+
+    <div class="text-center my-4">
+        <h2>MIS COMUNIDADES</h2>
     </div>
 
-    <div class="container d-flex justify-content-center align-items-center">
-        <table class="table table-bordered table-hover row border rounded-5 p-3 bg-white shadow box-area">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#comunidades}}
-                <tr>
-                    <th scope="row">{{id}}</th>
-                    <td><a href="/comunidades/{{id}}">{{nombre}}</a></td>
-                </tr>
-                {{/comunidades}}
-            </tbody>
-        </table>
+<div class="row justify-content-center">
+{{#comunidades}}
+<div class="col-4">
+    <div class="card">
+      <div class="card-header">
+
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-uppercase fw-bold">{{nombre}}</h5>
+        <div class="d-md-flex justify-content-md-end">
+        <a href="/comunidades/{{id}}" class="btn btn-amarillo">Ver incidentes</a>
+        </div>
+      </div>
     </div>
+    </div>
+    {{/comunidades}}
+</div>
+
 
 {{/partial}}
 
