@@ -42,16 +42,6 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       return null;
     }
 
-    public ModelAndView postUsuarios(Request request, Response response) {
-      String metodo = request.queryParams("_method");
-
-        if(metodo.equals("PUT")){
-            return modificarUsuario(request, response);
-        }
-
-        return eliminarUsuario(request, response);
-    }
-
     public ModelAndView crearUsuario(Request request, Response response) {
     String nombre = request.queryParams("nombre");
     String contrasenia = request.queryParams("contrasenia");
