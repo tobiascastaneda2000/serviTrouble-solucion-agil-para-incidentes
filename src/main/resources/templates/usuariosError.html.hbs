@@ -1,10 +1,14 @@
 {{#partial "principal" }}
 
-<h1>USUARIOS</h1>
+<div class="text-center my-4">
+<h2>USUARIOS</h2>
+</div>
 
-<div class="cont-form">
+<div class="row justify-content-center my-4">
+    <div class="col-4">
+    <div class="cont-form">
     <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
-       <h3>Crear nuevo usuario:</h3>
+       <h4>CREAR NUEVO USUARIO</h4>
        <div class="mb-3">
            <label>Nombre</label>
            <input type="text" class="form-control" name="nombre">
@@ -17,33 +21,38 @@
             <label>Contacto</label>
             <input type="text" class="form-control" name="contacto">
        </div>
-       <input type="submit" class="btn btn-primary">
-        <div class="alert alert-warning" role="alert">
-          El usuario ya existe
-        </div>
+       <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+             <input type="submit" class="btn btn-amarillo " value="Crear">
+       </div>
+       <div class="alert alert-warning" role="alert">
+                 El usuario ya existe
+       </div>
     </form>
+  </div>
 </div>
 
-<div class="container d-flex justify-content-center align-items-center ">
-<table class="table table-bordered table-hover caption-top row border rounded-5 p-3 bg-white shadow box-area">
-    <caption>Lista de usuarios</caption>
-    <thead>
-        <tr>
-           <th scope="col">ID</th>
-           <th scope="col">Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#usuarios}}
-            <tr>
-               <th scope="row">{{id}}</th>
-               <td><a href="/usuarios/{{id}}">{{usuario}}</a></td>
-            </tr>
-        {{/usuarios}}
-    </tbody>
+<div class="row justify-content-center my-5">
+<div class="col-4">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NOMBRE</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#usuarios}}
+    <tr>
+      <td>{{id}}</td>
+      <td><a href="/usuarios/{{id}}">{{usuario}}</a></td>
+    </tr>
+   {{/usuarios}}
+  </tbody>
 </table>
 </div>
+</div>
+
 
 {{/partial}}
 
-{{> layoutSesionIniciada.html.hbs }}
+{{> layoutAdmin.html.hbs }}

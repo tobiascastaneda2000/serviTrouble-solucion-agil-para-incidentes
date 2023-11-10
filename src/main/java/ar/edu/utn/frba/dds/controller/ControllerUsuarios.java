@@ -72,7 +72,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       getTransaction().begin();
       entityManager().flush();
       getTransaction().commit();
-      response.redirect("/usuarios");
+      response.redirect("/admin-home");
     }
 
     return null;
