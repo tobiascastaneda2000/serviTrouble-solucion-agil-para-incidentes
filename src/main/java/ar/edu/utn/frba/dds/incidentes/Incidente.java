@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Incidente implements WithSimplePersistenceUnit {
@@ -34,6 +35,20 @@ public class Incidente implements WithSimplePersistenceUnit {
   }
 
   public LocalDateTime fechaHoraCierre;
+
+  @Transient
+  public String fechaApertura;
+
+  public String getFechaApertura() {
+    return fechaApertura;
+  }
+
+  @Transient
+  public String fechaCierre;
+
+  public String getFechaCierre() {
+    return fechaCierre;
+  }
 
   //-------------------------CONSTRUCTOR----------------------------------------//
   protected Incidente() {

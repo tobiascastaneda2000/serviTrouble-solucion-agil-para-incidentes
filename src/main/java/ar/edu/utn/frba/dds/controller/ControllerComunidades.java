@@ -7,7 +7,15 @@ import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.text.CompactNumberFormat;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.text.DateFormatter;
+import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.StringMatcher;
 import spark.ModelAndView;
 import spark.Request;
@@ -18,6 +26,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ControllerComunidades implements WithSimplePersistenceUnit {
 
@@ -53,6 +64,19 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       modelo.put("anio", LocalDate.now().getYear());
       List<Incidente> incidentesAbiertos = comunidad.incidentes;
       List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
+
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+      for (Incidente incidente : incidentesAbiertos) {
+
+        incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
+
+      }
+      for (Incidente incidente : incidentesCerrados) {
+
+        incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
+        incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
+      }
+
       modelo.put("incidentesAbiertos", incidentesAbiertos);
       modelo.put("incidentesCerrados", incidentesCerrados);
       List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
