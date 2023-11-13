@@ -36,10 +36,10 @@ public class Usuario implements WithSimplePersistenceUnit {
 
   int intentos;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne
   public MedioNotificador medioNotificador;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToMany
   Set<Entidad> entidadesInteres = new HashSet<>();
 
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
