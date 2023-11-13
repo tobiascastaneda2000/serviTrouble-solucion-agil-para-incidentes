@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ApiGeoRef;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Departamento;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.Provincia;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioGeoRef;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
+import ar.edu.utn.frba.dds.serviciolocalizacion.ApiGeoRef;
+import ar.edu.utn.frba.dds.serviciolocalizacion.Departamento;
+import ar.edu.utn.frba.dds.serviciolocalizacion.Provincia;
+import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioGeoRef;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

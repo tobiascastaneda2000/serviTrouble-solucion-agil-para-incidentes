@@ -1,8 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.comunidad.Comunidad;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;

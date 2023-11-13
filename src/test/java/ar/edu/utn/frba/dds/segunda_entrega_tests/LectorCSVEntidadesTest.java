@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.segunda_entrega_tests;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.ArchivoNoExistenteException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.CampoDeEntidadVacioException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadIncompletaException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.EntidadYaCargadaException;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.PathIncorrectoException;
+import ar.edu.utn.frba.dds.entidades.Entidad;
+import ar.edu.utn.frba.dds.lectorCSV.LectorCSVLectura;
+import ar.edu.utn.frba.dds.lectorCSV.ArchivoNoExistenteException;
+import ar.edu.utn.frba.dds.lectorCSV.CampoDeEntidadVacioException;
+import ar.edu.utn.frba.dds.lectorCSV.EntidadIncompletaException;
+import ar.edu.utn.frba.dds.lectorCSV.EntidadYaCargadaException;
+import ar.edu.utn.frba.dds.lectorCSV.PathIncorrectoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

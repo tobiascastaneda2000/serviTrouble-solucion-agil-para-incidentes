@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.controller;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.PermisoUsuario;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.comunidad.Comunidad;
+import ar.edu.utn.frba.dds.comunidad.PermisoUsuario;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
+import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
+import ar.edu.utn.frba.dds.lectorCSV.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;

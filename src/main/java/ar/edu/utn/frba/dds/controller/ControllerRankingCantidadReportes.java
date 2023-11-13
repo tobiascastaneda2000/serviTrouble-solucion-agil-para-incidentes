@@ -1,11 +1,8 @@
 package ar.edu.utn.frba.dds.controller;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
-import ar.edu.utn.frba.dds.lectorCSV_y_entidadesPrestadoras.LectorCSVLectura;
-import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
+import ar.edu.utn.frba.dds.entidades.Entidad;
+import ar.edu.utn.frba.dds.lectorCSV.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
-import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
-import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;

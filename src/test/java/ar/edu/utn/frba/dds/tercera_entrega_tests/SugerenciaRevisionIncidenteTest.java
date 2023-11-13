@@ -1,17 +1,16 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
+import ar.edu.utn.frba.dds.entidades.Entidad;
+import ar.edu.utn.frba.dds.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.MainTareasPlanificadas;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
-import ar.edu.utn.frba.dds.serviciolocalizacion_y_apiGeoref.ServicioUbicacion;
-import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.entidades.Servicio;
+import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
+import ar.edu.utn.frba.dds.entidades.TipoServicio;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
+import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
-import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

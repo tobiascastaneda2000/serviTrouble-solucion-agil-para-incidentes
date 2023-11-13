@@ -1,12 +1,11 @@
 package ar.edu.utn.frba.dds.controller;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
 import ar.edu.utn.frba.dds.repositorios.*;
 import java.time.LocalDate;
 import java.util.HashMap;

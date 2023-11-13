@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Establecimiento;
+import ar.edu.utn.frba.dds.entidades.Entidad;
+import ar.edu.utn.frba.dds.entidades.Establecimiento;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Servicio;
-import ar.edu.utn.frba.dds.entidades_y_servicios.TipoServicio;
+import ar.edu.utn.frba.dds.entidades.Servicio;
+import ar.edu.utn.frba.dds.entidades.TipoServicio;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;

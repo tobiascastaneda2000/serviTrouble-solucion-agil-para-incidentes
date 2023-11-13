@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.*;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
+import ar.edu.utn.frba.dds.entidades.*;
+import ar.edu.utn.frba.dds.comunidad.*;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.incidentes.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;

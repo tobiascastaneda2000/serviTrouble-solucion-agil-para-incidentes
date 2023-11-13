@@ -4,12 +4,11 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
+import ar.edu.utn.frba.dds.comunidad.*;
 import ar.edu.utn.frba.dds.repositorios.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import spark.Session;
 
 public class ControllerLogin implements WithSimplePersistenceUnit {
 

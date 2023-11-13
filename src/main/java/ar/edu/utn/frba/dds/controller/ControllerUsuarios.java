@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.*;
+import ar.edu.utn.frba.dds.comunidad.*;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Comunidad;
+import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 import java.util.HashSet;

@@ -1,12 +1,9 @@
 package ar.edu.utn.frba.dds.repositorios;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
-import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 

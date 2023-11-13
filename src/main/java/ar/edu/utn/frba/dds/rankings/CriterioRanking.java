@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.rankings;
 
-import ar.edu.utn.frba.dds.entidades_y_servicios.Entidad;
+import ar.edu.utn.frba.dds.entidades.Entidad;
 
 import java.util.ArrayList;
 import java.util.List;

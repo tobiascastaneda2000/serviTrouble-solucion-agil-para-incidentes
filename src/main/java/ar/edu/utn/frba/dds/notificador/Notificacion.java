@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.notificador;
 
-import ar.edu.utn.frba.dds.comunidad_y_usuarios.Usuario;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 import javax.persistence.*;
