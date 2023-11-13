@@ -1,15 +1,16 @@
 package ar.edu.utn.frba.dds.notificador;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import java.util.Objects;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Embeddable
 public class Horario {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
+
   public int hora;
   public int minuto;
 
@@ -30,15 +31,24 @@ public class Horario {
     return minuto;
   }
 
-  public boolean esIgual(int hora2,int minuto2){
+  @Override
+  public boolean equals(Object otro) {
 
-    if(this.hora == hora2 && this.minuto == minuto2){
-      return true;
-    }
-    else{
+    if((otro==null) || (otro.getClass()!=getClass())){
       return false;
+    }
+    else {
+      Horario otroHorario = (Horario) otro;
+      if (otroHorario.minuto == this.minuto && otroHorario.hora == this.hora) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
-
+  @Override
+  public int hashCode() {
+    return Objects.hash(hora,minuto);
+  }
 }

@@ -49,9 +49,9 @@ public class Usuario implements WithSimplePersistenceUnit {
   ServicioLocalizacion servicioLocalizacion;
   @Transient  // FALTA
   ServicioUbicacion servicioUbicacion;
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ElementCollection
   @JoinColumn(name = "usuario_id")
-  private Set<Horario> horariosPlanificados = new HashSet<>();
+  public Set<Horario> horariosPlanificados = new HashSet<>();
 
   public PermisoUsuario permisoUsuario;
 
@@ -198,9 +198,7 @@ public class Usuario implements WithSimplePersistenceUnit {
 
   public void verificarNotificaciones(LocalDateTime ahora) {
 
-    int hora = ahora.getHour();
-    int minutos = ahora.getMinute();
-    if (horariosPlanificados.stream().anyMatch(h -> h.esIgual(hora, minutos))) {
+    if (horariosPlanificados.stream().anyMatch(h -> h.equals(ahora))) {
       notificacionesPendientes.stream().filter(n -> !n.fueNotificada).forEach(
           n -> n.ejecutarse(this));
     }
