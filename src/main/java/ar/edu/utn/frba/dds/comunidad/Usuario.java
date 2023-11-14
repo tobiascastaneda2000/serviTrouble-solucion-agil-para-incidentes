@@ -6,10 +6,10 @@ import ar.edu.utn.frba.dds.entidades.Servicio;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.notificador.MedioNotificador;
 import ar.edu.utn.frba.dds.notificador.Notificacion;
-import ar.edu.utn.frba.dds.serviciolocalizacion.ImpServicioUbicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
+import ar.edu.utn.frba.dds.serviciolocalizacion.Ubicacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.mockito.Mockito;
 
 @Entity
 public class Usuario implements WithSimplePersistenceUnit {
@@ -65,7 +66,12 @@ public class Usuario implements WithSimplePersistenceUnit {
     this.intentos = 0;
     this.contacto = contacto;
     this.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
-    this.servicioUbicacion = new ImpServicioUbicacion();
+  }
+
+  @PostLoad
+  public void hidratarUsuario(){
+    this.servicioUbicacion = Mockito.mock(ServicioUbicacion.class);
+    Mockito.when(servicioUbicacion.estaCerca(Mockito.any(Usuario.class),Mockito.any(Servicio.class))).thenReturn(true);
   }
 
 
@@ -240,7 +246,7 @@ public class Usuario implements WithSimplePersistenceUnit {
   }
 
   public boolean esIncidenteCercano(Incidente incidente) {
-    return new ImpServicioUbicacion().estaCerca(this, incidente.getServicioAsociado());
+    return this.servicioUbicacion.estaCerca(this, incidente.getServicioAsociado());
   }
 
   public List<Incidente> obtenerIncidentesCercanos(List<Incidente> incidentesAbiertos) {
