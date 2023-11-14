@@ -82,19 +82,28 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView mostrarIncidentesSugeridos(Request request, Response response){
-    Long user_id = revisarSesionIniciada(request,response);
-    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(user_id);
-    Map<String, Object> modelo = new HashMap<>();
-    List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-    List<Incidente> incidentes = comunidades.stream().flatMap( comunidad -> comunidad.getIncidentes().stream() ).filter( incidente -> usuario.esIncidenteCercano(incidente) ).collect(Collectors.toList());
-    if(incidentes.isEmpty()){
-      modelo.put("mensajeIncidentes","No tienes incidentes cercanos para revisar");
+
+    Long idsession = request.session().attribute("user_id");
+    if (idsession != null) {
+
+      Long user_id = revisarSesionIniciada(request, response);
+      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(user_id);
+      Map<String, Object> modelo = new HashMap<>();
+      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+      List<Incidente> incidentes = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream()).filter(incidente -> usuario.esIncidenteCercano(incidente)).collect(Collectors.toList());
+      if (incidentes.isEmpty()) {
+        modelo.put("mensajeIncidentes", "No tienes incidentes cercanos para revisar");
+      }
+      modelo.put("usuario", usuario);
+      modelo.put("incidentes", incidentes);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
+      return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
     }
-    modelo.put("usuario", usuario);
-    modelo.put("incidentes", incidentes);
-    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-    modelo.put("criterios", criterio);
-    return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+    else{
+      response.redirect("/");
+      return null;
+    }
   }
 
   public Long revisarSesionIniciada(Request request, Response response){
