@@ -23,6 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.mockito.Mockito;
+import spark.Request;
+import spark.Response;
 
 @Entity
 public class Usuario implements WithSimplePersistenceUnit {
@@ -46,9 +48,9 @@ public class Usuario implements WithSimplePersistenceUnit {
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "usuario_id")
   List<Notificacion> notificacionesPendientes = new ArrayList<>();
-  @Transient  // FALTA
+  @Transient
   ServicioLocalizacion servicioLocalizacion;
-  @Transient  // FALTA
+  @Transient
   ServicioUbicacion servicioUbicacion;
   @ElementCollection
   @JoinColumn(name = "usuario_id")
@@ -163,6 +165,10 @@ public class Usuario implements WithSimplePersistenceUnit {
     }
   }
 
+    public static Long redirigirSesionNoIniciada(Request request, Response response){
+        if (request.session().attribute("user_id")==null) response.redirect("/");
+        return request.session().attribute("user_id");
+    }
 
   private boolean coincideUsuarioYContrasenia(String username, String contrasenia) {
     return getUsuario().equals(username) && getContrasenia().equals(contrasenia);
