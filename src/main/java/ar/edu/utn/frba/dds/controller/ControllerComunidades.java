@@ -39,6 +39,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
     for (Incidente incidente : incidentesAbiertos) {
       incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
     }
