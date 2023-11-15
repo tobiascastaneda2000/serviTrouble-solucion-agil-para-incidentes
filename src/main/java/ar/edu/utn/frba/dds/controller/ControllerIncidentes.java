@@ -19,59 +19,41 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
 
   public ModelAndView verDetalle(Request request, Response response) {
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
-          .setParameter("id",Long.parseLong(id)).getResultList().get(0);
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      modelo.put("incidente",incidente);
-      modelo.put("estado",incidente.estadoIncidente.toString());
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-      String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
-      modelo.put("fechaApertura",fechaAperturaFormateada);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "detalleIncidente.html.hbs");
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
-
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
+        .setParameter("id",id).getResultList().get(0);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("incidente",incidente);
+    modelo.put("estado",incidente.estadoIncidente.toString());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
+    modelo.put("fechaApertura",fechaAperturaFormateada);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    return new ModelAndView(modelo, "detalleIncidente.html.hbs");
   }
 
   public ModelAndView verDetalleIncidenteCerrado(Request request, Response response) {
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
-          .setParameter("id",Long.parseLong(id)).getResultList().get(0);
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      modelo.put("incidente",incidente);
-      modelo.put("estado",incidente.estadoIncidente.toString());
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-      String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
-      String fechaCierreFormateada = incidente.fechaHoraCierre.format(formatter);
-      modelo.put("fechaApertura",fechaAperturaFormateada);
-      modelo.put("fechaCierre",fechaCierreFormateada);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "detalleIncidenteCerrado.html.hbs");
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
-
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
+        .setParameter("id",id).getResultList().get(0);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("incidente",incidente);
+    modelo.put("estado",incidente.estadoIncidente.toString());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    String fechaAperturaFormateada = incidente.fechaHoraAbre.format(formatter);
+    String fechaCierreFormateada = incidente.fechaHoraCierre.format(formatter);
+    modelo.put("fechaApertura",fechaAperturaFormateada);
+    modelo.put("fechaCierre",fechaCierreFormateada);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    return new ModelAndView(modelo, "detalleIncidenteCerrado.html.hbs");
   }
 
-  public ModelAndView cerrarIncidente(Request request, Response response) {
 
+  public ModelAndView cerrarIncidente(Request request, Response response) {
     String idIncidente = request.queryParams("idIncidente");
     Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
         .setParameter("id",Long.parseLong(idIncidente)).getResultList().get(0);
@@ -82,33 +64,19 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView mostrarIncidentesSugeridos(Request request, Response response){
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-
-      Long user_id = revisarSesionIniciada(request, response);
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(user_id);
-      Map<String, Object> modelo = new HashMap<>();
-      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-      List<Incidente> incidentes = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream()).filter(incidente -> usuario.esIncidenteCercano(incidente)).collect(Collectors.toList());
-      if (incidentes.isEmpty()) {
-        modelo.put("mensajeIncidentes", "No tienes incidentes cercanos para revisar");
-      }
-      modelo.put("usuario", usuario);
-      modelo.put("incidentes", incidentes);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+    Map<String, Object> modelo = new HashMap<>();
+    List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+    List<Incidente> incidentes = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream()).filter(incidente -> usuario.esIncidenteCercano(incidente)).collect(Collectors.toList());
+    if (incidentes.isEmpty()) {
+      modelo.put("mensajeIncidentes", "No tienes incidentes cercanos para revisar");
     }
-    else{
-      response.redirect("/");
-      return null;
-    }
-  }
-
-  public Long revisarSesionIniciada(Request request, Response response){
-    if (request.session().attribute("user_id")==null) response.redirect("/");
-    return request.session().attribute("user_id");
+    modelo.put("usuario", usuario);
+    modelo.put("incidentes", incidentes);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
   }
 
 }

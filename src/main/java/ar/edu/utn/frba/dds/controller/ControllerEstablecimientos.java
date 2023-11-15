@@ -18,12 +18,8 @@ import java.util.List;
 public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarEstablecimientos(Request request, Response response) {
-
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(id));
+      Long id = Usuario.redirigirSesionNoIniciada(request,response);
+      Entidad entidad = RepoEntidades.getInstance().getOne(id);
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
@@ -32,17 +28,9 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       modelo.put("establecimientos", establecimientos);
       return new ModelAndView(modelo, "establecimientos.html.hbs");
     }
-    else{
-      response.redirect("/");
-      return null;
-    }
-
-  }
 
   public ModelAndView cargarIncidente(Request request, Response response) {
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
+      Long id = Usuario.redirigirSesionNoIniciada(request,response);
       String idEstablecimiento = request.params(":id");
       Establecimiento establecimiento = entityManager()
           .createQuery("from Establecimiento where id = :id", Establecimiento.class)
@@ -64,15 +52,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
         return new ModelAndView(modelo,"incidenteCreado.html.hbs");
       }
     }
-    else{
-      response.redirect("/");
-      return null;
-    }
-
-  }
 
   public ModelAndView crearIncidente(Request request, Response response) {
-
     try {
       String idEstablecimiento = request.params(":id");
           String id = request.queryParams("servicio");
@@ -89,7 +70,6 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           response.redirect("/establecimientos/"+idEstablecimiento);
           return null;
     } catch (Exception e) {
-
         String idEstablecimiento = request.params(":id");
         Establecimiento establecimiento = entityManager()
             .createQuery("from Establecimiento where id = :id", Establecimiento.class)

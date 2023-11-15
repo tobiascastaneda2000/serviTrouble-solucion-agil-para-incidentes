@@ -18,131 +18,84 @@ import java.util.List;
 public class ControllerComunidades implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarComunidades(Request request, Response response) {
-
-    Long id = request.session().attribute("user_id");
-    if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-      modelo.put("comunidades", comunidades);
-      return new ModelAndView(modelo, "comunidades.html.hbs");
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
-
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+    modelo.put("comunidades", comunidades);
+    return new ModelAndView(modelo, "comunidades.html.hbs");
   }
 
 
   public ModelAndView mostrarIncidentes(Request request, Response response) {
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    List<Incidente> incidentesAbiertos = comunidad.incidentes;
+    List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
 
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      List<Incidente> incidentesAbiertos = comunidad.incidentes;
-      List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
-
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-      for (Incidente incidente : incidentesAbiertos) {
-
-        incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
-
-      }
-      for (Incidente incidente : incidentesCerrados) {
-
-        incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
-        incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
-      }
-
-      modelo.put("incidentesAbiertos", incidentesAbiertos);
-      modelo.put("incidentesCerrados", incidentesCerrados);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "incidentes.html.hbs");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    for (Incidente incidente : incidentesAbiertos) {
+      incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
     }
-    else{
-      response.redirect("/");
-      return null;
+
+    for (Incidente incidente : incidentesCerrados) {
+      incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
+      incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
     }
+
+    modelo.put("incidentesAbiertos", incidentesAbiertos);
+    modelo.put("incidentesCerrados", incidentesCerrados);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    return new ModelAndView(modelo, "incidentes.html.hbs");
   }
 
 
   public ModelAndView verComunidadesAdministrables(Request request, Response response){
-
-    Long id = request.session().attribute("user_id");
-    if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
-      Map<String, Object> modelo = new HashMap<>();
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      modelo.put("anio", LocalDate.now().getYear());
-      List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-      List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c->c.miembroEsAdmin(usuario)).toList();
-      if(comunidadesAdmin.isEmpty()){
-        String vacio = "No eres administrador de ninguna comunidad";
-        modelo.put("vacio",vacio);
-      }
-      modelo.put("comunidades", comunidadesAdmin);
-      return new ModelAndView(modelo, "comunidadesAdministrables.html.hbs");
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Map<String, Object> modelo = new HashMap<>();
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    modelo.put("anio", LocalDate.now().getYear());
+    List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+    List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c->c.miembroEsAdmin(usuario)).toList();
+    if(comunidadesAdmin.isEmpty()){
+      String vacio = "No eres administrador de ninguna comunidad";
+      modelo.put("vacio",vacio);
     }
-    else{
-      response.redirect("/");
-      return null;
-    }
+    modelo.put("comunidades", comunidadesAdmin);
+    return new ModelAndView(modelo, "comunidadesAdministrables.html.hbs");
   }
-
-
-
   public ModelAndView verMiembros(Request request, Response response){
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-      List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
-      modelo.put("nombreComunidad",comunidad.nombre);
-      modelo.put("usuarios",usuarios);
-      return new ModelAndView(modelo, "verUsuariosComunidad.html.hbs");
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
+    modelo.put("nombreComunidad",comunidad.nombre);
+    modelo.put("usuarios",usuarios);
+    return new ModelAndView(modelo, "verUsuariosComunidad.html.hbs");
   }
 
   public ModelAndView eliminarMiembro(Request request, Response response){
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      String idusuario = request.queryParams("idusuario");
-      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-      Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(idusuario));
-      Miembro miembro = comunidad.miembros.stream().filter(m->m.usuario.equals(usuario)).toList().get(0);
-      getTransaction().begin();
-      comunidad.miembros.remove(miembro);
-      remove(miembro);
-      getTransaction().commit();
-      response.redirect("/admin-comunidades");
-      return null;
-    }
-    else{
-      response.redirect("/");
-      return null;
-    }
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    String idusuario = request.queryParams("idusuario");
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(idusuario));
+    Miembro miembro = comunidad.miembros.stream().filter(m->m.usuario.equals(usuario)).toList().get(0);
+    getTransaction().begin();
+    comunidad.miembros.remove(miembro);
+    remove(miembro);
+    getTransaction().commit();
+    response.redirect("/admin-comunidades");
+    return null;
   }
-
-
 }

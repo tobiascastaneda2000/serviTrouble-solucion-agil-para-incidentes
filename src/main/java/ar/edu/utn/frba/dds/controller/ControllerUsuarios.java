@@ -69,36 +69,26 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     }
 
   public ModelAndView mostrarDetalleUsuario(Request request, Response response) {
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-      String id = request.params(":id");
-      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
-      Map<String, Object> modelo = new HashMap<>();
-      if (usuario.medioNotificador != null) {
-        modelo.put("medioNoti", usuario.medioNotificador.toString());
-      } else {
-        modelo.put("medioNoti", "");
-      }
-      modelo.put("entidadesInteres", usuario.getEntidadesInteres());
-      modelo.put("horarios", usuario.getHorariosPlanificados());
-      modelo.put("anio", LocalDate.now().getYear());
-      modelo.put("usuarioDetalle", usuario);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Map<String, Object> modelo = new HashMap<>();
+    if (usuario.medioNotificador != null) {
+      modelo.put("medioNoti", usuario.medioNotificador.toString());
+    } else {
+      modelo.put("medioNoti", "");
     }
-    else{
-      response.redirect("/");
-      return null;
-    }
+    modelo.put("entidadesInteres", usuario.getEntidadesInteres());
+    modelo.put("horarios", usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle", usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
   }
 
   public ModelAndView mostrarPerfil(Request request, Response response) {
-
-    Long idsession = request.session().attribute("user_id");
-    if (idsession != null) {
-    Long id = request.session().attribute("user_id");
-    Usuario usuario = RepoUsuarios.getInstance().getOne((id));
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("id", usuario.id);
     modelo.put("entidadesInteres", usuario.getEntidadesInteres());
@@ -109,14 +99,9 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "perfilUsuario.html.hbs");
   }
-  else{
-      response.redirect("/");
-      return null;
-    }
-  }
 
   public ModelAndView modificarPerfil(Request request, Response response) {
-    Long id = request.session().attribute("user_id");
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
     Usuario usuario = RepoUsuarios.getInstance().getOne((id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("id", usuario.id);
@@ -130,8 +115,8 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
   }
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
-    String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
     List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
     try {
       getTransaction().begin();

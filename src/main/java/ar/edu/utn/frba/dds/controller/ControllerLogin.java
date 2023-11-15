@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerLogin implements WithSimplePersistenceUnit {
-
   public ModelAndView mostrarLogin(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
@@ -42,7 +41,6 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
 
 
   public ModelAndView cerrarSesion(Request request, Response response) {
-
     request.session().removeAttribute("user_id");
     response.redirect("/");
     return null;
