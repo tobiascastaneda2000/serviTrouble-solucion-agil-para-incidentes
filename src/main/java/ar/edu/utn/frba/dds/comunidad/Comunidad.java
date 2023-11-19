@@ -117,7 +117,7 @@ public class Comunidad implements WithSimplePersistenceUnit {
   public void cerrarIncidente(Incidente incidente) {
     incidente.cerrar();
     incidentes.remove(incidente);
-    //miembros.forEach(m->m.usuario.getNotificaciones().remove(m.usuario.obtenerNotificacion(incidente)));
+    miembros.forEach(m->m.usuario.notificacionesPendientes.remove(m.usuario.obtenerNotificacion(incidente)));
     incidentesCerrados.add(incidente);
     persist(incidente);
     entityManager().getTransaction().begin();
