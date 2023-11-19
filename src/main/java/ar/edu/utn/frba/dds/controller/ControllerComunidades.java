@@ -31,8 +31,9 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
 
   public ModelAndView mostrarIncidentes(Request request, Response response) {
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
-    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    String id = request.params(":id");
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     List<Incidente> incidentesAbiertos = comunidad.incidentes;
@@ -74,12 +75,17 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     return new ModelAndView(modelo, "comunidadesAdministrables.html.hbs");
   }
   public ModelAndView verMiembros(Request request, Response response){
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    String id = request.params(":id");
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
-    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
+    if(!usuario.comunidadesPertenecientes().contains(comunidad)){
+      response.redirect("/home");
+    }
     List<Usuario> usuarios = comunidad.miembros.stream().map(m->m.usuario).toList();
     modelo.put("nombreComunidad",comunidad.nombre);
     modelo.put("usuarios",usuarios);
@@ -87,9 +93,14 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView eliminarMiembro(Request request, Response response){
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    Usuario usuariosession = RepoUsuarios.getInstance().getOne(idsession);
     String idusuario = request.queryParams("idusuario");
-    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(id);
+    String id = request.params(":id");
+    Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
+    if(!usuariosession.comunidadesPertenecientes().contains(comunidad)){
+      response.redirect("/home");
+    }
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(idusuario));
     Miembro miembro = comunidad.miembros.stream().filter(m->m.usuario.equals(usuario)).toList().get(0);
     getTransaction().begin();

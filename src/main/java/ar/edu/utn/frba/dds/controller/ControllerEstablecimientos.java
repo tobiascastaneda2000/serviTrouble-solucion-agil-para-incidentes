@@ -18,8 +18,9 @@ import java.util.List;
 public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarEstablecimientos(Request request, Response response) {
-      Long id = Usuario.redirigirSesionNoIniciada(request,response);
-      Entidad entidad = RepoEntidades.getInstance().getOne(id);
+      Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+      String id = request.params(":id");
+      Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(id));
       Map<String, Object> modelo = new HashMap<>();
       modelo.put("anio", LocalDate.now().getYear());
       List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();

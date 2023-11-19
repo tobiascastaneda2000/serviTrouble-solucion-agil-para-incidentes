@@ -43,34 +43,45 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
     }
 
     public ModelAndView crearUsuario(Request request, Response response) {
-    String nombre = request.queryParams("nombre");
-    String contrasenia = request.queryParams("contrasenia");
-    String contacto = request.queryParams("contacto");
-    if(RepoUsuarios.getInstance().buscarPorUsuario(nombre).size() >0){
-      Map<String, Object> modelo = new HashMap<>();
-      modelo.put("anio", LocalDate.now().getYear());
-      List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
-      modelo.put("usuarios",usuarios);
-      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-      modelo.put("criterios", criterio);
-      return new ModelAndView(modelo, "usuariosError.html.hbs");
-    }
-    else {
-      Usuario usuario = new Usuario(nombre, contrasenia, contacto);
-      usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
-      persist(usuario);
-      getTransaction().begin();
-      entityManager().flush();
-      getTransaction().commit();
-      response.redirect("/admin-home");
-    }
 
+      Long id = request.session().attribute("user_id");
+      if (id != null) {
+        Usuario usuariologueado = RepoUsuarios.getInstance().getOne(id);
+        if (usuariologueado.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
+
+          String nombre = request.queryParams("nombre");
+          String contrasenia = request.queryParams("contrasenia");
+          String contacto = request.queryParams("contacto");
+          if(RepoUsuarios.getInstance().buscarPorUsuario(nombre).size() >0){
+            Map<String, Object> modelo = new HashMap<>();
+            modelo.put("anio", LocalDate.now().getYear());
+            List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
+            modelo.put("usuarios",usuarios);
+            List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+            modelo.put("criterios", criterio);
+            return new ModelAndView(modelo, "usuariosError.html.hbs");
+          }
+          else {
+            Usuario usuario = new Usuario(nombre, contrasenia, contacto);
+            usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
+            persist(usuario);
+            getTransaction().begin();
+            entityManager().flush();
+            getTransaction().commit();
+            response.redirect("/admin-home");
+          }
+        }
+        else{
+          response.redirect("/home");
+        }
+      }
     return null;
     }
 
   public ModelAndView mostrarDetalleUsuario(Request request, Response response) {
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
-    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    String id = request.params(":id");
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     if (usuario.medioNotificador != null) {
       modelo.put("medioNoti", usuario.medioNotificador.toString());
@@ -115,8 +126,9 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
   }
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
-    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    String id = request.params(":id");
+    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
     try {
       getTransaction().begin();
