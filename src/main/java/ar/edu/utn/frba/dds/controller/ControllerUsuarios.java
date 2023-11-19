@@ -29,9 +29,9 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit{
       String nombre = request.queryParams("usuario");
       String contrasenia = request.queryParams("contrasenia");
       String contacto = request.queryParams("contacto");
-      String id = request.params(":id");
+      Long id = request.session().attribute("user_id");
 
-      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
 
       usuario.setUsername(nombre);
       usuario.setContrasenia(contrasenia);

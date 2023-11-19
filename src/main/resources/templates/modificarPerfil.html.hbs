@@ -15,7 +15,7 @@
 <div class="row justify-content-center my-5">
     <div class="col-4 border rounded-5 p-3 bg-white shadow box-area  align-self-center">
     <h2 class="text-center my-3">MODIFICAR MI USUARIO</h2>
-    <form method="POST" action="/usuarios/{{id}}" type="submit" value="Modificar Usuario">
+    <form method="POST" action="/profile/modificacion" type="submit" value="Modificar Usuario">
     <!-- Campo oculto para tratar la request como PUT -->
     <input type="hidden" class="form-control" name="_method" value="PUT">
          <ul class="list-group">
@@ -35,11 +35,9 @@
                <span class="input-group-text" id="inputGroup-sizing-default">MEDIO NOTIFICADOR</span>
                <input type="text" id="disabledTextInput" class="form-control" value="medioNoti" name="medioNoti">
             </div>
-            <form method="POST">
             <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
             <input type="submit" class="btn btn-amarillo" value="Guardar">
             </div>
-            </form>
          </ul>
          </form>
       <div>
