@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.main;
 
-import ar.edu.utn.frba.dds.MainTareasPlanificadas;
+import ar.edu.utn.frba.dds.RankingProgramado;
 import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.comunidad.PermisoComunidad;
 import ar.edu.utn.frba.dds.comunidad.PermisoUsuario;
@@ -164,7 +164,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoRanking.getInstance().add(criterioPromedioCierre);
       RepoRanking.getInstance().add(criterioCantidadReportes);
 
-      MainTareasPlanificadas.lanzarRanking();
+      new RankingProgramado().run();
 
   }
 

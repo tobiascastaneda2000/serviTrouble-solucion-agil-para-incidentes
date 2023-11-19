@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
+import ar.edu.utn.frba.dds.SugerenciaProgramado;
 import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.entidades.Establecimiento;
-import ar.edu.utn.frba.dds.MainTareasPlanificadas;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
 import ar.edu.utn.frba.dds.entidades.TipoServicio;
@@ -72,7 +72,7 @@ public class SugerenciaRevisionIncidenteTest {
     Incidente incidente = usuarioInformante.abrirIncidente(servicio,"obs");
     when(servicioUbicacion.estaCerca(usuario,incidente.getServicioAsociado())).thenReturn(booleano);
     when(servicioUbicacion.estaCerca(usuarioInformante,incidente.getServicioAsociado())).thenReturn(booleano);
-    MainTareasPlanificadas.sugerirIncidentes();
+    new SugerenciaProgramado().run();
 
     Assertions.assertEquals(comunidad.incidentes.size(),1);
     verify(medioNotificador,times(2)).notificarUnIncidente(any(),anyString());

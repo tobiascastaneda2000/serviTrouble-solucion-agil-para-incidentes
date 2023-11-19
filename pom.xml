@@ -272,7 +272,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>ar.edu.utn.frba.dds.MainTareasPlanificadas</mainClass>
+                                    <mainClass>ar.edu.utn.frba.dds.main.Routes</mainClass>
                                 </manifest>
                             </archive>
                             <finalName>Scheduler</finalName>
