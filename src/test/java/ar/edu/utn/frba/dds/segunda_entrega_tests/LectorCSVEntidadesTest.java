@@ -16,8 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LectorCSVEntidadesTest {
 
-  LectorCSVLectura lectorCSV = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
-  LectorCSVLectura lectorCSVError = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras con error.csv");
+  public String path = "src/main/resources/CSVEntidadesPrestadoras.csv";
+  public String pathConError = "src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras-con-error.csv";
+
+  LectorCSVLectura lectorCSV = new LectorCSVLectura(path);
+  LectorCSVLectura lectorCSVError = new LectorCSVLectura(pathConError);
 
   public String lineaCompleta() {
     return "10;DDS.SA;sistemas@dds.com";
@@ -41,7 +44,7 @@ class LectorCSVEntidadesTest {
   @DisplayName("Si la extension no es .csv tira exception")
   void NoseAbreArchivoConOtraExtension() {
 
-    String path = "src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.txt";
+    String path = "src/main/resources/CSVEntidadesPrestadoras.txt";
     assertThrows(PathIncorrectoException.class, () -> new LectorCSVLectura(path));
   }
 
@@ -49,7 +52,7 @@ class LectorCSVEntidadesTest {
   @DisplayName("Si un CSV no existe tira exception")
   void NoseAbreArchivoCSVsiNoExiste() {
 
-    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntiuyudadesPrestadoras.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/resources/CSVEntiuyudadesPrestadoras.csv");
     assertThrows(ArchivoNoExistenteException.class, () -> lector.obtenerEntidadesDeCSV());
   }
 
@@ -57,7 +60,7 @@ class LectorCSVEntidadesTest {
   @DisplayName("Si un CSV existe entonces y es correcto entonces carga las entidades")
   void seAbreCSV() {
 
-    LectorCSVLectura lector = new LectorCSVLectura("src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras.csv");
+    LectorCSVLectura lector = new LectorCSVLectura("src/main/resources/CSVEntidadesPrestadoras.csv");
     List<Entidad> lista = lector.obtenerEntidadesDeCSV();
   }
 
