@@ -14,8 +14,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -257,7 +257,7 @@
               </configuration>
             </plugin>
             -->
-            <plugin>
+            <!--plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
@@ -279,7 +279,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin!-->
         </plugins>
     </build>
 </project>
