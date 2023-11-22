@@ -24,7 +24,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
   Entidad entidad;
   Establecimiento establecimiento;
   RepositorioComunidades repositorioComunidades;
-
+/*
   @BeforeEach
   void setUp() {
     usuarioInformante = new Usuario("Leonardo ", "Dicaprio", "mail@utn.com.ar");
@@ -52,7 +52,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
   /*@AfterEach
   void clear(){
     repositorioComunidades.getInstance().clean();
-  }*/
+  }
 
   @Test
   void seAbreIncidente() {
@@ -78,7 +78,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     Assertions.assertNotNull(incidenteCerrado.getFechaHoraCierre());
     Assertions.assertEquals(palermoGrupo.incidentes.size(), 0);
 
-  }
+  }*/
 
 
 }

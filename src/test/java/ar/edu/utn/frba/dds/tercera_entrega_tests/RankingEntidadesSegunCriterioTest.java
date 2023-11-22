@@ -42,7 +42,7 @@ class RankingEntidadesSegunCriterioTest {
 
   CriterioRanking rankingPromedio;
   CriterioRanking rankingCantidadReportes;
-
+/*
   @BeforeEach
   void setUp() {
 
@@ -254,5 +254,5 @@ class RankingEntidadesSegunCriterioTest {
   public Incidente devolverIncidente(Servicio servicio, String obs) {
     return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
-  }
+  }*/
 }

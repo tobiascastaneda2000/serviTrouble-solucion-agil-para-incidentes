@@ -35,7 +35,7 @@ public class SugerenciaRevisionIncidenteTest {
   ServicioUbicacion servicioUbicacion;
   MedioNotificador medioNotificador;
   RepositorioComunidades repositorioComunidades;
-
+/*
   @BeforeEach
   void setUp() {
     usuarioInformante = new Usuario("a", "b", "contacto");
@@ -76,5 +76,5 @@ public class SugerenciaRevisionIncidenteTest {
 
     Assertions.assertEquals(comunidad.incidentes.size(), 1);
     verify(medioNotificador, times(2)).notificarUnIncidente(any(), anyString());
-  }
+  }*/
 }

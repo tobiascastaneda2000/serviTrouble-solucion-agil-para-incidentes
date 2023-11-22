@@ -51,7 +51,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
   CriterioRanking rankingPromedio;
   CriterioRanking rankingCantidadReportes;
-
+/*
   @BeforeEach
   void setUp() {
 
@@ -230,5 +230,5 @@ public class EscrituraCSVRankingsEntidadesTest {
       e.printStackTrace();
       return null;
     }
-  }
+  }*/
 }

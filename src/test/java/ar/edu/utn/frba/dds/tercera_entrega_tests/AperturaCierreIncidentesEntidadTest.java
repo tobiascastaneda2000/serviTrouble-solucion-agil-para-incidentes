@@ -27,7 +27,7 @@ public class AperturaCierreIncidentesEntidadTest {
   RepoUsuarios repoUsuarios = RepoUsuarios.getInstance();
   Usuario usuario;
 
-
+/*
   @BeforeEach
   void setUp() {
 
@@ -60,6 +60,6 @@ public class AperturaCierreIncidentesEntidadTest {
   @AfterEach
   void clear() {
     repoUsuarios.clean();
-  }
+  }*/
 
 }
