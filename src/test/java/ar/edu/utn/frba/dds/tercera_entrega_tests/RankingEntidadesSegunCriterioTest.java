@@ -91,7 +91,7 @@ class RankingEntidadesSegunCriterioTest {
   }
 
   @AfterEach
-  void clear(){
+  void clear() {
     repoEntidades.getInstance().clean();
   }
 
@@ -165,7 +165,7 @@ class RankingEntidadesSegunCriterioTest {
 
   @Test
   @DisplayName("SI hay varios incidentes cerrados, se devuelve el PROMEDIO")
-  void guelmayenCalculaPromedioCierreUnIncidente(){
+  void guelmayenCalculaPromedioCierreUnIncidente() {
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");

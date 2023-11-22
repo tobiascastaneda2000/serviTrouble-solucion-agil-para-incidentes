@@ -32,17 +32,17 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     palermoGrupo = new Comunidad("uno");
     otraComunidad = new Comunidad("dos");
     repositorioComunidades = RepositorioComunidades.getInstance();
-    palermoGrupo.agregarUsuario(usuarioInformante,PermisoComunidad.USUARIO_COMUNIDAD);
-    palermoGrupo.agregarUsuario(otroUsuario,PermisoComunidad.USUARIO_COMUNIDAD);
+    palermoGrupo.agregarUsuario(usuarioInformante, PermisoComunidad.USUARIO_COMUNIDAD);
+    palermoGrupo.agregarUsuario(otroUsuario, PermisoComunidad.USUARIO_COMUNIDAD);
     persist(usuarioInformante);
     persist(otroUsuario);
     persist(palermoGrupo);
     otraComunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades.getInstance().add(palermoGrupo);
     repositorioComunidades.getInstance().add(otraComunidad);
-    entidad = new Entidad("razonsocial","unEmail");
+    entidad = new Entidad("razonsocial", "unEmail");
     establecimiento = new Establecimiento("nombre");
-    servicio =new Servicio("nombre",TipoServicio.ASCENSOR);
+    servicio = new Servicio("nombre", TipoServicio.ASCENSOR);
     establecimiento.agregarServicio(servicio);
     entidad.agregarEstablecimiento(establecimiento);
     palermoGrupo.serviciosDeInteres.add(servicio);
@@ -55,20 +55,20 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
   }*/
 
   @Test
-  void seAbreIncidente(){
-    usuarioInformante.abrirIncidente(servicio,"unaObservacion");
+  void seAbreIncidente() {
+    usuarioInformante.abrirIncidente(servicio, "unaObservacion");
 
     //Se carga el incidente en las distintas comunidades que pertenece el usuario
-    Assertions.assertEquals(palermoGrupo.incidentes.size(),1);
-    Assertions.assertEquals(otraComunidad.incidentes.size(),1);
+    Assertions.assertEquals(palermoGrupo.incidentes.size(), 1);
+    Assertions.assertEquals(otraComunidad.incidentes.size(), 1);
 
     //Se guarda la notificacion a los usuarios de esas comunidades
-    Assertions.assertEquals(otroUsuario.getNotificaciones().size(),1);
+    Assertions.assertEquals(otroUsuario.getNotificaciones().size(), 1);
   }
 
   @Test
   void cerrarIncidente() throws CloneNotSupportedException {
-    usuarioInformante.abrirIncidente(servicio,"unaObservacion");
+    usuarioInformante.abrirIncidente(servicio, "unaObservacion");
     Incidente incidente = palermoGrupo.incidentes.get(0);
     palermoGrupo.cerrarIncidente(incidente);
 
@@ -76,7 +76,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
 
     Assertions.assertEquals(incidenteCerrado.getEstado(), EstadoIncidente.CERRADO);
     Assertions.assertNotNull(incidenteCerrado.getFechaHoraCierre());
-    Assertions.assertEquals(palermoGrupo.incidentes.size(),0);
+    Assertions.assertEquals(palermoGrupo.incidentes.size(), 0);
 
   }
 

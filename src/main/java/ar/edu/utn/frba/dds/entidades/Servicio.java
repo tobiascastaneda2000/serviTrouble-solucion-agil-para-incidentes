@@ -26,26 +26,30 @@ public class Servicio {
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
   }
+
   @OneToMany(mappedBy = "servicioAsociado")
   List<Incidente> historialIncidentes = new ArrayList<>();
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;
 
-  public Servicio(TipoServicio tipoServicio){
+  public Servicio(TipoServicio tipoServicio) {
     this.tipoServicio = tipoServicio;
     this.nombre = "";
   }
-  public Servicio(String nombre,TipoServicio tipoServicio) {
+
+  public Servicio(String nombre, TipoServicio tipoServicio) {
     this.nombre = nombre;
     this.tipoServicio = tipoServicio;
   }
 
-  protected Servicio(){}
-  public Long getId(){
+  protected Servicio() {
+  }
+
+  public Long getId() {
     return id;
   }
 
-  public String getNombre(){
+  public String getNombre() {
     return nombre;
   }
 
@@ -57,9 +61,9 @@ public class Servicio {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Servicio: ");
-    sb.append("[id]: "+this.id+" ");
-    sb.append("[nombre]: "+this.nombre+" ");
-    sb.append("[incidentes]: { "+this.historialIncidentes.toString()+" }");
+    sb.append("[id]: " + this.id + " ");
+    sb.append("[nombre]: " + this.nombre + " ");
+    sb.append("[incidentes]: { " + this.historialIncidentes.toString() + " }");
     return sb.toString();
   }
 

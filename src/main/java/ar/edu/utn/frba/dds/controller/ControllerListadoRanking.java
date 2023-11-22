@@ -6,7 +6,9 @@ import ar.edu.utn.frba.dds.lectorCSV.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+
 import java.util.stream.Collectors;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,7 +22,7 @@ public class ControllerListadoRanking implements WithSimplePersistenceUnit {
 
 
   public ModelAndView mostrarListaDeRanking(Request request, Response response) {
-    Long idsession = Usuario.redirigirSesionNoIniciada(request,response);
+    Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
     String id = request.params(":id");
     CriterioRanking criterioRanking = RepoRanking.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();

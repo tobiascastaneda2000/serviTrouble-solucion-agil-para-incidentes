@@ -29,7 +29,7 @@ class ServicioFiltrarIncidentesReportadosTest {
 
   @Test
   @DisplayName("Servicio sin incidentes no devuelve nada")
-  void servicoSinIncidentesNodevuelveNada(){
+  void servicoSinIncidentesNodevuelveNada() {
     Assertions.assertEquals(0, servicio.incidentesDe24Horas().size());
   }
 
@@ -42,10 +42,10 @@ class ServicioFiltrarIncidentesReportadosTest {
 
   @Test
   @DisplayName("Servicio con 2 incidentes, si el primero esta ABIERTO y plazo es MAYOR a 24 horas, devuelve ambos")
-  void servicioConMuchosIncidentesAbiertosPLazoMayorA24Horas(){
-    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
+  void servicioConMuchosIncidentesAbiertosPLazoMayorA24Horas() {
+    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 6, 0, 0));
     when(unIncidente.estaCerrado()).thenReturn(false);
-    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,8,0,0));
+    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 8, 0, 0));
     when(unIncidente.estaCerrado()).thenReturn(false);
     servicio.aniadirIncidente(unIncidente);
     servicio.aniadirIncidente(otroIncidente);
@@ -54,10 +54,10 @@ class ServicioFiltrarIncidentesReportadosTest {
 
   @Test
   @DisplayName("Servicio con 2 incidentes, si el primero esta CERRADO, devuelve ambos")
-  void servicioConMuchosIncidentesPlazoMenorA24HorasPrimerIncidenteCerrado(){
-    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
+  void servicioConMuchosIncidentesPlazoMenorA24HorasPrimerIncidenteCerrado() {
+    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 6, 0, 0));
     when(unIncidente.estaCerrado()).thenReturn(true);
-    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,5,0));
+    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 6, 5, 0));
     when(otroIncidente.estaCerrado()).thenReturn(false);
     servicio.aniadirIncidente(unIncidente);
     servicio.aniadirIncidente(otroIncidente);
@@ -68,10 +68,10 @@ class ServicioFiltrarIncidentesReportadosTest {
 
   @Test
   @DisplayName("Servicio con 2 incidentes, si el primero esta ABIERTO y el plazo MENOR a 24 horas, filtra el segundo")
-  void servicioConMuchosIncidentesAbiertosConPlazoMenorA24Horas(){
-    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,0));
+  void servicioConMuchosIncidentesAbiertosConPlazoMenorA24Horas() {
+    when(unIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 6, 0, 0));
     when(unIncidente.estaCerrado()).thenReturn(false);
-    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY,6,0,1));
+    when(otroIncidente.getFechaHoraAbre()).thenReturn(LocalDateTime.of(2023, Month.JULY, 6, 0, 1));
     when(otroIncidente.estaCerrado()).thenReturn(false);
     servicio.aniadirIncidente(unIncidente);
     servicio.aniadirIncidente(otroIncidente);

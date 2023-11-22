@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.entidades;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Ubicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Localizacion;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -26,22 +27,27 @@ public class Establecimiento {
   public List<Servicio> getServicios() {
     return servicios;
   }
+
   @OneToMany
   @JoinColumn(name = "Establecimiento_id")
   public List<Servicio> servicios = new ArrayList<>();
 
-  protected Establecimiento(){}
+  protected Establecimiento() {
+  }
+
   public Establecimiento(String nombre) {
     this.nombre = nombre;
   }
 
-  public String getNombre(){
+  public String getNombre() {
     return nombre;
   }
-  public Long getId(){
+
+  public Long getId() {
     return id;
   }
-  public Localizacion getLocalizacion(){
+
+  public Localizacion getLocalizacion() {
     return localizacion;
   }
 
@@ -49,19 +55,20 @@ public class Establecimiento {
     this.localizacion = localizacion;
   }
 
-  public void agregarServicio(Servicio servicio){
+  public void agregarServicio(Servicio servicio) {
     servicios.add(servicio);
   }
 
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
   @Transient
-      ServicioUbicacion servicioUbicacion;
+  ServicioUbicacion servicioUbicacion;
+
   public void setServicioUbicacion(ServicioUbicacion servicioUbicacion) {
     this.servicioUbicacion = servicioUbicacion;
   }
 
-  public Ubicacion ubicacion(){
+  public Ubicacion ubicacion() {
     return this.servicioUbicacion.ubicacionEstablecimiento(this);
   }
 

@@ -18,6 +18,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
 @Disabled
 public class NotificionesAperturaTest {
 
@@ -31,15 +32,15 @@ public class NotificionesAperturaTest {
   Incidente incidente;
 
   @BeforeEach
-  void setUp(){
+  void setUp() {
     repositorioComunidades = RepositorioComunidades.getInstance();
     comunidad = new Comunidad("nombre");
-    unUsuario = new Usuario( "Messi", "alguien", "mail");
+    unUsuario = new Usuario("Messi", "alguien", "mail");
     otroUsuario = new Usuario("Cristiano", "alguien", "otroMail");
     repositorioComunidades.getInstance().add(comunidad);
-    servicio = new Servicio("nombre",TipoServicio.ESCALERA_MECANICA);
+    servicio = new Servicio("nombre", TipoServicio.ESCALERA_MECANICA);
     comunidad.registrarMiembro(unUsuario);
-    unUsuario.abrirIncidente(servicio,"abc");
+    unUsuario.abrirIncidente(servicio, "abc");
     medioNotificador1 = new WhatsAppSender();
     medioEspiado = spy(medioNotificador1);
     unUsuario.setMedioNotificador(medioEspiado);
@@ -48,18 +49,18 @@ public class NotificionesAperturaTest {
   }
 
   @Test
-  public void notificaATodosLosUsuario(){
-    verify(medioEspiado, times(1)).notificarUnIncidente(incidente,unUsuario.getContacto());
-    verify(medioEspiado, times(1)).notificarUnIncidente(incidente,"otroMail");
+  public void notificaATodosLosUsuario() {
+    verify(medioEspiado, times(1)).notificarUnIncidente(incidente, unUsuario.getContacto());
+    verify(medioEspiado, times(1)).notificarUnIncidente(incidente, "otroMail");
   }
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {
-    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
+    return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
   }
 
   @AfterEach
-  void clear(){
+  void clear() {
     repositorioComunidades.getInstance().clean();
   }
 }

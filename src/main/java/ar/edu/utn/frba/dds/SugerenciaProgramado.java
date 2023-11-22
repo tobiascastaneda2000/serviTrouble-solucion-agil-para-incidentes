@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
+
 import java.util.*;
 import java.util.Set;
 import java.time.LocalDateTime;
@@ -18,8 +19,8 @@ public class SugerenciaProgramado {
     new SugerenciaProgramado().run();
   }
 
-  public void run(){
+  public void run() {
     List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
-    comunidades.forEach(c->c.sugerirIncidentes());
+    comunidades.forEach(c -> c.sugerirIncidentes());
   }
 }

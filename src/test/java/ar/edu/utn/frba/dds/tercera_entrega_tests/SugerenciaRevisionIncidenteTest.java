@@ -37,7 +37,7 @@ public class SugerenciaRevisionIncidenteTest {
   RepositorioComunidades repositorioComunidades;
 
   @BeforeEach
-  void setUp()  {
+  void setUp() {
     usuarioInformante = new Usuario("a", "b", "contacto");
     usuario = new Usuario("a", "b", "mail@gmail.com");
     comunidad = new Comunidad("nombre");
@@ -45,10 +45,10 @@ public class SugerenciaRevisionIncidenteTest {
     comunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades = RepositorioComunidades.getInstance();
     repositorioComunidades.add(comunidad);
-    entidad = new Entidad("a","mail");
+    entidad = new Entidad("a", "mail");
     establecimiento = new Establecimiento("nombre");
     entidad.agregarEstablecimiento(establecimiento);
-    servicio = new Servicio("nombre",TipoServicio.ASCENSOR);
+    servicio = new Servicio("nombre", TipoServicio.ASCENSOR);
     comunidad.aniadirServicioInteres(servicio);
     establecimiento.agregarServicio(servicio);
     servicioUbicacion = mock(ServicioUbicacion.class);
@@ -61,7 +61,7 @@ public class SugerenciaRevisionIncidenteTest {
   }
 
   @AfterEach
-  public void borrar(){
+  public void borrar() {
     repositorioComunidades.getInstance().clean();
   }
 
@@ -69,12 +69,12 @@ public class SugerenciaRevisionIncidenteTest {
   @DisplayName("Notificar al miembro cercano")
   void notificarMiembroCercano() {
     boolean booleano = true;
-    Incidente incidente = usuarioInformante.abrirIncidente(servicio,"obs");
-    when(servicioUbicacion.estaCerca(usuario,incidente.getServicioAsociado())).thenReturn(booleano);
-    when(servicioUbicacion.estaCerca(usuarioInformante,incidente.getServicioAsociado())).thenReturn(booleano);
+    Incidente incidente = usuarioInformante.abrirIncidente(servicio, "obs");
+    when(servicioUbicacion.estaCerca(usuario, incidente.getServicioAsociado())).thenReturn(booleano);
+    when(servicioUbicacion.estaCerca(usuarioInformante, incidente.getServicioAsociado())).thenReturn(booleano);
     new SugerenciaProgramado().run();
 
-    Assertions.assertEquals(comunidad.incidentes.size(),1);
-    verify(medioNotificador,times(2)).notificarUnIncidente(any(),anyString());
+    Assertions.assertEquals(comunidad.incidentes.size(), 1);
+    verify(medioNotificador, times(2)).notificarUnIncidente(any(), anyString());
   }
 }

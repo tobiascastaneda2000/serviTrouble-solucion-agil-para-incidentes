@@ -58,6 +58,7 @@ public abstract class CriterioRanking {
   public void setEntidadesOrdenadas(List<Entidad> entidadesOrdenadas) {
     this.entidadesOrdenadas = entidadesOrdenadas;
   }
+
   public List<Entidad> getEntidadesOrdenadas() {
     return entidadesOrdenadas;
   }

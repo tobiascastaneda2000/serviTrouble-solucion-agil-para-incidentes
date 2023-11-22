@@ -26,10 +26,10 @@ public class RepositorioComunidades extends Repositorio<Comunidad> {
     this.getAll().forEach(comunidad -> comunidad.notificarMiembros(incidente));
   }
 
-  public Comunidad contieneIncidente(Incidente incidente){
+  public Comunidad contieneIncidente(Incidente incidente) {
 
     List<Comunidad> comunidades = this.getAll();
-    return comunidades.stream().filter(c->c.contieneIncidente(incidente)).toList().get(0);
+    return comunidades.stream().filter(c -> c.contieneIncidente(incidente)).toList().get(0);
   }
 
   public void clear() {

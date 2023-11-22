@@ -34,9 +34,9 @@ public class AperturaCierreIncidentesEntidadTest {
     usuario = new Usuario("Juan ", "Perez", "unMail");
     usuario.setMedioNotificador(new WhatsAppSender());
     repoUsuarios.add(usuario);
-    servicio =new Servicio("unNombre",TipoServicio.ASCENSOR);
+    servicio = new Servicio("unNombre", TipoServicio.ASCENSOR);
     unEstablecimiento = new Establecimiento("nombre");
-    unaEntidad= new Entidad("razonsocial","unMail");
+    unaEntidad = new Entidad("razonsocial", "unMail");
     unEstablecimiento.agregarServicio(servicio);
     unaEntidad.agregarEstablecimiento(unEstablecimiento);
     usuario.getEntidadesInteres().add(unaEntidad);
@@ -45,7 +45,7 @@ public class AperturaCierreIncidentesEntidadTest {
 
   @Test
   void seCreaYAgregaElIncidente() {
-    unaEntidad.crearIncidente(servicio,"observacion");
+    unaEntidad.crearIncidente(servicio, "observacion");
     Incidente incidente = devolverIncidente(servicio, "observacion");
     Assertions.assertTrue(unaEntidad.incidentes.contains(incidente));
     Assertions.assertEquals(1, unaEntidad.incidentes.size());
@@ -53,12 +53,12 @@ public class AperturaCierreIncidentesEntidadTest {
 
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {
-    return servicio.getHistorialIncidentes().stream().filter(i-> Objects.equals(i.getObservacion(), obs)).toList().get(0);
+    return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
   }
 
   @AfterEach
-  void clear(){
+  void clear() {
     repoUsuarios.clean();
   }
 

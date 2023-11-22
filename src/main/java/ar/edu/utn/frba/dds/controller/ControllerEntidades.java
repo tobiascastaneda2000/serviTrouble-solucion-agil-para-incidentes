@@ -8,6 +8,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import ar.edu.utn.frba.dds.repositorios.*;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ControllerEntidades implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarEntidades(Request request, Response response) {
-    Long id = Usuario.redirigirSesionNoIniciada(request,response);
+    Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();

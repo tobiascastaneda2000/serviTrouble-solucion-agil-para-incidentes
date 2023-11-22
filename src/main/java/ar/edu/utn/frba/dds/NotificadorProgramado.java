@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import ar.edu.utn.frba.dds.repositorios.RepoEntidades;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
+
 import java.util.*;
 import java.util.Set;
 import java.time.LocalDateTime;
@@ -18,9 +19,9 @@ public class NotificadorProgramado {
     new NotificadorProgramado().run();
   }
 
-  public void run(){
+  public void run() {
     Set<Usuario> usuarios = RepoUsuarios.getInstance().getUsuariosComoSet();
     LocalDateTime ahora = LocalDateTime.now();
-    usuarios.forEach(u->u.verificarNotificaciones(ahora));
+    usuarios.forEach(u -> u.verificarNotificaciones(ahora));
   }
 }

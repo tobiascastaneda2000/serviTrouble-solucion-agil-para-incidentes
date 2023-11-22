@@ -82,7 +82,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
     establecimientoJorgito = new Establecimiento("nombre");
 
-    jorgito = new Entidad( "Jorgito", "jorgito.com");
+    jorgito = new Entidad("Jorgito", "jorgito.com");
 
     jorgito.agregarEstablecimiento(establecimientoJorgito);
 
@@ -105,7 +105,7 @@ public class EscrituraCSVRankingsEntidadesTest {
   }
 
   @AfterEach
-  void clear(){
+  void clear() {
     repoEntidades.getInstance().clean();
   }
 
@@ -116,8 +116,8 @@ public class EscrituraCSVRankingsEntidadesTest {
     lectorDeRankings.escribirRankings(listadoEntidades);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, gualmayen.getId()+" ; Gualmayen ; alfajores.com");
-    Assertions.assertEquals(segundaLinea, jorgito.getId()+" ; Jorgito ; jorgito.com");
+    Assertions.assertEquals(primeraLinea, gualmayen.getId() + " ; Gualmayen ; alfajores.com");
+    Assertions.assertEquals(segundaLinea, jorgito.getId() + " ; Jorgito ; jorgito.com");
   }
 
   @Test
@@ -148,7 +148,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
   @Test
   @DisplayName("Archivo CSV por promedios de cierres de incidentes, escribe entidades ordenadas, de menor a mayor")
-  void escribirArchivoSegunPromedios(){
+  void escribirArchivoSegunPromedios() {
 
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -186,8 +186,8 @@ public class EscrituraCSVRankingsEntidadesTest {
     repoEntidades.generarRankingEnCsvPromedioCierres(rankingPromedio);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, (gualmayen.getId()+" ; Gualmayen ; alfajores.com"));
-    Assertions.assertEquals(segundaLinea, (jorgito.getId()+" ; Jorgito ; jorgito.com"));
+    Assertions.assertEquals(primeraLinea, (gualmayen.getId() + " ; Gualmayen ; alfajores.com"));
+    Assertions.assertEquals(segundaLinea, (jorgito.getId() + " ; Jorgito ; jorgito.com"));
   }
 
   @Test
@@ -206,8 +206,8 @@ public class EscrituraCSVRankingsEntidadesTest {
     repoEntidades.generarRankingEnCsvCantidadReportes(rankingCantidadReportes);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, jorgito.getId()+" ; Jorgito ; jorgito.com");
-    Assertions.assertEquals(segundaLinea, gualmayen.getId()+" ; Gualmayen ; alfajores.com");
+    Assertions.assertEquals(primeraLinea, jorgito.getId() + " ; Jorgito ; jorgito.com");
+    Assertions.assertEquals(segundaLinea, gualmayen.getId() + " ; Gualmayen ; alfajores.com");
   }
 
   //FUNCIONES AUXILIARES

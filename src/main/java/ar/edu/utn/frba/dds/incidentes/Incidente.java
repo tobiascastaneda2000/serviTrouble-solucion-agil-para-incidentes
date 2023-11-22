@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.incidentes;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -84,7 +85,8 @@ public class Incidente implements WithSimplePersistenceUnit {
   public String getObservacion() {
     return observacion;
   }
-  public Long getId(){
+
+  public Long getId() {
     return id;
   }
 
@@ -118,9 +120,9 @@ public class Incidente implements WithSimplePersistenceUnit {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Incidente: ");
-    sb.append("[id]: "+this.id+" ");
-    sb.append("[estado]: "+this.estadoIncidente+" ");
-    sb.append("[obs]: "+this.observacion+" ");
+    sb.append("[id]: " + this.id + " ");
+    sb.append("[estado]: " + this.estadoIncidente + " ");
+    sb.append("[obs]: " + this.observacion + " ");
     return sb.toString();
   }
 

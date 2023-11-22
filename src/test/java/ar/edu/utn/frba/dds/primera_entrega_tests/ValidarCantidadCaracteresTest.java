@@ -22,7 +22,7 @@ public class ValidarCantidadCaracteresTest {
   @Test
   @DisplayName("contraseña con menos de 8 caracteres lanza excepccion")
   void contraseniaMenosDe8Caracteres() {
-    assertThrows(ContraseniaConPocosCaracteresException.class, () -> validacionLongitudContrasenia.esValida("sh") );
+    assertThrows(ContraseniaConPocosCaracteresException.class, () -> validacionLongitudContrasenia.esValida("sh"));
   }
 
   @Test
@@ -34,14 +34,14 @@ public class ValidarCantidadCaracteresTest {
         "incluidas interfaces de usuario, bases de datos, servicios web y otros sistemas externos. El objetivo principal " +
         "de las pruebas end-to-end es verificar que todo el sistema funcione correctamente y se comporte como se espera en " +
         "situaciones del mundo real.";
-    assertThrows(ContraseniaConMuchosCaracteresException.class, () -> validacionLongitudContrasenia.esValida(muchosCaracteres) );
+    assertThrows(ContraseniaConMuchosCaracteresException.class, () -> validacionLongitudContrasenia.esValida(muchosCaracteres));
   }
 
   @Test
   @DisplayName("contraseña entre 8 y 64 caracteres es aceptado")
   void contraseniaEntre8a64Caracteres() {
     String caracteres = "ry5u4j iro5";
-    assertDoesNotThrow( () -> validacionLongitudContrasenia.esValida(caracteres) );
+    assertDoesNotThrow(() -> validacionLongitudContrasenia.esValida(caracteres));
   }
 }
 

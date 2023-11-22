@@ -39,11 +39,11 @@ public class Routes implements WithSimplePersistenceUnit {
     //LOGIN Y HOME
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
     Spark.get("/login", controllerLogin::mostrarLogin, engine);
-    Spark.post("/login", controllerLogin::crearSesion,engine);
+    Spark.post("/login", controllerLogin::crearSesion, engine);
     Spark.get("/sesion", controllerLogin::cerrarSesion);
     Spark.get("/home", demoControllerhome::mostrarHome, engine);
-    Spark.get("/admin-home", demoControllerhome::mostrarHomeAdmin,engine);
-    Spark.post("/admin-home",controllerUsuarios::crearUsuario,engine);
+    Spark.get("/admin-home", demoControllerhome::mostrarHomeAdmin, engine);
+    Spark.post("/admin-home", controllerUsuarios::crearUsuario, engine);
 
     //APERTURA DE INCIDENTES
     Spark.get("/entidades", controllerEntidades::mostrarEntidades, engine);
@@ -55,27 +55,27 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/comunidades", controllerComunidades::mostrarComunidades, engine);
     Spark.get("/comunidades/:id", controllerComunidades::mostrarIncidentes, engine);
     Spark.post("/comunidades/:id", controllerIncidentes::cerrarIncidente);
-    Spark.post("/incidente/:id",controllerIncidentes::cerrarIncidente);
+    Spark.post("/incidente/:id", controllerIncidentes::cerrarIncidente);
 
     //RANKINGS
     Spark.get("/rankings/:id", controllerListadoRanking::mostrarListaDeRanking, engine);
 
     //USUARIOS
 
-    Spark.get("/usuarios/:id",controllerUsuarios::mostrarDetalleUsuario,engine);
-    Spark.post("/usuarios/:id",controllerUsuarios::eliminarUsuario);
+    Spark.get("/usuarios/:id", controllerUsuarios::mostrarDetalleUsuario, engine);
+    Spark.post("/usuarios/:id", controllerUsuarios::eliminarUsuario);
     Spark.get("/profile", controllerUsuarios::mostrarPerfil, engine);
     Spark.get("/profile/modificacion", controllerUsuarios::modificarPerfil, engine);
     Spark.post("/profile/modificacion", controllerUsuarios::modificarUsuario, engine);
 
 
     //INCIDENTES SUGERIDOS
-    Spark.get("/incidente-sugerido", controllerIncidentes::mostrarIncidentesSugeridos,engine);
+    Spark.get("/incidente-sugerido", controllerIncidentes::mostrarIncidentesSugeridos, engine);
 
     //ADMINISTRAR COMUNIDADES  
     Spark.get("/admin-comunidades", controllerComunidades::verComunidadesAdministrables, engine);
     Spark.get("/admin-comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
-    Spark.post("/admin-comunidades/:id/miembros",controllerComunidades::eliminarMiembro);
+    Spark.post("/admin-comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");
