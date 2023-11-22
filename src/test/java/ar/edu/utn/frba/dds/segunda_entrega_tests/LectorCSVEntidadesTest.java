@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LectorCSVEntidadesTest {
 
   public String path = "src/main/resources/CSVEntidadesPrestadoras.csv";
-  public String pathConError = "src/main/java/ar/edu/utn/frba/dds/lectorCSV_y_entidadesPrestadoras/CSVEntidadesPrestadoras-con-error.csv";
+  public String pathConError = "src/main/resources/CSVEntidadesPrestadoras-con-error.csv";
 
   LectorCSVLectura lectorCSV = new LectorCSVLectura(path);
   LectorCSVLectura lectorCSVError = new LectorCSVLectura(pathConError);

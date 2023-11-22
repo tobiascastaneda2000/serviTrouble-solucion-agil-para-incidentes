@@ -32,8 +32,10 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     palermoGrupo = new Comunidad("uno");
     otraComunidad = new Comunidad("dos");
     repositorioComunidades = RepositorioComunidades.getInstance();
-    palermoGrupo.registrarMiembro(usuarioInformante);
-    palermoGrupo.registrarMiembro(otroUsuario);
+    palermoGrupo.agregarUsuario(usuarioInformante,PermisoComunidad.USUARIO_COMUNIDAD);
+    palermoGrupo.agregarUsuario(otroUsuario,PermisoComunidad.USUARIO_COMUNIDAD);
+    persist(usuarioInformante);
+    persist(otroUsuario);
     persist(palermoGrupo);
     otraComunidad.registrarMiembro(usuarioInformante);
     repositorioComunidades.getInstance().add(palermoGrupo);
@@ -47,10 +49,10 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     otraComunidad.serviciosDeInteres.add(servicio);
   }
 
-  @AfterEach
+  /*@AfterEach
   void clear(){
     repositorioComunidades.getInstance().clean();
-  }
+  }*/
 
   @Test
   void seAbreIncidente(){
