@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Notificacion {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
   @ManyToOne
   @JoinColumn(name = "incidente_id")

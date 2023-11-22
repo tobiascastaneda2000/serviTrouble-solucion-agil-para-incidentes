@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.notificador.WhatsAppSender;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 import ar.edu.utn.frba.dds.entidades.TipoServicio;
@@ -31,6 +32,7 @@ public class AperturaCierreIncidentesEntidadTest {
   void setUp() {
 
     usuario = new Usuario("Juan ", "Perez", "unMail");
+    usuario.setMedioNotificador(new WhatsAppSender());
     repoUsuarios.add(usuario);
     servicio =new Servicio("unNombre",TipoServicio.ASCENSOR);
     unEstablecimiento = new Establecimiento("nombre");
