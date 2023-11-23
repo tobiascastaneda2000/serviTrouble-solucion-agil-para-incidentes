@@ -22,7 +22,7 @@ public class LectorCSVEscritura {
 
   public LectorCSVEscritura(String path) {
     File unArchivo = new File(path);
-
+    System.out.println(unArchivo.getPath());
     if (unArchivo.exists()) {
       this.archivo = unArchivo;
     } else {

@@ -30,7 +30,7 @@ public class CantidadReportesSemanal extends CriterioRanking {
 
 
   @Transient
-  public String path = "src/main/resources/rankings-entidades-cr.csv";
+  public String path = "../src/main/resources/rankings-entidades-cr.csv";
 
   public String nombre_criterio = "cantidad de incidentes reportados";
 
