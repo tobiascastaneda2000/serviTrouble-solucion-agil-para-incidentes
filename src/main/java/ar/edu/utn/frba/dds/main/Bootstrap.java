@@ -155,7 +155,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
     comunidad1.incidentes.add(incidente4);
 
     comunidad1.agregarUsuario(usuarioAdmin, PermisoComunidad.ADMIN_COMUNIDAD);
-    comunidad1.agregarUsuario(usuarioComun2, PermisoComunidad.USUARIO_COMUNIDAD);
+    comunidad1.agregarUsuario(usuarioComun1, PermisoComunidad.USUARIO_COMUNIDAD);
     RepositorioComunidades.getInstance().add(comunidad1);
 
     Comunidad comunidad2 = new Comunidad("nombre2");
