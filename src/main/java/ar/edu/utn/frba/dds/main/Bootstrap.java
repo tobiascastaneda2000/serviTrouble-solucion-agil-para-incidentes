@@ -168,6 +168,8 @@ public class Bootstrap implements WithSimplePersistenceUnit {
     RepoRanking.getInstance().add(criterioPromedioCierre);
     RepoRanking.getInstance().add(criterioCantidadReportes);
 
+
+    System.out.println("Working Directory = " + System.getProperty("user.dir"));
     new RankingProgramado().run();
 
   }

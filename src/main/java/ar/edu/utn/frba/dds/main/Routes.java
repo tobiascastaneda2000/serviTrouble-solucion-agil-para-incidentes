@@ -18,8 +18,9 @@ public class Routes implements WithSimplePersistenceUnit {
     System.out.println("Iniciando servidor");
 
     new Bootstrap().run();
-    Spark.port(8080);
+    Spark.port(getHerokuAssignedPort());
     Spark.staticFileLocation("/public");
+
 
     HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
     DemoControllerHome demoControllerhome = new DemoControllerHome();
@@ -86,5 +87,13 @@ public class Routes implements WithSimplePersistenceUnit {
     });
   }
 
+
+  static int getHerokuAssignedPort() {
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    if (processBuilder.environment().get("PORT") != null) {
+      return Integer.parseInt(processBuilder.environment().get("PORT"));
+    }
+    return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+  }
 
 }
