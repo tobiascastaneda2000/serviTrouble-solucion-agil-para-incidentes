@@ -98,8 +98,6 @@ public class Incidente implements WithSimplePersistenceUnit {
     this.fechaHoraCierre = LocalDateTime.now();
     this.estadoIncidente = EstadoIncidente.CERRADO;
     persist(this);
-    entityManager().getTransaction().begin();
-    entityManager().getTransaction().commit();
   }
 
   //-------------------------RANKINGS----------------------------------------//

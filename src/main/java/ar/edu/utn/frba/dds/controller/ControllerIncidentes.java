@@ -60,6 +60,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
         .setParameter("id", Long.parseLong(idIncidente)).getResultList().get(0);
     Comunidad comunidad = RepositorioComunidades.getInstance().contieneIncidente(incidente);
     comunidad.cerrarIncidente(incidente);
+    entityManager().getTransaction().begin();
+    entityManager().getTransaction().commit();
     response.redirect("/home");
     return null;
   }

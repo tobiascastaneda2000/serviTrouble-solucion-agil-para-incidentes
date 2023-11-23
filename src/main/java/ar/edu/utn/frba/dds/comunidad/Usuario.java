@@ -222,8 +222,6 @@ public class Usuario implements WithSimplePersistenceUnit {
     notificacionesPendientes.add(notificacion);
     persist(incidente);
     persist(notificacion);
-    entityManager().getTransaction().begin();
-    entityManager().getTransaction().commit();
   }
 
   public Notificacion obtenerNotificacion(Incidente incidente) {
