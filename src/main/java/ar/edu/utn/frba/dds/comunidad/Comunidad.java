@@ -105,7 +105,6 @@ public class Comunidad implements WithSimplePersistenceUnit {
     miembros.forEach(m -> m.getUsuario().guardarNotificacion(incidente));
     persist(incidente);
     entityManager().getTransaction().begin();
-    entityManager().flush();
     entityManager().getTransaction().commit();
 
 
@@ -121,7 +120,6 @@ public class Comunidad implements WithSimplePersistenceUnit {
     incidentesCerrados.add(incidente);
     persist(incidente);
     entityManager().getTransaction().begin();
-    entityManager().flush();
     entityManager().getTransaction().commit();
 
   }

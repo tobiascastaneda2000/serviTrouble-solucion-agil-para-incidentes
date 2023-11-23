@@ -67,7 +67,6 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
           usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
           persist(usuario);
           getTransaction().begin();
-          entityManager().flush();
           getTransaction().commit();
           response.redirect("/admin-home");
         }

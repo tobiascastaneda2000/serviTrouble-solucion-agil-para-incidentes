@@ -99,7 +99,6 @@ public class Incidente implements WithSimplePersistenceUnit {
     this.estadoIncidente = EstadoIncidente.CERRADO;
     persist(this);
     entityManager().getTransaction().begin();
-    entityManager().flush();
     entityManager().getTransaction().commit();
   }
 

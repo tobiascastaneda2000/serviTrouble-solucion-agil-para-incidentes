@@ -223,7 +223,6 @@ public class Usuario implements WithSimplePersistenceUnit {
     persist(incidente);
     persist(notificacion);
     entityManager().getTransaction().begin();
-    entityManager().flush();
     entityManager().getTransaction().commit();
   }
 
