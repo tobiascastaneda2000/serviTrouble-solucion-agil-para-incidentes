@@ -1,0 +1,53 @@
+{{#partial "principal" }}
+
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Comunidades Administrables</li>
+  </ol>
+</nav>
+</div>
+
+
+
+<div class="container justify-content-center">
+    <div class="titulo my-5 text-center">
+        <h2 class="text-center">MIS COMUNIDADES ADMINISTRABLES</h2>
+        <a class="text-center text-uppercase text-decoration-none">{{vacio}}</a>
+    </div>
+
+<div class="row justify-content-center my-4">
+<div class="col-8">
+<div class="accordion" id="accordionExample">
+  {{#comunidades}}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button text-uppercase fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        {{nombre}}
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+           Servicios de Interés:
+           <ul class="list-group list-group-flush">
+           {{#serviciosDeInteres}}
+                 <li class="list-group-item">{{nombre}}</li>
+           {{/serviciosDeInteres}}
+           </ul>
+           <div class="d-md-flex justify-content-md-end">
+           <a href="/admin-comunidades/{{id}}/miembros"><button type="button" class="btn btn-warning">Miembros</button></a>
+           </div>
+      </div>
+    </div>
+  </div>
+  {{/comunidades}}
+</div>
+</div>
+</div>
+</div>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

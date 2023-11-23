@@ -1,0 +1,5 @@
+#2F6FE0  azul
+#5D77A3  azul gris
+#565C66  gris
+#8B774C  marron
+#E0A72F  amarillo

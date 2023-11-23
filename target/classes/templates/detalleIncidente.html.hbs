@@ -1,0 +1,27 @@
+{{#partial "principal" }}
+
+<h1>DETALLE DEL INCIDENTE</h1>
+
+<ul>
+{{#incidente}}
+     <li>Observacion: {{observacion}}</li>
+     <li>Estado: {{estado}}</li>
+     <li>Fecha Apertura: {{fechaApertura}}</li>
+     <li>Servicio: {{servicioAsociado.nombre}}</li>
+</ul>
+<a href="/comunidades">Volver</a>
+
+<form method="POST">
+    <input onclick="mostrarAlerta()" type="submit" value="Cerrar Incidente">
+
+    <script>
+    function mostrarAlerta() {
+        alert('Incidente Cerrado!');
+    }
+    </script>
+</form>
+{{/incidente}}
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

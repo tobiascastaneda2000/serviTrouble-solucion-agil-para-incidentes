@@ -1,0 +1,44 @@
+{{#partial "principal" }}
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/admin-home" class="text-decoration-none text-white">Admin</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Usuario</li>
+  </ol>
+</nav>
+</div>
+
+
+
+<div class="container d-flex justify-content-center align-items-center my-5">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <h2 class="text-center">USUARIO</h2>
+
+        <ul class="list-group list-group-flush">
+                {{#usuarioDetalle}}
+                  <li class="list-group-item"><a><span style="font-weight: bold">Usuario:</span> {{usuario}}</a></li>
+                  <li class="list-group-item"><a><span style="font-weight: bold">Contacto:</span> {{contacto}}</a></li>
+                  <li class="list-group-item"><a><span style="font-weight: bold">Medio Notificador:</span> {{medioNoti}}</a></li>
+                  <li class="list-group-item"><a><span style="font-weight: bold;">Entidades de Interés:</span>
+                                                 {{#entidadesInteres}}
+                                                     <li>{{razonSocial}}</li>
+                                                 {{/entidadesInteres}}
+                                                </a></li>
+                  <li class="list-group-item"><a><span style="font-weight: bold">Horarios de Notificación:</span>
+                                                  {{#horarios}}
+                                                     {{hora}}:{{minuto}}
+                                                   {{/horarios}}
+                                               </a></li>
+                {{/usuarioDetalle}}
+        </ul>
+
+        <form method="POST" class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <input  onclick="return confirm('¿Seguro que querés eliminar el usuario?')" type="submit" class="btn btn-amarillo" value="Eliminar Usuario">
+        </form>
+    </div>
+</div>
+
+{{/partial}}
+
+{{> layoutAdmin.html.hbs }}

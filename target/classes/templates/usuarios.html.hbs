@@ -1,0 +1,48 @@
+{{#partial "principal" }}
+
+<h1 class="titulo">USUARIOS</h1>
+
+<div class="presentation-container">
+<div class="cont-form">
+    <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
+       <h3>Crear nuevo usuario:</h3>
+       <div class="mb-3">
+           <label>Nombre</label>
+           <input type="text" class="form-control" name="nombre">
+       </div>
+       <div class="mb-3">
+           <label>Contraseña</label>
+           <input type="password" class="form-control" name="contrasenia">
+       </div>
+       <div class="mb-3">
+            <label>Contacto</label>
+            <input type="text" class="form-control" name="contacto">
+       </div>
+       <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center ">
+<table id="lista-usuarios" class="table table-bordered table-hover caption-top row border rounded-5 p-3 bg-white shadow box-area">
+    <caption>Lista de usuarios</caption>
+    <thead>
+        <tr>
+           <th scope="col">ID</th>
+           <th scope="col">Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#usuarios}}
+            <tr>
+               <th scope="row">{{id}}</th>
+               <td><a href="/usuarios/{{id}}">{{usuario}}</a></td>
+            </tr>
+        {{/usuarios}}
+    </tbody>
+</table>
+</div>
+</div>
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

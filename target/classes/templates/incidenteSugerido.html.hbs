@@ -1,0 +1,48 @@
+{{#partial "principal" }}
+
+
+
+      <div class="bg-gris py-2 align-items-center text-white">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+            <li class="breadcrumb-item text-white" aria-current="page">Incidentes Sugeridos</li>
+          </ol>
+        </nav>
+        </div>
+
+ <div>
+        <h2 class="text-center mt-5 mb-4">INCIDENTES CERCANOS</h2>
+      </div>
+
+    <div class="container  my-2">
+        <div class="text-center">
+        {{#mensajeIncidentes}}
+        <div class="container-md">
+            <p class="alert alert-warning">{{mensajeIncidentes}}</p>
+        </div>
+        {{/mensajeIncidentes}}
+
+            <div class="row">
+                {{#incidentes}}
+                <div class="col my-4">
+                  <div class="card" style="width: 16rem;">
+                      <div class="card-body">
+                        <h5 class="card-title">{{servicioAsociado.nombre}}</h5>
+                        <p class="card-text">{{observacion}}</p>
+                        <form class="incidente_sugeridos-form" method="POST" action="/incidente/{{id}}">
+                            <input type="hidden" value="{{id}}" name="idIncidente"></input>
+                            <input type="submit"  onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-amarillo"/>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+                {{/incidentes}}
+            </div>
+        </div>
+      </div>
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

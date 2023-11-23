@@ -1,0 +1,54 @@
+{{#partial "principal" }}
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Perfil</li>
+  </ol>
+</nav>
+</div>
+
+
+
+{{#with usuarioDetalle}}
+<div class="row justify-content-center my-5">
+    <div class="col-4 border rounded-5 p-3 bg-white shadow box-area  align-self-center">
+    <h2 class="text-center my-3">MODIFICAR MI USUARIO</h2>
+    <form method="POST" action="/profile/modificacion" type="submit" value="Modificar Usuario">
+    <!-- Campo oculto para tratar la request como PUT -->
+    <input type="hidden" class="form-control" name="_method" value="PUT">
+         <ul class="list-group">
+           <div class="input-group mb-3">
+             <span class="input-group-text" id="inputGroup-sizing-default">USUARIO</span>
+             <input type="text" id="disabledTextInput" class="form-control" name="usuario" value="{{usuario}}">
+           </div>
+           <div class="input-group mb-3">
+             <span class="input-group-text" id="inputGroup-sizing-default">CONTACTO</span>
+             <input type="text" id="disabledTextInput" class="form-control" name="contacto" value="{{contacto}}">
+           </div>
+           <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">CONTRASEÑA</span>
+              <input type="password" id="disabledTextInput" class="form-control" name="contrasenia" value="{{contrasenia}}">
+           </div>
+           <div class="input-group mb-3">
+               <span class="input-group-text" id="inputGroup-sizing-default">MEDIO NOTIFICADOR</span>
+               <input type="text" id="disabledTextInput" class="form-control" value="medioNoti" name="medioNoti">
+            </div>
+            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+            <input type="submit" class="btn btn-amarillo" value="Guardar">
+            </div>
+         </ul>
+         </form>
+      <div>
+</div>
+    {{/with}}
+
+
+
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

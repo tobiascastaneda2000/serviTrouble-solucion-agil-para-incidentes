@@ -1,0 +1,41 @@
+{{#partial "principal" }}
+
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/admin-comunidades" class="text-decoration-none text-white">Comunidades Administrables</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Miembros</li>
+  </ol>
+</nav>
+</div>
+
+
+<div class="container text-center my-4">
+<h1 class="text-uppercase">USUARIOS DE {{nombreComunidad}}</h1>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center">
+<div class="col-6">
+<ul class="list-group">
+        {{#usuarios}}
+            <form method="POST" >
+              <li class="list-group-item d-flex justify-content-between align-items-center rounded-4">
+                {{usuario}}
+                <input type="hidden" name="idusuario" value="{{id}}">
+                <input type="submit" value="Eliminar Miembro" class="btn btn-warning">
+              </li>
+
+
+            </form>
+        {{/usuarios}}
+</ul>
+</div>
+</div>
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

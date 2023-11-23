@@ -1,0 +1,49 @@
+{{#partial "principal" }}
+
+
+<div class="bg-gris py-2 align-items-center text-white">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white" aria-current="page">Perfil</li>
+  </ol>
+</nav>
+</div>
+
+
+
+{{#with usuarioDetalle}}
+<div class="row justify-content-center my-5">
+    <div class="col-4 border rounded-5 p-3 bg-white shadow box-area  align-self-center">
+    <h2 class="text-center my-3">MI USUARIO</h2>
+         <ul class="list-group">
+           <div class="input-group mb-3">
+             <span class="input-group-text" id="inputGroup-sizing-default">USUARIO</span>
+             <input type="text" id="disabledTextInput" class="form-control" placeholder="{{usuario}}" disabled>
+           </div>
+           <div class="input-group mb-3">
+             <span class="input-group-text" id="inputGroup-sizing-default">CONTACTO</span>
+             <input type="text" id="disabledTextInput" class="form-control" placeholder="{{contacto}}" disabled>
+           </div>
+           <div class="input-group mb-3">
+             <span class="input-group-text" id="inputGroup-sizing-default">HORARIOS DE NOTIFICACION</span>
+             <input type="text" id="disabledTextInput" class="form-control" placeholder="{{#horarios}}{{hora}}:{{minuto}}  {{/horarios}}" disabled>
+           </div>
+           <div class="input-group mb-3">
+               <span class="input-group-text" id="inputGroup-sizing-default">MEDIO NOTIFICADOR</span>
+               <input type="text" id="disabledTextInput" class="form-control" placeholder="{{medioNotificador}}" disabled>
+            </div>
+            <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/profile/modificacion"><input type="button" class="btn btn-amarillo" value="Modificar Perfil"></a>
+            </div>
+         </ul>
+      <div>
+</div>
+    {{/with}}
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
+
