@@ -32,8 +32,6 @@ public class RepoUsuarios extends Repositorio<Usuario> {
   }
 
   public Usuario buscarPorUsuarioYContrasenia(String nombre, String contrasenia) {
-
-
     return entityManager()
         .createQuery("from Usuario where usuario = :nombre and contrasenia = :contrasenia", Usuario.class)
         .setParameter("nombre", nombre)
@@ -43,7 +41,6 @@ public class RepoUsuarios extends Repositorio<Usuario> {
   }
 
   public List<Usuario> buscarPorUsuario(String nombre) {
-
     return entityManager()
         .createQuery("from Usuario where usuario = :nombre", Usuario.class)
         .setParameter("nombre", nombre)
