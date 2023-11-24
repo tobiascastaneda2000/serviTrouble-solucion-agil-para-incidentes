@@ -83,19 +83,26 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
     String id = request.params(":id");
     Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
-    Map<String, Object> modelo = new HashMap<>();
-    if (usuario.medioNotificador != null) {
-      modelo.put("medioNoti", usuario.medioNotificador.toString());
-    } else {
-      modelo.put("medioNoti", "");
+    Usuario usuariosession = RepoUsuarios.getInstance().getOne(Long.parseLong(idsession.toString()));
+    if (usuariosession.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
+      Map<String, Object> modelo = new HashMap<>();
+      if (usuario.medioNotificador != null) {
+        modelo.put("medioNoti", usuario.medioNotificador.toString());
+      } else {
+        modelo.put("medioNoti", "");
+      }
+      modelo.put("entidadesInteres", usuario.getEntidadesInteres());
+      modelo.put("horarios", usuario.getHorariosPlanificados());
+      modelo.put("anio", LocalDate.now().getYear());
+      modelo.put("usuarioDetalle", usuario);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
+      return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
     }
-    modelo.put("entidadesInteres", usuario.getEntidadesInteres());
-    modelo.put("horarios", usuario.getHorariosPlanificados());
-    modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("usuarioDetalle", usuario);
-    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-    modelo.put("criterios", criterio);
-    return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
+    else{
+      response.redirect("/home");
+      return null;
+    }
   }
 
   public ModelAndView mostrarPerfil(Request request, Response response) {
@@ -128,14 +135,19 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
     Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
-    String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
-    List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
-    withTransaction(() -> {
-      miembrosDeUsuario.forEach(m -> remove(m));
-      remove(usuario);
-    });
-    response.redirect("/login");
-    return null;
+    Usuario usuariosession = RepoUsuarios.getInstance().getOne(Long.parseLong(idsession.toString()));
+    if (usuariosession.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
+      String id = request.params(":id");
+      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+      List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
+      withTransaction(() -> {
+        miembrosDeUsuario.forEach(m -> remove(m));
+        remove(usuario);
+      });
+      response.redirect("/admin-home");
+      return null;
+    } else {
+      return null;
+    }
   }
 }
