@@ -40,7 +40,7 @@ public class Usuario implements WithSimplePersistenceUnit {
 
   int intentos;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   public MedioNotificador medioNotificador;
 
   @ManyToMany
