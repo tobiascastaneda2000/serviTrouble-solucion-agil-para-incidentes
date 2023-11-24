@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.tercera_entrega_tests;
 
 import ar.edu.utn.frba.dds.entidades.*;
 import ar.edu.utn.frba.dds.comunidad.*;
+import ar.edu.utn.frba.dds.repositorios.RepoServicios;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.incidentes.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -24,39 +26,45 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
   Entidad entidad;
   Establecimiento establecimiento;
   RepositorioComunidades repositorioComunidades;
-/*
+
   @BeforeEach
   void setUp() {
     usuarioInformante = new Usuario("Leonardo ", "Dicaprio", "mail@utn.com.ar");
     otroUsuario = new Usuario("Margot ", "Robbie", "mail2@utn.com.ar");
     palermoGrupo = new Comunidad("uno");
     otraComunidad = new Comunidad("dos");
-    repositorioComunidades = RepositorioComunidades.getInstance();
+    //repositorioComunidades = RepositorioComunidades.getInstance();
     palermoGrupo.agregarUsuario(usuarioInformante, PermisoComunidad.USUARIO_COMUNIDAD);
     palermoGrupo.agregarUsuario(otroUsuario, PermisoComunidad.USUARIO_COMUNIDAD);
-    persist(usuarioInformante);
-    persist(otroUsuario);
-    persist(palermoGrupo);
+    //persist(usuarioInformante);
+    //persist(otroUsuario);
+    //persist(palermoGrupo);
     otraComunidad.registrarMiembro(usuarioInformante);
-    repositorioComunidades.getInstance().add(palermoGrupo);
-    repositorioComunidades.getInstance().add(otraComunidad);
+    RepoUsuarios.getInstance().add(usuarioInformante);
+    RepoUsuarios.getInstance().add(otroUsuario);
+    RepositorioComunidades.getInstance().add(palermoGrupo);
+    RepositorioComunidades.getInstance().add(otraComunidad);
     entidad = new Entidad("razonsocial", "unEmail");
     establecimiento = new Establecimiento("nombre");
     servicio = new Servicio("nombre", TipoServicio.ASCENSOR);
+    RepoServicios.getInstance().add(servicio);
+    //persist(servicio);
     establecimiento.agregarServicio(servicio);
     entidad.agregarEstablecimiento(establecimiento);
     palermoGrupo.serviciosDeInteres.add(servicio);
     otraComunidad.serviciosDeInteres.add(servicio);
   }
 
-  /*@AfterEach
+  @AfterEach
   void clear(){
-    repositorioComunidades.getInstance().clean();
+    RepositorioComunidades.getInstance().clean();
   }
 
   @Test
   void seAbreIncidente() {
-    usuarioInformante.abrirIncidente(servicio, "unaObservacion");
+    //usuarioInformante.abrirIncidente(servicio, "unaObservacion");
+    palermoGrupo.abrirIncidenteEnComunidad("unaObservacion", servicio );
+    otraComunidad.abrirIncidenteEnComunidad("unaObservacion", servicio);
 
     //Se carga el incidente en las distintas comunidades que pertenece el usuario
     Assertions.assertEquals(palermoGrupo.incidentes.size(), 1);
@@ -67,8 +75,11 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
   }
 
   @Test
-  void cerrarIncidente() throws CloneNotSupportedException {
-    usuarioInformante.abrirIncidente(servicio, "unaObservacion");
+  void cerrarIncidente()  {
+    //usuarioInformante.abrirIncidente(servicio, "unaObservacion");
+
+    palermoGrupo.abrirIncidenteEnComunidad("unaObservacion", servicio );
+    otraComunidad.abrirIncidenteEnComunidad("unaObservacion", servicio);
     Incidente incidente = palermoGrupo.incidentes.get(0);
     palermoGrupo.cerrarIncidente(incidente);
 
@@ -78,7 +89,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     Assertions.assertNotNull(incidenteCerrado.getFechaHoraCierre());
     Assertions.assertEquals(palermoGrupo.incidentes.size(), 0);
 
-  }*/
+  }
 
 
 }

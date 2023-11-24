@@ -66,8 +66,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
           .get(0);
       Long userid = request.session().attribute("user_id");
       Usuario usuario = RepoUsuarios.getInstance().getOne(userid);
-      usuario.abrirIncidente(servicio, observacion);
       entityManager().getTransaction().begin();
+      usuario.abrirIncidente(servicio, observacion);
       entityManager().getTransaction().commit();
       response.cookie("creado", "si");
       response.redirect("/establecimientos/" + idEstablecimiento);
