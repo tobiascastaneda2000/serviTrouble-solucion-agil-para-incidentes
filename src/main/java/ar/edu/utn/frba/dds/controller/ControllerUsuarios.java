@@ -35,10 +35,12 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
 
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
 
-    usuario.setUsername(nombre);
-    usuario.setContrasenia(contrasenia);
-    usuario.setContacto(contacto);
-    RepoUsuarios.getInstance().update(usuario);
+    withTransaction(() -> {
+      usuario.setUsername(nombre);
+      usuario.setContrasenia(contrasenia);
+      usuario.setContacto(contacto);
+      RepoUsuarios.getInstance().update(usuario);
+    });
 
     response.redirect("/home");
     return null;
@@ -63,11 +65,11 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
           modelo.put("criterios", criterio);
           return new ModelAndView(modelo, "usuariosError.html.hbs");
         } else {
-          Usuario usuario = new Usuario(nombre, contrasenia, contacto);
-          usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
-          persist(usuario);
-          getTransaction().begin();
-          getTransaction().commit();
+          withTransaction(() -> {
+            Usuario usuario = new Usuario(nombre, contrasenia, contacto);
+            usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
+            RepoUsuarios.getInstance().add(usuario);
+          });
           response.redirect("/admin-home");
         }
       } else {
@@ -129,15 +131,11 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     String id = request.params(":id");
     Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
     List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
-    try {
-      getTransaction().begin();
+    withTransaction(() -> {
       miembrosDeUsuario.forEach(m -> remove(m));
       remove(usuario);
-      getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    response.redirect("/home");
+    });
+    response.redirect("/login");
     return null;
   }
 }

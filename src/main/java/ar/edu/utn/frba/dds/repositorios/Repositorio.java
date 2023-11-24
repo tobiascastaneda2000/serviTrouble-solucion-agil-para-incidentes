@@ -25,21 +25,15 @@ public class Repositorio<T> implements WithSimplePersistenceUnit {
   }
 
   public void add(Object object) {
-    entityManager().getTransaction().begin();
     entityManager().persist(object);
-    entityManager().getTransaction().commit();
   }
 
   public void update(Object object) {
-    entityManager().getTransaction().begin();
     entityManager().merge(object);
-    entityManager().getTransaction().commit();
   }
 
   public void delete(Object object) {
-    entityManager().getTransaction().begin();
     entityManager().remove(object);
-    entityManager().getTransaction().commit();
   }
 
   public void clean() {
