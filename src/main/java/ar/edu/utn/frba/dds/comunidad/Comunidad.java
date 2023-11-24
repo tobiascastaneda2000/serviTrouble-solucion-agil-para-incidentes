@@ -102,6 +102,11 @@ public class Comunidad implements WithSimplePersistenceUnit {
     return nombre;
   }
 
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//
 
   public void abrirIncidenteEnComunidad(String observacion, Servicio servicio) {

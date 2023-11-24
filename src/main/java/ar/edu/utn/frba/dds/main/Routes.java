@@ -3,7 +3,15 @@ package ar.edu.utn.frba.dds.main;
 
 import ar.edu.utn.frba.dds.NotificadorProgramado;
 import ar.edu.utn.frba.dds.controller.*;
+import ar.edu.utn.frba.dds.comunidad.*;
+import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
+import com.google.gson.Gson;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import java.util.Set;
@@ -37,13 +45,9 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerEstablecimientos controllerEstablecimientos = new ControllerEstablecimientos();
     ControllerIncidentes controllerIncidentes = new ControllerIncidentes();
     ControllerComunidades controllerComunidades = new ControllerComunidades();
-    ControllerMenuRankings controllerMenuRanking = new ControllerMenuRankings();
-    ControllerRankingCantidadReportes controllerRankingCantidadReportes = new ControllerRankingCantidadReportes();
-    ControllerRankingPromedioCierres controllerRankingPromedioCierres = new ControllerRankingPromedioCierres();
-
     ControllerListadoRanking controllerListadoRanking = new ControllerListadoRanking();
-
     ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
+    ControllerAPIComunidades controllerAPI = new ControllerAPIComunidades();
 
     //LOGIN Y HOME
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
@@ -85,6 +89,74 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/admin-comunidades", controllerComunidades::verComunidadesAdministrables, engine);
     Spark.get("/admin-comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
     Spark.post("/admin-comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
+
+
+
+
+
+    //---------------------------------------API COMUNIDADES-------------------------------------//
+
+
+
+    Gson gson = new Gson();
+
+    //NO PUEDO PASAR LA RESPONSE A JSON
+
+    //VER COMUNIDADES
+    Spark.get("/admin/comunidades",((request, response) -> {
+
+          List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
+          return comunidades;
+    }));
+
+    //VER DETALLE DE UNA COMUNIDAD
+    Spark.get("/admin/comunidades/:id",((request, response) -> {
+
+      String id = request.params(":id");
+      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
+      return comunidad;
+    }));
+
+    //BORRAR UNA COMUNIDAD
+    Spark.delete("/admin/comunidades/:id",((request, response) -> {
+
+      String id = request.params(":id");
+      RepositorioComunidades repo = RepositorioComunidades.getInstance();
+      Comunidad comunidad = repo.getOne(Long.parseLong(id));
+      withTransaction(() -> {
+            repo.remove(comunidad);
+          });
+      return null; // funca pero tira 404 idk
+    }));
+
+    //CREAR UNA COMUNIDAD
+    Spark.post("/admin/comunidades",((request, response) -> {
+
+      String nombre = request.headers("nombreComunidad");
+      Comunidad comunidad1 = new Comunidad(nombre);
+      withTransaction(() -> {
+        RepositorioComunidades.getInstance().add(comunidad1);
+      });
+      return null; // funca pero tira 404 idk
+    }));
+
+    //EDITAR UNA COMUNIDAD
+    Spark.put("/admin/comunidades/:id",((request, response) -> {
+
+      String id = request.params(":id");
+      RepositorioComunidades repo = RepositorioComunidades.getInstance();
+      Comunidad comunidad = repo.getOne(Long.parseLong(id));
+      String nombre = request.headers("nombreComunidad");
+      comunidad.setNombre(nombre);
+      withTransaction(() -> {
+        repo.update(comunidad);
+      });
+      return null; // funca pero tira 404 idk
+    }));
+
+
+    //----------------------------------------------------------------------------------------------//
+
 
     Spark.exception(PersistenceException.class, (e, request, response) -> {
       response.redirect("/500");
