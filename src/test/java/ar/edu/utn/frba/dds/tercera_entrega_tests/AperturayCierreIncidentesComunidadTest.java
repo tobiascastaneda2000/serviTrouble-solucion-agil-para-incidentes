@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.incidentes.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUnit {
+class AperturayCierreIncidentesComunidadTest implements SimplePersistenceTest {
 
   Usuario usuarioInformante;
   Usuario otroUsuario;
@@ -58,6 +59,9 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
 
   @AfterEach
   void clear() {
+
+    //RepoUsuarios.getInstance().clean();
+    //RepoServicios.getInstance().clean();
     RepositorioComunidades.getInstance().clean();
   }
 
@@ -116,6 +120,7 @@ class AperturayCierreIncidentesComunidadTest implements WithSimplePersistenceUni
     Assertions.assertEquals(otraComunidad.incidentes.size(), 1);
 
   }
+
 
 
 }

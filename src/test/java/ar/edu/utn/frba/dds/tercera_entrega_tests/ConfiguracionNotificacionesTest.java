@@ -10,12 +10,14 @@ import ar.edu.utn.frba.dds.notificador.Notificacion;
 
 import java.time.LocalDateTime;
 
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-public class ConfiguracionNotificaciones {
+public class ConfiguracionNotificacionesTest implements SimplePersistenceTest {
 
   Usuario usuario;
   Horario horario;
@@ -37,12 +39,18 @@ public class ConfiguracionNotificaciones {
     notificacion = new Notificacion(usuario, incidente);
     usuario.getNotificaciones().add(notificacion);
 
+    withTransaction(() -> {
+
+      persist(incidente);
+      persist(servicio);
+    });
   }
 
   @Test
   void seEjecutanLasNotificaciones() {
 
     LocalDateTime hora = LocalDateTime.of(2023, 1, 1, 10, 10);
+
     usuario.verificarNotificaciones(hora);
 
     verify(medioNotificador, times(1)).notificarUnIncidente(incidente, "email");
