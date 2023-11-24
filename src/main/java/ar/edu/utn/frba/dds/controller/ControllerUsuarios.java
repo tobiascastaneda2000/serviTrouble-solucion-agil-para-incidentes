@@ -135,14 +135,19 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
 
   public ModelAndView eliminarUsuario(Request request, Response response) {
     Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
-    String id = request.params(":id");
-    Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
-    List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
-    withTransaction(() -> {
-      miembrosDeUsuario.forEach(m -> remove(m));
-      remove(usuario);
-    });
-    response.redirect("/admin-home");
-    return null;
+    Usuario usuariosession = RepoUsuarios.getInstance().getOne(Long.parseLong(idsession.toString()));
+    if (usuariosession.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
+      String id = request.params(":id");
+      Usuario usuario = RepoUsuarios.getInstance().getOne(Long.parseLong(id));
+      List<Miembro> miembrosDeUsuario = usuario.obtenerMiembros();
+      withTransaction(() -> {
+        miembrosDeUsuario.forEach(m -> remove(m));
+        remove(usuario);
+      });
+      response.redirect("/admin-home");
+      return null;
+    } else {
+      return null;
+    }
   }
 }
