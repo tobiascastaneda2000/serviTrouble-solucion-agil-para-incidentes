@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.EntradaNoPuedeSerNull;
 import ar.edu.utn.frba.dds.rankings.LectorCSVEscritura;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,8 +32,8 @@ import java.util.Objects;
 
 import static org.mockito.Mockito.mock;
 
-public class EscrituraCSVRankingsEntidadesTest {
-/*
+public class EscrituraCSVRankingsEntidadesTest implements SimplePersistenceTest {
+
   RepoEntidades repoEntidades = RepoEntidades.getInstance(); // Habra que mockear calculo, o conectarlo a una db de pruebas, ni idea
   Entidad gualmayen;
   Entidad jorgito;
@@ -61,17 +62,26 @@ public class EscrituraCSVRankingsEntidadesTest {
     unaEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
     unaEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
+    withTransaction(() -> {
+      persist(unAscensor);
+      persist(unaEscaleraMecanicaBajada);
+      persist(unaEscaleraMecanicaSubida);
+    });
+
     establecimientoGualmayen = new Establecimiento("nombre");
 
     gualmayen = new Entidad("Gualmayen", "alfajores.com");
 
-    gualmayen.agregarEstablecimiento(establecimientoGualmayen);
+    withTransaction(() -> {
+      persist(establecimientoGualmayen);
+      RepoEntidades.getInstance().add(gualmayen);
 
-    establecimientoGualmayen.agregarServicio(unAscensor);
-    establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
-    establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
+      gualmayen.agregarEstablecimiento(establecimientoGualmayen);
 
-    repoEntidades.getInstance().add(gualmayen);
+      establecimientoGualmayen.agregarServicio(unAscensor);
+      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
+      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
+    });
 
 
     //CREACION ENTIDAD JORGITO
@@ -80,18 +90,27 @@ public class EscrituraCSVRankingsEntidadesTest {
     otroEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
     otroEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
+    withTransaction(() -> {
+      persist(otroAscensor);
+      persist(otroEscaleraMecanicaBajada);
+      persist(otroEscaleraMecanicaSubida);
+    });
+
     establecimientoJorgito = new Establecimiento("nombre");
 
     jorgito = new Entidad("Jorgito", "jorgito.com");
 
-    jorgito.agregarEstablecimiento(establecimientoJorgito);
 
+    withTransaction(() -> {
+      persist(establecimientoJorgito);
+      RepoEntidades.getInstance().add(jorgito);
 
-    establecimientoJorgito.agregarServicio(otroAscensor);
-    establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
-    establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
+      jorgito.agregarEstablecimiento(establecimientoJorgito);
 
-    repoEntidades.getInstance().add(jorgito);
+      establecimientoJorgito.agregarServicio(otroAscensor);
+      establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
+      establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
+    });
 
     //RANKINGS
 
@@ -101,12 +120,12 @@ public class EscrituraCSVRankingsEntidadesTest {
     //OTROS DATOS
 
     listadoEntidades = new ArrayList<>(List.of(gualmayen, jorgito));
-    path = "src/main/java/ar/edu/utn/frba/dds/rankings/rankings-entidades-cr.csv";
+    path = "src/main/resources/ranking-para-test.csv";
   }
 
   @AfterEach
   void clear() {
-    repoEntidades.getInstance().clean();
+    RepoEntidades.getInstance().clean();
   }
 
   @Test
@@ -116,8 +135,8 @@ public class EscrituraCSVRankingsEntidadesTest {
     lectorDeRankings.escribirRankings(listadoEntidades);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, gualmayen.getId() + " ; Gualmayen ; alfajores.com");
-    Assertions.assertEquals(segundaLinea, jorgito.getId() + " ; Jorgito ; jorgito.com");
+    Assertions.assertEquals(primeraLinea, gualmayen.getId() + ";Gualmayen ; alfajores.com");
+    Assertions.assertEquals(segundaLinea, jorgito.getId() + ";Jorgito ; jorgito.com");
   }
 
   @Test
@@ -142,13 +161,13 @@ public class EscrituraCSVRankingsEntidadesTest {
     listadoEntidades = new ArrayList<>();
     LectorCSVEscritura lectorDeRankings = new LectorCSVEscritura(path);
     lectorDeRankings.escribirRankings(listadoEntidades);
-    Assertions.assertEquals(0, lectorDeRankings.getArchivo().length());
-
+    Assertions.assertNull(obtenerNumeroDeLineaN(1));
   }
 
   @Test
   @DisplayName("Archivo CSV por promedios de cierres de incidentes, escribe entidades ordenadas, de menor a mayor")
   void escribirArchivoSegunPromedios() {
+
 
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
@@ -183,16 +202,18 @@ public class EscrituraCSVRankingsEntidadesTest {
     Assertions.assertEquals(jorgito.promedioDuracionIncidentes(), Duration.of(8, ChronoUnit.MINUTES));
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingPromedio), List.of(gualmayen, jorgito));
 
-    repoEntidades.generarRankingEnCsvPromedioCierres(rankingPromedio);
+
+    repoEntidades.generarRankingCSVSegunCriterioEnUnPathEspecifico(rankingPromedio, path);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, (gualmayen.getId() + " ; Gualmayen ; alfajores.com"));
-    Assertions.assertEquals(segundaLinea, (jorgito.getId() + " ; Jorgito ; jorgito.com"));
+    Assertions.assertEquals(primeraLinea, (gualmayen.getId() + ";Gualmayen ; alfajores.com"));
+    Assertions.assertEquals(segundaLinea, (jorgito.getId() + ";Jorgito ; jorgito.com"));
   }
 
   @Test
   @DisplayName("Archivo CSV por cantidad de reportes, escribe entidades ordenadas, de menor a mayor")
   void escribirArchivoSegunCantidadIncidentesOrdenados() {
+
     gualmayen.crearIncidente(unAscensor, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaBajada, "1° incidente");
     gualmayen.crearIncidente(unaEscaleraMecanicaSubida, "1° incidente");
@@ -203,11 +224,11 @@ public class EscrituraCSVRankingsEntidadesTest {
     Assertions.assertEquals(jorgito.cantidadDeIncidentesReportados(), 2);
     Assertions.assertEquals(repoEntidades.ordenarEntidadesSegunCriterio(rankingCantidadReportes), List.of(jorgito, gualmayen));
 
-    repoEntidades.generarRankingEnCsvCantidadReportes(rankingCantidadReportes);
+    repoEntidades.generarRankingCSVSegunCriterioEnUnPathEspecifico(rankingCantidadReportes, path);
     String primeraLinea = obtenerNumeroDeLineaN(1);
     String segundaLinea = obtenerNumeroDeLineaN(2);
-    Assertions.assertEquals(primeraLinea, jorgito.getId() + " ; Jorgito ; jorgito.com");
-    Assertions.assertEquals(segundaLinea, gualmayen.getId() + " ; Gualmayen ; alfajores.com");
+    Assertions.assertEquals(primeraLinea, jorgito.getId() + ";Jorgito ; jorgito.com");
+    Assertions.assertEquals(segundaLinea, gualmayen.getId() + ";Gualmayen ; alfajores.com");
   }
 
   //FUNCIONES AUXILIARES
@@ -221,7 +242,7 @@ public class EscrituraCSVRankingsEntidadesTest {
     try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
       int aux = 0;
       String linea = null;
-      while (aux < i) {
+      while (aux < i + 1) {
         linea = br.readLine();
         aux++;
       }
@@ -230,5 +251,5 @@ public class EscrituraCSVRankingsEntidadesTest {
       e.printStackTrace();
       return null;
     }
-  }*/
+  }
 }

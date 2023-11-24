@@ -25,13 +25,9 @@ public class RepoEntidades extends Repositorio<Entidad> { // Hacer que extienda 
 
   // ---------------------------------RANKINGS----------------------------------------------------//
 
-  public void generarRankingEnCsvCantidadReportes(CriterioRanking criterio) {
-    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/resources/rankings-entidades-cr.csv");
-    lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
-  }
 
-  public void generarRankingEnCsvPromedioCierres(CriterioRanking criterio) {
-    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura("src/main/resources/rankings-entidades-pc.csv");
+  public void generarRankingCSVSegunCriterioEnUnPathEspecifico(CriterioRanking criterio, String path) {
+    LectorCSVEscritura lectorCSVEscritura = new LectorCSVEscritura(path);
     lectorCSVEscritura.escribirRankings(ordenarEntidadesSegunCriterio(criterio));
   }
 
