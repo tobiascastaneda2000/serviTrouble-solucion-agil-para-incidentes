@@ -105,53 +105,134 @@ public class Routes implements WithSimplePersistenceUnit {
     //VER COMUNIDADES
     Spark.get("/admin/comunidades",((request, response) -> {
 
+      try{
+        String nombreusuario = request.headers("usuario");
+        String contrasenia = request.headers("contrasenia");
+        Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+            nombreusuario,
+            contrasenia);
+        if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
           List<Comunidad> comunidades = RepositorioComunidades.getInstance().getAll();
+          System.out.println("entra");
           return comunidades;
+        }
+        else{
+          response.status(401);
+          return null;
+        }
+      } catch (Exception e) {
+        response.status(401);
+        return null;
+      }
     }));
 
     //VER DETALLE DE UNA COMUNIDAD
     Spark.get("/admin/comunidades/:id",((request, response) -> {
 
-      String id = request.params(":id");
-      Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-      return comunidad;
+      try{
+        String nombreusuario = request.headers("usuario");
+        String contrasenia = request.headers("contrasenia");
+        Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+            nombreusuario,
+            contrasenia);
+        if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
+          String id = request.params(":id");
+          Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
+          return comunidad;
+        }
+        else{
+          response.status(401);
+          return null;
+        }
+      } catch (Exception e) {
+        response.status(401);
+        return null;
+      }
     }));
 
     //BORRAR UNA COMUNIDAD
     Spark.delete("/admin/comunidades/:id",((request, response) -> {
 
-      String id = request.params(":id");
-      RepositorioComunidades repo = RepositorioComunidades.getInstance();
-      Comunidad comunidad = repo.getOne(Long.parseLong(id));
-      withTransaction(() -> {
+      try{
+        String nombreusuario = request.headers("usuario");
+        String contrasenia = request.headers("contrasenia");
+        Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+            nombreusuario,
+            contrasenia);
+        if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
+          String id = request.params(":id");
+          RepositorioComunidades repo = RepositorioComunidades.getInstance();
+          Comunidad comunidad = repo.getOne(Long.parseLong(id));
+          withTransaction(() -> {
             repo.remove(comunidad);
           });
-      return null; // funca pero tira 404 idk
+          return null; // funca pero tira 404 idk
+        }
+        else{
+          response.status(401);
+          return null;
+        }
+      } catch (Exception e) {
+        response.status(401);
+        return null;
+      }
     }));
 
     //CREAR UNA COMUNIDAD
     Spark.post("/admin/comunidades",((request, response) -> {
 
-      String nombre = request.headers("nombreComunidad");
-      Comunidad comunidad1 = new Comunidad(nombre);
-      withTransaction(() -> {
-        RepositorioComunidades.getInstance().add(comunidad1);
-      });
-      return null; // funca pero tira 404 idk
+      try{
+        String nombreusuario = request.headers("usuario");
+        String contrasenia = request.headers("contrasenia");
+        Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+            nombreusuario,
+            contrasenia);
+        if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
+          String nombre = request.headers("nombreComunidad");
+          Comunidad comunidad1 = new Comunidad(nombre);
+          withTransaction(() -> {
+            RepositorioComunidades.getInstance().add(comunidad1);
+          });
+          return null; // funca pero tira 404 idk
+        }
+        else{
+          response.status(401);
+          return null;
+        }
+      } catch (Exception e) {
+        response.status(401);
+        return null;
+      }
     }));
 
     //EDITAR UNA COMUNIDAD
     Spark.put("/admin/comunidades/:id",((request, response) -> {
 
-      String id = request.params(":id");
-      RepositorioComunidades repo = RepositorioComunidades.getInstance();
-      Comunidad comunidad = repo.getOne(Long.parseLong(id));
-      String nombre = request.headers("nombreComunidad");
-      comunidad.setNombre(nombre);
-      withTransaction(() -> {
-        repo.update(comunidad);
-      });
-      return null; // funca pero tira 404 idk
+      try{
+        String nombreusuario = request.headers("usuario");
+        String contrasenia = request.headers("contrasenia");
+        Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
+            nombreusuario,
+            contrasenia);
+        if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)){
+          String id = request.params(":id");
+          RepositorioComunidades repo = RepositorioComunidades.getInstance();
+          Comunidad comunidad = repo.getOne(Long.parseLong(id));
+          String nombre = request.headers("nombreComunidad");
+          comunidad.setNombre(nombre);
+          withTransaction(() -> {
+            repo.update(comunidad);
+          });
+          return null; // funca pero tira 404 idk
+        }
+        else{
+          response.status(401);
+          return null;
+        }
+      } catch (Exception e) {
+        response.status(401);
+        return null;
+      }
     }));
 
 
