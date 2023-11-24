@@ -17,6 +17,7 @@ import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -55,11 +56,16 @@ public class AperturaCierreIncidentesEntidadTest implements SimplePersistenceTes
   }
 
   @Test
+  @DisplayName("Incidente se persiste en la Base de datos")
   void incidenteCreadoExiste() {
     unaEntidad.crearIncidente(servicio, "observacion");
     Incidente incidente = devolverIncidente(servicio, "observacion");
-    withTransaction(() -> persist(incidente));
 
+    withTransaction(() -> {
+
+      persist(incidente);
+    });
+    //Incidente incidente = devolverIncidente(servicio, "observacion");
     Assertions.assertNotNull(incidente.getId());
     Assertions.assertNotNull(incidente.getObservacion());
     Assertions.assertNotNull(incidente.getServicioAsociado());
@@ -68,6 +74,7 @@ public class AperturaCierreIncidentesEntidadTest implements SimplePersistenceTes
 
 
   @Test
+  @DisplayName("Incidente se guarda en entidad")
   void incidenteSeGuardaEnEntidad() {
 
     unaEntidad.crearIncidente(servicio, "observacion");

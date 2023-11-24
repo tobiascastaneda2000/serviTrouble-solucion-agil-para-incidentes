@@ -5,10 +5,13 @@ import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import org.hibernate.annotations.Cascade;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,7 +56,9 @@ public class Comunidad implements WithSimplePersistenceUnit {
   public void agregarUsuario(Usuario usuario,PermisoComunidad permiso){
     Miembro miembro = new Miembro(usuario,permiso);
     miembros.add(miembro);
+    persist(usuario);
     persist(miembro);
+
   }
 
   //-------------------------GETTERS-------------------------------------------//
@@ -81,7 +86,8 @@ public class Comunidad implements WithSimplePersistenceUnit {
   }
 
   public void registrarMiembro(Usuario usuario) {
-    miembros.add(new Miembro(usuario, PermisoComunidad.USUARIO_COMUNIDAD));
+    this.agregarUsuario(usuario, PermisoComunidad.USUARIO_COMUNIDAD);
+
   }
 
   public boolean contieneUsuario(Usuario usuario) {

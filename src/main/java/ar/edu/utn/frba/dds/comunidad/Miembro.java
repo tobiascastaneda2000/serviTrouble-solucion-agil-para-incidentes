@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.comunidad;
 
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,6 +29,26 @@ public class Miembro {
   //-------------------------CONSTRUCTOR----------------------------------------//
   protected Miembro() {
 
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+  }
+
+  public PermisoComunidad getPermisoComunidad() {
+    return permisoComunidad;
+  }
+
+  public void setPermisoComunidad(PermisoComunidad permisoComunidad) {
+    this.permisoComunidad = permisoComunidad;
   }
 
   public Miembro(Usuario usuario, PermisoComunidad permisoComunidad) {
