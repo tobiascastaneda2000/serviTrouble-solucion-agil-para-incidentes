@@ -135,7 +135,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
       miembrosDeUsuario.forEach(m -> remove(m));
       remove(usuario);
     });
-    response.redirect("/login");
+    response.redirect("/admin-home");
     return null;
   }
 }
