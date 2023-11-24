@@ -32,7 +32,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.mock;
 
 public class EscrituraCSVRankingsEntidadesTest {
-
+/*
   RepoEntidades repoEntidades = RepoEntidades.getInstance(); // Habra que mockear calculo, o conectarlo a una db de pruebas, ni idea
   Entidad gualmayen;
   Entidad jorgito;
@@ -51,7 +51,7 @@ public class EscrituraCSVRankingsEntidadesTest {
 
   CriterioRanking rankingPromedio;
   CriterioRanking rankingCantidadReportes;
-/*
+
   @BeforeEach
   void setUp() {
 

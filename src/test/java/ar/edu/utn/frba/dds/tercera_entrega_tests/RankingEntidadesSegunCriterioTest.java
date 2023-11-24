@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
+import io.github.flbulgarelli.jpa.extras.test.SimplePersistenceTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 import static org.mockito.Mockito.mock;
 
-class RankingEntidadesSegunCriterioTest {
+class RankingEntidadesSegunCriterioTest implements SimplePersistenceTest {
 
   RepoEntidades repoEntidades = RepoEntidades.getInstance(); //mock?
   Entidad gualmayen;
@@ -42,7 +43,7 @@ class RankingEntidadesSegunCriterioTest {
 
   CriterioRanking rankingPromedio;
   CriterioRanking rankingCantidadReportes;
-/*
+
   @BeforeEach
   void setUp() {
 
@@ -52,17 +53,26 @@ class RankingEntidadesSegunCriterioTest {
     unaEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
     unaEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
+    withTransaction(() -> {
+      persist(unAscensor);
+      persist(unaEscaleraMecanicaBajada);
+      persist(unaEscaleraMecanicaSubida);
+    });
+
     establecimientoGualmayen = new Establecimiento("nombre");
 
     gualmayen = new Entidad("Gualmayen", "alfajores.com");
 
-    gualmayen.agregarEstablecimiento(establecimientoGualmayen);
+    withTransaction(() -> {
+      persist(establecimientoGualmayen);
+      RepoEntidades.getInstance().add(gualmayen);
 
-    establecimientoGualmayen.agregarServicio(unAscensor);
-    establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
-    establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
+      gualmayen.agregarEstablecimiento(establecimientoGualmayen);
 
-    repoEntidades.getInstance().add(gualmayen);
+      establecimientoGualmayen.agregarServicio(unAscensor);
+      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaSubida);
+      establecimientoGualmayen.agregarServicio(unaEscaleraMecanicaBajada);
+    });
 
 
     //CREACION ENTIDAD JORGITO
@@ -71,18 +81,27 @@ class RankingEntidadesSegunCriterioTest {
     otroEscaleraMecanicaBajada = new Servicio(TipoServicio.ESCALERA_MECANICA);
     otroEscaleraMecanicaSubida = new Servicio(TipoServicio.ESCALERA_MECANICA);
 
+    withTransaction(() -> {
+      persist(otroAscensor);
+      persist(otroEscaleraMecanicaBajada);
+      persist(otroEscaleraMecanicaSubida);
+    });
+
     establecimientoJorgito = new Establecimiento("nombre");
 
     jorgito = new Entidad("Jorgito", "jorgito.com");
 
-    jorgito.agregarEstablecimiento(establecimientoJorgito);
+    withTransaction(() -> {
+      persist(establecimientoJorgito);
+      RepoEntidades.getInstance().add(jorgito);
 
+      jorgito.agregarEstablecimiento(establecimientoJorgito);
 
-    establecimientoJorgito.agregarServicio(otroAscensor);
-    establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
-    establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
+      establecimientoJorgito.agregarServicio(otroAscensor);
+      establecimientoJorgito.agregarServicio(otroEscaleraMecanicaBajada);
+      establecimientoJorgito.agregarServicio(otroEscaleraMecanicaSubida);
+    });
 
-    repoEntidades.getInstance().add(jorgito);
 
     //RANKINGS
 
@@ -92,7 +111,7 @@ class RankingEntidadesSegunCriterioTest {
 
   @AfterEach
   void clear() {
-    repoEntidades.getInstance().clean();
+    RepoEntidades.getInstance().clean();
   }
 
   @Test
@@ -254,5 +273,5 @@ class RankingEntidadesSegunCriterioTest {
   public Incidente devolverIncidente(Servicio servicio, String obs) {
     return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);
 
-  }*/
+  }
 }
