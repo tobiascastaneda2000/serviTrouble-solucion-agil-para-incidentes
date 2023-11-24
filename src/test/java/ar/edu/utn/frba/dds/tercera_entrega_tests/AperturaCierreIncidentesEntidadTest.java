@@ -21,11 +21,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
 
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-
-
 public class AperturaCierreIncidentesEntidadTest implements SimplePersistenceTest {
 
   Servicio servicio;
@@ -47,28 +42,43 @@ public class AperturaCierreIncidentesEntidadTest implements SimplePersistenceTes
     unaEntidad.agregarEstablecimiento(unEstablecimiento);
     usuario.setMedioNotificador(new WhatsAppSender());
 
-    // Persistir el Usuario
-    repoUsuarios.add(usuario);
-    RepoServicios.getInstance().add(servicio);
-    RepoEstablecimientos.getInstance().add(unEstablecimiento);
-    RepoEntidades.getInstance().add(unaEntidad);
+    withTransaction(() -> {
+      persist(medioNotificador);
+      repoUsuarios.add(usuario);
+      RepoServicios.getInstance().add(servicio);
+      RepoEstablecimientos.getInstance().add(unEstablecimiento);
+      RepoEntidades.getInstance().add(unaEntidad);
 
-    // Persistir el Usuario y MedioNotificador
-    //getTransaction().begin();
-    persist(medioNotificador);
-    //getTransaction().commit();
+    });
 
 
   }
+
   @Test
-  void seCreaYAgregaElIncidente() {
+  void incidenteCreadoExiste() {
     unaEntidad.crearIncidente(servicio, "observacion");
     Incidente incidente = devolverIncidente(servicio, "observacion");
+    withTransaction(() -> persist(incidente));
+
+    Assertions.assertNotNull(incidente.getId());
+    Assertions.assertNotNull(incidente.getObservacion());
+    Assertions.assertNotNull(incidente.getServicioAsociado());
+    Assertions.assertNotNull(incidente.getFechaHoraAbre());
+  }
+
+
+  @Test
+  void incidenteSeGuardaEnEntidad() {
+
+    unaEntidad.crearIncidente(servicio, "observacion");
+    Incidente incidente = devolverIncidente(servicio, "observacion");
+    withTransaction(() -> persist(incidente));
+
+
     Assertions.assertTrue(unaEntidad.incidentes.contains(incidente));
     Assertions.assertEquals(1, unaEntidad.incidentes.size());
 
   }
-
 
   public Incidente devolverIncidente(Servicio servicio, String obs) {
     return servicio.getHistorialIncidentes().stream().filter(i -> Objects.equals(i.getObservacion(), obs)).toList().get(0);
