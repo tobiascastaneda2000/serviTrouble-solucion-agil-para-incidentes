@@ -1,17 +1,25 @@
 package ar.edu.utn.frba.dds.main;
 
 
+import ar.edu.utn.frba.dds.NotificadorProgramado;
 import ar.edu.utn.frba.dds.controller.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+import java.util.Set;
+import java.time.LocalDateTime;
+import ar.edu.utn.frba.dds.comunidad.Usuario;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 
 import javax.persistence.PersistenceException;
 
 public class Routes implements WithSimplePersistenceUnit {
 
   public static void main(String[] args) {
-    new Routes().start();
+    if(args.length==0) new Routes().start();
+    else{
+      if(args[0].equalsIgnoreCase("notificador")) new NotificadorProgramado().run();
+    }
   }
 
   public void start() {
