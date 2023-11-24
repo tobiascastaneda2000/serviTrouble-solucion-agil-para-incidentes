@@ -107,10 +107,10 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     }
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(Long.parseLong(idusuario));
     Miembro miembro = comunidad.miembros.stream().filter(m -> m.usuario.equals(usuario)).toList().get(0);
-    getTransaction().begin();
-    comunidad.miembros.remove(miembro);
-    remove(miembro);
-    getTransaction().commit();
+    withTransaction(() -> {
+      comunidad.miembros.remove(miembro);
+      remove(miembro);
+    });
     response.redirect("/admin-comunidades");
     return null;
   }
