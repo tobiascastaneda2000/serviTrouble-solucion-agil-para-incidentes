@@ -32,10 +32,9 @@ public class PromedioCierresSemanal extends CriterioRanking {
     return path;
   }
 
-  @Transient
-  public String path = "src/main/resources/rankings-entidades-pc.csv";
+  public static String path = "src/main/resources/rankings-entidades-pc.csv";
 
-  public String nombre_criterio = "promedio de cierres de incidentes";
+  public static String nombre_criterio = "promedio de cierres de incidentes";
 
 
   @Override

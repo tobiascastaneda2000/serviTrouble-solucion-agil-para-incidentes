@@ -70,7 +70,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
             usuario.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
             RepoUsuarios.getInstance().add(usuario);
           });
-          response.redirect("/admin-home");
+          response.redirect("/admin/home");
         }
       } else {
         response.redirect("/home");
@@ -144,7 +144,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
         miembrosDeUsuario.forEach(m -> remove(m));
         remove(usuario);
       });
-      response.redirect("/admin-home");
+      response.redirect("/admin/home");
       return null;
     } else {
       return null;

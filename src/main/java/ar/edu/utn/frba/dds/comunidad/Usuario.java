@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.comunidad;
 
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorMedioNotificador;
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorUbicacion;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.entidades.Servicio;
@@ -9,7 +11,6 @@ import ar.edu.utn.frba.dds.notificador.Notificacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Localizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioLocalizacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
-import ar.edu.utn.frba.dds.serviciolocalizacion.Ubicacion;
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import ar.edu.utn.frba.dds.notificador.Horario;
 
@@ -23,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.mockito.Mockito;
 import spark.Request;
 import spark.Response;
 
@@ -73,8 +73,7 @@ public class Usuario implements WithSimplePersistenceUnit {
 
   @PostLoad
   public void hidratarUsuario(){
-    this.servicioUbicacion = Mockito.mock(ServicioUbicacion.class);
-    Mockito.when(servicioUbicacion.estaCerca(Mockito.any(Usuario.class),Mockito.any(Servicio.class))).thenReturn(true);
+    this.servicioUbicacion = ServiceLocatorUbicacion.getServicio("servicioUbicacion");
   }
 
 

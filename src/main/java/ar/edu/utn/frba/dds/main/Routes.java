@@ -55,8 +55,8 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.post("/login", controllerLogin::crearSesion, engine);
     Spark.get("/sesion", controllerLogin::cerrarSesion);
     Spark.get("/home", demoControllerhome::mostrarHome, engine);
-    Spark.get("/admin-home", demoControllerhome::mostrarHomeAdmin, engine);
-    Spark.post("/admin-home", controllerUsuarios::crearUsuario, engine);
+    Spark.get("/admin/home", demoControllerhome::mostrarHomeAdmin, engine);
+    Spark.post("/usuarios", controllerUsuarios::crearUsuario, engine);
 
     //APERTURA DE INCIDENTES
     Spark.get("/entidades", controllerEntidades::mostrarEntidades, engine);
@@ -68,7 +68,6 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/comunidades", controllerComunidades::mostrarComunidades, engine);
     Spark.get("/comunidades/:id", controllerComunidades::mostrarIncidentes, engine);
     Spark.post("/comunidades/:id", controllerIncidentes::cerrarIncidente);
-    Spark.post("/incidente/:id", controllerIncidentes::cerrarIncidente);
 
     //RANKINGS
     Spark.get("/rankings/:id", controllerListadoRanking::mostrarListaDeRanking, engine);

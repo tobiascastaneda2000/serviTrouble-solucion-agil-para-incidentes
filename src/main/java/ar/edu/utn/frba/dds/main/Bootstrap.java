@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.main;
 
 import ar.edu.utn.frba.dds.RankingProgramado;
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorMedioNotificador;
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorUbicacion;
 import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.comunidad.PermisoComunidad;
 import ar.edu.utn.frba.dds.comunidad.PermisoUsuario;
@@ -11,10 +13,12 @@ import ar.edu.utn.frba.dds.entidades.Servicio;
 import ar.edu.utn.frba.dds.entidades.TipoServicio;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.notificador.Horario;
+import ar.edu.utn.frba.dds.notificador.MailSender;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal;
 import ar.edu.utn.frba.dds.repositorios.*;
+import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion1;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 /**
@@ -31,9 +35,15 @@ public class Bootstrap implements WithSimplePersistenceUnit {
   public void run() {
     //CARGA USUARIO
     withTransaction(() -> {
+
+      new ServiceLocatorUbicacion().setServicios("servicioUbicacion",new ServicioUbicacion1());
+      new ServiceLocatorMedioNotificador().setServicios("mailSender", new MailSender());
+
+
       Usuario usuarioComun1 = new Usuario("facu", "123456", "contacto");
       Horario unHorario = new Horario(10, 30);
       usuarioComun1.agregarHorario(unHorario);
+      usuarioComun1.medioNotificador = ServiceLocatorMedioNotificador.getServicio("mailSender");
       RepoUsuarios.getInstance().add(usuarioComun1);
 
       Usuario usuarioAdmin = new Usuario("admin", "123456", "contacto");
@@ -69,17 +79,6 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       establecimiento1.agregarServicio(servicio5);
       RepoServicios.getInstance().add(servicio5);
 
-      Incidente incidente = new Incidente("Botonera rota", servicio5);
-      RepoIncidentes.getInstance().add(incidente);
-
-      Incidente incidente2 = new Incidente("Puerta rota", servicio5);
-      RepoIncidentes.getInstance().add(incidente2);
-
-      Incidente incidente3 = new Incidente("Falta un espejo", servicio5);
-      RepoIncidentes.getInstance().add(incidente3);
-
-      Incidente incidente4 = new Incidente("El piso se esta levantando", servicio5);
-      RepoIncidentes.getInstance().add(incidente4);
 
       //CARGA ENTIDAD PIXEL
       Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
@@ -150,10 +149,10 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       //CARGA COMUNIDADES
       Comunidad comunidad1 = new Comunidad("nombre1");
       comunidad1.aniadirServicioInteres(servicio1);
-      comunidad1.incidentes.add(incidente);
+      /*comunidad1.incidentes.add(incidente);
       comunidad1.incidentes.add(incidente2);
       comunidad1.incidentes.add(incidente3);
-      comunidad1.incidentes.add(incidente4);
+      comunidad1.incidentes.add(incidente4);*/
 
       comunidad1.agregarUsuario(usuarioAdmin, PermisoComunidad.ADMIN_COMUNIDAD);
       comunidad1.agregarUsuario(usuarioComun1, PermisoComunidad.ADMIN_COMUNIDAD);
@@ -168,6 +167,20 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       RepoRanking.getInstance().add(criterioPromedioCierre);
       RepoRanking.getInstance().add(criterioCantidadReportes);
+
+      Incidente incidente = usuarioComun1.abrirIncidente(servicio1,"Botonera rota");
+      RepoIncidentes.getInstance().add(incidente);
+
+      Incidente incidente2 = usuarioComun1.abrirIncidente(servicio1,"Puerta rota");
+      RepoIncidentes.getInstance().add(incidente2);
+
+      Incidente incidente3 = usuarioComun1.abrirIncidente(servicio1,"Falta un espejo");
+      RepoIncidentes.getInstance().add(incidente3);
+
+      Incidente incidente4 = usuarioComun1.abrirIncidente(servicio1,"El piso se esta levantando");
+      RepoIncidentes.getInstance().add(incidente4);
+
+
     });
 
     System.out.println("Working Directory = " + System.getProperty("user.dir"));

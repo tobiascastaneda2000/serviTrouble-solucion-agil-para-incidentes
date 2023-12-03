@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import java.util.stream.Collectors;
 import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
@@ -127,8 +128,6 @@ public class Comunidad implements WithSimplePersistenceUnit {
     incidentes.remove(incidente);
     miembros.forEach(m->m.usuario.notificacionesPendientes.remove(m.usuario.obtenerNotificacion(incidente)));
     incidentesCerrados.add(incidente);
-    persist(incidente);
-
   }
 
   //---------------------------------------------------------------------------------------------------//

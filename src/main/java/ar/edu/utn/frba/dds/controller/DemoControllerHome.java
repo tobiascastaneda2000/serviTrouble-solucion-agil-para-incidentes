@@ -70,7 +70,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
         return new ModelAndView(modelo, "home.html.hbs");
       }
       if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
-        response.redirect("/admin-home");
+        response.redirect("/admin/home");
         return null;
       } else {
         response.redirect("/");
