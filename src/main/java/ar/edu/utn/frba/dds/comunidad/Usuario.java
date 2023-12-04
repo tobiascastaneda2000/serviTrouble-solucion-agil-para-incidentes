@@ -208,7 +208,7 @@ public class Usuario implements WithSimplePersistenceUnit {
     horariosPlanificados.add(horario);
   }
 
-  public void verificarNotificaciones(LocalDateTime ahora) {
+  public void verificarNotificaciones(Horario ahora) {
 
     if (horariosPlanificados.stream().anyMatch(h -> h.equals(ahora))) {
       notificacionesPendientes.stream().filter(n -> !n.fueNotificada).forEach(

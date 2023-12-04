@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.comunidad.Usuario;
+import ar.edu.utn.frba.dds.main.Bootstrap;
+import ar.edu.utn.frba.dds.notificador.Horario;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
 import ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
@@ -22,6 +24,8 @@ public class NotificadorProgramado {
   public void run() {
     Set<Usuario> usuarios = RepoUsuarios.getInstance().getUsuariosComoSet();
     LocalDateTime ahora = LocalDateTime.now();
-    usuarios.forEach(u -> u.verificarNotificaciones(ahora));
+    int hora = ahora.getHour();
+    int minuto = ahora.getMinute();
+    usuarios.forEach(u -> u.verificarNotificaciones(new Horario(hora,minuto)));
   }
 }

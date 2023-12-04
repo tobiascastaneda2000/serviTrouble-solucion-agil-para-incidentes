@@ -49,9 +49,11 @@ public class ConfiguracionNotificacionesTest implements SimplePersistenceTest {
   @Test
   void seEjecutanLasNotificaciones() {
 
-    LocalDateTime hora = LocalDateTime.of(2023, 1, 1, 10, 10);
+    LocalDateTime ahora = LocalDateTime.of(2023, 1, 1, 10, 10);
+    int hora = ahora.getHour();
+    int minuto = ahora.getMinute();
 
-    usuario.verificarNotificaciones(hora);
+    usuario.verificarNotificaciones(new Horario(hora,minuto));
 
     verify(medioNotificador, times(1)).notificarUnIncidente(incidente, "email");
   }
