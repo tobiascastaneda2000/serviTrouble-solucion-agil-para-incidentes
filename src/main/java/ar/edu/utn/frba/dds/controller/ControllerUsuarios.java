@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controller;
 
+import ar.edu.utn.frba.dds.notificador.Horario;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
@@ -31,6 +32,10 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     String nombre = request.queryParams("usuario");
     String contrasenia = request.queryParams("contrasenia");
     String contacto = request.queryParams("contacto");
+    String horario = request.queryParams("horario");
+    String[] partes = horario.split(":");
+    String hora = partes[0];
+    String minuto = partes[1];
     Long id = request.session().attribute("user_id");
 
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
@@ -39,6 +44,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
       usuario.setUsername(nombre);
       usuario.setContrasenia(contrasenia);
       usuario.setContacto(contacto);
+      usuario.agregarHorario(new Horario(Integer.parseInt(hora),Integer.parseInt(minuto)));
       RepoUsuarios.getInstance().update(usuario);
     });
 

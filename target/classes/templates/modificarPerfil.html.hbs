@@ -31,9 +31,13 @@
               <span class="input-group-text" id="inputGroup-sizing-default">CONTRASEÑA</span>
               <input type="password" id="disabledTextInput" class="form-control" name="contrasenia" value="{{contrasenia}}">
            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">AGREGAR HORARIO DE NOTIFICACION</span>
+              <input type="time" id="disabledTextInput" class="form-control" value="horario" name="horario" >
+           </div>
            <div class="input-group mb-3">
                <span class="input-group-text" id="inputGroup-sizing-default">MEDIO NOTIFICADOR</span>
-               <input type="text" id="disabledTextInput" class="form-control" value="medioNoti" name="medioNoti">
+               <input type="text" id="disabledTextInput" class="form-control" value="{{medioNotificador.nombre}}" name="medioNoti" disabled>
             </div>
             <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
             <input type="submit" class="btn btn-amarillo" value="Guardar">

@@ -25,6 +25,7 @@ public class MailSender extends MedioNotificador {
   @Transient
   final String correoRemitente = "mailsendergrupo7@gmail.com";
 
+  public static String nombre = "mailsender";
   @Transient
   String passwordRemitente = null;
 
@@ -47,6 +48,10 @@ public class MailSender extends MedioNotificador {
     this.configurarPropiedades();
     this.armarMensaje(contacto, texto, "Nuevo incidente");
     this.enviar();
+  }
+
+  public String getNombre(){
+    return nombre;
   }
 
   //Guarda la contraseña cargada en un archivo de texto

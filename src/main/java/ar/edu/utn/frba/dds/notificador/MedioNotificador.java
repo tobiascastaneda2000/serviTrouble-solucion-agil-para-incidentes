@@ -21,6 +21,12 @@ public abstract class MedioNotificador {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   long id;
 
+  public static String nombre;
   public abstract void notificarUnIncidente(Incidente incidente, String contacto);
 //Incluye la apertura de incidentes y la sugerencias
+
+  public String getNombre(){
+    return nombre;
+  }
+
 }
