@@ -1,23 +1,38 @@
 {{#partial "principal" }}
 
 
-<div class="bg-gris py-2">
-    <ul class="nav justify-content-center">
-        <li class="nav-item mx-4">
-          <a class="nav-link text-white" href="/entidades">Abrir nuevo incidente</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a class="nav-link text-white" href="/comunidades">Mis comunidades</a>
-        </li>
-        <li class="nav-item mx-4">
-          <a class="nav-link text-white" href="/admin-comunidades">Administrador de comunidad</a>
-        </li>
-      </ul>
+<div class="container text-center my-5">
+    <h4 class="fw-bolder my-3">ServiTrouble es tu solución ágil para incidentes de movilidad</h4>
 </div>
 
 
+
+<div class="container text-center my-5">
+        <div class="container">
+
+        </div>
+        <div class="row align-items-center my-5">
+            <div class="col ">
+                <img src="incidente.png" alt="incidente" style="width:150px;height:150px;">
+                </br>
+                <h5 class="my-4">Cargá un nuevo incidente en alguna de nuestras entidades</h5>
+                </br>
+                <a href="/entidades" class="btn btn-warning my-2">Entidades</a>
+            </div>
+            <div class="col">
+                <img src="lista-de-verificacion.png" alt="lista" style="width:150px;height:150px;">
+                </br>
+                <h5 class="my-4">Dale un vistazo a los incidentes creados en cada comunidad</h5>
+                </br>
+                <a href="/comunidades" class="btn btn-warning my-2">Comunidades</a>
+            </div>
+        </div>
+</div>
+
+<hr class="border border-warning border-2 opacity-50">
+
       <div>
-        <h2 class="text-center mt-5 mb-4">INCIDENTES CERCANOS</h2>
+        <h2 class="text-center mt-5 mb-5">Incidentes cercanos</h2>
       </div>
 
     <div class="container  my-2">
@@ -37,7 +52,7 @@
                         <p class="card-text">{{observacion}}</p>
                         <form class="incidente_sugeridos-form" method="POST" action="/comunidades/{{id}}">
                             <input type="hidden" value="{{id}}" name="idIncidente"></input>
-                            <input type="submit" onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-amarillo"/>
+                            <input type="submit" onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-warning"/>
                         </form>
                       </div>
                     </div>
@@ -47,32 +62,6 @@
         </div>
         <a href="/incidente-sugerido"><p class="text-end mt-3">Ver más</p></a>
       </div>
-
-      <div>
-        <h2 class="text-center mt-5 mb-4">RANKINGS</h2>
-      </div>
-
-
-<div class="container">
-    <div class="row">
-    <div class="col">
-        <ul class="list-group text-center">
-          <li class="list-group-item text-uppercase fw-bold">RANKING DE ENTIDADES POR {{criterio1.nombre_criterio}} </li>
-          {{#ranking1}}
-             <li class="list-group-item">{{razonSocial}}</li>
-          {{/ranking1}}
-        </ul>
-    </div>
-    <div class="col">
-        <ul class="list-group text-center">
-          <li class="list-group-item text-uppercase fw-bold">RANKING DE ENTIDADES POR {{criterio2.nombre_criterio}}</li>
-          {{#ranking2}}
-             <li class="list-group-item">{{razonSocial}}</li>
-          {{/ranking2}}
-        </ul>
-     </div>
-     </div>
-</div>
 
 
 {{/partial}}

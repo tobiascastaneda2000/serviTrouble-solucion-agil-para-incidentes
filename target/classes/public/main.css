@@ -45,9 +45,13 @@
 
 
   .btn-outline-amarillo{
+
     border-color: #E0A72F;
   }
 
+   .btn-warning{
+        background: #E0A72F;
+   }
 
   footer {
     position: absolute;
