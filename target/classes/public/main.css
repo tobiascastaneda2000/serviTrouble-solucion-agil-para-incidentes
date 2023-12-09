@@ -62,3 +62,12 @@
     <!---->
   }
 
+
+  #subrayado:hover {
+            text-decoration: underline;
+    }
+
+    .btn-outline-warning:hover{
+        background: #E0A72F;
+    }
+

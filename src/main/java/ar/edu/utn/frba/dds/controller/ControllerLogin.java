@@ -18,12 +18,6 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
     return new ModelAndView(modelo, "login.html.hbs");
   }
 
-  public ModelAndView mostrarLoginError(Request request, Response response) {
-    Map<String, Object> modelo = new HashMap<>();
-    modelo.put("anio", LocalDate.now().getYear());
-    return new ModelAndView(modelo, "loginError.html.hbs");
-  }
-
   public ModelAndView crearSesion(Request request, Response response) {
     try {
       Usuario usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(
