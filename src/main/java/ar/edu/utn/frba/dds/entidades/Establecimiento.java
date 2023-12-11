@@ -57,6 +57,7 @@ public class Establecimiento {
 
   public void agregarServicio(Servicio servicio) {
     servicios.add(servicio);
+    servicio.establecimiento = this;
   }
 
 

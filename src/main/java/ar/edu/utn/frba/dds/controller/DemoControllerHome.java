@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,11 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
       List<Incidente> cuatroIncidentes = incidentesCercanos.stream().limit(4).collect(Collectors.toList());
       if (cuatroIncidentes.isEmpty()) {
         modelo.put("mensajeIncidentes", "No tienes incidentes cercanos para revisar");
+      }
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+      for (Incidente incidente : cuatroIncidentes) {
+        incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
       }
       modelo.put("incidentes", cuatroIncidentes);
       if (usuario.permisoUsuario.equals(PermisoUsuario.USUARIO_COMUN)) {

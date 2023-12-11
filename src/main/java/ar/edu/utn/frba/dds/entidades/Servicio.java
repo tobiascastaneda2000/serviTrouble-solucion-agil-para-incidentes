@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.entidades;
 
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
+import ar.edu.utn.frba.dds.repositorios.RepoEstablecimientos;
+import ar.edu.utn.frba.dds.repositorios.RepoServicios;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +14,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Servicio {
@@ -31,6 +35,9 @@ public class Servicio {
   List<Incidente> historialIncidentes = new ArrayList<>();
   @Enumerated(EnumType.STRING)
   TipoServicio tipoServicio;
+
+  @ManyToOne
+  Establecimiento establecimiento;
 
   public Servicio(TipoServicio tipoServicio) {
     this.tipoServicio = tipoServicio;
@@ -95,5 +102,9 @@ public class Servicio {
 
       return listadoIncidentesFiltrados;
     }
+  }
+
+  public Establecimiento getEstablecimiento() {
+    return establecimiento;
   }
 }

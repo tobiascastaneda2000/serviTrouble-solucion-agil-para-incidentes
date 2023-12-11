@@ -28,8 +28,10 @@
                 <div class="col my-4">
                   <div class="card" style="width: 16rem;">
                       <div class="card-body">
-                        <h5 class="card-title">{{servicioAsociado.nombre}}</h5>
+                        <h5 class="card-title fw-bolder">{{servicioAsociado.nombre}}</h5>
                         <p class="card-text">{{observacion}}</p>
+                        <p class="card-text">Fecha de apertura: {{fechaApertura}}</p>
+                        <p class="card-text">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</p>
                         <form class="incidente_sugeridos-form" method="POST" action="/comunidades/{{id}}">
                             <input type="hidden" value="{{id}}" name="idIncidente"></input>
                             <input type="submit"  onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-amarillo"/>

@@ -76,6 +76,11 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     if (incidentes.isEmpty()) {
       modelo.put("mensajeIncidentes", "No tienes incidentes cercanos para revisar");
     }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    for (Incidente incidente : incidentes) {
+      incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
+    }
     modelo.put("usuario", usuario);
     modelo.put("incidentes", incidentes);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();

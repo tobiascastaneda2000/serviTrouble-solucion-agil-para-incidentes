@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.repositorios;
 
 import ar.edu.utn.frba.dds.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.entidades.Servicio;
 import java.util.HashSet;
 import java.util.Set;
 
