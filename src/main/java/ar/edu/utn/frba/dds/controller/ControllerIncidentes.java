@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import java.util.Arrays;
+import java.util.HashSet;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -67,7 +69,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     return null;
   }
 
-  public ModelAndView mostrarIncidentesSugeridos(Request request, Response response) {
+
+  public ModelAndView mostrarIncidentesSugeridosPaginados(Request request, Response response) {
     Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
     Map<String, Object> modelo = new HashMap<>();
@@ -81,11 +84,51 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     for (Incidente incidente : incidentes) {
       incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
     }
-    modelo.put("usuario", usuario);
-    modelo.put("incidentes", incidentes);
-    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-    modelo.put("criterios", criterio);
-    return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+    int i=0;
+    int k=1;
+    HashSet<Integer> paginas = new HashSet<Integer>();
+    paginas.add(1);
+    for (Incidente incidente : incidentes) {
+      i++;
+      if(i>8){
+        k++;
+        paginas.add(k);
+        i=0;
+      }
+    }
+
+
+    String idPagina = request.params(":id");
+    int limiteInferior = (Integer.parseInt(idPagina) - 1) * 8;
+    int limiteSuperior = limiteInferior + 8;
+    try {
+      List<Incidente> incidentesPaginados = incidentes.subList(limiteInferior,limiteSuperior);
+      modelo.put("usuario", usuario);
+      modelo.put("incidentes", incidentesPaginados);
+      modelo.put("paginas", paginas);
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
+      return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+    }
+    catch(Exception e){
+        try {
+          List<Incidente> incidentesPaginados = incidentes.subList(limiteInferior,incidentes.size());
+          if(incidentesPaginados.size() == 0){
+            throw new Exception("No hay incidentes para esta pagina");
+          }
+          modelo.put("usuario", usuario);
+          modelo.put("incidentes", incidentesPaginados);
+          modelo.put("paginas", paginas);
+          List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+          modelo.put("criterios", criterio);
+          return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
+        }
+        catch (Exception e2){
+          response.redirect("/incidente-sugerido/1");
+          return null;
+        }
+    }
   }
 
 }
+

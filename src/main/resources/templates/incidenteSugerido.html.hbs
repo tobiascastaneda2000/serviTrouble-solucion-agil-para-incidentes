@@ -4,7 +4,7 @@
 
       <div class="bg-gris py-2 align-items-center text-white">
           <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+            <li class="breadcrumb-item text-white"><a href="/home" class="nav-link text-white" id="subrayado">Home</a></li>
             <li class="text-white text-decoration-none mx-2"> > </li>
             <li class="breadcrumb-item text-white" aria-current="page">Incidentes Sugeridos</li>
           </ol>
@@ -12,7 +12,7 @@
         </div>
 
  <div>
-        <h2 class="text-center mt-5 mb-4">INCIDENTES CERCANOS</h2>
+        <h2 class="text-center fw-bolder mt-5 mb-4">Incidentes cercanos</h2>
       </div>
 
     <div class="container  my-2">
@@ -34,7 +34,7 @@
                         <p class="card-text">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</p>
                         <form class="incidente_sugeridos-form" method="POST" action="/comunidades/{{id}}">
                             <input type="hidden" value="{{id}}" name="idIncidente"></input>
-                            <input type="submit"  onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-amarillo"/>
+                            <input type="submit"  onclick="return confirm('¿Seguro que querés cerrar el incidente?')" value="Cerrar Incidente" class="btn btn-warning"/>
                         </form>
                       </div>
                     </div>
@@ -44,6 +44,13 @@
         </div>
       </div>
 
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {{#each paginas}}
+    <li class="page-item paginationCustom"><a class="page-link" href="/incidente-sugerido/{{this}}">{{this}}</a></li>
+  {{/each}}
+  </ul>
+</nav>
 
 {{/partial}}
 

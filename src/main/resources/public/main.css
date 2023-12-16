@@ -71,3 +71,8 @@
         background: #E0A72F;
     }
 
+.paginationCustom{
+
+  --bs-pagination-hover-bg: #448af2;
+  --bs-pagination-hover-color: white;
+}
