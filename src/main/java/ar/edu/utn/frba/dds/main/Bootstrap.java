@@ -159,7 +159,41 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepositorioComunidades.getInstance().add(comunidad1);
 
       Comunidad comunidad2 = new Comunidad("nombre2");
+      comunidad2.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad2);
+
+      Comunidad comunidad3 = new Comunidad("nombre3");
+      comunidad3.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad3);
+
+      Comunidad comunidad4 = new Comunidad("nombre4");
+      comunidad4.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad4);
+
+      Comunidad comunidad5 = new Comunidad("nombre5");
+      comunidad5.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad5);
+
+      Comunidad comunidad6 = new Comunidad("nombre6");
+      comunidad6.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad6);
+
+      Comunidad comunidad7 = new Comunidad("nombre7");
+      comunidad7.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad7);
+
+      Comunidad comunidad8 = new Comunidad("nombre8");
+      comunidad8.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad8);
+
+      Comunidad comunidad9 = new Comunidad("nombre9");
+      comunidad9.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad9);
+
+      Comunidad comunidad10 = new Comunidad("nombre10");
+      comunidad10.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      RepositorioComunidades.getInstance().add(comunidad10);
+
 
       //CARGA CRITERIOS RANKINGS
       CriterioRanking criterioPromedioCierre = new PromedioCierresSemanal();

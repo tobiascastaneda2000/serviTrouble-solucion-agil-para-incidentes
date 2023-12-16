@@ -7,6 +7,7 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.time.format.DateTimeFormatter;
 
+import java.util.HashSet;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -28,8 +29,47 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
-    modelo.put("comunidades", comunidades);
-    return new ModelAndView(modelo, "comunidades.html.hbs");
+
+    String idPagina = request.queryParams("pagina");
+    if(idPagina==null){
+      idPagina="1";
+    }
+    int limiteInferior = (Integer.parseInt(idPagina) - 1) * 9;
+    int limiteSuperior = limiteInferior + 9;
+
+    int i=0;
+    int k=1;
+    HashSet<Integer> paginas = new HashSet<Integer>();
+    paginas.add(1);
+    for (Comunidad comunidad : comunidades) {
+      i++;
+      if(i>9){
+        k++;
+        paginas.add(k);
+        i=0;
+      }
+    }
+
+    try {
+      List<Comunidad> comunidadesPaginadas = comunidades.subList(limiteInferior,limiteSuperior);
+      modelo.put("comunidades", comunidadesPaginadas);
+      modelo.put("paginas", paginas);
+      return new ModelAndView(modelo, "comunidades.html.hbs");
+    }
+    catch(Exception e) {
+      try {
+        List<Comunidad> comunidadesPaginadas = comunidades.subList(limiteInferior, comunidades.size());
+        if (comunidadesPaginadas.size() == 0) {
+          throw new Exception("No hay incidentes para esta pagina");
+        }
+        modelo.put("comunidades", comunidadesPaginadas);
+        modelo.put("paginas", paginas);
+        return new ModelAndView(modelo, "comunidades.html.hbs");
+      } catch (Exception e2) {
+        response.redirect("/comunidades");
+        return null;
+      }
+    }
   }
 
 

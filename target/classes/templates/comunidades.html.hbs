@@ -3,7 +3,7 @@
 
 <div class="bg-gris py-2 align-items-center text-white">
   <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
     <li class="breadcrumb-item text-white" aria-current="page">Comunidades</li>
   </ol>
@@ -12,28 +12,40 @@
 
 
 
-    <div class="text-center my-4">
-        <h2>MIS COMUNIDADES</h2>
-    </div>
+<div class="text-center my-4">
+     <h2>Mis comunidades</h2>
+</div>
 
-<div class="row justify-content-center">
+<div class="container">
+<div class="row mb-4">
 {{#comunidades}}
-<div class="col-4">
+<div class="col-4 mb-4">
     <div class="card">
       <div class="card-header">
-
+        <h5 class="card-title fw-bold">{{nombre}}</h5>
       </div>
       <div class="card-body">
-        <h5 class="card-title text-uppercase fw-bold">{{nombre}}</h5>
         <div class="d-md-flex justify-content-md-end">
-        <a href="/comunidades/{{id}}" class="btn btn-amarillo">Ver incidentes</a>
+        <a href="/comunidades/{{id}}" class="btn btn-warning">Ver incidentes</a>
         </div>
       </div>
     </div>
-    </div>
-    {{/comunidades}}
+</div>
+{{/comunidades}}
+</div>
 </div>
 
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  {{#each paginas}}
+    <form id="pagina{{this}}" method="GET">
+    <input type="hidden" class="form-control" name="pagina" value="{{this}}">
+    <li class="page-item paginationCustom"><a class="page-link" onclick="document.getElementById('pagina{{this}}').submit();">{{this}}</a></li>
+    </form>
+  {{/each}}
+  </ul>
+</nav>
 
 {{/partial}}
 
