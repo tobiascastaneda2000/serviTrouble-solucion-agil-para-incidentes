@@ -2,9 +2,9 @@
 
       <div class="bg-gris py-2 align-items-center text-white">
           <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+            <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
             <li class="text-white text-decoration-none mx-2"> > </li>
-            <li class="breadcrumb-item text-white text-decoration-none"><a href="/comunidades" class="text-decoration-none text-white">Comunidades</a></li>
+            <li class="breadcrumb-item text-white"><a href="/comunidades" id="subrayado" class="nav-link text-white">Comunidades</a></li>
             <li class="text-white text-decoration-none mx-2"> > </li>
             <li class="breadcrumb-item text-white" aria-current="page">Incidentes</li>
           </ol>
@@ -12,70 +12,64 @@
         </div>
 
 
-
-
+<div class="container">
 <div class="row justify-content-center">
-    <div class="col-5">
-    <div class="text-center my-4">
-    <h2>Incidentes abiertos</h2>
-    </div>
-      <div class="accordion" id="accordionExample">
-      {{#incidentesAbiertos}}
-        <div class="accordion-item">
-          <h2 class="accordion-header">
+	<div class="col-6">
+		<div class="text-center my-4">
+			<h2>Incidentes</h2>
+		</div>
+		<div class="accordion" id="accordionExample">
+			{{#incidentesAbiertos}}
+			<div class="accordion-item">
+				<h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
               {{observacion}}
             </button>
           </h2>
-          <div id="collapse{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Estado: {{estado}}</li>
-                        <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                        <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
-                    </ul>
-                 <form method="POST">
-                 <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
-                 <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
-                      <input type="submit" onclick="return confirm('¿Seguro que querés cerrar el incidente?')" class="btn btn-warning " value="Cerrar Incidente">
-                 </div>
-                 </form>
-            </div>
-          </div>
-        </div>
-        {{/incidentesAbiertos}}
-      </div>
-    </div>
-    <div class="col-5">
-    <div class="text-center my-4">
-    <h2>Incidentes cerrados</h2>
-    </div>
-            <div class="accordion" id="accordionExample">
-            {{#incidentesCerrados}}
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
-                    {{observacion}}
-                  </button>
-                </h2>
-                <div id="collapse{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Observacion: {{observacion}}</li>
-                          <li class="list-group-item">Estado: {{estado}}</li>
-                          <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                          <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
-                          <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
-                         </ul>
-                       <form method="POST">
-                       </form>
-                  </div>
-                </div>
-              </div>
-              {{/incidentesCerrados}}
-            </div>
-    </div>
+				<div id="collapse{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Estado: {{estado}}</li>
+							<li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+							<li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
+						</ul>
+						<form method="POST" action="/incidentes">
+							<input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+							<div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+								<input type="submit" onclick="return confirm('¿Seguro que querés cerrar el incidente?')" class="btn btn-warning " value="Cerrar Incidente">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			{{/incidentesAbiertos}}
+			{{#incidentesCerrados}}
+            				<div class="accordion-item">
+            					<h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
+                                {{observacion}}
+                              </button>
+                            </h2>
+            					<div id="collapse{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            						<div class="accordion-body">
+            							<ul class="list-group list-group-flush">
+            								<li class="list-group-item">Observacion: {{observacion}}</li>
+            								<li class="list-group-item">Estado: {{estado}}</li>
+            								<li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+            								<li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+            								<li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
+            							</ul>
+            							<form method="POST">
+            							</form>
+            						</div>
+            					</div>
+            				</div>
+            {{/incidentesCerrados}}
+		</div>
+	</div>
 </div>
+</div>
+
 
 
 {{/partial}}

@@ -61,11 +61,12 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
         .setParameter("id", Long.parseLong(idIncidente)).getResultList().get(0);
     Comunidad comunidad = RepositorioComunidades.getInstance().contieneIncidente(incidente);
+    Long idComunidad = comunidad.id;
     withTransaction(() -> {
       comunidad.cerrarIncidente(incidente);
     });
 
-    response.redirect("/home");
+    response.redirect("/comunidades/"+idComunidad);
     return null;
   }
 
