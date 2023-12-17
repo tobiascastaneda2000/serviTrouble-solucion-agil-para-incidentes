@@ -16,10 +16,22 @@
      <h2>Mis comunidades</h2>
 </div>
 
+<div class="container d-flex justify-content-end my-2">
+<form class="row g-3">
+  <div class="col-auto">
+    <label for="inputSearch" class="visually-hidden">Buscar por nombre</label>
+    <input type="text" name="filtrado" class="form-control" id="inputSearch" placeholder="Buscar por nombre">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-warning mb-3">Filtrar</button>
+  </div>
+</form>
+</div>
+
 <div class="container">
 <div class="row mb-4">
 {{#comunidades}}
-<div class="col-4 mb-4">
+<div class="col-xl-4 mb-4">
     <div class="card">
       <div class="card-header">
         <h5 class="card-title fw-bold">{{nombre}}</h5>

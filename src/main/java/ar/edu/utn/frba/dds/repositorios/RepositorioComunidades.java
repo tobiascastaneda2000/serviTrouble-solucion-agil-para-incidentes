@@ -32,6 +32,16 @@ public class RepositorioComunidades extends Repositorio<Comunidad> {
     return comunidades.stream().filter(c -> c.contieneIncidente(incidente)).toList().get(0);
   }
 
+  public List<Comunidad> comunidadesFiltradas(List<Comunidad> comunidades,String filtro){
+
+    Set<Comunidad> common = new HashSet<>(comunidades);
+    List<Comunidad> comunidadesFiltradas = entityManager().createQuery("from Comunidad where nombre like :filtro")
+        .setParameter("filtro",filtro)
+        .getResultList();
+    common.retainAll(comunidadesFiltradas);
+    return common.stream().toList();
+  }
+
   public void clear() {
     this.comunidades = new HashSet<>();
   }
