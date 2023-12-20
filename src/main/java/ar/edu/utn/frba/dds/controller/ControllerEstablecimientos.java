@@ -28,6 +28,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("criterios", criterio);
     List<Establecimiento> establecimientos = entidad.getEstablecimientos();
     modelo.put("establecimientos", establecimientos);
+    modelo.put("idEntidad",id);
     return new ModelAndView(modelo, "establecimientos.html.hbs");
   }
 
@@ -57,6 +58,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
   public ModelAndView crearIncidente(Request request, Response response) {
     try {
       String idEstablecimiento = request.params(":id");
+      String idEntidad = request.queryParams("idEntidad");
       String id = request.queryParams("servicio");
       String observacion = request.queryParams("observacion");
       Servicio servicio = entityManager()
@@ -72,7 +74,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       });
       
       response.cookie("creado", "si");
-      response.redirect("/establecimientos/" + idEstablecimiento);
+      response.redirect("/entidades/" + idEntidad);
       return null;
     } catch (Exception e) {
       String idEstablecimiento = request.params(":id");

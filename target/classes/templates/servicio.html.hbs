@@ -2,9 +2,9 @@
 
       <div class="bg-gris py-2 align-items-center text-white">
           <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
             <li class="text-white text-decoration-none mx-2"> > </li>
-            <li class="breadcrumb-item text-white text-decoration-none"><a href="/entidades" class="text-decoration-none text-white">Entidades</a></li>
+            <li class="breadcrumb-item text-white "><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a></li>
             <li class="text-white text-decoration-none mx-2"> > </li>
             <li class="breadcrumb-item text-white" aria-current="page">Cargar Incidente</li>
 
@@ -13,11 +13,14 @@
         </div>
 
 
-<h2 class="text-center my-5">Cargar incidente</h1>
 
-<div class="container d-flex justify-content-center align-items-center ">
-    <form method="POST" class="row border rounded-5 p-3 bg-white shadow box-area">
-        <div class="mb-3">
+
+<div class="container mt-5 d-flex justify-content-center align-items-center ">
+    <form method="POST" class="col-5 border border-dark">
+        <div class="border border-dark border-top-0 border-end-0 border-start-0" style="background: #B39556;">
+        <h2 class="text-center text-white fw-bolder py-4">Cargar incidente</h2>
+        </div>
+        <div class="container my-3">
            <div class="mb-3">
                <label for="disabledTextInput">Establecimiento</label>
                <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombreEstablecimiento}}" disabled>
@@ -29,11 +32,11 @@
                {{/servicios}}
            </select>
         </div>
-        <div class="mb-3">
+        <div class="container mb-3">
            <label>Observación</label>
-           <textarea class="form-control" name="observacion" maxlength="50"></textarea>
+           <textarea class="form-control" name="observacion" maxlength="250"></textarea>
         </div>
-        <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="container mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
             <input type="submit" class="btn btn-warning" value="Abrir Incidente">
         </div>
     </form>

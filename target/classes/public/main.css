@@ -35,6 +35,7 @@
     background: #8B774C;
   }
 
+
   .bg-claro{
     background: #E4E8F0;
   }
@@ -76,3 +77,4 @@
   --bs-pagination-hover-bg: #448af2;
   --bs-pagination-hover-color: white;
 }
+
