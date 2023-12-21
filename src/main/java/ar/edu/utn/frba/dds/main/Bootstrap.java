@@ -163,7 +163,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepositorioComunidades.getInstance().add(comunidad2);
 
       Comunidad comunidad3 = new Comunidad("nombre3");
-      comunidad3.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      comunidad3.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad3);
 
       Comunidad comunidad4 = new Comunidad("nombre4");
@@ -175,7 +175,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepositorioComunidades.getInstance().add(comunidad5);
 
       Comunidad comunidad6 = new Comunidad("nombre6");
-      comunidad6.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      comunidad6.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad6);
 
       Comunidad comunidad7 = new Comunidad("nombre7");
@@ -191,7 +191,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepositorioComunidades.getInstance().add(comunidad9);
 
       Comunidad comunidad10 = new Comunidad("nombre10");
-      comunidad10.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
+      comunidad10.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad10);
 
 

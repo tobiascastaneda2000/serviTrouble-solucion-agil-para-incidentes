@@ -3,9 +3,9 @@
 
 <div class="bg-gris py-2 align-items-center text-white">
   <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
-    <li class="breadcrumb-item text-white text-decoration-none"><a href="/admin-comunidades" class="text-decoration-none text-white">Comunidades Administrables</a></li>
+    <li class="breadcrumb-item text-white "><a href="/admin-comunidades" id="subrayado" class="nav-link text-white">Comunidades Administrables</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
     <li class="breadcrumb-item text-white" aria-current="page">Miembros</li>
   </ol>
@@ -14,7 +14,7 @@
 
 
 <div class="container text-center my-4">
-<h1 class="text-uppercase">Usuarios de {{nombreComunidad}}</h1>
+<h2>Usuarios de {{nombreComunidad}}</h2>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center">
@@ -22,12 +22,16 @@
 <ul class="list-group">
         {{#usuarios}}
             <form method="POST" >
-              <li class="list-group-item d-flex justify-content-between align-items-center rounded-4">
-                {{usuario}}
+
+            <div class="card">
+              <h5 class="card-header">{{usuario}}</h5>
+              <div class="card-body">
+                <p class="card-text text-lowercase">Contacto: {{contacto}}</p>
+                <p class="card-text text-lowercase">Permiso de comunidad: {{permisoUsuario}}</p>
                 <input type="hidden" name="idusuario" value="{{id}}">
                 <input type="submit" value="Eliminar Miembro" class="btn btn-warning">
-              </li>
-
+              </div>
+            </div>
 
             </form>
         {{/usuarios}}

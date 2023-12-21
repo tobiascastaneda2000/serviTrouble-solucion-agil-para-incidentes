@@ -3,7 +3,7 @@
 
 <div class="bg-gris py-2 align-items-center text-white">
   <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
     <li class="breadcrumb-item text-white" aria-current="page">Comunidades Administrables</li>
   </ol>
@@ -13,22 +13,22 @@
 
 
 <div class="container justify-content-center">
-    <div class="titulo my-5 text-center">
+    <div class="titulo my-4 text-center">
         <h2 class="text-center">Mis comunidades administrables</h2>
-        <a class="text-center text-uppercase text-decoration-none">{{vacio}}</a>
+        <a class="text-center text-decoration-none">{{vacio}}</a>
     </div>
 
 <div class="row justify-content-center my-4">
-<div class="col-8">
-<div class="accordion" id="accordionExample">
+<div class="col-6">
+<div class="accordion border border-1 border-secondary rounded" id="accordionExample">
   {{#comunidades}}
-  <div class="accordion-item">
+  <div class="accordion-item border border-1 border-secondary">
     <h2 class="accordion-header">
-      <button class="accordion-button text-uppercase fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
         {{nombre}}
       </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+    <div id="collapse{{id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div class="accordion-body">
            Servicios de Interés:
            <ul class="list-group list-group-flush">
