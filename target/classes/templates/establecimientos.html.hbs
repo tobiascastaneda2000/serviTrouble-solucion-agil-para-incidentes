@@ -27,44 +27,51 @@
         <p>{{nombre}}</p>
     {{/servicios}}
     <div class="container mt-auto align-self-end justify-content-center">
-    <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Cargar incidente</button>
 
-    <div class="offcanvas offcanvas-bottom bg-marron" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-      <div class="offcanvas-header py-0 mt-2" data-bs-theme="dark">
-        <h5 class="offcanvas-title text-white" id="offcanvasBottomLabel">Cargar incidente</h5>
-        <button type="button" class="btn-close end-0" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Cargar incidente
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar incidente</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body small py-0">
-        <form method="POST" action="/establecimientos/{{id}}">
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label class="text-white" for="disabledTextInput">Establecimiento</label>
-                            <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombre}}" disabled>
+      <form method="POST" action="/establecimientos">
+      <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-start mb-3">
+                                    <label for="disabledTextInput">Establecimiento</label>
+                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombre}}" disabled>
+                                </div>
+                                <div class="text-start mb-3">
+                                    <label  for="opciones">Servicio</label>
+                                    <select id="servicio" class="form-select " name="servicio">
+                                         {{#servicios}}
+                                         <option value={{id}}>{{nombre}}</option>
+                                         {{/servicios}}
+                                    </select>
+                                </div>
+                                <div class="container text-start mb-3">
+                                    <label >Observación</label>
+                                    <textarea class="form-control " name="observacion" maxlength="250"></textarea>
+                                </div>
+                              </div>
                         </div>
-                        <div>
-                            <label class="text-white" for="opciones">Servicio</label>
-                            <select id="servicio" class="form-select " name="servicio">
-                                 {{#servicios}}
-                                 <option value={{id}}>{{nombre}}</option>
-                                 {{/servicios}}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="container mb-3">
-                            <label class="text-white">Observación</label>
-                            <textarea class="form-control " name="observacion" maxlength="250"></textarea>
-                        </div>
-                        <div class="container mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
-                            <input type="hidden" class="form-control" name="idEntidad" value="{{idEntidad}}">
-                            <input type="submit" class="btn btn-warning text-white" value="Abrir Incidente">
-                        </div>
-                    </div>
-                </div>
-            </form>
       </div>
+      <div class="modal-footer">
+        <input type="hidden" class="form-control" name="idEntidad" value="{{idEntidad}}">
+        <input type="submit" class="btn btn-warning " value="Abrir Incidente">
+      </div>
+      </form>
     </div>
+  </div>
+</div>
+
     </div>
   </div>
 </div>

@@ -29,7 +29,12 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     List<Establecimiento> establecimientos = entidad.getEstablecimientos();
     modelo.put("establecimientos", establecimientos);
     modelo.put("idEntidad",id);
-    return new ModelAndView(modelo, "establecimientos.html.hbs");
+    if (request.cookie("creado") == null) {
+      return new ModelAndView(modelo, "establecimientos.html.hbs");
+    } else {
+      response.removeCookie("creado");
+      return new ModelAndView(modelo, "incidenteCreado.html.hbs");
+    }
   }
 
   public ModelAndView cargarIncidente(Request request, Response response) {
@@ -47,17 +52,11 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("nombreEstablecimiento", establecimiento.nombre);
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("servicios", servicios);
-    if (request.cookie("creado") == null) {
-      return new ModelAndView(modelo, "servicio.html.hbs");
-    } else {
-      response.removeCookie("creado");
-      return new ModelAndView(modelo, "incidenteCreado.html.hbs");
-    }
+    return new ModelAndView(modelo, "servicio.html.hbs");
   }
 
   public ModelAndView crearIncidente(Request request, Response response) {
     try {
-      String idEstablecimiento = request.params(":id");
       String idEntidad = request.queryParams("idEntidad");
       String id = request.queryParams("servicio");
       String observacion = request.queryParams("observacion");
@@ -72,10 +71,9 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       withTransaction(() -> {
         usuario.abrirIncidente(servicio, observacion);
       });
-      
-      response.cookie("creado", "si");
+
+      response.cookie("creado","si",1);
       response.redirect("/entidades/" + idEntidad);
-      return null;
     } catch (Exception e) {
       String idEstablecimiento = request.params(":id");
       Establecimiento establecimiento = entityManager()
@@ -92,6 +90,7 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       modelo.put("servicios", servicios);
       return new ModelAndView(modelo, "incidenteNoCreado.html.hbs");
     }
+    return null;
   }
 
 }
