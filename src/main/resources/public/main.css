@@ -86,4 +86,8 @@
     text-decoration: underline;
   }
 
+  .incidente-card{
+    width: 16rem;
+  }
+
 }

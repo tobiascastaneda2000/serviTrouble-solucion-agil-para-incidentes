@@ -50,13 +50,18 @@
 
     .incidentes-cercanos-container-responsive{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-content: center;
+        gap: 20px;
     }
 
     .incidente-cercano-responsive{
-        width: auto;
+        width: 100%;
         margin: 20px;
+    }
+
+    .incidente-card{
+        width: 100%;
     }
 }
