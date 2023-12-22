@@ -42,6 +42,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       Usuario usuarioComun1 = new Usuario("facu", "123456", "famartnez@frba.utn.edu.ar");
       Horario unHorario = new Horario(15, 43);
+      usuarioComun1.permisoUsuario = PermisoUsuario.USUARIO_COMUN;
       usuarioComun1.agregarHorario(unHorario);
       usuarioComun1.medioNotificador = ServiceLocatorMedioNotificador.getServicio("mailSender");
       RepoUsuarios.getInstance().add(usuarioComun1);

@@ -24,6 +24,7 @@ public class ControllerEntidades implements WithSimplePersistenceUnit {
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     List<Entidad> entidades = RepoEntidades.getInstance().getAll();
+    System.out.println(entidades.size());
     modelo.put("entidades", entidades);
     return new ModelAndView(modelo, "entidades.html.hbs");
   }

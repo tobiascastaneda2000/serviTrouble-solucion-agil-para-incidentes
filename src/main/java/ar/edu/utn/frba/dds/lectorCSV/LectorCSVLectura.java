@@ -52,16 +52,8 @@ public class LectorCSVLectura {
         String leido = fileReader.readLine();
         while (leido != null) {
           Entidad entidadNueva = generarEntidad(leido);
-          if (entidades.stream().anyMatch(e ->
-              e.getId() == entidadNueva.getId() &&
-                  e.getEmail().equals(entidadNueva.getEmail()) &&
-                  e.getRazonSocial().equals(entidadNueva.getRazonSocial())
-          )) {
-            throw new EntidadYaCargadaException();
-          } else {
             entidades.add(entidadNueva);
             leido = fileReader.readLine();
-          }
         }
         fileReader.close();
       } catch (IOException ex) {

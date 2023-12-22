@@ -57,7 +57,7 @@ public class Usuario implements WithSimplePersistenceUnit {
   @JoinColumn(name = "usuario_id")
   public Set<Horario> horariosPlanificados = new HashSet<>();
 
-  @Enumerated(EnumType.STRING)
+  @Enumerated(EnumType.ORDINAL)
   public PermisoUsuario permisoUsuario;
 
   ///---------------------CONSTRUCTOR----------------------------------///
