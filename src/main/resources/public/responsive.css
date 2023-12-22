@@ -25,4 +25,18 @@
         position: static;
         margin-top: 20px; /* Agregar espacio entre la imagen y el botón */
     }
+
+    .col-4{
+        width: 60%;
+    }
+
+    .responsive-login{
+        height: calc(100vh - 90px);
+        margin-bottom: 60px;
+    }
+
+    .login-error-responsive{
+        height: 100%;
+    }
+
 }
