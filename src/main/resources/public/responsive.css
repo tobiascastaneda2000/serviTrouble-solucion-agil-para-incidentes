@@ -1,0 +1,28 @@
+@media only screen and (orientation: portrait) {
+    .background-overlay {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+        height: auto;
+    }
+
+    .columna-index {
+        padding: 20px;
+    }
+
+    .image-container {
+        width: 100vw;
+        height: 100vw;
+        padding: 0;
+        margin: 0;
+        transform: rotate(90deg); /* Girar la imagen para la vista vertical */
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container button {
+        position: static;
+        margin-top: 20px; /* Agregar espacio entre la imagen y el botón */
+    }
+}
