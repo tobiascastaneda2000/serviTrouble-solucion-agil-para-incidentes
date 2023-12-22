@@ -2,9 +2,13 @@ package ar.edu.utn.frba.dds.main;
 
 
 import ar.edu.utn.frba.dds.NotificadorProgramado;
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorMedioNotificador;
+import ar.edu.utn.frba.dds.ServicesLocators.ServiceLocatorUbicacion;
 import ar.edu.utn.frba.dds.controller.*;
 import ar.edu.utn.frba.dds.comunidad.*;
+import ar.edu.utn.frba.dds.notificador.MailSender;
 import ar.edu.utn.frba.dds.repositorios.RepositorioComunidades;
+import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion1;
 import com.google.gson.Gson;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.time.LocalDate;
@@ -32,6 +36,9 @@ public class Routes implements WithSimplePersistenceUnit {
 
   public void start() {
     System.out.println("Iniciando servidor");
+
+    new ServiceLocatorUbicacion().setServicios("servicioUbicacion",new ServicioUbicacion1());
+    new ServiceLocatorMedioNotificador().setServicios("mailSender", new MailSender());
 
     Spark.port(getHerokuAssignedPort());
     Spark.staticFileLocation("/public");
