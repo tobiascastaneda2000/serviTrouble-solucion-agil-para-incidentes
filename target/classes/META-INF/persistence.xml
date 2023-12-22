@@ -8,21 +8,21 @@
   <persistence-unit name="simple-persistence-unit" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <class>package ar.edu.utn.frba.dds.Entidad</class>
-    <class>package ar.edu.utn.frba.dds.Establecimiento</class>
-    <class>package ar.edu.utn.frba.dds.Servicio</class>
-    <class>package ar.edu.utn.frba.dds.comunidad_e_incidentes.Incidente</class>
-    <class>package ar.edu.utn.frba.dds.comunidad_e_incidentes.Comunidad</class>
-    <class>package ar.edu.utn.frba.dds.comunidad_e_incidentes.Miembro</class>
-    <class>package ar.edu.utn.frba.dds.Usuario</class>
-    <class>package ar.edu.utn.frba.dds.notificador.Notificacion</class>
-    <class>package ar.edu.utn.frba.dds.notificador.Horario</class>
-    <class>package ar.edu.utn.frba.dds.notificador.MedioNotificador</class>
-    <class>package ar.edu.utn.frba.dds.notificador.WhatsAppSender</class>
-    <class>package ar.edu.utn.frba.dds.notificador.MailSender</class>
-    <class>package ar.edu.utn.frba.dds.rankings.CriterioRanking</class>
-    <class>package ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal</class>
-    <class>package ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal</class>
+    <class>ar.edu.utn.frba.dds.entidades.Entidad</class>
+    <class>ar.edu.utn.frba.dds.entidades.Establecimiento</class>
+    <class>ar.edu.utn.frba.dds.entidades.Servicio</class>
+    <class>ar.edu.utn.frba.dds.incidentes.Incidente</class>
+    <class>ar.edu.utn.frba.dds.comunidad.Comunidad</class>
+    <class>ar.edu.utn.frba.dds.comunidad.Miembro</class>
+    <class>ar.edu.utn.frba.dds.comunidad.Usuario</class>
+    <class>ar.edu.utn.frba.dds.notificador.Notificacion</class>
+    <class>ar.edu.utn.frba.dds.notificador.Horario</class>
+    <class>ar.edu.utn.frba.dds.notificador.MedioNotificador</class>
+    <class>ar.edu.utn.frba.dds.notificador.WhatsAppSender</class>
+    <class>ar.edu.utn.frba.dds.notificador.MailSender</class>
+    <class>ar.edu.utn.frba.dds.rankings.CriterioRanking</class>
+    <class>ar.edu.utn.frba.dds.rankings.CantidadReportesSemanal</class>
+    <class>ar.edu.utn.frba.dds.rankings.PromedioCierresSemanal</class>
 
 
     <properties>

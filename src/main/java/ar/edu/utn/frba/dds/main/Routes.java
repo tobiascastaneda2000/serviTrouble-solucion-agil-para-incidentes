@@ -33,7 +33,6 @@ public class Routes implements WithSimplePersistenceUnit {
   public void start() {
     System.out.println("Iniciando servidor");
 
-    new Bootstrap().run();
     Spark.port(getHerokuAssignedPort());
     Spark.staticFileLocation("/public");
 
