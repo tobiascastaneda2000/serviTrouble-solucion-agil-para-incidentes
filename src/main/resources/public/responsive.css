@@ -53,15 +53,19 @@
         flex-direction: row;
         justify-content: center;
         align-content: center;
+        flex-wrap: wrap;
         gap: 20px;
     }
 
     .incidente-cercano-responsive{
         width: 100%;
+    }
+
+    .responsive-card{
         margin: 20px;
     }
 
-    .incidente-card{
-        width: 100%;
+    main{
+        height: auto;
     }
 }
