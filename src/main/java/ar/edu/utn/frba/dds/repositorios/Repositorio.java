@@ -28,6 +28,7 @@ public class Repositorio<T> implements WithSimplePersistenceUnit {
     entityManager().persist(object);
   }
 
+
   public void update(Object object) {
     entityManager().merge(object);
   }

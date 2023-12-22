@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
@@ -39,6 +41,9 @@ public class Usuario implements WithSimplePersistenceUnit {
   public String contacto;
 
   int intentos;
+
+  @Transient
+  private static final Logger log = LoggerFactory.getLogger(Usuario.class);
 
   @ManyToOne(cascade = CascadeType.PERSIST)
   public MedioNotificador medioNotificador;
@@ -179,10 +184,15 @@ public class Usuario implements WithSimplePersistenceUnit {
     return getUsuario().equals(username) && getContrasenia().equals(contrasenia);
   }
 
-  private void validarCantidadIntentos() {
+  public void validarCantidadIntentos() {
     if (getIntentos() >= 3) {
       throw new MaxCantIntentosInicioSesionException("Se ha superado limite de intentos e inicio de sesion, espere unos minutos..");
     }
+  }
+
+  public boolean haSuperadoLimiteIntentos() {
+    log.debug("Intentos del usuario: {}", getIntentos());
+    return getIntentos() >= 3;
   }
 
   //------------------------------------------------------------------------------------------------------//

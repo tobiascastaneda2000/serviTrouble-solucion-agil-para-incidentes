@@ -4,18 +4,18 @@
         <div class="row justify-content-center">
                 <div class="col-4 align-self-center">
                    <div class=" mb-4 alert alert-danger" role="alert">
-                     Contraseña o usuario incorrecto. Intente de nuevo. Cantidad de intentos realizados: {{intentos}}
+                     Ha realizado muchos intentos, intente nuevamente mas tarde
                    </div>
                     <div class="cont-form border border-secondary-subtle border-3 ">
                         <form method="POST" class="row p-3">
                         <h2 class="text-center my-3 fw-bold">Iniciar sesión</h2>
                         <div class="my-3">
                             <label>Nombre</label>
-                            <input type="text" class="form-control is-invalid " name="nombre" placeholder="name@example.com">
+                            <input type="text" class="form-control is-invalid " name="nombre" placeholder="name@example.com" disabled>
                         </div>
                         <div class="my-3">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control is-invalid" name="contrasenia" placeholder="password">
+                            <input type="password" class="form-control is-invalid" name="contrasenia" placeholder="password" disabled>
                         </div>
                         <div class="my-3 d-grid gap-2 ">
                             <input type="submit" class="btn btn-warning " value="Iniciar">
