@@ -18,13 +18,13 @@
         position: relative;
         top: 0;
         left: 0;
-        min-height: 100vh;
+        /*min-height: 100vh;*/
     }
-
+/*
     .layout-logeado{
         min-height: auto;
     }
-
+*/
     .background-overlay {
         display: flex;
         flex-direction: column; /* Cambiar a columna en pantallas pequeñas */

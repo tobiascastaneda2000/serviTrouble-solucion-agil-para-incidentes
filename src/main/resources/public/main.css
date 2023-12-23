@@ -33,12 +33,17 @@
   background: #E0A72F;
 }
 
+@media screen and (max-height: 100vh) and (orientation: landscape){
+  body {
+    height: 100vh;
+  }
+}
+
 @media only screen and (orientation: landscape){
 
   body {
     font-family: 'Poppins', sans-serif;
     position: relative;
-    height: 100vh;
     display: flex;
     flex-direction: column;
   }
@@ -50,10 +55,11 @@
         min-height: 100vh;
     }
 
+/*
     .layout-logeado{
         min-height: auto;
     }
-
+*/
   .background-overlay{
     display: flex;
     background-color: #FFF;
