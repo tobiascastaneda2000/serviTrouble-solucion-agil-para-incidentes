@@ -29,7 +29,6 @@ public class Notificacion {
 
   public void ejecutarse(Usuario usuario) {
     usuario.notificarIncidente(incidente);
-    incidente.cerrar();
     this.fueNotificada = true;
     usuario.deleteNotificacion(this);
     RepoUsuarios.getInstance().update(usuario);
