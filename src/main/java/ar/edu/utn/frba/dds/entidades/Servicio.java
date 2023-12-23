@@ -2,8 +2,7 @@ package ar.edu.utn.frba.dds.entidades;
 
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
-import ar.edu.utn.frba.dds.repositorios.RepoEstablecimientos;
-import ar.edu.utn.frba.dds.repositorios.RepoServicios;
+import ar.edu.utn.frba.dds.repositorios.RepoIncidentes;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,7 +25,6 @@ public class Servicio {
   public Long id;
 
   public String nombre;
-
   public List<Incidente> getHistorialIncidentes() {
     return historialIncidentes;
   }
@@ -62,6 +60,7 @@ public class Servicio {
 
   public void aniadirIncidente(Incidente incidente) {
     this.historialIncidentes.add(incidente);
+    RepoIncidentes.getInstance().add(incidente);
   }
 
   @Override
