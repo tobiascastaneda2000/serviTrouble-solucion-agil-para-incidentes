@@ -2,7 +2,7 @@
 
 <div class="bg-gris py-2 align-items-center text-white">
   <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item text-white text-decoration-none"><a href="/home" class="text-decoration-none text-white">Home</a></li>
+    <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
     <li class="breadcrumb-item text-white" aria-current="page">Perfil</li>
   </ol>
@@ -12,45 +12,66 @@
 
 
 {{#with usuarioDetalle}}
-<div class="row justify-content-center my-5">
-    <div class="col-4 border rounded-5 p-3 bg-white shadow box-area  align-self-center">
+<div>
     <h2 class="text-center my-3">Modificar mi usuario</h2>
+</div>
+<div class="container">
+<div class="row justify-content-center my-4">
+    <div class="col-3">
+    </div>
+    <div class="col-5 align-self-center">
     <form method="POST" action="/profile/modificacion" type="submit" value="Modificar Usuario">
-    <!-- Campo oculto para tratar la request como PUT -->
-    <input type="hidden" class="form-control" name="_method" value="PUT">
-         <ul class="list-group">
-           <div class="input-group mb-3">
-             <span class="input-group-text" id="inputGroup-sizing-default">Usuario</span>
-             <input type="text" id="disabledTextInput" class="form-control" name="usuario" value="{{usuario}}">
+           <!-- Campo oculto para tratar la request como PUT -->
+           <input type="hidden" class="form-control" name="_method" value="PUT">
+           <div class="mb-3">
+             <label for="exampleInputEmail1" class="form-label">Usuario</label>
+             <input type="text" id="exampleInputEmail1" class="form-control" placeholder="{{usuario}}" name="usuario" value="{{usuario}}" disabled>
            </div>
-           <div class="input-group mb-3">
-             <span class="input-group-text" id="inputGroup-sizing-default">Contacto</span>
+           <div class="mb-3">
+             <label for="exampleInputEmail1" class="form-label">Contacto</label>
              <input type="text" id="disabledTextInput" class="form-control" name="contacto" value="{{contacto}}">
            </div>
-           <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Contraseña</span>
+           <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Contraseña</label>
               <input type="password" id="disabledTextInput" class="form-control" name="contrasenia" value="{{contrasenia}}">
            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Agregar horario de notificacion</span>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Agregar horario de notificación</label>
               <input type="time" id="disabledTextInput" class="form-control" value="horario" name="horario" >
+              <div id="emailHelp" class="form-text">Hasta cinco horarios posibles</div>
            </div>
-           <div class="input-group mb-3">
-               <span class="input-group-text" id="inputGroup-sizing-default">Medio notificador</span>
+           <div class="mb-3">
+               <label for="exampleInputEmail1" class="form-label">Medio notificador</label>
                <input type="text" id="disabledTextInput" class="form-control" value="{{medioNotificador.nombre}}" name="medioNoti" disabled>
+               <div id="emailHelp" class="form-text">Proximamente mas medios de notificación</div>
             </div>
             <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
             <input type="submit" class="btn btn-warning" value="Guardar">
             </div>
-         </ul>
-         </form>
-      <div>
+    </form>
+    </div>
+    <div class="col-4 justify-content-center text-center">
+        <h5 class="mb-3">Horarios de notificación</h5>
+        <p>{{horarioVacio}}</p>
+        <div class="container justify-content-center">
+        {{#horarios}}
+            <form method="POST" action="/profile/modificacion/horarios">
+                <div class="card w-50 mx-auto">
+                  <div class="card-body text-center">
+                    <p class="card-title">{{hora}}:{{minuto}}</p>
+                    <input type="hidden" class="form-control" name="hora" value="{{hora}}">
+                    <input type="hidden" class="form-control" name="minuto" value="{{minuto}}">
+                    <input type="submit" class="btn btn-danger btn-sm" value="Borrar">
+                  </div>
+                </div>
+            </form>
+        {{/horarios}}
+        </div>
+    </div>
 </div>
-    {{/with}}
+</div>
 
-
-
-
+{{/with}}
 
 
 {{/partial}}

@@ -78,6 +78,7 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/profile", controllerUsuarios::mostrarPerfil, engine);
     Spark.get("/profile/modificacion", controllerUsuarios::modificarPerfil, engine);
     Spark.post("/profile/modificacion", controllerUsuarios::modificarUsuario, engine);
+    Spark.post("/profile/modificacion/horarios", controllerUsuarios::borrarHorario, engine);
 
 
     //INCIDENTES SUGERIDOS

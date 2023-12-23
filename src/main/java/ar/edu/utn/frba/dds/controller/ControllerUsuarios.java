@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.notificador.Horario;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
+import ar.edu.utn.frba.dds.repositorios.Repositorio;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import ar.edu.utn.frba.dds.comunidad.*;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.stream.Collectors;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -29,26 +31,41 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView modificarUsuario(Request request, Response response) {
-    String nombre = request.queryParams("usuario");
+
+    String hora;
+    String minuto;
     String contrasenia = request.queryParams("contrasenia");
     String contacto = request.queryParams("contacto");
     String horario = request.queryParams("horario");
-    String[] partes = horario.split(":");
-    String hora = partes[0];
-    String minuto = partes[1];
+
+    try {
+      String[] partes = horario.split(":");
+      hora = partes[0];
+      minuto = partes[1];
+    }catch (Exception e){
+      minuto = null;
+      hora = null;
+    }
+
+
     Long id = request.session().attribute("user_id");
 
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
 
+    String finalHora = hora;
+    String finalMinuto = minuto;
     withTransaction(() -> {
-      usuario.setUsername(nombre);
       usuario.setContrasenia(contrasenia);
       usuario.setContacto(contacto);
-      usuario.agregarHorario(new Horario(Integer.parseInt(hora),Integer.parseInt(minuto)));
+      if(usuario.horariosPlanificados.size()<5){
+        if(finalHora != null && finalMinuto !=null){
+          usuario.agregarHorario(new Horario(Integer.parseInt(finalHora),Integer.parseInt(finalMinuto)));
+        }
+      }
       RepoUsuarios.getInstance().update(usuario);
     });
 
-    response.redirect("/home");
+    response.redirect("/profile");
     return null;
   }
 
@@ -129,6 +146,9 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuario = RepoUsuarios.getInstance().getOne((id));
     Map<String, Object> modelo = new HashMap<>();
+    if(usuario.horariosPlanificados.size()==0){
+      modelo.put("horarioVacio", "No tenés horarios configurados");
+    }
     modelo.put("id", usuario.id);
     modelo.put("entidadesInteres", usuario.getEntidadesInteres());
     modelo.put("horarios", usuario.getHorariosPlanificados());
@@ -155,5 +175,28 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     } else {
       return null;
     }
+  }
+
+
+
+
+  public ModelAndView borrarHorario(Request request, Response response) {
+
+    Long id = request.session().attribute("user_id");
+    String hora = request.queryParams("hora");
+    String minuto = request.queryParams("minuto");
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+
+    withTransaction(() -> {
+
+      Horario horario = usuario.horariosPlanificados.stream().filter(h->h.equals(new Horario(Integer.parseInt(hora),Integer.parseInt(minuto))))
+          .collect(Collectors.toList()).get(0);
+      usuario.sacarHorario(horario);
+
+      RepoUsuarios.getInstance().update(usuario);
+    });
+
+    response.redirect("/profile/modificacion");
+    return null;
   }
 }

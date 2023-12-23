@@ -25,7 +25,7 @@ public class MailSender extends MedioNotificador {
   @Transient
   final String correoRemitente = "mailsendergrupo7@gmail.com";
 
-  public static String nombre = "mailsender";
+  public static String nombre = "Mail";
   @Transient
   String passwordRemitente = null;
 
