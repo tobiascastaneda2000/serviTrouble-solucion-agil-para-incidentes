@@ -71,8 +71,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
         modelo.put("paginas", paginas);
         return new ModelAndView(modelo, "comunidades.html.hbs");
       } catch (Exception e2) {
-        response.redirect("/comunidades");
-        return null;
+        return new ModelAndView(modelo, "comunidades.html.hbs");
       }
     }
   }
