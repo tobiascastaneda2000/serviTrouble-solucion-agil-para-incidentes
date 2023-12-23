@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controller;
 
 import ar.edu.utn.frba.dds.validaciones_password.MaxCantIntentosInicioSesionException;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import net.bytebuddy.matcher.StringMatcher;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -21,7 +22,7 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView crearSesion(Request request, Response response) {
-    Usuario usuario = null;
+    Usuario usuario;
     String nombreUsuario;
     String contraseniaUsuario;
 
@@ -32,9 +33,10 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
       usuario = RepoUsuarios.getInstance().buscarPorUsuarioYContrasenia(nombreUsuario, contraseniaUsuario);
 
       Usuario finalUsuario = usuario;
+      /*
       withTransaction(() -> {
         finalUsuario.iniciarSesion(nombreUsuario, contraseniaUsuario);
-      });
+      });*/
 
       request.session().attribute("user_id", usuario.getId());
 
@@ -43,10 +45,18 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
       if (intentos == null) {
         intentos = 0;
       }
-      request.session().attribute("intentos", intentos );
 
-      response.redirect("/home");
-      return null;
+      if (intentos < 3) {
+        request.session().attribute("intentos", intentos);
+        response.redirect("/home");
+        return null;
+
+      }
+      else {
+        return bloquearLogin(request,response);
+      }
+
+
     } catch (Exception e) {
 
       Integer intentos = request.session().attribute("intentos");
@@ -56,18 +66,29 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
 
       request.session().attribute("intentos", intentos + 1);
 
+
       if (intentos >= 3) {
-        Map<String, Object> modelo = new HashMap<>();
-        return new ModelAndView(modelo, "loginErrorBloqueo.html.hbs");
+        return bloquearLogin( request,  response);
       } else {
-        Map<String, Object> modelo = new HashMap<>();
-        modelo.put("anio", LocalDate.now().getYear());
-        modelo.put("intentos", request.session().attribute("intentos"));
-        return new ModelAndView(modelo, "loginError.html.hbs");
+        return mostrarErrorDeLogueo(request, response);
       }
 
 
     }
+
+  }
+
+  public ModelAndView mostrarErrorDeLogueo(Request request, Response response){
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("intentos", request.session().attribute("intentos"));
+    return new ModelAndView(modelo, "loginError.html.hbs");
+  }
+
+  public ModelAndView bloquearLogin(Request request, Response response){
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    return new ModelAndView(modelo, "loginErrorBloqueo.html.hbs");
 
   }
 

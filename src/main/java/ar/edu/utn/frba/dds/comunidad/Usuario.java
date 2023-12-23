@@ -78,7 +78,7 @@ public class Usuario implements WithSimplePersistenceUnit {
   }
 
   @PostLoad
-  public void hidratarUsuario(){
+  public void hidratarUsuario() {
     this.servicioUbicacion = ServiceLocatorUbicacion.getServicio("servicioUbicacion");
   }
 
@@ -175,10 +175,16 @@ public class Usuario implements WithSimplePersistenceUnit {
     }
   }
 
-    public static Long redirigirSesionNoIniciada(Request request, Response response){
-        if (request.session().attribute("user_id")==null) response.redirect("/");
-        return request.session().attribute("user_id");
+  public static Long redirigirSesionNoIniciada(Request request, Response response) {
+    if (request.session().attribute("user_id") == null) response.redirect("/");
+    return request.session().attribute("user_id");
+  }
+
+  public void validarEspaciosEnBlanco(String username, String contrasenia){
+    if( username!=null && contrasenia!= null){
+      throw new EspaciosEnBlancoException("");
     }
+  }
 
   private boolean coincideUsuarioYContrasenia(String username, String contrasenia) {
     return getUsuario().equals(username) && getContrasenia().equals(contrasenia);
