@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.notificador;
 
+import ar.edu.utn.frba.dds.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.entidades.Servicio;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
 import javax.mail.Message;
@@ -44,7 +46,10 @@ public class MailSender extends MedioNotificador {
 
   @Override
   public void notificarUnIncidente(Incidente incidente, String contacto) {
-    String texto = incidente.getObservacion();
+    Servicio servicio = incidente.getServicioAsociado();
+    Establecimiento establecimiento = servicio.getEstablecimiento();
+    String texto = "Se ha generado el incidente" + incidente.getObservacion() + " en el servicio " + servicio
+        + " en el establecimiento " + establecimiento;
     this.configurarPropiedades();
     this.armarMensaje(contacto, texto, "Nuevo incidente");
     this.enviar();

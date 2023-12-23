@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.entidades.Servicio;
 
+import ar.edu.utn.frba.dds.notificador.Notificacion;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.stream.Collectors;
 import org.hibernate.annotations.Cascade;
@@ -106,6 +107,8 @@ public class Comunidad implements WithSimplePersistenceUnit {
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
+
+
 
 
   //------------------------------APERTURA DE INCIDENTE---------------------------------------------------//

@@ -237,6 +237,9 @@ public class Usuario implements WithSimplePersistenceUnit {
     return notificacionesPendientes.stream().filter(n -> n.getIncidente().equals(incidente)).toList().get(0);
   }
 
+  public void deleteNotificacion(Notificacion notificacion){
+    notificacionesPendientes.remove(notificacion);
+  }
 
   //------------------------------------------------------------------------------------------------------------//
 

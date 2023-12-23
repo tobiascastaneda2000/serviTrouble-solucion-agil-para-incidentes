@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.notificador;
 import ar.edu.utn.frba.dds.comunidad.Usuario;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import javax.persistence.*;
 
 @Entity
@@ -28,7 +29,9 @@ public class Notificacion {
 
   public void ejecutarse(Usuario usuario) {
     usuario.notificarIncidente(incidente);
+    usuario.deleteNotificacion(this);
     this.fueNotificada = true;
+    RepoUsuarios.getInstance().update(usuario);
   }
 }
 
