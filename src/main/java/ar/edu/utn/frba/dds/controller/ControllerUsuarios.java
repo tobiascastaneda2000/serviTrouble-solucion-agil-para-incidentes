@@ -110,7 +110,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     if (usuariosession.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
       Map<String, Object> modelo = new HashMap<>();
       if (usuario.medioNotificador != null) {
-        modelo.put("medioNoti", usuario.medioNotificador.toString());
+        modelo.put("medioNoti", usuario.medioNotificador.getNombre());
       } else {
         modelo.put("medioNoti", "");
       }
