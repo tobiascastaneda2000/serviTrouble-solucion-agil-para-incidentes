@@ -85,11 +85,11 @@ public class Routes implements WithSimplePersistenceUnit {
 
 
     //INCIDENTES SUGERIDOS
-    Spark.get("/incidente-sugerido/:id", controllerIncidentes::mostrarIncidentesSugeridosPaginados, engine);
+    Spark.get("/incidentes/sugeridos", controllerIncidentes::mostrarIncidentesSugeridosPaginados, engine);
 
     //ADMINISTRAR COMUNIDADES  
     Spark.get("/admin-comunidades", controllerComunidades::verComunidadesAdministrables, engine);
-    Spark.get("/admin-comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
+    Spark.get("-comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
     Spark.post("/admin-comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
 
 

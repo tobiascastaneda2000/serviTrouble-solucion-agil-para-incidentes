@@ -74,6 +74,8 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
   public ModelAndView mostrarIncidentesSugeridosPaginados(Request request, Response response) {
     Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuario = RepoUsuarios.getInstance().buscarUsuarioPorID(id);
+    String pag = request.queryParams("pag");
+    int idPagina = Integer.parseInt(pag);
     Map<String, Object> modelo = new HashMap<>();
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     List<Incidente> incidentes = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream()).filter(incidente -> usuario.esIncidenteCercano(incidente)).collect(Collectors.toList());
@@ -99,8 +101,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     }
 
 
-    String idPagina = request.params(":id");
-    int limiteInferior = (Integer.parseInt(idPagina) - 1) * 8;
+    int limiteInferior = (idPagina - 1) * 8;
     int limiteSuperior = limiteInferior + 8;
     try {
       List<Incidente> incidentesPaginados = incidentes.subList(limiteInferior,limiteSuperior);
@@ -125,7 +126,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
           return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
         }
         catch (Exception e2){
-          response.redirect("/incidente-sugerido/1");
+          response.redirect("/incidentes/sugeridos?pag=1");
           return null;
         }
     }
