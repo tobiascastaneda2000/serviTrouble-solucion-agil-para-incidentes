@@ -206,7 +206,9 @@ public class Usuario implements WithSimplePersistenceUnit {
 
   //-----------------------------------NOTIFICAR INCIDENTE--------------------------------------------------------------//
   public void notificarIncidente(Incidente incidente) {
-    this.medioNotificador.notificarUnIncidente(incidente, this.contacto);
+    if (incidente.estaAbierto()) {
+      this.medioNotificador.notificarUnIncidente(incidente, this.contacto);
+    }
   }
 
   public void agregarHorario(Horario horario) {
