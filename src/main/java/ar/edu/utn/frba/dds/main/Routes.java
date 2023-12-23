@@ -88,9 +88,9 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/incidentes/sugeridos", controllerIncidentes::mostrarIncidentesSugeridosPaginados, engine);
 
     //ADMINISTRAR COMUNIDADES  
-    Spark.get("/admin-comunidades", controllerComunidades::verComunidadesAdministrables, engine);
-    Spark.get("-comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
-    Spark.post("/admin-comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
+    Spark.get("/admin/comunidades", controllerComunidades::verComunidadesAdministrables, engine);
+    Spark.get("/admin/comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
+    Spark.post("/admin/comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
 
 
 
@@ -105,7 +105,7 @@ public class Routes implements WithSimplePersistenceUnit {
     //NO PUEDO PASAR LA RESPONSE A JSON
 
     //VER COMUNIDADES
-    Spark.get("/admin/comunidades",((request, response) -> {
+    Spark.get("/api/admin/comunidades",((request, response) -> {
 
       try{
         String nombreusuario = request.headers("usuario");
@@ -129,7 +129,7 @@ public class Routes implements WithSimplePersistenceUnit {
     }));
 
     //VER DETALLE DE UNA COMUNIDAD
-    Spark.get("/admin/comunidades/:id",((request, response) -> {
+    Spark.get("/api/admin/comunidades/:id",((request, response) -> {
 
       try{
         String nombreusuario = request.headers("usuario");
@@ -153,7 +153,7 @@ public class Routes implements WithSimplePersistenceUnit {
     }));
 
     //BORRAR UNA COMUNIDAD
-    Spark.delete("/admin/comunidades/:id",((request, response) -> {
+    Spark.delete("/api/admin/comunidades/:id",((request, response) -> {
 
       try{
         String nombreusuario = request.headers("usuario");
@@ -181,7 +181,7 @@ public class Routes implements WithSimplePersistenceUnit {
     }));
 
     //CREAR UNA COMUNIDAD
-    Spark.post("/admin/comunidades",((request, response) -> {
+    Spark.post("/api/admin/comunidades",((request, response) -> {
 
       try{
         String nombreusuario = request.headers("usuario");
@@ -208,7 +208,7 @@ public class Routes implements WithSimplePersistenceUnit {
     }));
 
     //EDITAR UNA COMUNIDAD
-    Spark.put("/admin/comunidades/:id",((request, response) -> {
+    Spark.put("/api/admin/comunidades/:id",((request, response) -> {
 
       try{
         String nombreusuario = request.headers("usuario");

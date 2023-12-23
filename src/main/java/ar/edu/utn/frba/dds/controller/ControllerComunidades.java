@@ -155,7 +155,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       comunidad.miembros.remove(miembro);
       remove(miembro);
     });
-    response.redirect("/admin-comunidades");
+    response.redirect("/admin/comunidades");
     return null;
   }
 }
