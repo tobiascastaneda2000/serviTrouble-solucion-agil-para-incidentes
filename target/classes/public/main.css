@@ -1,20 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
+.paginationCustom{
+  --bs-pagination-hover-bg: #448af2;
+  --bs-pagination-hover-color: white;
+}
+
+.bg-azul{
+  background: #5D77A3;
+}
+
+.bg-gris{
+  background: #565C66;
+}
+
+.bg-marron{
+  background: #8B774C;
+}
+
+.bg-claro{
+  background: #E4E8F0;
+}
+
+.btn-amarillo{
+  background: #E0A72F;
+}
+
+.btn-outline-amarillo, .btn-warning{
+  border-color: #E0A72F;
+}
+
+.btn-outline-warning:hover{
+  background: #E0A72F;
+}
+
+@media screen and (max-height: 100vh) and (orientation: landscape){
+  body {
+    height: 100vh;
+  }
+}
+
+@media only screen and (orientation: landscape){
+
   body {
     font-family: 'Poppins', sans-serif;
     position: relative;
-    padding-bottom: 60px;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
+    main{
+        position: relative;
+        top: 0;
+        left: 0;
+        min-height: 140vh;
+    }
 
-.image-container {
-    position: relative;
-    display: inline-block; /* Para asegurarse de que el contenedor se ajuste al tamaño de la imagen */
+/*
+    .layout-logeado{
+        min-height: auto;
+    }
+*/
+  .background-overlay{
+    display: flex;
+    background-color: #FFF;
+    height: 100%;
+  }
+
+  .columna-index{
+    flex: 1;
+  }
+
+  .presentacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .image-container {
+    display: flex;
+    align-items: stretch;
   }
 
   .image-container img {
-    width: 100%; /* Asegura que la imagen ocupe todo el espacio del contenedor */
+    width: auto;
+    height: 100%;
+    object-fit: fill; /* Ajustar la imagen manteniendo la proporción */
   }
 
   .image-container button {
@@ -23,58 +94,18 @@
     left: 8.5%; /* Ajusta la posición horizontalmente */
   }
 
-  .bg-azul{
-    background: #5D77A3;
-  }
-
-  .bg-gris{
-    background: #565C66;
-  }
-
-  .bg-marron{
-    background: #8B774C;
-  }
-
-
-  .bg-claro{
-    background: #E4E8F0;
-  }
-
-  .btn-amarillo{
-    background: #E0A72F;
-  }
-
-
-  .btn-outline-amarillo{
-
-    border-color: #E0A72F;
-  }
-
-   .btn-warning{
-        background: #E0A72F;
-   }
-
   footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
     height: 30px;
     color: white;
-    <!---->
   }
 
-
   #subrayado:hover {
-            text-decoration: underline;
-    }
+    text-decoration: underline;
+  }
 
-    .btn-outline-warning:hover{
-        background: #E0A72F;
-    }
+  .incidente-card{
+    width: 16rem;
+  }
 
-.paginationCustom{
-
-  --bs-pagination-hover-bg: #448af2;
-  --bs-pagination-hover-color: white;
 }
-

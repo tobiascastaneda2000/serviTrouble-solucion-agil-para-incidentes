@@ -1,0 +1,94 @@
+@media only screen and (orientation: portrait) {
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+        footer {
+          width: 100%;
+          height: 30px;
+          color: white;
+        }
+
+    main{
+        position: relative;
+        top: 0;
+        left: 0;
+        /*min-height: 100vh;*/
+    }
+/*
+    .layout-logeado{
+        min-height: auto;
+    }
+*/
+    .background-overlay {
+        display: flex;
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+        height: 100vh;
+        justify-content: space-between;
+    }
+
+    .columna-index {
+        padding: 20px;
+    }
+
+    .image-container {
+        width: 100vw;
+        height: 100vw;
+        padding: 0;
+        margin: 0;
+        transform: rotate(90deg); /* Girar la imagen para la vista vertical */
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .image-container button {
+        position: static;
+        margin-top: 20px; /* Agregar espacio entre la imagen y el botón */
+    }
+
+    .col-4{
+        width: 60%;
+    }
+
+    .responsive-login{
+        display: flex;
+        height: 100vh;
+        margin: 0 !important;
+    }
+
+    .login-error-responsive{
+        /*height: 100%;*/
+    }
+
+    .d-flex {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .incidentes-cercanos-container-responsive{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .incidente-cercano-responsive{
+        width: 100%;
+    }
+
+    .responsive-card{
+        margin: 20px;
+    }
+
+}

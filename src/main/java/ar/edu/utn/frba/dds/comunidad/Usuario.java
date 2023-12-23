@@ -213,6 +213,10 @@ public class Usuario implements WithSimplePersistenceUnit {
     horariosPlanificados.add(horario);
   }
 
+  public void sacarHorario(Horario horario) {
+    horariosPlanificados.remove(horario);
+  }
+
   public void verificarNotificaciones(Horario ahora) {
 
     if (horariosPlanificados.stream().anyMatch(h -> h.equals(ahora))) {

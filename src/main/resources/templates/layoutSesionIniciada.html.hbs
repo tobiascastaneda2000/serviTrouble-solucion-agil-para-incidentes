@@ -5,7 +5,8 @@
    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
    	<link rel="stylesheet" href="/bootstrap-5.3.2-dist/css/bootstrap.min.css">
    	<script src="/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/responsive.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
@@ -42,21 +43,11 @@
                     <li class="list-group-item bg-marron text-white"><a class="nav-link text-white" id="subrayado" href="/entidades">Abrir incidente</a></li>
                     <li class="list-group-item bg-marron text-white"><a class="nav-link text-white" id="subrayado" href="/comunidades">Mis comunidades</a></li>
                     <li class="list-group-item bg-marron text-white"><a class="nav-link text-white" id="subrayado" href="/admin-comunidades">Administrador de comunidad</a></li>
-                    <li class="list-group-item bg-marron text-white">
-                        <a class="dropdown-toggle nav-link text-white" id="subrayado" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                             Rankings de entidades
-                        </a>
-                        <ul class="dropdown-menu bg-marron">
-                             {{#criterios}}
-                                 <li><a href="/rankings/{{id}}" id="subrayado" class="text-white nav-link bg-marron">{{nombre_criterio}}</a></li>
-                             {{/criterios}}
-                          </ul>
-                    </li>
                   </ul>
             </div>
           </div>
 
-	<main>
+	<main class="layout-logeado">
 
      {{#block "principal" }}
      {{/block}}
