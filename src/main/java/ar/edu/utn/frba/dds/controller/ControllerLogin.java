@@ -51,9 +51,8 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
         response.redirect("/home");
         return null;
 
-      }
-      else {
-        return bloquearLogin(request,response);
+      } else {
+        return bloquearLogin(request, response);
       }
 
 
@@ -68,7 +67,7 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
 
 
       if (intentos >= 3) {
-        return bloquearLogin( request,  response);
+        return bloquearLogin(request, response);
       } else {
         return mostrarErrorDeLogueo(request, response);
       }
@@ -78,14 +77,14 @@ public class ControllerLogin implements WithSimplePersistenceUnit {
 
   }
 
-  public ModelAndView mostrarErrorDeLogueo(Request request, Response response){
+  public ModelAndView mostrarErrorDeLogueo(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("intentos", request.session().attribute("intentos"));
     return new ModelAndView(modelo, "loginError.html.hbs");
   }
 
-  public ModelAndView bloquearLogin(Request request, Response response){
+  public ModelAndView bloquearLogin(Request request, Response response) {
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     return new ModelAndView(modelo, "loginErrorBloqueo.html.hbs");
