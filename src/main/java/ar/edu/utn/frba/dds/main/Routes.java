@@ -40,9 +40,9 @@ public class Routes implements WithSimplePersistenceUnit {
     new ServiceLocatorUbicacion().setServicios("servicioUbicacion",new ServicioUbicacion1());
     new ServiceLocatorMedioNotificador().setServicios("mailSender", new MailSender());
 
+    new Bootstrap().run();
     Spark.port(getHerokuAssignedPort());
     Spark.staticFileLocation("/public");
-
 
     HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
     DemoControllerHome demoControllerhome = new DemoControllerHome();
