@@ -26,6 +26,8 @@ public class ControllerEntidades implements WithSimplePersistenceUnit {
     List<Entidad> entidades = RepoEntidades.getInstance().getAll();
     System.out.println(entidades.size());
     modelo.put("entidades", entidades);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "entidades.html.hbs");
   }
 

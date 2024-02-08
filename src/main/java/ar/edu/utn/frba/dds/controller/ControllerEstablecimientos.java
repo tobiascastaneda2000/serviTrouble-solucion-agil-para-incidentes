@@ -29,6 +29,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     List<Establecimiento> establecimientos = entidad.getEstablecimientos();
     modelo.put("establecimientos", establecimientos);
     modelo.put("idEntidad",id);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
     if (request.cookie("creado") == null) {
       return new ModelAndView(modelo, "establecimientos.html.hbs");
     } else {
@@ -52,6 +54,8 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
     modelo.put("nombreEstablecimiento", establecimiento.nombre);
     modelo.put("anio", LocalDate.now().getYear());
     modelo.put("servicios", servicios);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "servicio.html.hbs");
   }
 

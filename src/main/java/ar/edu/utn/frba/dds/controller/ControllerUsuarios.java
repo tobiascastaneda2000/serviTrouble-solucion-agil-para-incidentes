@@ -120,6 +120,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
       modelo.put("usuarioDetalle", usuario);
       List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
       modelo.put("criterios", criterio);
+      modelo.put("nombreUsuario",usuariosession.usuario);
       return new ModelAndView(modelo, "usuarioDetalle.html.hbs");
     }
     else{
@@ -139,6 +140,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     modelo.put("usuarioDetalle", usuario);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "perfilUsuario.html.hbs");
   }
 
@@ -156,6 +158,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     modelo.put("usuarioDetalle", usuario);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "modificarPerfil.html.hbs");
   }
 

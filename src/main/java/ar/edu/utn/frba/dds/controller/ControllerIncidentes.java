@@ -77,6 +77,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     String pag = request.queryParams("pag");
     int idPagina = Integer.parseInt(pag);
     Map<String, Object> modelo = new HashMap<>();
+    modelo.put("nombreUsuario",usuario.usuario);
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     List<Incidente> incidentes = comunidades.stream().flatMap(comunidad -> comunidad.getIncidentes().stream()).filter(incidente -> usuario.esIncidenteCercano(incidente)).collect(Collectors.toList());
     if (incidentes.isEmpty()) {

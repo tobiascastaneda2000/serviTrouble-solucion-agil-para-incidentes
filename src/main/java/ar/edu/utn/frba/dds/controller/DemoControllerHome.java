@@ -73,6 +73,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
         modelo.put("criterio2", criterio.get(1));
         modelo.put("ranking1", entidades1Diez);
         modelo.put("ranking2", entidades2Diez);
+        modelo.put("nombreUsuario",usuario.usuario);
         return new ModelAndView(modelo, "home.html.hbs");
       }
       if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
@@ -112,6 +113,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
         modelo.put("criterio2", criterio.get(1));
         modelo.put("ranking1", entidades1Diez);
         modelo.put("ranking2", entidades2Diez);
+        modelo.put("nombreUsuario",usuario.usuario);
         return new ModelAndView(modelo, "homeAdmin.html.hbs");
       } else {
         response.redirect("/home");

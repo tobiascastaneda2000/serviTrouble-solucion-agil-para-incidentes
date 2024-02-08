@@ -29,6 +29,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
+    modelo.put("nombreUsuario",usuario.usuario);
 
     String filtro = request.queryParams("filtrado");
     if (filtro!=null){
@@ -85,6 +86,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     modelo.put("anio", LocalDate.now().getYear());
     List<Incidente> incidentesAbiertos = comunidad.incidentes;
     List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -112,6 +115,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("nombreUsuario",usuario.usuario);
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c -> c.miembroEsAdmin(usuario)).toList();
     if (comunidadesAdmin.isEmpty()) {
@@ -128,6 +132,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     String id = request.params(":id");
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("nombreUsuario",usuario.usuario);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));

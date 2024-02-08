@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
+
+
+
 .paginationCustom{
   --bs-pagination-hover-bg: #448af2;
   --bs-pagination-hover-color: white;
@@ -8,6 +11,11 @@
 .bg-azul{
   background: #5D77A3;
 }
+
+.bg-celeste{
+  background: #7590BF;
+}
+
 
 .bg-gris{
   background: #565C66;
@@ -107,5 +115,6 @@
   .incidente-card{
     width: 16rem;
   }
+
 
 }
