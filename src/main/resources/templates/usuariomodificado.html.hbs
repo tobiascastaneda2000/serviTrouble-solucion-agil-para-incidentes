@@ -16,6 +16,12 @@
 {{#with usuarioDetalle}}
 
 <div class="container">
+<div class="row justify-content-center mt-3 mb-0">
+<div class="col-6 text-center alert alert-success alert-dismissible fade show" role="alert">
+  El usuario se ha modificado correctamente
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+</div>
+</div>
 <div class="row justify-content-start my-2 mb-3">
 <div>
     <h2 class="text-center my-3">Modificar mi usuario</h2>
@@ -29,7 +35,7 @@
          <a href="/profile/modificacion/horarios" class="btn btn-outline-secondary" for="vbtn-radio2">Horarios de notificación</a>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-4 align-self-center">
     <form method="POST" action="/profile/modificacion" type="submit" value="Modificar Usuario">
            <!-- Campo oculto para tratar la request como PUT -->
            <input type="hidden" class="form-control" name="_method" value="PUT">

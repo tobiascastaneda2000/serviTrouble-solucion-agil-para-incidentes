@@ -4,7 +4,9 @@
   <ol class="breadcrumb justify-content-center">
     <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
     <li class="text-white text-decoration-none mx-2"> > </li>
-    <li class="breadcrumb-item text-white" aria-current="page">Perfil</li>
+    <li class="breadcrumb-item text-white "><a href="/profile" id="subrayado" class="nav-link text-white">Perfil</a></li>
+    <li class="text-white text-decoration-none mx-2"> > </li>
+    <li class="breadcrumb-item text-white" aria-current="page">Modificar</li>
   </ol>
 </nav>
 </div>
@@ -12,14 +14,22 @@
 
 
 {{#with usuarioDetalle}}
+
+<div class="container">
+<div class="row justify-content-start my-2 mb-3">
 <div>
     <h2 class="text-center my-3">Modificar mi usuario</h2>
 </div>
-<div class="container">
-<div class="row justify-content-center my-4">
+    <div class="col-1"></div>
     <div class="col-3">
+        <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+         <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+          <label class="btn btn-outline-secondary" for="vbtn-radio1">General</label>
+         <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+         <a href="/profile/modificacion/horarios" class="btn btn-outline-secondary" for="vbtn-radio2">Horarios de notificación</a>
+        </div>
     </div>
-    <div class="col-5 align-self-center">
+    <div class="col-4">
     <form method="POST" action="/profile/modificacion" type="submit" value="Modificar Usuario">
            <!-- Campo oculto para tratar la request como PUT -->
            <input type="hidden" class="form-control" name="_method" value="PUT">
@@ -35,11 +45,6 @@
               <label for="exampleInputEmail1" class="form-label">Contraseña</label>
               <input type="password" id="disabledTextInput" class="form-control" name="contrasenia" value="{{contrasenia}}">
            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Agregar horario de notificación</label>
-              <input type="time" id="disabledTextInput" class="form-control" value="horario" name="horario" >
-              <div id="emailHelp" class="form-text">Hasta cinco horarios posibles</div>
-           </div>
            <div class="mb-3">
                <label for="exampleInputEmail1" class="form-label">Medio notificador</label>
                <input type="text" id="disabledTextInput" class="form-control" value="{{medioNotificador.nombre}}" name="medioNoti" disabled>
@@ -49,24 +54,6 @@
             <input type="submit" class="btn btn-warning" value="Guardar">
             </div>
     </form>
-    </div>
-    <div class="col-4 justify-content-center text-center">
-        <h5 class="mb-3">Horarios de notificación</h5>
-        <p>{{horarioVacio}}</p>
-        <div class="container justify-content-center">
-        {{#horarios}}
-            <form method="POST" action="/profile/modificacion/horarios">
-                <div class="card w-50 mx-auto">
-                  <div class="card-body text-center">
-                    <p class="card-title">{{hora}}:{{minuto}}</p>
-                    <input type="hidden" class="form-control" name="hora" value="{{hora}}">
-                    <input type="hidden" class="form-control" name="minuto" value="{{minuto}}">
-                    <input type="submit" class="btn btn-danger btn-sm" value="Borrar">
-                  </div>
-                </div>
-            </form>
-        {{/horarios}}
-        </div>
     </div>
 </div>
 </div>

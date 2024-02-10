@@ -32,10 +32,40 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
 
   public ModelAndView modificarUsuario(Request request, Response response) {
 
-    String hora;
-    String minuto;
+
     String contrasenia = request.queryParams("contrasenia");
     String contacto = request.queryParams("contacto");
+
+    Long id = request.session().attribute("user_id");
+
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+
+    withTransaction(() -> {
+      usuario.setContrasenia(contrasenia);
+      usuario.setContacto(contacto);
+      RepoUsuarios.getInstance().update(usuario);
+    });
+
+    Map<String, Object> modelo = new HashMap<>();
+    if(usuario.horariosPlanificados.size()==0){
+      modelo.put("horarioVacio", "No tenés horarios configurados");
+    }
+    modelo.put("id", usuario.id);
+    modelo.put("entidadesInteres", usuario.getEntidadesInteres());
+    modelo.put("horarios", usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle", usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    modelo.put("nombreUsuario",usuario.usuario);
+
+    return new ModelAndView(modelo, "usuariomodificado.html.hbs");
+  }
+
+  public ModelAndView modificarHorariosNot(Request request, Response response) {
+
+    String hora;
+    String minuto;
     String horario = request.queryParams("horario");
 
     try {
@@ -55,19 +85,24 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     String finalHora = hora;
     String finalMinuto = minuto;
     withTransaction(() -> {
-      usuario.setContrasenia(contrasenia);
-      usuario.setContacto(contacto);
+
       if(usuario.horariosPlanificados.size()<5){
         if(finalHora != null && finalMinuto !=null){
           usuario.agregarHorario(new Horario(Integer.parseInt(finalHora),Integer.parseInt(finalMinuto)));
         }
       }
+      else{
+        System.out.println("entrooooooooooooooooo");
+        response.cookie("error","true",1);
+      }
       RepoUsuarios.getInstance().update(usuario);
     });
 
-    response.redirect("/profile");
+    response.redirect("/profile/modificacion/horarios");
     return null;
   }
+
+
 
   public ModelAndView crearUsuario(Request request, Response response) {
 
@@ -162,6 +197,33 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     return new ModelAndView(modelo, "modificarPerfil.html.hbs");
   }
 
+  public ModelAndView modificarHorarios(Request request, Response response) {
+    Long id = Usuario.redirigirSesionNoIniciada(request, response);
+    Usuario usuario = RepoUsuarios.getInstance().getOne((id));
+    Map<String, Object> modelo = new HashMap<>();
+    if(usuario.horariosPlanificados.size()==0){
+      modelo.put("horarioVacio", "No tienes horarios configurados");
+    }
+    modelo.put("id", usuario.id);
+    modelo.put("entidadesInteres", usuario.getEntidadesInteres());
+    modelo.put("horarios", usuario.getHorariosPlanificados());
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("usuarioDetalle", usuario);
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("criterios", criterio);
+    modelo.put("nombreUsuario",usuario.usuario);
+
+
+    if(request.cookie("error") == null){
+      return new ModelAndView(modelo, "modificarhorarios.html.hbs");
+    }
+    if(request.cookie("error").equals("true")){
+      return new ModelAndView(modelo, "modificarhorarioserror.html.hbs");
+    }
+    return null;
+  }
+
+
   public ModelAndView eliminarUsuario(Request request, Response response) {
     Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuariosession = RepoUsuarios.getInstance().getOne(Long.parseLong(idsession.toString()));
@@ -199,7 +261,7 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
       RepoUsuarios.getInstance().update(usuario);
     });
 
-    response.redirect("/profile/modificacion");
+    response.redirect("/profile/modificacion/horarios");
     return null;
   }
 }
