@@ -1,71 +1,72 @@
 {{#partial "principal" }}
 
-      <div class="bg-gris py-2 align-items-center text-white">
-          <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
-            <li class="breadcrumb-item text-white"><a href="/comunidades" id="subrayado" class="nav-link text-white">Comunidades</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
+    <div class="bg-gris py-2 align-items-center text-white">
+        <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white"><a href="/comunidades" id="subrayado" class="nav-link text-white">Comunidades</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
             <li class="breadcrumb-item text-white" aria-current="page">Incidentes</li>
-          </ol>
+        </ol>
         </nav>
-        </div>
+    </div>
+
+    <div class="text-center fw-bolder mt-5 mb-4"><h2>Incidentes</h2></div>
 
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="text-center my-4">
-                <h2>Incidentes</h2>
-            </div>
-            <div class="row">
-                {{#incidentesAbiertos}}
-                    <div class="col-xl-4 mb-4">
-                        <div class="card border">
-                            <div class="card-header">
-                                {{observacion}}
-                            </div>
-                            <div class="card-body ">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Estado: {{estado}}</li>
-                                    <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                    <li class="list-group-item">Fecha Cierre: - </li>
-                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
-                                </ul>
-                                <form method="POST" action="/incidentes">
-                                    <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
-                                    <div class="text-end mt-3">
-                                        <input type="submit"
-                                               onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
-                                               class="btn btn-warning" value="Cerrar Incidente">
-                                    </div>
-                                </form>
-                            </div>
+    <div class="container my-2">
+        <div class="row">
+
+
+            {{#incidentesAbiertos}}
+                <div class="col my-4">
+                    <div class="card " style="width: 16rem;">
+                        <div class="card-header">
+                            <h5 class="card-title fw-bold">{{servicioAsociado.nombre}}</h5>
                         </div>
+                        <div class="card-body ">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{observacion}}</li>
+                                <li class="list-group-item">Estado: {{estado}}</li>
+                                <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+                                <li class="list-group-item">Fecha Cierre: -</li>
 
-
-                    </div>
-                {{/incidentesAbiertos}}
-                {{#incidentesCerrados}}
-                    <div class="col-xl-4 mb-4">
-                        <div class="card border">
-                            <div class="card-header">
-                                {{observacion}}
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Estado: {{estado}}</li>
-                                    <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                    <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
-                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
-                                </ul>
-                            </div>
-                            <div class="card-footer">
-
-                            </div>
+                            </ul>
+                            <form method="POST" action="/incidentes">
+                                <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+                                <div class="text-end mt-3">
+                                    <input type="submit"
+                                           onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
+                                           class="btn btn-warning" value="Cerrar Incidente">
+                                </div>
+                            </form>
                         </div>
                     </div>
-                {{/incidentesCerrados}}
-            </div>
+                </div>
+            {{/incidentesAbiertos}}
+            {{#incidentesCerrados}}
+                <div class="col my-4">
+                    <div class="card " style="width: 16rem;">
+                        <div class="card-header">
+                            <h5 class="card-title fw-bold">{{servicioAsociado.nombre}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{observacion}}</li>
+                                <li class="list-group-item">Estado: {{estado}}</li>
+                                <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+                                <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            {{/incidentesCerrados}}
+
         </div>
     </div>
 
