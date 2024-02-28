@@ -1,0 +1,26 @@
+{{#partial "principal" }}
+    {{#incidente}}
+
+    <li>Observacion: {{observacion}}</li>
+    <li>Estado: {{estado}}</li>
+    <li>Fecha Apertura: {{fechaApertura}}</li>
+    <li>Fecha Cierre: {{fechaCierre}}</li>
+    <li>Servicio: {{servicioAsociado.nombre}}</li>
+
+
+    {{#unless fechaCierre}}
+        <form method="POST" action="/incidentes">
+            <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+            <div class="text-end mt-3">
+                <input type="submit"
+                       onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
+                       class="btn btn-warning" value="Cerrar Incidente">
+            </div>
+        </form>
+    {{/unless}}
+
+    {{/incidente}}
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}
