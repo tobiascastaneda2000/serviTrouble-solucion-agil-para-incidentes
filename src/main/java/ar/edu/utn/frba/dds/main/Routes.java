@@ -53,6 +53,7 @@ public class Routes implements WithSimplePersistenceUnit {
     ControllerComunidades controllerComunidades = new ControllerComunidades();
     ControllerListadoRanking controllerListadoRanking = new ControllerListadoRanking();
     ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
+    ControllerAdmin controllerAdmin = new ControllerAdmin();
 
     //LOGIN Y HOME
     Spark.get("/", demoControllerhome::mostrarInicio, engine);
@@ -91,9 +92,9 @@ public class Routes implements WithSimplePersistenceUnit {
     Spark.get("/incidentesSugeridos", controllerIncidentes::mostrarIncidentesSugeridosPaginados, engine);
 
     //ADMINISTRAR COMUNIDADES  
-    Spark.get("/admin/comunidades", controllerComunidades::verComunidadesAdministrables, engine);
-    Spark.get("/admin/comunidades/:id/miembros", controllerComunidades::verMiembros, engine);
-    Spark.post("/admin/comunidades/:id/miembros", controllerComunidades::eliminarMiembro);
+    Spark.get("/admin/comunidades", controllerAdmin::verComunidadesAdministrables, engine);
+    Spark.get("/admin/comunidades/:id/miembros", controllerAdmin::verMiembros, engine);
+    Spark.post("/admin/comunidades/:id/miembros", controllerAdmin::eliminarMiembro);
 
 
 

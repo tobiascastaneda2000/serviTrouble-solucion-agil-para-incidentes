@@ -160,6 +160,10 @@ public class Usuario implements WithSimplePersistenceUnit {
     return miembros.stream().filter(m -> m.usuario.equals(this)).toList();
   }
 
+  public boolean esAdmin() {
+    return this.permisoUsuario.equals(PermisoUsuario.ADMIN);
+  }
+
 
   // -----------------------------------------INICIO DE SESION--------------------------------------//
 
