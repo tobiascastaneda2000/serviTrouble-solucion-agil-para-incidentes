@@ -68,7 +68,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       comunidad.cerrarIncidente(incidente);
     });
 
-    response.redirect("/comunidades/"+idComunidad);
+    response.redirect("/home");
     return null;
   }
 
