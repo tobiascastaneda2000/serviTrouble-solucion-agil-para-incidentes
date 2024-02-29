@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controller;
 
 import ar.edu.utn.frba.dds.entidades.Entidad;
+import ar.edu.utn.frba.dds.incidentes.EstadoIncidente;
 import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -143,13 +144,12 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
-    //incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
 
-
+    if(incidente.estadoIncidente.equals(EstadoIncidente.CERRADO)){
+      incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
+    }
 
     modelo.put("incidente", incidente);
-    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
-    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "verDetalleIncidente.html.hbs");
   }
 

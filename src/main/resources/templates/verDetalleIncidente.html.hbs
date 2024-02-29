@@ -1,26 +1,42 @@
 {{#partial "principal" }}
-    {{#incidente}}
+    <div class="container d-flex justify-content-center align-items-center " style="height: 80vh;">
+        <div class="row">
+            <div class="col-lg-12"> <!-- Columna ancha para la tarjeta grande -->
+                <div class="card w-100 mx-3">
 
-    <li>Observacion: {{observacion}}</li>
-    <li>Estado: {{estado}}</li>
-    <li>Fecha Apertura: {{fechaApertura}}</li>
-    <li>Fecha Cierre: {{fechaCierre}}</li>
-    <li>Servicio: {{servicioAsociado.nombre}}</li>
+                    {{#incidente}}
+                        <div class="card-header">
+                            <h5 class="card-title fw-bold"
+                                style="text-transform: capitalize;">Detalles del Incidente</h5>
+                        </div>
+                        <div class="card-body">
 
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Observacion: {{observacion}}</li>
+                                <li class="list-group-item">Estado: {{estado}}</li>
+                                <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+                                <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+                                <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
+                            </ul>
 
-    {{#unless fechaCierre}}
-        <form method="POST" action="/incidentes">
-            <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
-            <div class="text-end mt-3">
-                <input type="submit"
-                       onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
-                       class="btn btn-warning" value="Cerrar Incidente">
+                            {{#unless fechaCierre}}
+                                <form method="POST" action="/incidentes">
+                                    <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+                                    <div class="text-end mt-3">
+                                        <input type="submit"
+                                               onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
+                                               class="btn btn-warning" value="Cerrar Incidente">
+                                    </div>
+                                </form>
+                            {{/unless}}
+                        </div>
+
+                    {{/incidente}}
+
+                </div>
             </div>
-        </form>
-    {{/unless}}
-
-    {{/incidente}}
-
+        </div>
+    </div>
 {{/partial}}
 
 {{> layoutSesionIniciada.html.hbs }}
