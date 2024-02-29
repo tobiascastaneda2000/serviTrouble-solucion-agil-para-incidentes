@@ -33,8 +33,11 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
 
     String filtro = request.queryParams("filtrado");
     if (filtro!=null){
-      comunidades = RepositorioComunidades.getInstance().comunidadesFiltradas(comunidades,filtro);
+      comunidades = comunidades.stream().filter(c -> c.getNombre().toLowerCase().contains(filtro.toLowerCase())).toList();
+      modelo.put("filtro",filtro);
     }
+
+
 
     String idPagina = request.queryParams("pagina");
     if(idPagina==null){

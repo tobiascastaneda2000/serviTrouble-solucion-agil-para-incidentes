@@ -148,7 +148,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       RepoServicios.getInstance().add(servicioM);
 
       //CARGA COMUNIDADES
-      Comunidad comunidad1 = new Comunidad("nombre1");
+      Comunidad comunidad1 = new Comunidad("NOMBRE");
       comunidad1.aniadirServicioInteres(servicio1);
       /*comunidad1.incidentes.add(incidente);
       comunidad1.incidentes.add(incidente2);
@@ -159,31 +159,31 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       comunidad1.agregarUsuario(usuarioComun1, PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad1);
 
-      Comunidad comunidad2 = new Comunidad("nombre2");
+      Comunidad comunidad2 = new Comunidad("Comunidad");
       comunidad2.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad2);
 
-      Comunidad comunidad3 = new Comunidad("nombre3");
+      Comunidad comunidad3 = new Comunidad("La Comunidad");
       comunidad3.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad3);
 
-      Comunidad comunidad4 = new Comunidad("nombre4");
+      Comunidad comunidad4 = new Comunidad("yaTuSabe");
       comunidad4.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad4);
 
-      Comunidad comunidad5 = new Comunidad("nombre5");
+      Comunidad comunidad5 = new Comunidad("DaleDale");
       comunidad5.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad5);
 
-      Comunidad comunidad6 = new Comunidad("nombre6");
+      Comunidad comunidad6 = new Comunidad("hola");
       comunidad6.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad6);
 
-      Comunidad comunidad7 = new Comunidad("nombre7");
+      Comunidad comunidad7 = new Comunidad("daledale");
       comunidad7.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad7);
 
-      Comunidad comunidad8 = new Comunidad("nombre8");
+      Comunidad comunidad8 = new Comunidad("Mismo Nombre que Antes");
       comunidad8.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad8);
 
