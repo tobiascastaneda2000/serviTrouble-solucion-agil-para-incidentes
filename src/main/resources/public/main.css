@@ -41,6 +41,28 @@
   background: #E0A72F;
 }
 
+.row-incidentes{
+  background-color: transparent;
+
+}
+
+/* Ajusta el tamaño de las tarjetas para que se expandan horizontalmente */
+.card-incidente {
+  width: 16rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-body {
+  min-height: 9rem;
+}
+
+.card-incidente:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+.card-incidente:active{
+
+}
+
 @media screen and (max-height: 100vh) and (orientation: landscape){
   body {
     height: 100vh;

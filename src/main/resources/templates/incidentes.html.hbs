@@ -17,54 +17,46 @@
 
 
     <div class="container my-2">
-        <div class="row">
-
-
+        <div class="row row-incidentes">
             {{#incidentesAbiertos}}
-                <div class="col my-4">
-                    <div class="card " style="width: 16rem;">
-                        <div class="card-header">
+                <div class="col my-4 card-clickable">
+                    <a href="/incidentes/{{id}}" class="btn">
 
-                            <h5 class="card-title fw-bold" style="text-transform: capitalize;">{{ servicioAsociado.nombre}}</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">{{observacion}}</li>
-                                <li class="list-group-item">Estado: {{estado}}</li>
-                                <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                <li class="list-group-item">Fecha Cierre: -</li>
+                        <div class="card card-incidente">
+                            <div class="card-header">
 
-                            </ul>
-                            <form method="POST" action="/incidentes">
-                                <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
-                                <div class="text-end mt-3">
-                                    <input type="submit"
-                                           onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
-                                           class="btn btn-warning" value="Cerrar Incidente">
-                                </div>
-                            </form>
+                                <h5 class="card-title fw-bold"
+                                    style="text-transform: capitalize;">{{ servicioAsociado.nombre}}</h5></div>
+
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{{observacion}}</li>
+                                    <li class="list-group-item">Estado: {{estado}}</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+
+                    </a>
                 </div>
             {{/incidentesAbiertos}}
             {{#incidentesCerrados}}
-                <div class="col my-4">
-                    <div class="card " style="width: 16rem;">
-                        <div class="card-header">
-                            <h5 class="card-title fw-bold" style="text-transform: capitalize;">{{servicioAsociado.nombre}}</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">{{observacion}}</li>
-                                <li class="list-group-item">Estado: {{estado}}</li>
-                                <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+                <div class="col my-4 card-clickable">
+                    <a href="/incidentes/{{id}}" class="btn ">
 
-                            </ul>
+                        <div class="card card-incidente">
+                            <div class="card-header">
+                                <h5 class="card-title fw-bold"
+                                    style="text-transform: capitalize;">{{servicioAsociado.nombre}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{{observacion}}</li>
+                                    <li class="list-group-item">Estado: {{estado}}</li>
+
+                                </ul>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                        </div>
-                    </div>
+                    </a>
                 </div>
             {{/incidentesCerrados}}
 
