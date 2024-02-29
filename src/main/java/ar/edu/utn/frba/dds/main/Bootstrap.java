@@ -56,23 +56,23 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       //CARGA ENTIDAD FANTASY
       Entidad entidadFantasy = new Entidad("Fantasy Co.", "fantasy@mail.com");
-      entidadFantasy.setDescripcion("una descripcion de la organizacion");
+      entidadFantasy.setDescripcion("Una descripcion de la organizacion");
       entidadFantasy.setImg("fantasy.jpg");
       RepoEntidades.getInstance().add(entidadFantasy);
 
-      Establecimiento establecimiento1 = new Establecimiento("nombre 1");
+      Establecimiento establecimiento1 = new Establecimiento("Sala Este");
       entidadFantasy.agregarEstablecimiento(establecimiento1);
       RepoEstablecimientos.getInstance().add(establecimiento1);
 
-      Establecimiento establecimiento2 = new Establecimiento("nombre 2");
+      Establecimiento establecimiento2 = new Establecimiento("Sala Oeste");
       entidadFantasy.agregarEstablecimiento(establecimiento2);
       RepoEstablecimientos.getInstance().add(establecimiento2);
 
-      Servicio servicio1 = new Servicio("baño primer piso", TipoServicio.BAÑO);
+      Servicio servicio1 = new Servicio("Baño primer piso", TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio1);
       RepoServicios.getInstance().add(servicio1);
 
-      Servicio servicio2 = new Servicio("baño segundo piso", TipoServicio.BAÑO);
+      Servicio servicio2 = new Servicio("Baño segundo piso", TipoServicio.BAÑO);
       establecimiento1.agregarServicio(servicio2);
       RepoServicios.getInstance().add(servicio2);
 
@@ -83,29 +83,29 @@ public class Bootstrap implements WithSimplePersistenceUnit {
 
       //CARGA ENTIDAD PIXEL
       Entidad entidadPixel = new Entidad("Pixel Innovators", "pixel@mail.com");
-      entidadPixel.setDescripcion("una descripcion de la organizacion");
+      entidadPixel.setDescripcion("Una descripcion de la organizacion");
       entidadPixel.setImg("pixel.jpg");
       RepoEntidades.getInstance().add(entidadPixel);
 
-      Establecimiento establecimientoA = new Establecimiento("establecimiento A");
+      Establecimiento establecimientoA = new Establecimiento("Establecimiento rojo");
       entidadPixel.agregarEstablecimiento(establecimientoA);
       RepoEstablecimientos.getInstance().add(establecimientoA);
 
-      Establecimiento establecimientoB = new Establecimiento("establecimiento B");
+      Establecimiento establecimientoB = new Establecimiento("Establecimiento azul");
       entidadPixel.agregarEstablecimiento(establecimientoB);
       RepoEstablecimientos.getInstance().add(establecimientoB);
 
-      Servicio servicio3 = new Servicio("baño tercer piso", TipoServicio.BAÑO);
+      Servicio servicio3 = new Servicio("Baño tercer piso", TipoServicio.BAÑO);
       establecimientoA.agregarServicio(servicio3);
       RepoServicios.getInstance().add(servicio3);
 
-      Servicio servicio4 = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      Servicio servicio4 = new Servicio("Ascensor", TipoServicio.ASCENSOR);
       establecimientoB.agregarServicio(servicio4);
       RepoServicios.getInstance().add(servicio4);
 
       //CARGA ENTIDAD MCDONALDS
       Entidad entidadMcDonald = new Entidad("McDonald", "mcdonald@mail.com");
-      entidadMcDonald.setDescripcion("una descripcion de la organizacion");
+      entidadMcDonald.setDescripcion("Una descripcion de la organizacion");
       entidadMcDonald.setImg("mc.jpg");
       RepoEntidades.getInstance().add(entidadMcDonald);
 
@@ -117,17 +117,17 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidadMcDonald.agregarEstablecimiento(establecimientoX);
       RepoEstablecimientos.getInstance().add(establecimientoX);
 
-      Servicio servicioZ = new Servicio("baño primer piso", TipoServicio.BAÑO);
+      Servicio servicioZ = new Servicio("Baño primer piso", TipoServicio.BAÑO);
       establecimientoA.agregarServicio(servicioZ);
       RepoServicios.getInstance().add(servicioZ);
 
-      Servicio servicioX = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      Servicio servicioX = new Servicio("Ascensor", TipoServicio.ASCENSOR);
       establecimientoB.agregarServicio(servicioX);
       RepoServicios.getInstance().add(servicioX);
 
       //CARGA ENTIDAD BURGER KING
       Entidad entidadburger = new Entidad("Burguer King", "bking@mail.com");
-      entidadburger.setDescripcion("una descripcion de la organizacion");
+      entidadburger.setDescripcion("Una descripcion de la organizacion");
       entidadburger.setImg("burger.jpg");
       RepoEntidades.getInstance().add(entidadburger);
 
@@ -139,11 +139,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidadburger.agregarEstablecimiento(establecimientoM);
       RepoEstablecimientos.getInstance().add(establecimientoM);
 
-      Servicio servicioW = new Servicio("baño primer piso", TipoServicio.BAÑO);
+      Servicio servicioW = new Servicio("Baño primer piso", TipoServicio.BAÑO);
       establecimientoW.agregarServicio(servicioW);
       RepoServicios.getInstance().add(servicioW);
 
-      Servicio servicioM = new Servicio("ascensor", TipoServicio.ASCENSOR);
+      Servicio servicioM = new Servicio("Ascensor", TipoServicio.ASCENSOR);
       establecimientoM.agregarServicio(servicioM);
       RepoServicios.getInstance().add(servicioM);
 
@@ -179,7 +179,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       comunidad6.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad6);
 
-      Comunidad comunidad7 = new Comunidad("daledale");
+      Comunidad comunidad7 = new Comunidad("Daledale");
       comunidad7.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad7);
 
@@ -187,11 +187,11 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       comunidad8.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad8);
 
-      Comunidad comunidad9 = new Comunidad("nombre9");
+      Comunidad comunidad9 = new Comunidad("Nombre9");
       comunidad9.agregarUsuario(usuarioComun1,PermisoComunidad.USUARIO_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad9);
 
-      Comunidad comunidad10 = new Comunidad("nombre10");
+      Comunidad comunidad10 = new Comunidad("Nombre10");
       comunidad10.agregarUsuario(usuarioComun1,PermisoComunidad.ADMIN_COMUNIDAD);
       RepositorioComunidades.getInstance().add(comunidad10);
 

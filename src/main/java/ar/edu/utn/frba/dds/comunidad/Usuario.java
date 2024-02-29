@@ -195,10 +195,12 @@ public class Usuario implements WithSimplePersistenceUnit {
   //--------------------------------APERTURA DE INCIDENTE PARA COMUNIDADES----------------------------------------------//
 
   public Incidente abrirIncidente(Servicio servicio, String observacion) {
+
+    String obs = observacion.substring(0, 1).toUpperCase() + observacion.substring(1);
     List<Comunidad> comunidades = comunidadesPertenecientes().stream().filter(c -> c.contieneServicioDeInteres(servicio)).toList();
-    Incidente incidente = new Incidente(observacion, servicio);
+    Incidente incidente = new Incidente(obs, servicio);
     servicio.aniadirIncidente(incidente); //Para ranking
-    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(observacion, servicio));
+    comunidades.forEach(c -> c.abrirIncidenteEnComunidad(obs, servicio));
     return incidente;
   }
   //--------------------------------------------------------------------------------------------------------------------//
