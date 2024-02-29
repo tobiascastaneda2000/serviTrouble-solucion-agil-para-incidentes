@@ -129,7 +129,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
           return new ModelAndView(modelo, "incidenteSugerido.html.hbs");
         }
         catch (Exception e2){
-          response.redirect("/incidentes/sugeridos?pag=1");
+          response.redirect("/incidentesSugeridos?pag=1");
           return null;
         }
     }
