@@ -21,18 +21,24 @@ import spark.Response;
 public class ControllerUsuarios implements WithSimplePersistenceUnit {
 
   public ModelAndView mostrarUsuarios(Request request, Response response) {
+    Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
     modelo.put("usuarios", usuarios);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "usuarios.html.hbs");
   }
 
   public ModelAndView cargarUsuario(Request request, Response response){
+    Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "cargaUsuarios.html.hbs");
   }
 

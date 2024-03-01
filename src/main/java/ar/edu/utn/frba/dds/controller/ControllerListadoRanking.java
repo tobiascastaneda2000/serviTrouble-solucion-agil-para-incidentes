@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.lectorCSV.LectorCSVLectura;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
+import ar.edu.utn.frba.dds.repositorios.RepoUsuarios;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.stream.Collectors;
@@ -26,6 +27,8 @@ public class ControllerListadoRanking implements WithSimplePersistenceUnit {
     String id = request.params(":id");
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
     //List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     //modelo.put("criterios", criterio);
 
