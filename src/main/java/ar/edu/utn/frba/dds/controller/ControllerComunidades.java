@@ -87,6 +87,7 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("idComunidad", id);
     List<Incidente> incidentesAbiertos = comunidad.incidentes;
     List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
     Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
