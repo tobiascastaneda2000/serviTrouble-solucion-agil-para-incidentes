@@ -63,6 +63,20 @@
 
 }
 
+.table-bordered.custom {
+  border: 4px solid #dee2e6;
+  border-radius: 12px;
+}
+
+.table-bordered.custom th,
+.table-bordered.custom td {
+  border: 4px solid #dee2e6;
+}
+
+.container-rankings{
+  margin-top: 50px;
+}
+
 @media screen and (max-height: 100vh) and (orientation: landscape){
   body {
     height: 100vh;

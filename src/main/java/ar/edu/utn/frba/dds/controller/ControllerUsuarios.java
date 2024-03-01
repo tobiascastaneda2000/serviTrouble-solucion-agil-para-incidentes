@@ -30,6 +30,12 @@ public class ControllerUsuarios implements WithSimplePersistenceUnit {
     return new ModelAndView(modelo, "usuarios.html.hbs");
   }
 
+  public ModelAndView cargarUsuario(Request request, Response response){
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    return new ModelAndView(modelo, "cargaUsuarios.html.hbs");
+  }
+
   public ModelAndView modificarUsuario(Request request, Response response) {
 
 

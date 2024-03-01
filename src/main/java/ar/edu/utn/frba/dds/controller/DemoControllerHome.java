@@ -88,7 +88,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
       return null;
     }
   }
-
+/*
   public ModelAndView mostrarHomeAdmin(Request request, Response response) {
 
     Long id = request.session().attribute("user_id");
@@ -115,6 +115,27 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
         modelo.put("ranking2", entidades2Diez);
         modelo.put("nombreUsuario",usuario.usuario);
         return new ModelAndView(modelo, "homeAdmin.html.hbs");
+      } else {
+        response.redirect("/home");
+        return null;
+      }
+    } else {
+      response.redirect("/");
+      return null;
+    }
+  }*/
+
+  public ModelAndView mostrarHomeAdmin(Request request, Response response) {
+
+    Long id = request.session().attribute("user_id");
+    if (id != null) {
+      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+      if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("anio", LocalDate.now().getYear());
+        List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
+        modelo.put("nombreUsuario",usuario.usuario);
+        return new ModelAndView(modelo, "homeAdminV2.html.hbs");
       } else {
         response.redirect("/home");
         return null;

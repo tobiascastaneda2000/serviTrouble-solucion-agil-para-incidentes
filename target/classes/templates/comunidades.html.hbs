@@ -20,7 +20,7 @@
 <form class="row g-3">
   <div class="col-auto">
     <label for="inputSearch" class="visually-hidden">Buscar por nombre</label>
-    <input type="text" name="filtrado" class="form-control" id="inputSearch" placeholder="Buscar por nombre">
+    <input type="text" name="filtrado" class="form-control" id="inputSearch" placeholder="Buscar por nombre" value="{{#if filtro}}{{filtro}}{{/if}}">
   </div>
   <div class="col-auto">
     <button type="submit" class="btn btn-warning mb-3">Filtrar</button>
