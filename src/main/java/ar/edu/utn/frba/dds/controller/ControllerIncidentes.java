@@ -150,6 +150,9 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
     }
 
     modelo.put("incidente", incidente);
+
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "verDetalleIncidente.html.hbs");
   }
 
