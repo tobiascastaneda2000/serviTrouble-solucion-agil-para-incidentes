@@ -51,13 +51,14 @@
                             <div class="card-body">
 
                                 <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</li>
+                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
                                     <li class="list-group-item">Observacion: {{observacion}}</li>
                                     <li class="list-group-item">Estado: {{estado}}</li>
-                                    <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                    {{#if fechaCierre}}
-                                    <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+                                    <li class="list-group-item">Fecha Apertura: {{fechaHoraAbre}}</li>
+                                    {{#if fechaHoraCierre}}
+                                        <li class="list-group-item">Fecha Cierre: {{fechaHoraCierre}}</li>
                                     {{/if}}
-                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
                                 </ul>
 
                                 {{#unless fechaCierre}}
@@ -74,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                            </div>
+                </div>
             {{/incidentes}}
         </div>
     </div>

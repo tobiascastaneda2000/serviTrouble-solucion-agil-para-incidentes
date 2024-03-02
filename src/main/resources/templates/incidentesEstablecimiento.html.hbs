@@ -1,5 +1,4 @@
 {{#partial "principal" }}
-
     <div class="bg-gris py-2 align-items-center text-white">
         <ol class="breadcrumb justify-content-center">
             <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
@@ -53,13 +52,14 @@
                             <div class="card-body">
 
                                 <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</li>
+                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
                                     <li class="list-group-item">Observacion: {{observacion}}</li>
                                     <li class="list-group-item">Estado: {{estado}}</li>
-                                    <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
-                                    {{#if fechaCierre}}
-                                        <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+                                    <li class="list-group-item">Fecha Apertura: {{fechaHoraAbre}}</li>
+                                    {{#if fechaHoraCierre}}
+                                        <li class="list-group-item">Fecha Cierre: {{fechaHoraCierre}}</li>
                                     {{/if}}
-                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
                                 </ul>
 
                                 {{#unless fechaCierre}}
@@ -81,7 +81,24 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleccionar todas las etiquetas con clase 'fecha'
+            const fechas = document.querySelectorAll('.fecha');
 
+            // Iterar sobre cada elemento encontrado
+            fechas.forEach(function(elemento) {
+                // Obtener el contenido de la etiqueta
+                const fechaOriginal = elemento.textContent.trim();
+
+                // Formatear la fecha utilizando moment.js
+                const fechaFormateada = moment(fechaOriginal).format('DD/MM/YYYY HH:mm');
+
+                // Actualizar el contenido de la etiqueta con la fecha formateada
+                elemento.textContent = fechaFormateada;
+            });
+        });
+    </script>
 
 {{/partial}}
 
