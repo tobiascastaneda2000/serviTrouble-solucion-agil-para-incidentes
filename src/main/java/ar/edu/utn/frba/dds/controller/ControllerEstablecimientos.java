@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.controller;
 
 import ar.edu.utn.frba.dds.entidades.Entidad;
 import ar.edu.utn.frba.dds.entidades.Establecimiento;
+import ar.edu.utn.frba.dds.incidentes.EstadoIncidente;
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import ar.edu.utn.frba.dds.entidades.*;
@@ -37,6 +39,33 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
       response.removeCookie("creado");
       return new ModelAndView(modelo, "incidenteCreado.html.hbs");
     }
+  }
+
+  public ModelAndView mostrarIncidentes(Request request, Response response) {
+    Long idsession = Usuario.redirigirSesionNoIniciada(request, response);
+    String entidadId = request.params(":entidadId");
+    String establecimientoId = request.params(":establecimientoId");
+    Entidad entidad = RepoEntidades.getInstance().getOne(Long.parseLong(entidadId));
+
+    Establecimiento establecimiento = entidad.getEstablecimientos().stream()
+        .filter(e -> e.getId().equals(Long.parseLong(establecimientoId)))
+        .findFirst()
+        .get();
+
+    List<Incidente> incidentes = establecimiento.getIncidentes();
+    List<Incidente> abiertos = incidentes.stream().filter(i -> i.getEstado().equals(EstadoIncidente.ABIERTO)).toList();
+    List<Incidente> cerrados = incidentes.stream().filter(i -> i.getEstado().equals(EstadoIncidente.CERRADO)).toList();
+
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+    modelo.put("entidadId", entidadId);
+    modelo.put("criterios", criterio);
+    modelo.put("incidentesAbiertos", abiertos);
+    modelo.put("incidentesCerrados", cerrados);
+    Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
+    modelo.put("nombreUsuario",usuario.usuario);
+    return new ModelAndView(modelo, "incidentesEstablecimiento.html.hbs");
   }
 
   public ModelAndView cargarIncidente(Request request, Response response) {
