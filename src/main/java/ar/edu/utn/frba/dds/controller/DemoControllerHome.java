@@ -69,6 +69,7 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
       List<Entidad> entidades2 = lectorCSVLectura2.obtenerEntidadesDeCSV();
       List<Entidad> entidades1Diez = entidades1.stream().limit(10).collect(Collectors.toList());
       List<Entidad> entidades2Diez = entidades2.stream().limit(10).collect(Collectors.toList());
+      modelo.put("esAdmin", usuario.esAdmin());
       modelo.put("criterio1", criterio.get(0));
       modelo.put("criterio2", criterio.get(1));
       modelo.put("ranking1", entidades1Diez);

@@ -9,9 +9,11 @@
         <li class="nav-item mx-4">
           <a class="nav-link text-white" id="subrayado" href="/comunidades">Mis comunidades</a>
         </li>
+        {{#if esAdmin}}
         <li class="nav-item mx-4">
-          <a class="nav-link text-white" id="subrayado" href="/admin/comunidades">Administrador de comunidad</a>
+          <a class="nav-link text-white" id="subrayado" href="/admin/home">Panel Administrador</a>
         </li>
+        {{/if}}
       </ul>
  </div>
 
