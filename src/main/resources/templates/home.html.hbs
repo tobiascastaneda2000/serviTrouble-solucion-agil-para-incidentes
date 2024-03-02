@@ -1,20 +1,22 @@
 {{#partial "principal" }}
 
 
-    <div class="bg-gris py-2">
-        <ul class="nav justify-content-center">
-            <li class="nav-item mx-4">
-                <a class="nav-link text-white" id="subrayado" href="/entidades">Abrir nuevo incidente</a>
-            </li>
-            <li class="nav-item mx-4">
-                <a class="nav-link text-white" id="subrayado" href="/comunidades">Mis comunidades</a>
-            </li>
-            <li class="nav-item mx-4">
-                <a class="nav-link text-white" id="subrayado" href="/admin/comunidades">Administrador de comunidad</a>
-            </li>
-        </ul>
-    </div>
 
+<div class="bg-gris py-2">
+    <ul class="nav justify-content-center">
+        <li class="nav-item mx-4">
+          <a class="nav-link text-white" id="subrayado" href="/entidades">Abrir nuevo incidente</a>
+        </li>
+        <li class="nav-item mx-4">
+          <a class="nav-link text-white" id="subrayado" href="/comunidades">Mis comunidades</a>
+        </li>
+        {{#if esAdmin}}
+        <li class="nav-item mx-4">
+          <a class="nav-link text-white" id="subrayado" href="/admin/home">Panel Administrador</a>
+        </li>
+        {{/if}}
+      </ul>
+ </div>
 
     <div class="py-3"
          style="background-image: url('../ciudad2.jpg'); background-size: cover; background-position: center; width: 100%;">
