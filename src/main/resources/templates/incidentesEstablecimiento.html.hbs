@@ -18,18 +18,18 @@
 
     <div class="text-center fw-bolder mt-5 mb-4"><h2>Incidentes</h2></div>
 
-
     <div class="container my-2">
         <div class="row row-incidentes">
-            {{#incidentesAbiertos}}
+            {{#incidentes}}
                 <div class="col my-4 card-clickable">
-                    <a href="/incidentes/{{id}}" class="btn">
+                    <button href="/incidentes/{{id}}" class="btn"  data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{id}}">
 
                         <div class="card card-incidente">
                             <div class="card-header">
 
                                 <h5 class="card-title fw-bold"
-                                    style="text-transform: capitalize;">{{ servicioAsociado.nombre }}</h5></div>
+                                    style="text-transform: capitalize;">{{ servicioAsociado.nombre}}</h5></div>
 
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
@@ -39,30 +39,45 @@
                             </div>
                         </div>
 
-                    </a>
+                    </button>
                 </div>
-            {{/incidentesAbiertos}}
-            {{#incidentesCerrados}}
-                <div class="col my-4 card-clickable">
-                    <a href="/incidentes/{{id}}" class="btn ">
 
-                        <div class="card card-incidente">
-                            <div class="card-header">
-                                <h5 class="card-title fw-bold"
-                                    style="text-transform: capitalize;">{{servicioAsociado.nombre}}</h5>
+                <div class="modal fade" id="exampleModal{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle incidente</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
                             <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{observacion}}</li>
-                                    <li class="list-group-item">Estado: {{estado}}</li>
 
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Observacion: {{observacion}}</li>
+                                    <li class="list-group-item">Estado: {{estado}}</li>
+                                    <li class="list-group-item">Fecha Apertura: {{fechaApertura}}</li>
+                                    {{#if fechaCierre}}
+                                        <li class="list-group-item">Fecha Cierre: {{fechaCierre}}</li>
+                                    {{/if}}
+                                    <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
                                 </ul>
+
+                                {{#unless fechaCierre}}
+                                    <form method="POST" action="/incidentes">
+                                        <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+                                        <input type="hidden" class="form-control" name="redirectionUrl" value="/entidades/{{../entidadId}}/establecimientos/{{../establecimientoId}}/incidentes">
+                                        <div class="text-end p-3">
+                                            <input type="submit"
+                                                   onclick="return confirm('Con esto estarás indicando que el incidente fue resuelto y el servicio funciona con normalidad. ¿Deseas continuar?')"
+                                                   class="btn btn-warning" value="Cerrar Incidente">
+                                        </div>
+                                    </form>
+                                {{/unless}}
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
-            {{/incidentesCerrados}}
-
+            {{/incidentes}}
         </div>
     </div>
 

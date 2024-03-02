@@ -52,17 +52,13 @@ public class ControllerEstablecimientos implements WithSimplePersistenceUnit {
         .findFirst()
         .get();
 
-    List<Incidente> incidentes = establecimiento.getIncidentes();
-    List<Incidente> abiertos = incidentes.stream().filter(i -> i.getEstado().equals(EstadoIncidente.ABIERTO)).toList();
-    List<Incidente> cerrados = incidentes.stream().filter(i -> i.getEstado().equals(EstadoIncidente.CERRADO)).toList();
-
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("entidadId", entidadId);
+    modelo.put("establecimientoId", establecimientoId);
     modelo.put("criterios", criterio);
-    modelo.put("incidentesAbiertos", abiertos);
-    modelo.put("incidentesCerrados", cerrados);
+    modelo.put("incidentes", establecimiento.getIncidentes());
     Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
     modelo.put("nombreUsuario",usuario.usuario);
     return new ModelAndView(modelo, "incidentesEstablecimiento.html.hbs");
