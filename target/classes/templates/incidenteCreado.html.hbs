@@ -1,95 +1,127 @@
 {{#partial "principal" }}
 
-      <div class="bg-gris py-2 align-items-center text-white">
-          <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
-            <li class="breadcrumb-item text-white "><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
+    <div class="bg-gris py-2 align-items-center text-white">
+        <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white "><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
             <li class="breadcrumb-item text-white" aria-current="page">Establecimientos</li>
-          </ol>
+        </ol>
         </nav>
+    </div>
+
+    <div class="container mt-3">
+        <div class="container text-center">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                El incidente se ha creado correctamente!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
         </div>
+    </div>
 
-<div class="container mt-3">
-<div class="container text-center">
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  El incidente se ha creado correctamente!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-</div>
-</div>
-</div>
-
-<h2 class="text-center my-4">Establecimientos</h2>
+    <h2 class="text-center my-4">Establecimientos</h2>
 
 
-<div class="container d-flex justify-content-center">
-<div class="row">
-{{#establecimientos}}
-<div class="col mx-4">
-<div class="card h-100 d-inline-block border border-secondary justify-content-center text-center" style="width: 18rem;">
-  <div class="card-body h-100 d-inline-block d-flex flex-column">
-    <h5 class="card-title fw-bolder">{{nombre}}</h5>
-    <h6>Servicios:</h6>
-    {{#servicios}}
-        <p>{{nombre}}</p>
-    {{/servicios}}
-    <div class="container mt-auto align-self-end justify-content-center">
-
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Cargar incidente
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar incidente</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form method="POST" action="/establecimientos">
-      <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="text-start mb-3">
-                                    <label for="disabledTextInput">Establecimiento</label>
-                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombre}}" disabled>
-                                </div>
-                                <div class="text-start mb-3">
-                                    <label  for="opciones">Servicio</label>
-                                    <select id="servicio" class="form-select " name="servicio">
-                                         {{#servicios}}
-                                         <option value={{id}}>{{nombre}}</option>
-                                         {{/servicios}}
-                                    </select>
-                                </div>
-                                <div class="container text-start mb-3">
-                                    <label >Observación</label>
-                                    <textarea class="form-control " name="observacion" maxlength="250"></textarea>
-                                </div>
-                              </div>
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            {{#establecimientos}}
+                <div class="col mx-4">
+                    <div class="card h-100 d-inline-block border border-secondary justify-content-center text-center"
+                         style="width: 18rem;">
+                        <div class="card-header">
+                            <h5 class="card-title fw-bolder" style="text-transform: capitalize;"><a
+                                    href="/entidades/{{idEntidad}}/establecimientos/{{id}}/incidentes">{{nombre}}</a>
+                            </h5>
                         </div>
-      </div>
-      <div class="modal-footer">
-        <input type="hidden" class="form-control" name="idEntidad" value="{{idEntidad}}">
-        <input type="submit" class="btn btn-warning " value="Abrir Incidente">
-      </div>
-      </form>
+                        <div class="card-body h-100 d-inline-block d-flex flex-column">
+
+                            {{#if servicios.length}}
+                                <h6 class="fw-bold">Servicios:</h6>
+                                {{#servicios}}
+                                    <p class="text-start">{{nombre}}</p>
+                                {{/servicios}}
+                            {{else}}
+                                <h6>No hay servicios asociados</h6>
+                            {{/if}}
+                        </div>
+                        <div class="container mt-auto align-self-end justify-content-center">
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{id}}">
+                                    Cargar incidente
+                                </button>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar incidente</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <form method="POST" action="/establecimientos">
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="text-start mb-3">
+                                                            <label for="disabledTextInput">Establecimiento</label>
+
+                                                            <input type="text" id="disabledTextInput"
+                                                                   class="form-control"
+                                                                   placeholder="{{nombre}}" disabled>
+                                                        </div>
+                                                        <div class="text-start mb-3">
+                                                            <label for="opciones">Servicio</label>
+                                                            <select id="servicio" class="form-select " name="servicio"
+                                                                    {{#unless servicios}}disabled{{/unless}}>
+                                                                {{#if servicios}}
+                                                                    {{#servicios}}
+                                                                        <option value={{id}}>{{nombre}}</option>
+                                                                    {{/servicios}}
+                                                                {{else}}
+                                                                    <option disabled selected>No hay servicios
+                                                                        disponibles
+                                                                    </option>
+                                                                {{/if}}
+                                                            </select>
+                                                        </div>
+                                                        <div class="text-start mb-3">
+                                                            <label>Observación</label>
+                                                            <textarea class="form-control " name="observacion"
+                                                                      maxlength="250" required{{#unless
+                                                                    servicios}}disabled{{/unless}}></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" class="form-control" name="idEntidad"
+                                                       value="{{idEntidad}}">
+                                                <input type="submit" class="btn btn-warning " value="Abrir Incidente"
+                                                       {{#unless servicios}}disabled{{/unless}}>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            {{/establecimientos}}
+        </div>
     </div>
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
-</div>
-{{/establecimientos}}
-</div>
-</div>
 
 
 
-{{/partial}}
 
-{{> layoutSesionIniciada.html.hbs }}
+    {{/partial}}
+
+    {{> layoutSesionIniciada.html.hbs }}
