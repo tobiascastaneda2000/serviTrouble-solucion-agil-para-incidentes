@@ -7,7 +7,8 @@ import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.time.format.DateTimeFormatter;
 
-import java.util.HashSet;
+import java.util.*;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -15,9 +16,6 @@ import ar.edu.utn.frba.dds.comunidad.*;
 import ar.edu.utn.frba.dds.repositorios.*;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 
 public class ControllerComunidades implements WithSimplePersistenceUnit {
 
@@ -90,6 +88,8 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
     modelo.put("idComunidad", id);
     List<Incidente> incidentesAbiertos = comunidad.incidentes;
     List<Incidente> incidentesCerrados = comunidad.incidentesCerrados;
+    List<Incidente> incidentes = new ArrayList<Incidente>();
+
     Usuario usuario = RepoUsuarios.getInstance().getOne(idsession);
     modelo.put("nombreUsuario",usuario.usuario);
 
@@ -104,8 +104,9 @@ public class ControllerComunidades implements WithSimplePersistenceUnit {
       incidente.fechaCierre = incidente.fechaHoraCierre.format(formatter);
     }
 
-    modelo.put("incidentesAbiertos", incidentesAbiertos);
-    modelo.put("incidentesCerrados", incidentesCerrados);
+    incidentes.addAll(incidentesAbiertos);
+    incidentes.addAll(incidentesCerrados);
+    modelo.put("incidentes", incidentes);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     return new ModelAndView(modelo, "incidentes.html.hbs");

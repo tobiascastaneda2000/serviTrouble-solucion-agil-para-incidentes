@@ -60,6 +60,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
 
   public ModelAndView cerrarIncidente(Request request, Response response) {
     String idIncidente = request.queryParams("idIncidente");
+    String redirectionUrl = request.queryParams("redirectionUrl");
     Incidente incidente = entityManager().createQuery("from Incidente where id=:id", Incidente.class)
         .setParameter("id", Long.parseLong(idIncidente)).getResultList().get(0);
     Comunidad comunidad = RepositorioComunidades.getInstance().contieneIncidente(incidente);
@@ -68,7 +69,7 @@ public class ControllerIncidentes implements WithSimplePersistenceUnit {
       comunidad.cerrarIncidente(incidente);
     });
 
-    response.redirect("/home");
+    response.redirect(redirectionUrl);
     return null;
   }
 
