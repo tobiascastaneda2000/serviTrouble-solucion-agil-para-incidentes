@@ -1,0 +1,73 @@
+{{#partial "principal" }}
+
+    <div class="bg-gris py-2 align-items-center text-white">
+        <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white"><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white"><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white"><a href="/entidades/{{entidadId}}" id="subrayado"
+                                                    class="nav-link text-white">Establecimientos</a></li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white" aria-current="page">Incidentes</li>
+        </ol>
+        </nav>
+    </div>
+
+    <div class="text-center fw-bolder mt-5 mb-4"><h2>Incidentes</h2></div>
+
+
+    <div class="container my-2">
+        <div class="row row-incidentes">
+            {{#incidentesAbiertos}}
+                <div class="col my-4 card-clickable">
+                    <a href="/incidentes/{{id}}" class="btn">
+
+                        <div class="card card-incidente">
+                            <div class="card-header">
+
+                                <h5 class="card-title fw-bold"
+                                    style="text-transform: capitalize;">{{ servicioAsociado.nombre }}</h5></div>
+
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{{observacion}}</li>
+                                    <li class="list-group-item">Estado: {{estado}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            {{/incidentesAbiertos}}
+            {{#incidentesCerrados}}
+                <div class="col my-4 card-clickable">
+                    <a href="/incidentes/{{id}}" class="btn ">
+
+                        <div class="card card-incidente">
+                            <div class="card-header">
+                                <h5 class="card-title fw-bold"
+                                    style="text-transform: capitalize;">{{servicioAsociado.nombre}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{{observacion}}</li>
+                                    <li class="list-group-item">Estado: {{estado}}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {{/incidentesCerrados}}
+
+        </div>
+    </div>
+
+
+
+{{/partial}}
+
+{{> layoutSesionIniciada.html.hbs }}

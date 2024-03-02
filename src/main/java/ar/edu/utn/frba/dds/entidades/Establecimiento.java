@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.entidades;
 
+import ar.edu.utn.frba.dds.incidentes.Incidente;
 import ar.edu.utn.frba.dds.serviciolocalizacion.ServicioUbicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Ubicacion;
 import ar.edu.utn.frba.dds.serviciolocalizacion.Localizacion;
@@ -60,6 +61,9 @@ public class Establecimiento {
     servicio.establecimiento = this;
   }
 
+  public List<Incidente> getIncidentes() {
+    return servicios.stream().flatMap(servicio -> servicio.getHistorialIncidentes().stream()).toList();
+  }
 
   //Servicio de ubicacion para calcular la ubicacion exacta en longitud y latitud del establecimiento
   @Transient
