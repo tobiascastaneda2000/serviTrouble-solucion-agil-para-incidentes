@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.controller;
+
 import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.comunidad.Miembro;
 import ar.edu.utn.frba.dds.comunidad.PermisoUsuario;
@@ -14,6 +15,7 @@ import spark.Response;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -29,10 +31,11 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("nombreUsuario",usuario.usuario);
+    modelo.put("nombreUsuario", usuario.usuario);
 
     return renderPage(modelo, "homeAdminV2.html.hbs", usuario);
   }
+
   public ModelAndView verComunidadesAdministrables(Request request, Response response) {
     Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
@@ -41,7 +44,7 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
 
     modelo.put("criterios", criterio);
     modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("nombreUsuario",usuario.usuario);
+    modelo.put("nombreUsuario", usuario.usuario);
     List<Comunidad> comunidades = usuario.comunidadesPertenecientes();
     List<Comunidad> comunidadesAdmin = comunidades.stream().filter(c -> c.miembroEsAdmin(usuario)).toList();
     if (comunidadesAdmin.isEmpty()) {
@@ -58,7 +61,7 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
     String id = request.params(":id");
     Map<String, Object> modelo = new HashMap<>();
     modelo.put("anio", LocalDate.now().getYear());
-    modelo.put("nombreUsuario",usuario.usuario);
+    modelo.put("nombreUsuario", usuario.usuario);
     List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
     modelo.put("criterios", criterio);
     Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
@@ -68,7 +71,52 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
     List<Usuario> usuarios = comunidad.miembros.stream().map(m -> m.usuario).toList();
     modelo.put("nombreComunidad", comunidad.nombre);
     modelo.put("usuarios", usuarios);
-    return renderPage(modelo, "verUsuariosComunidad.html.hbs", usuario);
+
+    String filtro = request.queryParams("filtrado");
+    if (filtro != null) {
+      usuarios = usuarios.stream().filter(c -> c.getUsuario().toLowerCase().contains(filtro.toLowerCase())).toList();
+      modelo.put("filtro", filtro);
+    }
+
+
+    String idPagina = request.queryParams("pagina");
+    if (idPagina == null) {
+      idPagina = "1";
+    }
+    int limiteInferior = (Integer.parseInt(idPagina) - 1) * 9;
+    int limiteSuperior = limiteInferior + 9;
+
+    int i = 0;
+    int k = 1;
+    HashSet<Integer> paginas = new HashSet<Integer>();
+    paginas.add(1);
+    for (Usuario usuarioN : usuarios) {
+      i++;
+      if (i > 9) {
+        k++;
+        paginas.add(k);
+        i = 0;
+      }
+    }
+
+    try {
+      List<Usuario> usuariosPaginados = usuarios.subList(limiteInferior, limiteSuperior);
+      modelo.put("usuarios", usuariosPaginados);
+      modelo.put("paginas", paginas);
+      return renderPage(modelo, "verUsuariosComunidad.html.hbs", usuario);
+    } catch (Exception e) {
+      try {
+        List<Usuario> usuariosPaginados = usuarios.subList(limiteInferior, usuarios.size());
+        if (usuariosPaginados.size() == 0) {
+          throw new Exception("No hay usuarios para esta pagina");
+        }
+        modelo.put("usuarios", usuariosPaginados);
+        modelo.put("paginas", paginas);
+        return renderPage(modelo, "verUsuariosComunidad.html.hbs", usuario);
+      } catch (Exception e2) {
+        return renderPage(modelo, "verUsuariosComunidad.html.hbs", usuario);
+      }
+    }
   }
 
   public ModelAndView eliminarMiembro(Request request, Response response) {
@@ -77,7 +125,7 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
     String idusuario = request.queryParams("idusuario");
     String id = request.params(":id");
     Comunidad comunidad = RepositorioComunidades.getInstance().getOne(Long.parseLong(id));
-    if(usuariosession.esAdmin()) {
+    if (usuariosession.esAdmin()) {
       return getErrorPage(usuariosession);
     }
     if (!usuariosession.comunidadesPertenecientes().contains(comunidad)) {
@@ -102,7 +150,7 @@ public class ControllerAdmin implements WithSimplePersistenceUnit {
   }
 
   public ModelAndView renderPage(Map<String, Object> modelo, String template, Usuario usuario) {
-    if(!usuario.esAdmin()) {
+    if (!usuario.esAdmin()) {
       return getErrorPage(usuario);
     }
     return new ModelAndView(modelo, template);

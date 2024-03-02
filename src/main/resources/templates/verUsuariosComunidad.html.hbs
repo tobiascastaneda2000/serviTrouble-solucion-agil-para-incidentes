@@ -1,43 +1,59 @@
 {{#partial "principal" }}
 
 
-<div class="bg-gris py-2 align-items-center text-white">
-  <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
-    <li class="text-white text-decoration-none mx-2"> > </li>
-    <li class="breadcrumb-item text-white "><a href="/admin/comunidades" id="subrayado" class="nav-link text-white">Comunidades Administrables</a></li>
-    <li class="text-white text-decoration-none mx-2"> > </li>
-    <li class="breadcrumb-item text-white" aria-current="page">Miembros</li>
-  </ol>
-</nav>
-</div>
+    <div class="bg-gris py-2 align-items-center text-white">
+        <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white "><a href="/admin/comunidades" id="subrayado"
+                                                       class="nav-link text-white">Comunidades Administrables</a></li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white" aria-current="page">Miembros</li>
+        </ol>
+        </nav>
+    </div>
 
 
-<div class="container text-center my-4">
-<h2>Usuarios de {{nombreComunidad}}</h2>
-</div>
+    <div class="container text-center my-4">
+        <h2>Usuarios de {{nombreComunidad}}</h2>
+    </div>
 
-<div class="container d-flex justify-content-center align-items-center">
-<div class="col-6">
-<ul class="list-group">
-        {{#usuarios}}
-            <form method="POST" >
+    <div class="container justify-content-center ">
+        <div class="row">
 
-            <div class="card">
-              <h5 class="card-header">{{usuario}}</h5>
-              <div class="card-body">
-                <p class="card-text text-lowercase">Contacto: {{contacto}}</p>
-                <p class="card-text text-lowercase">Tipo de usuario: {{permisoUsuario}}</p>
-                <input type="hidden" name="idusuario" value="{{id}}">
-                <input type="submit" value="Eliminar Miembro" class="btn btn-warning">
-              </div>
-            </div>
+            <ul class="list-group">
+                {{#usuarios}}
+                    <form method="POST">
+                        <div class="col-xl-4 mb-4">
+                            <div class="card">
+                                <h5 class="card-header text-center">{{usuario}}</h5>
+                                <div class="card-body">
+                                    <p class="card-text ">Contacto: {{contacto}}</p>
+                                    <p class="card-text ">Tipo de usuario: {{permisoUsuario}}</p>
+                                    <input type="hidden" name="idusuario" value="{{id}}">
+                                    <input type="submit" value="Eliminar Miembro" class="btn btn-warning">
+                                </div>
+                            </div>
+                        </div>
 
-            </form>
-        {{/usuarios}}
-</ul>
-</div>
-</div>
+                    </form>
+                {{/usuarios}}
+            </ul>
+        </div>
+
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {{#each paginas}}
+                <form id="pagina{{this}}" method="GET">
+                    <input type="hidden" class="form-control" name="pagina" value="{{this}}">
+                    <li class="page-item paginationCustom"><a class="page-link" onclick="document.getElementById('pagina{{this}}').submit();">{{this}}</a></li>
+                </form>
+            {{/each}}
+        </ul>
+    </nav>
 
 
 
