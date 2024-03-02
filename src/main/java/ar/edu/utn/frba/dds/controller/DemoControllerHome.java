@@ -58,93 +58,25 @@ public class DemoControllerHome implements WithSimplePersistenceUnit {
         incidente.fechaApertura = incidente.fechaHoraAbre.format(formatter);
       }
       modelo.put("incidentes", cuatroIncidentes);
-      if (usuario.permisoUsuario.equals(PermisoUsuario.USUARIO_COMUN)) {
-        List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-        modelo.put("criterios", criterio);
-        CriterioRanking criterioRanking1 = RepoRanking.getInstance().getOne(Long.parseLong("1"));
-        CriterioRanking criterioRanking2 = RepoRanking.getInstance().getOne(Long.parseLong("2"));
-        LectorCSVLectura lectorCSVLectura1 = new LectorCSVLectura(criterioRanking1.getPath());
-        LectorCSVLectura lectorCSVLectura2 = new LectorCSVLectura(criterioRanking2.getPath());
-        List<Entidad> entidades1 = lectorCSVLectura1.obtenerEntidadesDeCSV();
-        List<Entidad> entidades2 = lectorCSVLectura2.obtenerEntidadesDeCSV();
-        List<Entidad> entidades1Diez = entidades1.stream().limit(10).collect(Collectors.toList());
-        List<Entidad> entidades2Diez = entidades2.stream().limit(10).collect(Collectors.toList());
-        modelo.put("criterio1", criterio.get(0));
-        modelo.put("criterio2", criterio.get(1));
-        modelo.put("ranking1", entidades1Diez);
-        modelo.put("ranking2", entidades2Diez);
-        modelo.put("nombreUsuario",usuario.usuario);
-        return new ModelAndView(modelo, "home.html.hbs");
-      }
-      if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
-        response.redirect("/admin/home");
-        return null;
-      } else {
-        response.redirect("/");
-        return null;
-      }
-    } else {
-      response.redirect("/");
-      return null;
+
+      List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
+      modelo.put("criterios", criterio);
+      CriterioRanking criterioRanking1 = RepoRanking.getInstance().getOne(Long.parseLong("1"));
+      CriterioRanking criterioRanking2 = RepoRanking.getInstance().getOne(Long.parseLong("2"));
+      LectorCSVLectura lectorCSVLectura1 = new LectorCSVLectura(criterioRanking1.getPath());
+      LectorCSVLectura lectorCSVLectura2 = new LectorCSVLectura(criterioRanking2.getPath());
+      List<Entidad> entidades1 = lectorCSVLectura1.obtenerEntidadesDeCSV();
+      List<Entidad> entidades2 = lectorCSVLectura2.obtenerEntidadesDeCSV();
+      List<Entidad> entidades1Diez = entidades1.stream().limit(10).collect(Collectors.toList());
+      List<Entidad> entidades2Diez = entidades2.stream().limit(10).collect(Collectors.toList());
+      modelo.put("criterio1", criterio.get(0));
+      modelo.put("criterio2", criterio.get(1));
+      modelo.put("ranking1", entidades1Diez);
+      modelo.put("ranking2", entidades2Diez);
+      modelo.put("nombreUsuario",usuario.usuario);
+      return new ModelAndView(modelo, "home.html.hbs");
     }
+    response.redirect("/");
+    return null;
   }
-/*
-  public ModelAndView mostrarHomeAdmin(Request request, Response response) {
-
-    Long id = request.session().attribute("user_id");
-    if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
-      if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
-        Map<String, Object> modelo = new HashMap<>();
-        modelo.put("anio", LocalDate.now().getYear());
-        List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
-        modelo.put("usuarios", usuarios);
-        List<CriterioRanking> criterio = RepoRanking.getInstance().getAll();
-        modelo.put("criterios", criterio);
-        CriterioRanking criterioRanking1 = RepoRanking.getInstance().getOne(Long.parseLong("1"));
-        CriterioRanking criterioRanking2 = RepoRanking.getInstance().getOne(Long.parseLong("2"));
-        LectorCSVLectura lectorCSVLectura1 = new LectorCSVLectura(criterioRanking1.getPath());
-        LectorCSVLectura lectorCSVLectura2 = new LectorCSVLectura(criterioRanking2.getPath());
-        List<Entidad> entidades1 = lectorCSVLectura1.obtenerEntidadesDeCSV();
-        List<Entidad> entidades2 = lectorCSVLectura2.obtenerEntidadesDeCSV();
-        List<Entidad> entidades1Diez = entidades1.stream().limit(10).collect(Collectors.toList());
-        List<Entidad> entidades2Diez = entidades2.stream().limit(10).collect(Collectors.toList());
-        modelo.put("criterio1", criterio.get(0));
-        modelo.put("criterio2", criterio.get(1));
-        modelo.put("ranking1", entidades1Diez);
-        modelo.put("ranking2", entidades2Diez);
-        modelo.put("nombreUsuario",usuario.usuario);
-        return new ModelAndView(modelo, "homeAdmin.html.hbs");
-      } else {
-        response.redirect("/home");
-        return null;
-      }
-    } else {
-      response.redirect("/");
-      return null;
-    }
-  }*/
-
-  public ModelAndView mostrarHomeAdmin(Request request, Response response) {
-
-    Long id = request.session().attribute("user_id");
-    if (id != null) {
-      Usuario usuario = RepoUsuarios.getInstance().getOne(id);
-      if (usuario.permisoUsuario.equals(PermisoUsuario.ADMIN)) {
-        Map<String, Object> modelo = new HashMap<>();
-        modelo.put("anio", LocalDate.now().getYear());
-        List<Usuario> usuarios = RepoUsuarios.getInstance().listarUsuarios();
-        modelo.put("nombreUsuario",usuario.usuario);
-        return new ModelAndView(modelo, "homeAdminV2.html.hbs");
-      } else {
-        response.redirect("/home");
-        return null;
-      }
-    } else {
-      response.redirect("/");
-      return null;
-    }
-  }
-
-
 }

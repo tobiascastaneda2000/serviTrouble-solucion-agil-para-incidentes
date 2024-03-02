@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controller;
 import ar.edu.utn.frba.dds.comunidad.Comunidad;
 import ar.edu.utn.frba.dds.comunidad.Miembro;
+import ar.edu.utn.frba.dds.comunidad.PermisoUsuario;
 import ar.edu.utn.frba.dds.comunidad.Usuario;
 import ar.edu.utn.frba.dds.rankings.CriterioRanking;
 import ar.edu.utn.frba.dds.repositorios.RepoRanking;
@@ -17,6 +18,21 @@ import java.util.List;
 import java.util.Map;
 
 public class ControllerAdmin implements WithSimplePersistenceUnit {
+
+  public ModelAndView mostrarHome(Request request, Response response) {
+    Long id = request.session().attribute("user_id");
+    if (id == null) {
+      response.redirect("/");
+      return null;
+    }
+
+    Usuario usuario = RepoUsuarios.getInstance().getOne(id);
+    Map<String, Object> modelo = new HashMap<>();
+    modelo.put("anio", LocalDate.now().getYear());
+    modelo.put("nombreUsuario",usuario.usuario);
+
+    return renderPage(modelo, "homeAdminV2.html.hbs", usuario);
+  }
   public ModelAndView verComunidadesAdministrables(Request request, Response response) {
     Long id = Usuario.redirigirSesionNoIniciada(request, response);
     Usuario usuario = RepoUsuarios.getInstance().getOne(id);
