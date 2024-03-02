@@ -1,84 +1,99 @@
 {{#partial "principal" }}
 
-      <div class="bg-gris py-2 align-items-center text-white">
-          <ol class="breadcrumb justify-content-center">
-            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
-            <li class="breadcrumb-item text-white "><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a></li>
-            <li class="text-white text-decoration-none mx-2"> > </li>
+    <div class="bg-gris py-2 align-items-center text-white">
+        <ol class="breadcrumb justify-content-center">
+            <li class="breadcrumb-item text-white "><a href="/home" id="subrayado" class="nav-link text-white">Home</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
+            <li class="breadcrumb-item text-white "><a href="/entidades" id="subrayado" class="nav-link text-white">Entidades</a>
+            </li>
+            <li class="text-white text-decoration-none mx-2"> ></li>
             <li class="breadcrumb-item text-white" aria-current="page">Establecimientos</li>
-          </ol>
+        </ol>
         </nav>
-        </div>
+    </div>
 
 
-<h2 class="text-center my-4">Establecimientos</h2>
+    <h2 class="text-center my-4">Establecimientos</h2>
 
 
-<div class="container d-flex justify-content-center">
-<div class="row">
-{{#establecimientos}}
-<div class="col mx-4">
-<div class="card h-100 d-inline-block border border-secondary justify-content-center text-center" style="width: 18rem;">
-  <div class="card-body h-100 d-inline-block d-flex flex-column">
-    <h5 class="card-title fw-bolder" style="text-transform: capitalize;">{{nombre}}</h5>
-    <h6>Servicios:</h6>
-    {{#servicios}}
-        <p>{{nombre}}</p>
-    {{/servicios}}
-    <div class="container mt-auto align-self-end justify-content-center">
+    <div class="container d-flex justify-content-center">
+    <div class="row">
+        {{#establecimientos}}
+            <div class="col mx-4">
+                <div class="card h-100 d-inline-block border border-secondary justify-content-center text-center"
+                     style="width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title fw-bolder" style="text-transform: capitalize;"><a
+                                href="/entidades/{{idEntidad}}/establecimientos/{{id}}/incidentes">{{nombre}}</a></h5>
+                    </div>
+                    <div class="card-body h-100 d-inline-block d-flex flex-column">
 
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Cargar incidente
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar incidente</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form method="POST" action="/establecimientos">
-      <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="text-start mb-3">
-                                    <label for="disabledTextInput">Establecimiento</label>
-                                    <input type="text" id="disabledTextInput" class="form-control" placeholder="{{nombre}}" disabled>
-                                </div>
-                                <div class="text-start mb-3">
-                                    <label  for="opciones">Servicio</label>
-                                    <select id="servicio" class="form-select " name="servicio">
-                                         {{#servicios}}
-                                         <option value={{id}}>{{nombre}}</option>
-                                         {{/servicios}}
-                                    </select>
-                                </div>
-                                <div class="text-start mb-3">
-                                    <label >Observación</label>
-                                    <textarea class="form-control " name="observacion" maxlength="250"></textarea>
-                                </div>
-                              </div>
+                        <h6>Servicios:</h6>
+                        {{#servicios}}
+                            <p>{{nombre}}</p>
+                        {{/servicios}}
+                    </div>
+                    <div class="container mt-auto align-self-end justify-content-center">
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                Cargar incidente
+                            </button>
                         </div>
-      </div>
-      <div class="modal-footer">
-        <input type="hidden" class="form-control" name="idEntidad" value="{{idEntidad}}">
-        <input type="submit" class="btn btn-warning " value="Abrir Incidente">
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar incidente</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <form method="POST" action="/establecimientos">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="text-start mb-3">
+                                                        <label for="disabledTextInput">Establecimiento</label>
+                                                        <input type="text" id="disabledTextInput" class="form-control"
+                                                               placeholder="{{nombre}}" disabled>
+                                                    </div>
+                                                    <div class="text-start mb-3">
+                                                        <label for="opciones">Servicio</label>
+                                                        <select id="servicio" class="form-select " name="servicio">
+                                                            {{#servicios}}
+                                                                <option value={{id}}>{{nombre}}</option>
+                                                            {{/servicios}}
+                                                        </select>
+                                                    </div>
+                                                    <div class="text-start mb-3">
+                                                        <label>Observación</label>
+                                                        <textarea class="form-control " name="observacion"
+                                                                  maxlength="250"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" class="form-control" name="idEntidad"
+                                                   value="{{idEntidad}}">
+                                            <input type="submit" class="btn btn-warning " value="Abrir Incidente">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/establecimientos}}
     </div>
-  </div>
-</div>
-</div>
-{{/establecimientos}}
-</div>
-</div>
+    </div>
 
 
 
