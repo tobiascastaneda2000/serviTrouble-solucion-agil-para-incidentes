@@ -60,19 +60,60 @@
 
             <div class="row incidentes-cercanos-container-responsive">
                 {{#incidentes}}
-                    <div class="col incidente-cercano-responsive">
-                        <div class="card responsive-card">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bolder">{{servicioAsociado.nombre}}</h5>
-                                <p class="card-text">{{observacion}}</p>
-                                <p class="card-text">Fecha de apertura: {{fechaApertura}}</p>
-                                <p class="card-text">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</p>
-                                <form class="incidente_sugeridos-form" method="POST" action="/incidentes">
-                                    <input type="hidden" value="{{id}}" name="idIncidente"></input>
-                                    <input type="submit"
-                                           onclick="return confirm('¿Seguro que querés cerrar el incidente?')"
-                                           value="Cerrar Incidente" class="btn btn-warning"/>
-                                </form>
+                    <div class="col my-4 card-clickable">
+                        <button href="/incidentes/{{id}}" class="btn"  data-bs-toggle="modal"
+                                data-bs-target="#exampleModal{{id}}">
+
+                            <div class="card card-incidente">
+                                <div class="card-header">
+
+                                    <h5 class="card-title fw-bold"
+                                        style="text-transform: capitalize;">{{ servicioAsociado.nombre}}</h5></div>
+
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">{{observacion}}</li>
+                                        <li class="list-group-item">Estado: {{estado}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </button>
+                    </div>
+
+                    <div class="modal fade" id="exampleModal{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle incidente</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="card-body">
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Establecimiento: {{servicioAsociado.establecimiento.nombre}}</li>
+                                        <li class="list-group-item">Servicio: {{servicioAsociado.nombre}}</li>
+                                        <li class="list-group-item">Observacion: {{observacion}}</li>
+                                        <li class="list-group-item">Estado: {{estado}}</li>
+                                        <li class="list-group-item">Fecha Apertura: {{fechaHoraAbre}}</li>
+                                        {{#if fechaHoraCierre}}
+                                            <li class="list-group-item">Fecha Cierre: {{fechaHoraCierre}}</li>
+                                        {{/if}}
+                                    </ul>
+
+                                    {{#unless fechaCierre}}
+                                        <form method="POST" action="/incidentes">
+                                            <input type="hidden" class="form-control" name="idIncidente" value="{{id}}">
+                                            <input type="hidden" class="form-control" name="redirectionUrl" value="/home">
+                                            <div class="text-end p-3">
+                                                <input type="submit"
+                                                       onclick="return confirm('Con esto estarás indicando que el incidente fue resuelto y el servicio funciona con normalidad. ¿Deseas continuar?')"
+                                                       class="btn btn-warning" value="Cerrar Incidente">
+                                            </div>
+                                        </form>
+                                    {{/unless}}
+                                </div>
                             </div>
                         </div>
                     </div>
