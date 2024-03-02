@@ -76,6 +76,10 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       establecimiento1.agregarServicio(servicio2);
       RepoServicios.getInstance().add(servicio2);
 
+      Servicio servicio3 = new Servicio("Estoy cansado jefe", TipoServicio.BAÑO);
+      establecimiento2.agregarServicio(servicio3);
+      RepoServicios.getInstance().add(servicio3);
+
       Servicio servicio5 = new Servicio("Ascensor discapacitados", TipoServicio.ASCENSOR);
       establecimiento1.agregarServicio(servicio5);
       RepoServicios.getInstance().add(servicio5);
@@ -95,7 +99,7 @@ public class Bootstrap implements WithSimplePersistenceUnit {
       entidadPixel.agregarEstablecimiento(establecimientoB);
       RepoEstablecimientos.getInstance().add(establecimientoB);
 
-      Servicio servicio3 = new Servicio("Baño tercer piso", TipoServicio.BAÑO);
+      Servicio servicio38 = new Servicio("Baño tercer piso", TipoServicio.BAÑO);
       establecimientoA.agregarServicio(servicio3);
       RepoServicios.getInstance().add(servicio3);
 
