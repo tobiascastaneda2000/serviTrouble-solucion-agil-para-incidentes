@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # java-base-project
 
 Esta es una plantilla de proyecto diseñada para: 
@@ -77,3 +78,6 @@ mvn clean verify && git tag entrega-final && git push origin HEAD --tags
 3. Configurarlo activando los Checks de Google y la versión de Checkstyle `== 8.35`:
 
 ![image](https://user-images.githubusercontent.com/39303639/228126437-3d2f0137-3180-4221-a789-a057d920ae4e.png)
+=======
+# serviTrouble-solucion-agil-para-incidentes
+>>>>>>> 02b5f85e5c4e8440f15958ec8170c9de1c8b25e8
